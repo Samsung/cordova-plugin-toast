@@ -6,11 +6,24 @@
   <name>Toast</name>
 
   <engines>
-    <engine name="cordova" version=">=5.0.0"/>
+    <engine name="cordova" version=">=3.5.2"/>
   </engines>
 
-  <asset src="www/toast.js" target="js/toast.js"/>
-
-  <js-module src="www/toast.js" name="toast">
+  <js-module src="www/tvchannel.js" name="tvchannel">
+    <clobbers target="toast.tvchannel" />
   </js-module>
+
+  <js-module src="www/tvwindow.js" name="tvwindow">
+    <clobbers target="toast.tvwindow" />
+  </js-module>
+
+  <!-- browser -->
+  <platform name="browser">
+      <js-module src="src/browser/tvwindowProxy.js" name="tvwindowProxy">
+          <runs />
+      </js-module>
+      <js-module src="src/browser/tvchannelProxy.js" name="tvchannelProxy">
+          <runs />
+      </js-module>
+  </platform>
 </plugin>
