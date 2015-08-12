@@ -15,7 +15,7 @@ tvchannelExport = {
 
         var args = [tuneOption, type];
         exec(successCallback, errorCallback, "toast.tvchannel", "tune", args);
-    }
+    },
     // void tuneUp (TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional WindowType? type)
     // void tuneDown (TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional WindowType? type)
     // void findChannel (long major, long minor, FindChannelSuccessCallback successCallback, optional ErrorCallback? errorCallback)
@@ -28,7 +28,15 @@ tvchannelExport = {
     // long addProgramChangeListener (ProgramChangeCallback callback, optional ChannelInfo? channel)
     // void removeProgramChangeListener (long programListenerId)
     // unsigned long getNumOfAvailableTuner ()
-    // long getNumOfAvailableSources (optional sourceType)
+    getNumOfAvailableTuner: function (successCallback, errorCallback) {
+        argscheck.checkArgs('fF', 'tvchannel.getNumOfAvailableTuner', arguments);
+        exec(successCallback, errorCallback, 'toast.tvchannel', 'getNumOfAvailableTuner', Array.prototype.slice.call(arguments, 0));
+    },
+    //long getNumOfAvailableSources (optional sourceType)
+    getNumOfAvailableSources: function (successCallback, errorCallback, sourceType) {
+        argscheck.checkArgs('fFS', 'tvchannel.getNumOfAvailableSources', arguments);
+        exec(successCallback, errorCallback, 'toast.tvchannel', 'getNumOfAvailableSources', Array.prototype.slice.call(arguments, 0));
+    }
 };
 
 module.exports = tvchannelExport;

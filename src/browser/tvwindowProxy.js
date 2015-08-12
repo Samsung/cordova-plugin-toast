@@ -1,9 +1,7 @@
 module.exports = {
-    getAvailableWindows: function () {
-        console.log("getAvailableWindows("+Array.prototype.join.call(arguments, ", ")+")");
+    getAvailableWindows: function (success, fail, args) {
     },
-    setSource: function(){
-        console.log("setSource("+Array.prototype.join.call(arguments, ", ")+")");
+    setSource: function(success, fail, args){
     }
 };
 

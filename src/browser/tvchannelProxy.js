@@ -1,6 +1,12 @@
 module.exports = {
-    tune: function () {
-        console.log("tune("+Array.prototype.join.call(arguments, ", ")+")");
+    tune: function (success, fail, args) {
+        setTimeout(success.bind(null), 0);
+    },
+    getNumOfAvailableTuner: function (success, fail, args) {
+        setTimeout(success.bind(null, 1), 0);
+    },
+    getNumOfAvailableSources: function (success, fail, args) {
+        setTimeout(success.bind(null, 1), 0);
     }
 };
 
