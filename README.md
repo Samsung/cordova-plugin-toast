@@ -8,7 +8,7 @@ Although the object provides the global scoped `toast` object, it is not availab
 ```javascript
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
-    console.log(navigator.camera);
+    console.log(toast);
 }
 ```
 
