@@ -1,6 +1,25 @@
 {
   "name": "cordova-plugin-toast",
   "version": "0.1.0",
+  "author": "Samsung Electronics Co., Ltd.",
+  "description": "Cordova plugin for TV devices to allow using TV specific functionalities from a Cordova TV app.",
+  "cordova": {
+    "id": "com.sec.vd.toast",
+    "plaforms": [
+      "browser",
+      "tizen"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsung/cordova-plugin-toast"
+  },
+  "keywords": [
+    "samsung",
+    "cordova",
+    "tizen",
+    "tv"
+  ],
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.1"
