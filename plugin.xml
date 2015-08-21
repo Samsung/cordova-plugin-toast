@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="com.sec.vd.toast"
+        id="cordova-plugin-toast"
         version="0.1.0">
 
-  <name>Toast</name>
+  <name>cordova-plugin-toast</name>
 
   <engines>
     <engine name="cordova" version=">=3.5.2"/>
@@ -23,6 +23,20 @@
           <runs />
       </js-module>
       <js-module src="src/browser/tvchannelProxy.js" name="tvchannelProxy">
+          <runs />
+      </js-module>
+  </platform>
+  <platform name="sectv-orsay">
+      <js-module src="src/sectv-orsay/tvwindowProxy.js" name="tvwindowProxy">
+          <runs />
+      </js-module>
+      <js-module src="src/sectv-orsay/tvwindowSymbols.js" name="tvwindowSymbols">
+          <runs />
+      </js-module>
+      <js-module src="src/sectv-orsay/tvchannelProxy.js" name="tvchannelProxy">
+          <runs />
+      </js-module>
+      <js-module src="src/sectv-orsay/tvchannelSymbols.js" name="tvchannelSymbols">
           <runs />
       </js-module>
   </platform>

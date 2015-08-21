@@ -8,13 +8,13 @@ tvwindowExport = {
     //void getAvailableWindows (AvailableWindowListCallback successCallback, optional ErrorCallback? errorCallback)
     getAvailableWindows: function (successCallback, errorCallback) {
         argscheck.checkArgs('fF', 'tvwindow.getAvailableWindows', arguments);
-        exec(successCallback, errorCallback, "toast.tvwindow", "getAvailableWindows", []);
+        exec(successCallback, errorCallback, "Toast.tvwindow", "getAvailableWindows", []);
     },
     //void setSource (SystemInfoVideoSourceInfo videoSource, SourceChangedSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional WindowType? type)
     setSource: function (videoSource, successCallback, errorCallback, type) {
         argscheck.checkArgs('ofFS', 'tvwindow.getAvailableWindows', arguments);
         var args = [videoSource, type];
-        exec(successCallback, errorCallback, "toast.tvwindow", "setSource", args);
+        exec(successCallback, errorCallback, "Toast.tvwindow", "setSource", args);
     },
     //SystemInfoVideoSourceInfo getSource (optional WindowType? type)
     //void show (WindowRectangleSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional DOMString[]? rectangle, optional WindowType? type)

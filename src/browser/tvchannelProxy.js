@@ -10,4 +10,4 @@ module.exports = {
     }
 };
 
-require("cordova/exec/proxy").add("toast.tvchannel", module.exports);
+require("cordova/exec/proxy").add("Toast.tvchannel", module.exports);

@@ -5,4 +5,4 @@ module.exports = {
     }
 };
 
-require("cordova/exec/proxy").add("toast.tvwindow",module.exports);
+require("cordova/exec/proxy").add("Toast.tvwindow",module.exports);
