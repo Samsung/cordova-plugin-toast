@@ -1,5 +1,5 @@
 module.exports = {
-	tune: function (success, fail, args) {
+	setMute: function (success, fail, args) {
 		var element = '';
 		var source = {};
 		var randomColor = function(){
@@ -247,4 +247,4 @@ module.exports = {
 	}
 };
 
-require("cordova/exec/proxy").add("toast.tvchannel", module.exports);
+require("cordova/exec/proxy").add("toast.tvaudiocontrol", module.exports);
