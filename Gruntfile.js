@@ -4,12 +4,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     compile: {
       "sectv-orsay": {
-          src: ["src/sectv-orsay/**/*.js"],
-          dest: "platform_www/sectv-orsay/cordova.js"
+          //dest: "platform_www/sectv-orsay/toast.js" // default
       },
       "sectv-tizen": {
-          src: ["src/sectv-tizen/**/*.js"],
-          dest: "platform_www/sectv-tizen/cordova.js"
+          //dest: "platform_www/sectv-tizen/toast.js" // default
       }
     }
   });
@@ -18,5 +16,4 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['compile']);
-  grunt.registerTask('build', ['compile']);
 };
