@@ -58,13 +58,7 @@
       <js-module src="src/sectv-orsay/tvwindowProxy.js" name="tvwindowProxy">
           <runs />
       </js-module>
-      <js-module src="src/sectv-orsay/tvwindowSymbols.js" name="tvwindowSymbols">
-          <runs />
-      </js-module>
       <js-module src="src/sectv-orsay/tvchannelProxy.js" name="tvchannelProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/sectv-orsay/tvchannelSymbols.js" name="tvchannelSymbols">
           <runs />
       </js-module>
   </platform>
