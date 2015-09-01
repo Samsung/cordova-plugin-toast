@@ -112,7 +112,7 @@ module.exports = function(grunt) {
 
 function wrapWithDefine(id, content) {
     var PRE_LINES = [
-        "define(\""+id+"\", function(require, exports, module) {"
+        "cordova.define(\""+id+"\", function(require, exports, module) {"
     ];
     var POST_LINES = [
         "});"
