@@ -27,7 +27,7 @@ module.exports = {
 	getCurrentProgram: function (success, fail, args) {
 		tizen.tvchannel.getCurrentProgram(success, fail, args[0]);
 	},
-	channelListenerId: '';
+	channelListenerId: '',
 	addChannelChangeListener: function (success, fail, args) {
 		this.channelListenerId = tizen.tvchannel.addChannelChangeListener(success, args[0]);
 	},
