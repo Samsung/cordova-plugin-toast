@@ -27,12 +27,23 @@ function getValue(obj, expr, defaultVal) {
     }
 }
 
+function prepareDir(dirPath) {
+    dirPath = path.dirname(dirPath);
+    var tmp = dirPath.split(path.sep);
+    var chkPath = '';
+    for(var i=0, len=tmp.length; i<len; i++) {
+        chkPath += (i>0?path.sep:"") + tmp[i];
+        if(!fs.existsSync(chkPath)) {
+            fs.mkdirSync(chkPath);
+            break;
+        }
+    }
+}
+
 module.exports = function(grunt) {
     grunt.registerMultiTask('compile', 'build cordova-plugin-toast', function() {
         var platformName = this.target;
-        //console.log(this);
         var dest = this.data.dest || path.join('platform_www', platformName, 'toast.js');
-        //var done = this.async();
 
         // convert the plugin.xml into JSON for making easy to access...
         var pluginXml = fs.readFileSync('./plugin.xml');
@@ -42,7 +53,6 @@ module.exports = function(grunt) {
         }, function(err, result) {
             plugin = result;
         });
-        //console.log(JSON.stringify(plugin, null, 2));
 
         var pluginId = getValue(plugin, "plugin.$.id", "");
 
@@ -59,7 +69,21 @@ module.exports = function(grunt) {
             }
         }
 
+        var TOAST_VERSION = 'N/A';
+        var pkgConf = grunt.config.get('pkg');
+        if(pkgConf && pkgConf.version) {
+            TOAST_VERSION = pkgConf.version;
+        }
+
         var content = '';
+        content += ";(function() {\n";
+        content += "var TOAST_VERSION = '"+TOAST_VERSION+"';\n";
+        content += "var require = cordova.require,\n";
+        content += "    define = cordova.define;\n\n";
+
+        var lstClobbers = [],
+            lstMerges = [],
+            lstRuns = [];
         for(var i=0; i<jsMods.length; i++) {
             var src = getValue(jsMods[i], "$.src", null);
             var name = getValue(jsMods[i], "$.name", null);
@@ -75,44 +99,61 @@ module.exports = function(grunt) {
             content += '// file: ' + src + '\n';
             content += wrapWithDefine(modId, srcContent) + '\n';
 
-            if(clobbers || merges || runs) {
-                content += ';(function () {\n';
-                content += 'var moduleMapper = require("cordova/modulemapper");\n';
-                if(clobbers) {
-                    for(var c=0; c<clobbers.length; c++) {
-                        var target = getValue(clobbers[c], "$.target", null);
-                        if(target) {
-                            content += 'moduleMapper.clobbers(\"'+modId+'\", \"' + target + '\");\n';
-                        }
+            if(clobbers) {
+                for(var c=0; c<clobbers.length; c++) {
+                    var target = getValue(clobbers[c], "$.target", null);
+                    if(target) {
+                        lstClobbers.push({
+                            id: modId,
+                            target: target
+                        });
                     }
                 }
-                if(merges) {
-                    for(var m=0; m<merges.length; m++) {
-                        var target = getValue(merges[m], "$.target", null);
-                        if(target) {
-                            content += 'moduleMapper.merges(\"'+modId+'\", \"' + target + '\");\n';
-                        }
+            }
+            if(merges) {
+                for(var m=0; m<merges.length; m++) {
+                    var target = getValue(merges[m], "$.target", null);
+                    if(target) {
+                        lstMerges.push({
+                            id: modId,
+                            target: target
+                        });
                     }
                 }
-                if(runs) {  // runs is allowed only once
-                    content += 'moduleMapper.runs(\"'+modId+'\");\n';
-                }
-                content += '})();\n\n';
+            }
+            if(runs) {  // runs is allowed only once
+                lstRuns.push(modId);
             }
         }
 
+        if(lstClobbers.length > 0 || lstMerges.length > 0 || lstRuns.length > 0) {
+            content += 'var moduleMapper = require("cordova/modulemapper");\n';
+            for(var i=0; i<lstClobbers.length; i++) {
+                content += 'moduleMapper.clobbers("'+lstClobbers[i].id+'", "'+lstClobbers[i].target+'");\n';
+            }
+            for(var i=0; i<lstMerges.length; i++) {
+                content += 'moduleMapper.merges("'+lstMerges[i].id+'", "'+lstMerges[i].target+'"");\n';
+            }
+            for(var i=0; i<lstRuns.length; i++) {
+                content += 'moduleMapper.runs("'+lstRuns[i]+'");\n';
+            }
+            content += 'moduleMapper.mapModules(window);\n';
+        }
+
+        content += "})();\n\n";
+
         //console.log(content);
 
+        prepareDir(dest);
         fs.writeFileSync(dest, content);
         console.log('Created at: ' + dest);
 
-        //done();
     });
 };
 
 function wrapWithDefine(id, content) {
     var PRE_LINES = [
-        "cordova.define(\""+id+"\", function(require, exports, module) {"
+        "define(\""+id+"\", function(require, exports, module) {"
     ];
     var POST_LINES = [
         "});"

@@ -1,5 +1,5 @@
 module.exports = {
-	tune: function (success, fail, args) {
+	setMute: function (success, fail, args) {
 		var element = '';
 		var source = {};
 		var randomColor = function(){
@@ -37,9 +37,7 @@ module.exports = {
 			serviceName:''
 		};
 
-		setTimeout(function () {
-			success.onsuccess(channelInfo, args[1]);
-		}, 0);
+		success.onsuccess(channelInfo, args[1]);
 	},
 	tuneUp: function (success, fail, args) {
 		var element = '';
@@ -79,9 +77,7 @@ module.exports = {
 			serviceName:''
 		};
 
-		setTimeout(function () {
-			success.onsuccess(channelInfo, args[1]);
-		}, 0);
+		success.onsuccess(channelInfo, args[1]);
 	},
 	tuneDown: function (success, fail, args) {
 		var element = '';
@@ -121,9 +117,7 @@ module.exports = {
 			serviceName:''
 		};
 
-		setTimeout(function () {
-			success.onsuccess(channelInfo, args[1]);
-		}, 0);
+		success.onsuccess(channelInfo, args[1]);
 	},
 	findChannel: function (success, fail, args) {
 		var channelInfo = [{
@@ -150,9 +144,7 @@ module.exports = {
 			serviceName:''
 		}];
 
-		setTimeout(function () {
-			success(channelInfo);
-		}, 0);
+		success(channelInfo);
 	},
 	getChannelList: function (success, fail, args) {
 		var channelInfo = [{
@@ -179,9 +171,7 @@ module.exports = {
 			serviceName:''
 		}];
 
-		setTimeout(function () {
-			success(channelInfo);
-		}, 0);
+		success(channelInfo);
 	},
 	getCurrentChannel: function (success, fail, args) {
 		var channelInfo = [{
@@ -196,10 +186,6 @@ module.exports = {
 			originalNetworkID: '',
 			serviceName:''
 		}];
-
-		setTimeout(function () {
-			success(channelInfo);
-		}, 0);
 	},
 	getProgramList: function (success, fail, args) {
 		var programInfo = {
@@ -211,9 +197,7 @@ module.exports = {
 			rating: ''
 		};
 
-		setTimeout(function () {
-			success(programInfo);
-		}, 0);
+		success(programInfo);
 	},
 	getCurrentProgram: function (success, fail, args) {
 		var programInfo = {
@@ -224,12 +208,7 @@ module.exports = {
 			language: '',
 			rating: ''
 		};
-
-		setTimeout(function () {
-			success(programInfo);
-		}, 0);
 	},
-	watcher : '',
 	addChannelChangeListener: function (success, fail, args) {
 		var element = '';
 		var channelInfo = {
@@ -251,23 +230,21 @@ module.exports = {
 		} else {
 			element = document.getElementById('tvwindowshow');
 		}
-
-		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-		if (!this.watcher) {
-			this.watcher = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					success(channelInfo, args[0]);
-				});
-			});
-			this.watcher.observe(element, { attributes : true });
-		}
+		element.addEventListener('DOMAttrModified', function () {
+			success(channelInfo, args[1]);
+		});
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		if (this.watcher) {
-			this.watcher.disconnect();
-			this.watcher = '';
+		var element = ''
+
+		if (!document.getElementById('tvwindowshow')) {
+			element = document.createElement('div');
+			element.id = 'tvwindowshow';
+		} else {
+			element = document.getElementById('tvwindowshow');
 		}
+		element.removeEventListener('DOMAttrModified');
 	}
 };
 
-require("cordova/exec/proxy").add("toast.tvchannel", module.exports);
+require("cordova/exec/proxy").add("toast.tvaudiocontrol", module.exports);
