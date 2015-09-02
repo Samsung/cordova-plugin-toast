@@ -34,8 +34,12 @@ function prepareDir(dirPath) {
     for(var i=0, len=tmp.length; i<len; i++) {
         chkPath += (i>0?path.sep:"") + tmp[i];
         if(!fs.existsSync(chkPath)) {
-            fs.mkdirSync(chkPath);
-            break;
+            try {
+                fs.mkdirSync(chkPath);
+            }
+            catch(e) {
+                grunt.fail.fatal("Fail to create directory at " + path.resolve(chkPath));
+            }
         }
     }
 }
@@ -87,18 +91,23 @@ module.exports = function(grunt) {
         for(var i=0; i<jsMods.length; i++) {
             var src = getValue(jsMods[i], "$.src", null);
             var name = getValue(jsMods[i], "$.name", null);
-            var clobbers = getValue(jsMods[i], "clobbers", null);
-            var merges = getValue(jsMods[i], "merges", null);
-            var runs = getValue(jsMods[i], "runs", null);
             if(!src || !name) {
-                console.warn("Invalid js-module definition- src: " + src + ", name: " + name);
-                continue;
+                grunt.fail.warn("Invalid js-module definition- src: " + src + ", name: " + name);
             }
             var modId = pluginId + "." + name;
-            var srcContent = fs.readFileSync(src);
+            try {
+                var srcContent = fs.readFileSync(src);
+            }
+            catch(e) {
+                grunt.fail.warn("Fail to read file at " + path.resolve(src)
+                    + ". Please check that the file exists. This path is retrived from plugin.xml.");
+            }
             content += '// file: ' + src + '\n';
             content += wrapWithDefine(modId, srcContent) + '\n';
 
+            var clobbers = getValue(jsMods[i], "clobbers", null);
+            var merges = getValue(jsMods[i], "merges", null);
+            var runs = getValue(jsMods[i], "runs", null);
             if(clobbers) {
                 for(var c=0; c<clobbers.length; c++) {
                     var target = getValue(clobbers[c], "$.target", null);
