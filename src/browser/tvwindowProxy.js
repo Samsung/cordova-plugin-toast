@@ -35,6 +35,8 @@ module.exports = {
 
 		source['type'] = 'HDMI';
 		source['number'] = '1';
+
+		success(source);
 	},
 	show: function (success, fail, args) {
 		var element = '';

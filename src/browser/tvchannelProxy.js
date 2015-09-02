@@ -173,7 +173,7 @@ module.exports = {
 
 		success(channelInfo);
 	},
-	getCurrentChannel: function (success, fail, args) {
+	getCurrentChannel: function (success, args) {
 		var channelInfo = [{
 			major: '',
 			minor: '',
@@ -186,6 +186,8 @@ module.exports = {
 			originalNetworkID: '',
 			serviceName:''
 		}];
+
+		success(channelInfo);
 	},
 	getProgramList: function (success, fail, args) {
 		var programInfo = {
@@ -208,7 +210,10 @@ module.exports = {
 			language: '',
 			rating: ''
 		};
+
+		success(programInfo);
 	},
+	watcher : '',
 	addChannelChangeListener: function (success, fail, args) {
 		var element = '';
 		var channelInfo = {
@@ -230,20 +235,22 @@ module.exports = {
 		} else {
 			element = document.getElementById('tvwindowshow');
 		}
-		element.addEventListener('DOMAttrModified', function () {
-			success(channelInfo, args[1]);
-		});
+
+		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+		if (!this.watcher) {
+			this.watcher = new MutationObserver(function(mutations) {
+				mutations.forEach(function(mutation) {
+					success(channelInfo);
+				});
+			});
+			this.watcher.observe(element, { attributes : true });
+		}
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		var element = ''
-
-		if (!document.getElementById('tvwindowshow')) {
-			element = document.createElement('div');
-			element.id = 'tvwindowshow';
-		} else {
-			element = document.getElementById('tvwindowshow');
+		if (this.watcher) {
+			this.watcher.disconnect();
+			this.watcher = '';
 		}
-		element.removeEventListener('DOMAttrModified');
 	}
 };
 
