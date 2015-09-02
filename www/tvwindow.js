@@ -23,14 +23,14 @@ tvwindowExport = {
 		var args = [videoSource, type];
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'setSource', args);
 	},
-	//SystemInfoVideoSourceInfo getSource (optional WindowType? type)
-	getSource: function (type) {
+	//void getSource (SystemInfoVideoSourceInfoCallback callback, optional WindowType? type)
+	getSource: function (callback, type) {
 		argscheck.checkArgs('S', 'tvwindow.getSource', arguments);
         
 		type = type || 'MAIN';
 
         var args = [type];
-		exec(null, null, 'toast.tvwindow', 'getSource', args);
+		exec(callback, null, 'toast.tvwindow', 'getSource', args);
 	},
 	//void show (WindowRectangleSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional DOMString[]? rectangle, optional WindowType? type)
 	show: function (successCallback, errorCallback, rectangle, type) {

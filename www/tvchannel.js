@@ -61,14 +61,14 @@ tvchannelExport = {
 		var args = [mode, nStart, number];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getChannelList', args);
 	},
-	//ChannelInfo getCurrentChannel (optional WindowType? type)
-	getCurrentChannel: function (type) {
-		argscheck.checkArgs('S', 'tvchannel.getCurrentChannel', arguments);
+	//void getCurrentChannel (ChannelInfoCallback callback, optional WindowType? type)
+	getCurrentChannel: function (callback, type) {
+		argscheck.checkArgs('fS', 'tvchannel.getCurrentChannel', arguments);
 
 		type = type || 'MAIN';
 
 		var args = [type];
-		exec(null, null, 'toast.tvchannel', 'getCurrentChannel', args);
+		exec(callback, null, 'toast.tvchannel', 'getCurrentChannel', args);
 	},
 	//void getProgramList (ChannelInfo channelInfo, TZDate startTime, ProgramListSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional unsigned long? duration)
 	getProgramList: function (channelInfo, startTime, successCallback, errorCallback, duration) {
@@ -80,16 +80,16 @@ tvchannelExport = {
 		var args = [channelInfo, startTime, duration];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getProgramList', args);
 	},
-	//ProgramInfo getCurrentProgram (optional WindowType? type)
-	getCurrentProgram: function (type) {
-		argscheck.checkArgs('S', 'tvchannel.getCurrentProgram', arguments);
+	//void getCurrentProgram (ProgramInfoCallback callback, optional WindowType? type)
+	getCurrentProgram: function (callback, type) {
+		argscheck.checkArgs('fS', 'tvchannel.getCurrentProgram', arguments);
 
 		type = type || 'MAIN';
 
 		var args = [type];
-		exec(null, null, 'toast.tvchannel', 'getCurrentProgram', args);
+		exec(callback, null, 'toast.tvchannel', 'getCurrentProgram', args);
 	},
-	//long addChannelChangeListener (ChannelChangeCallback callback, optional WindowType? type)
+	//void addChannelChangeListener (ChannelChangeCallback callback, optional WindowType? type)
 	addChannelChangeListener: function (callback, type) {
 		argscheck.checkArgs('fS', 'tvchannel.addChannelChangeListener', arguments);
 
