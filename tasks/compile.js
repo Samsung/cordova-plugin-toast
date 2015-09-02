@@ -27,6 +27,19 @@ function getValue(obj, expr, defaultVal) {
     }
 }
 
+function prepareDir(dirPath) {
+    dirPath = path.dirname(dirPath);
+    var tmp = dirPath.split(path.sep);
+    var chkPath = '';
+    for(var i=0, len=tmp.length; i<len; i++) {
+        chkPath += (i>0?path.sep:"") + tmp[i];
+        if(!fs.existsSync(chkPath)) {
+            fs.mkdirSync(chkPath);
+            break;
+        }
+    }
+}
+
 module.exports = function(grunt) {
     grunt.registerMultiTask('compile', 'build cordova-plugin-toast', function() {
         var platformName = this.target;
@@ -131,6 +144,7 @@ module.exports = function(grunt) {
 
         //console.log(content);
 
+        prepareDir(dest);
         fs.writeFileSync(dest, content);
         console.log('Created at: ' + dest);
 
