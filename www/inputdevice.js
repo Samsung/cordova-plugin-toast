@@ -1,15 +1,21 @@
+'use strict';
+
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 
 var inputdeviceExport = {};
 
 inputdeviceExport = {
-	//InputDeviceKey[] getSupportedKeys ()
-	getSupportedKeys: function () {
+	//void getSupportedKeys(InputDevicesKeyCallback callback, option ErrorCallback error?)
+	getSupportedKeys: function (callback, error) {
+		argscheck.checkArgs('fF', 'inputdevice.getSupportedKeys', arguments);
+		error = error || function () {};
+
 		var args = [];
-		exec(null, null, 'toast.inputdevice', 'getSupportedKeys', args);
+
+		exec(callback, error, 'toast.inputdevice', 'getSupportedKeys', args);
 	},
-	//InputDeviceKey? getKey(InputDeviceKeyName keyName)
+	//void getKey(InputDeviceKeyName keyName)
 	getKey: function (keyName) {
 		argscheck.checkArgs('s', 'inputdevice.getKey', arguments);
 		var args = [keyName];
