@@ -62,14 +62,15 @@ tvchannelExport = {
 		var args = [mode, nStart, number];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getChannelList', args);
 	},
-	//void getCurrentChannel (ChannelInfoCallback callback, optional WindowType? type)
-	getCurrentChannel: function (callback, type) {
-		argscheck.checkArgs('fS', 'tvchannel.getCurrentChannel', arguments);
+	//void getCurrentChannel (ChannelInfoSuccessCallback successCallback, optional ChannelInfoErrorCallback? errorCallback, optional WindowType? type)
+	getCurrentChannel: function (successCallback, errorCallback, type) {
+		argscheck.checkArgs('fFS', 'tvchannel.getCurrentChannel', arguments);
 
+		errorCallback = errorCallback || function () {};
 		type = type || 'MAIN';
 
 		var args = [type];
-		exec(callback, null, 'toast.tvchannel', 'getCurrentChannel', args);
+		exec(successCallback, errorCallback, 'toast.tvchannel', 'getCurrentChannel', args);
 	},
 	//void getProgramList (ChannelInfo channelInfo, TZDate startTime, ProgramListSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional unsigned long? duration)
 	getProgramList: function (channelInfo, startTime, successCallback, errorCallback, duration) {
@@ -81,14 +82,15 @@ tvchannelExport = {
 		var args = [channelInfo, startTime, duration];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getProgramList', args);
 	},
-	//void getCurrentProgram (ProgramInfoCallback callback, optional WindowType? type)
-	getCurrentProgram: function (callback, type) {
-		argscheck.checkArgs('fS', 'tvchannel.getCurrentProgram', arguments);
+	//void getCurrentProgram (ProgramInfoSuccessCallback successCallback, optioncal ProgramInfoErrorCallback? errorCallback, optional WindowType? type)
+	getCurrentProgram: function (successCallback, errorCallback, type) {
+		argscheck.checkArgs('fFS', 'tvchannel.getCurrentProgram', arguments);
 
+		errorCallback = errorCallback || function () {};
 		type = type || 'MAIN';
 
 		var args = [type];
-		exec(callback, null, 'toast.tvchannel', 'getCurrentProgram', args);
+		exec(successCallback, errorCallback, 'toast.tvchannel', 'getCurrentProgram', args);
 	},
 	//void addChannelChangeListener (ChannelChangeCallback callback, optional WindowType? type)
 	addChannelChangeListener: function (callback, type) {
@@ -99,11 +101,12 @@ tvchannelExport = {
 		var args = [type];
 		exec(callback, null, 'toast.tvchannel', 'addChannelChangeListener', args);
 	},
-	//void removeChannelChangeListener (long channelListenerId)
-	removeChannelChangeListener: function (channelListenerId) {
-		argscheck.checkArgs('n', 'tvchannel.removeChannelChangeListener', arguments);
-		var args = [channelListenerId];
-		exec(null, null, 'toast.tvchannel', 'removeChannelChangeListener', args);
+	//void removeChannelChangeListener (ChannelChangeCallback callback)
+	removeChannelChangeListener: function (callback) {
+		argscheck.checkArgs('f', 'tvchannel.removeChannelChangeListener', arguments);
+
+		var args = [];
+		exec(callback, null, 'toast.tvchannel', 'removeChannelChangeListener', args);
 	}
 };
 

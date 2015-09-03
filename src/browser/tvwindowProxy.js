@@ -1,41 +1,50 @@
 'use strict';
 
+function getTvindowElement () {
+	var element = '';
+	
+	if (!document.getElementById('tvwindowshow')) {
+		element = document.createElement('div');
+		element.id = 'tvwindowshow';
+	} else {
+		element = document.getElementById('tvwindowshow');
+	}
+
+	return element;
+}
+
+function randomColor () {
+	var color = '#';
+
+	for (var i = 0; i < 6; i++) {
+		if(Math.floor(Math.random() * 2) === 0){
+		color = color + '0';
+		} else {
+			color = color + 'f';
+		}	
+	}
+
+	return color;
+}
+
 module.exports = {
 	getAvailableWindows: function (success, fail, args) {
 		fail = null;
 		args = null;
 
-		success(['MAIN']);
+		setTimeout(function () {
+			success(['MAIN']);
+		}, 0);
 	},
 	setSource: function (success, fail, args){
 		fail = null;
-
-		var element = '';
-
-		var randomColor = function () {
-			var color = '#';
-
-			for (var i = 0; i < 6; i++) {
-				if(Math.floor(Math.random() * 2) === 0){
-				color = color + '0';
-				} else {
-					color = color + 'f';
-				}	
-			}
-
-			return color;
-		};
-		
-		if (!document.getElementById('tvwindowshow')) {
-			element = document.createElement('div');
-			element.id = 'tvwindowshow';
-		} else {
-			element = document.getElementById('tvwindowshow');
-		}
+		var element = getTvindowElement();
 
 		element.style.backgroundColor = randomColor();
 
-		success(args[0], args[1]);
+		setTimeout(function () {
+			success(args[0], args[1]);
+		}, 0);
 	},
 	getSource: function (success, fail, args) {
 		fail = null;
@@ -46,32 +55,13 @@ module.exports = {
 		source.type = 'HDMI';
 		source.number = '1';
 
-		success(source);
+		setTimeout(function () {
+			success(source);
+		}, 0);
 	},
 	show: function (success, fail, args) {
 		fail = null;
-
-		var element = '';
-		var randomColor = function(){
-			var color = '#';
-
-			for (var i = 0; i < 6; i++) {
-				if(Math.floor(Math.random() * 2) === 0){
-				color = color + '0';
-				} else {
-					color = color + 'f';
-				}	
-			}
-
-			return color;
-		};
-
-		if (!document.getElementById('tvwindowshow')) {
-			element = document.createElement('div');
-			element.id = 'tvwindowshow';
-		} else {
-			element = document.getElementById('tvwindowshow');
-		}
+		var element = getTvindowElement();
 
 		element.style.position = 'absolute';
 		element.style.left = args[0][0];
@@ -81,7 +71,10 @@ module.exports = {
 		element.style.backgroundColor = randomColor();
 
 		document.getElementsByTagName('body')[0].appendChild(element);
-		success(args[0], args[1]);
+
+		setTimeout(function () {
+			success(args[0], args[1]);
+		}, 0);
 	},
 	hide: function (success, fail, args) {
 		args = null;
@@ -92,9 +85,14 @@ module.exports = {
 			element = document.getElementById('tvwindowshow');
 
 			document.getElementsByTagName('body')[0].removeChild(element);
-			success();
+
+			setTimeout(function () {
+				success();
+			}, 0);
 		} else {
-			fail();
+			setTimeout(function () {
+				fail();
+			}, 0);
 		}
 	},
 	getRect: function (success, fail, args) {
@@ -154,13 +152,19 @@ module.exports = {
 					rectangle[3] = rectangle[3] + '%';
 				}
 
-				success(rectangle, args[1]);
+				setTimeout(function () {
+					success(rectangle, args[1]);
+				}, 0);
 			} else {
-				fail();
+				setTimeout(function () {
+					fail();
+				}, 0);
 			}
 
 		} else {
-			fail();
+			setTimeout(function () {
+				fail();
+			}, 0);
 		}
 	}
 };
