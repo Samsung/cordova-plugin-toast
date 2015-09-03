@@ -277,7 +277,7 @@ module.exports = {
 	// 		element = document.getElementById('tvwindowshow');
 	// 	}
 	// 	element.removeEventListener('DOMAttrModified');
-	// }
+	}
 };
 
 require('cordova/exec/proxy').add('toast.tvaudiocontrol', module.exports);
