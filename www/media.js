@@ -1,9 +1,50 @@
+'use strict';
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 
 var mediaObjects = null;
 var Media = function (){
+    // Media messages
+    this.MEDIA_STATE = 1;
+    this.MEDIA_DURATION = 2;
+    this.MEDIA_POSITION = 3;
+    this.MEDIA_BUFFERINGPROGRESS = 4;
+    this.MEDIA_SUBTITLE = 5;
+    this.MEDIA_ERROR = 9;
 
+    // Media states
+    this.MEDIA_NONE = 0;
+    this.MEDIA_LOADEDMETADATA = 1;
+    this.MEDIA_BUFFERINGSTART = 2;
+    this.MEDIA_BUFFERINGCOMPLETE = 3;
+    this.MEDIA_RUNNING = 4;
+    this.MEDIA_PAUSED = 5;
+    this.MEDIA_STOPPED = 6;
+    this.MEDIA_MSG = ['None', 'LoadedMetaData', 'BufferingStart', 'BufferingComplete', 'Running', 'Paused', 'Stopped'];
+
+    // Media supported Adaptive Bitrate Streaming type
+    this.ABS_TYPE_HLS = 0;
+    this.ABS_TYPE_HAS = 1;
+    this.ABS_TYPE_SS = 2;
+    this.ABS_TYPE_WV = 3;
+    this.ABS_TYPE_MSG = ['HLS','HAS','SmoothStreaming','Widevine'];
+
+    // Media supported Digital rights management type
+    this.DRM_TYPE_PLAYREADY = 0;
+    this.DRM_TYPE_MSG = ['PlayReady'];
+
+    // Media supported 3D Effect mode
+    this.EFFECT_3D_TYPE_OFF = 0;
+    this.EFFECT_3D_TYPE_TOPNBOTTOM = 1;
+    this.EFFECT_3D_TYPE_SIDEBYSIDE = 2;
+    this.EFFECT_3D_TYPE_2DTO3D = 3;
+    this.EFFECT_3D_TYPE_MSG = ['OFF','TopBottom','SideBySide','2DTo3D'];
+
+    // Media error type
+    this.ERR_ABORTED = 1;
+    this.ERR_NETWORK = 2;
+    this.ERR_DECODE = 3;
+    this.ERR_SRC_NOT_SUPPORTED = 4;
 };
 /**
  * This class provides access to the device media, interfaces to both sound and video
@@ -29,7 +70,7 @@ Media.prototype.create = function(src, successCallback, errorCallback, statusCal
     this.msgCallback = msgCallback;
     this._duration = -1;
     this._position = -1;
-    exec(null, this.errorCallback, "toast.media", "create", this.src);
+    exec(null, this.errorCallback, 'toast.media', 'create', this.src);
 };
 
 // Media messages
@@ -48,25 +89,25 @@ Media.MEDIA_BUFFERINGCOMPLETE = 3;
 Media.MEDIA_RUNNING = 4;
 Media.MEDIA_PAUSED = 5;
 Media.MEDIA_STOPPED = 6;
-Media.MEDIA_MSG = ["None", "LoadedMetaData", "BufferingStart", "BufferingComplete", "Running", "Paused", "Stopped"];
+Media.MEDIA_MSG = ['None', 'LoadedMetaData', 'BufferingStart', 'BufferingComplete', 'Running', 'Paused', 'Stopped'];
 
 // Media supported Adaptive Bitrate Streaming type
 Media.ABS_TYPE_HLS = 0;
 Media.ABS_TYPE_HAS = 1;
 Media.ABS_TYPE_SS = 2;
 Media.ABS_TYPE_WV = 3;
-Media.ABS_TYPE_MSG = ["HLS","HAS","SmoothStreaming","Widevine"];
+Media.ABS_TYPE_MSG = ['HLS','HAS','SmoothStreaming','Widevine'];
 
 // Media supported Digital rights management type
 Media.DRM_TYPE_PLAYREADY = 0;
-Media.DRM_TYPE_MSG = ["PlayReady"];
+Media.DRM_TYPE_MSG = ['PlayReady'];
 
 // Media supported 3D Effect mode
-Media.3D_TYPE_OFF = 0;
-Media.3D_TYPE_TOPNBOTTOM = 1;
-Media.3D_TYPE_SIDEBYSIDE = 2;
-Media.3D_TYPE_2DTO3D = 3;
-Media.3D_TYPE_MSG = ["OFF","TopBottom","SideBySide","2DTo3D"];
+Media.EFFECT_3D_TYPE_OFF = 0;
+Media.EFFECT_3D_TYPE_TOPNBOTTOM = 1;
+Media.EFFECT_3D_TYPE_SIDEBYSIDE = 2;
+Media.EFFECT_3D_TYPE_2DTO3D = 3;
+Media.EFFECT_3D_TYPE_MSG = ['OFF','TopBottom','SideBySide','2DTo3D'];
 
 // Media error type
 Media.ERR_ABORTED = 1;
@@ -83,11 +124,11 @@ Media.prototype.getSupportedDRMType = function(){
 };
 
 Media.prototype.getSupported3DType = function(){
-	return Media.3D_TYPE_MSG;
-}
+	return Media.EFFECT_3D_TYPE_MSG;
+};
 
 Media.prototype.setDisplayRect = function(rect){
-    exec(null, null, "toast.media", "setVideoDisplayRect", rect);
+    exec(null, null, 'toast.media', 'setVideoDisplayRect', rect);
 };
 
 /**
@@ -111,25 +152,25 @@ Media.prototype.setDisplayRect = function(rect){
  */
 
 Media.prototype.play = function(options){
-	exec(null, null, "toast.media", "startPlayingVideo", [this.src, options]);
+	exec(null, null, 'toast.media', 'startPlayingVideo', [this.src, options]);
 };
 
 Media.prototype.stop = function() {
 	var me = this;
 	exec(function() {
 		me._position = 0;
-	}, null, "toast.media", "stopPlayingVideo", null);
+	}, null, 'toast.media', 'stopPlayingVideo', null);
 };
 
 Media.prototype.seekTo = function(milliseconds) {
 	var me = this;
 	exec(function(p) {
 		me._position = p;
-	}, null, "toast.media", "seekToVideo", milliseconds);
+	}, null, 'toast.media', 'seekToVideo', milliseconds);
 };
 
 Media.prototype.pause = function() {
-	exec(null, null, "toast.media", "pausePlayingVideo", null);
+	exec(null, null, 'toast.media', 'pausePlayingVideo', null);
 };
 
 Media.prototype.getDuration = function() {
@@ -141,7 +182,7 @@ Media.prototype.getCurrentPosition = function(success, fail) {
 	exec(function(p) {
 		me._position = p;
 		success(p);
-	}, fail, "toast.media", "getCurrentPositionVideo", null);
+	}, fail, 'toast.media', 'getCurrentPositionVideo', null);
 };
 
 /**
@@ -178,12 +219,12 @@ Media.onStatus = function(msgType, value) {
                 media.msgCallback && media.msgCallback(Media.MEDIA_SUBTITLE, value);
                 break;    
             default :
-                console.error && console.error("Unhandled Media.onStatus :: " + msgType);
+                console.error && console.error('Unhandled Media.onStatus :: ' + msgType);
                 break;
         }
     }
     else {
-         console.error && console.error("Received Media.onStatus callback for unknown media :: " + id);
+         console.error && console.error('Received Media.onStatus callback for unknown media');
     }
 };
 
