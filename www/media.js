@@ -1,50 +1,27 @@
 'use strict';
 var argscheck = require('cordova/argscheck'),
-	exec = require('cordova/exec');
+    utils = require('cordova/utils'),
+    exec = require('cordova/exec');
 
 var mediaObjects = null;
-var Media = function (){
-    // Media messages
-    this.MEDIA_STATE = 1;
-    this.MEDIA_DURATION = 2;
-    this.MEDIA_POSITION = 3;
-    this.MEDIA_BUFFERINGPROGRESS = 4;
-    this.MEDIA_SUBTITLE = 5;
-    this.MEDIA_ERROR = 9;
-
-    // Media states
-    this.MEDIA_NONE = 0;
-    this.MEDIA_LOADEDMETADATA = 1;
-    this.MEDIA_BUFFERINGSTART = 2;
-    this.MEDIA_BUFFERINGCOMPLETE = 3;
-    this.MEDIA_RUNNING = 4;
-    this.MEDIA_PAUSED = 5;
-    this.MEDIA_STOPPED = 6;
-    this.MEDIA_MSG = ['None', 'LoadedMetaData', 'BufferingStart', 'BufferingComplete', 'Running', 'Paused', 'Stopped'];
-
-    // Media supported Adaptive Bitrate Streaming type
-    this.ABS_TYPE_HLS = 0;
-    this.ABS_TYPE_HAS = 1;
-    this.ABS_TYPE_SS = 2;
-    this.ABS_TYPE_WV = 3;
-    this.ABS_TYPE_MSG = ['HLS','HAS','SmoothStreaming','Widevine'];
-
-    // Media supported Digital rights management type
-    this.DRM_TYPE_PLAYREADY = 0;
-    this.DRM_TYPE_MSG = ['PlayReady'];
-
-    // Media supported 3D Effect mode
-    this.EFFECT_3D_TYPE_OFF = 0;
-    this.EFFECT_3D_TYPE_TOPNBOTTOM = 1;
-    this.EFFECT_3D_TYPE_SIDEBYSIDE = 2;
-    this.EFFECT_3D_TYPE_2DTO3D = 3;
-    this.EFFECT_3D_TYPE_MSG = ['OFF','TopBottom','SideBySide','2DTo3D'];
-
-    // Media error type
-    this.ERR_ABORTED = 1;
-    this.ERR_NETWORK = 2;
-    this.ERR_DECODE = 3;
-    this.ERR_SRC_NOT_SUPPORTED = 4;
+var Media = function (src, successCallback, errorCallback, statusCallback, msgCallback){
+    if(!mediaObjects){
+        argscheck.checkArgs('sFFF', 'Media', arguments);
+        this.id = utils.createUUID();
+        mediaObjects = {};
+        mediaObjects[this.id] = this;
+        this.src = src;
+        this.successCallback = successCallback;
+        this.errorCallback = errorCallback;
+        this.statusCallback = statusCallback;
+        this.msgCallback = msgCallback;
+        this._duration = -1;
+        this._position = -1;
+        exec(null, this.errorCallback, 'toast.media', 'create', [this.id, this.src]);
+    } else {
+        throw Error('Media instance exists already. toast Media supported single instance');
+    }
+    
 };
 /**
  * This class provides access to the device media, interfaces to both sound and video
@@ -60,17 +37,8 @@ var Media = function (){
  * @param msgCallback          The callback to be called when receive message from media(ex. position, subtitleChange etc)
  *                                  msgCallback(int messageType, any messageValue) - OPTIONAL
  */
-Media.prototype.create = function(src, successCallback, errorCallback, statusCallback, msgCallback) {
-    argscheck.checkArgs('sFFF', 'Media', arguments);
-    mediaObjects = this;
-    this.src = src;
-    this.successCallback = successCallback;
-    this.errorCallback = errorCallback;
-    this.statusCallback = statusCallback;
-    this.msgCallback = msgCallback;
-    this._duration = -1;
-    this._position = -1;
-    exec(null, this.errorCallback, 'toast.media', 'create', this.src);
+Media.getInstance = function(src, successCallback, errorCallback, statusCallback, msgCallback) {
+    return mediaObjects || new Media(src, successCallback, errorCallback, statusCallback, msgCallback);
 };
 
 // Media messages
@@ -91,86 +59,30 @@ Media.MEDIA_PAUSED = 5;
 Media.MEDIA_STOPPED = 6;
 Media.MEDIA_MSG = ['None', 'LoadedMetaData', 'BufferingStart', 'BufferingComplete', 'Running', 'Paused', 'Stopped'];
 
-// Media supported Adaptive Bitrate Streaming type
-Media.ABS_TYPE_HLS = 0;
-Media.ABS_TYPE_HAS = 1;
-Media.ABS_TYPE_SS = 2;
-Media.ABS_TYPE_WV = 3;
-Media.ABS_TYPE_MSG = ['HLS','HAS','SmoothStreaming','Widevine'];
-
-// Media supported Digital rights management type
-Media.DRM_TYPE_PLAYREADY = 0;
-Media.DRM_TYPE_MSG = ['PlayReady'];
-
-// Media supported 3D Effect mode
-Media.EFFECT_3D_TYPE_OFF = 0;
-Media.EFFECT_3D_TYPE_TOPNBOTTOM = 1;
-Media.EFFECT_3D_TYPE_SIDEBYSIDE = 2;
-Media.EFFECT_3D_TYPE_2DTO3D = 3;
-Media.EFFECT_3D_TYPE_MSG = ['OFF','TopBottom','SideBySide','2DTo3D'];
-
-// Media error type
-Media.ERR_ABORTED = 1;
-Media.ERR_NETWORK = 2;
-Media.ERR_DECODE = 3;
-Media.ERR_SRC_NOT_SUPPORTED = 4;
-
-Media.prototype.getSupportedABSType = function(){
-	return Media.ABS_TYPE_MSG;
-};
-
-Media.prototype.getSupportedDRMType = function(){
-	return Media.DRM_TYPE_MSG;
-};
-
-Media.prototype.getSupported3DType = function(){
-	return Media.EFFECT_3D_TYPE_MSG;
-};
-
 Media.prototype.setDisplayRect = function(rect){
     exec(null, null, 'toast.media', 'setVideoDisplayRect', rect);
 };
 
-/**
- * Start or resume playing video file.
- *
- * @constructor
- * @param options     the options for playing the specific video(adaptive streaming, drm, 3D) contents. - OPTIONAL
- * @ ex) 
- *    options : {
- *        runningPosition : int milliseconds, // video playback has to be started with runningPosition - OPTIONAL(default 0)
- *        abs : {
- *            type : int type, // Adaptive Bitrate Streaming type (refer Media supported Adaptive Bitrate Streaming type)
- *            data : object data // specitic Adaptive data(ex. BITRATES, STARTBITRATE, SKIPBITRATE) - OPTIONAL
- *        },
- *        drm : {
- *            type : int type, // Digital rights management type (refer Media supported Digital rights management type)
- *            data : object data // specitic DRM data(ex. CustomData, LicenseServer)
- *        },
- *        3D : int type // 3D Effect mode (refer Media supported 3D Effect mode) - OPTIONAL(default Media.3D_TYPE_OFF)
- *    }
- */
-
 Media.prototype.play = function(options){
-	exec(null, null, 'toast.media', 'startPlayingVideo', [this.src, options]);
+	exec(null, null, 'toast.media', 'startPlayingVideo', [this.id, this.src, options]);
 };
 
 Media.prototype.stop = function() {
 	var me = this;
 	exec(function() {
 		me._position = 0;
-	}, null, 'toast.media', 'stopPlayingVideo', null);
+	}, null, 'toast.media', 'stopPlayingVideo', [this.id]);
 };
 
 Media.prototype.seekTo = function(milliseconds) {
 	var me = this;
 	exec(function(p) {
 		me._position = p;
-	}, null, 'toast.media', 'seekToVideo', milliseconds);
+	}, null, 'toast.media', 'seekToVideo', [this.id, milliseconds]);
 };
 
 Media.prototype.pause = function() {
-	exec(null, null, 'toast.media', 'pausePlayingVideo', null);
+	exec(null, null, 'toast.media', 'pausePlayingVideo', [this.id]);
 };
 
 Media.prototype.getDuration = function() {
@@ -182,7 +94,7 @@ Media.prototype.getCurrentPosition = function(success, fail) {
 	exec(function(p) {
 		me._position = p;
 		success(p);
-	}, fail, 'toast.media', 'getCurrentPositionVideo', null);
+	}, fail, 'toast.media', 'getCurrentPositionVideo', [this.id]);
 };
 
 /**
@@ -192,8 +104,8 @@ Media.prototype.getCurrentPosition = function(success, fail) {
  * @param msgType       The 'type' of update this is
  * @param value         Use of value is determined by the msgType
  */
-Media.onStatus = function(msgType, value) {
-    var media = mediaObjects;
+Media.onStatus = function(id, msgType, value) {
+    var media = mediaObjects[id];
     if(media) {
         switch(msgType) {
             case Media.MEDIA_STATE :
@@ -224,8 +136,8 @@ Media.onStatus = function(msgType, value) {
         }
     }
     else {
-         console.error && console.error('Received Media.onStatus callback for unknown media');
+         console.error && console.error('Received Media.onStatus callback for unknown media:: ' + id);
     }
 };
 
-module.exports = new Media();
+module.exports = Media;
