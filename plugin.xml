@@ -1,65 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="com.sec.vd.toast"
-        version="0.1.0">
+<?xml version='1.0' encoding='utf-8'?>
+<plugin xmlns='http://www.phonegap.com/ns/plugins/1.0' id='cordova-plugin-toast' version='0.1.0'>
+	<name>cordova-plugin-toast</name>
 
-  <name>cordova-plugin-toast</name>
+	<engines>
+		<engine name='cordova' version='>=3.5.2'/>
+	</engines>
 
-  <engines>
-    <engine name="cordova" version=">=3.5.2"/>
-  </engines>
+	<js-module src='www/inputdevice.js' name='inputdevice'>
+		<clobbers target='toast.inputdevice' />
+	</js-module>
+	<js-module src='www/tvchannel.js' name='tvchannel'>
+		<clobbers target='toast.tvchannel' />
+	</js-module>
+	<js-module src='www/tvwindow.js' name='tvwindow'>
+		<clobbers target='toast.tvwindow' />
+	</js-module>
+	<js-module src='www/tvaudiocontrol.js' name='tvaudiocontrol'>
+		<clobbers target='toast.tvaudiocontrol' />
+	</js-module>
+	<js-module src='www/tvdevice.js' name='tvdevice'>
+		<clobbers target='toast.tvdevice' />
+	</js-module>
+	<js-module src='www/drminfo.js' name='drminfo'>
+		<clobbers target='toast.drminfo' />
+	</js-module>
 
-  <js-module src="www/inputdevice.js" name="inputdevice">
-    <clobbers target="toast.inputdevice" />
-  </js-module>
+	<!-- browser -->
+	<platform name='browser'>
+		<js-module src='src/browser/inputdeviceProxy.js' name='inputdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/browser/tvwindowProxy.js' name='tvwindowProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/browser/tvchannelProxy.js' name='tvchannelProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/browser/tvaudiocontrolProxy.js' name='tvaudiocontrolProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/browser/tvdeviceProxy.js' name='tvdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/browser/drminfoProxy.js' name='drminfoProxy'>
+			<runs />
+		</js-module>
+	</platform>
 
-  <js-module src="www/tvchannel.js" name="tvchannel">
-    <clobbers target="toast.tvchannel" />
-  </js-module>
+	<!-- sectv-orsay -->
+	<platform name='sectv-orsay'>
+		<js-module src='src/sectv-orsay/inputdeviceProxy.js' name='inputdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-orsay/tvwindowProxy.js' name='tvwindowProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-orsay/tvchannelProxy.js' name='tvchannelProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-orsay/tvaudiocontrolProxy.js' name='tvaudiocontrolProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-orsay/tvdeviceProxy.js' name='tvdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-orsay/drminfoProxy.js' name='drminfoProxy'>
+			<runs />
+		</js-module>
+	</platform>
 
-  <js-module src="www/tvwindow.js" name="tvwindow">
-    <clobbers target="toast.tvwindow" />
-  </js-module>
-
-  <js-module src="www/tvaudiocontrol.js" name="tvaudiocontrol">
-    <clobbers target="toast.tvaudiocontrol" />
-  </js-module>
-
-  <js-module src="www/tvdevice.js" name="tvdevice">
-    <clobbers target="toast.tvdevice" />
-  </js-module>
-
-  <js-module src="www/drminfo.js" name="drminfo">
-    <clobbers target="toast.drminfo" />
-  </js-module>
-
-  <!-- browser -->
-  <platform name="browser">
-      <js-module src="src/browser/inputdeviceProxy.js" name="inputdeviceProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/browser/tvwindowProxy.js" name="tvwindowProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/browser/tvchannelProxy.js" name="tvchannelProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/browser/tvaudiocontrolProxy.js" name="tvaudiocontrolProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/browser/tvdeviceProxy.js" name="tvdeviceProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/browser/drminfoProxy.js" name="drminfoProxy">
-          <runs />
-      </js-module>
-  </platform>
-  <platform name="sectv-orsay">
-      <js-module src="src/sectv-orsay/tvwindowProxy.js" name="tvwindowProxy">
-          <runs />
-      </js-module>
-      <js-module src="src/sectv-orsay/tvchannelProxy.js" name="tvchannelProxy">
-          <runs />
-      </js-module>
-  </platform>
+	<!-- sectv-tizen -->
+	<platform name='sectv-tizen'>
+		<js-module src='src/sectv-tizen/inputdeviceProxy.js' name='inputdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-tizen/tvwindowProxy.js' name='tvwindowProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-tizen/tvchannelProxy.js' name='tvchannelProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-tizen/tvaudiocontrolProxy.js' name='tvaudiocontrolProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-tizen/tvdeviceProxy.js' name='tvdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-tizen/drminfoProxy.js' name='drminfoProxy'>
+			<runs />
+		</js-module>
+	</platform>
 </plugin>
