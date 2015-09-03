@@ -1,3 +1,4 @@
+'use strict';
 
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
@@ -8,11 +9,11 @@ tvaudiocontrolExport = {
 	//void setMute(boolean mute)
 	setMute: function (mute) {
 		argscheck.checkArgs('s', 'tvaudiocontrol.setMute', arguments);
+		mute = mute;
+		// type = type || 'MAIN';
 
-		type = type || 'MAIN';
-
-		var args = [tuneOption, type];
-		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setMute', args);
+		// var args = [tuneOption, type];
+		// exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setMute', args);
 	},
 	//boolean isMute()
 	isMute: function (successCallback, errorCallback, tuneMode, type) {
