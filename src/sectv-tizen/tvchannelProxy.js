@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	tune: function (success, fail, args) {
 		tizen.tvchannel.tune(args[0], success, fail, args[1]);
@@ -15,6 +17,8 @@ module.exports = {
 		tizen.tvchannel.findChannel(args[0], args[1], success, fail);
 	},
 	getCurrentChannel: function (success, fail, args) {
+		fail = null;
+		
 		var channelInfo = tizen.tvchannel.getCurrentChannel(args[0]);
 
 		setTimeout(function () {
@@ -27,13 +31,18 @@ module.exports = {
 	getCurrentProgram: function (success, fail, args) {
 		tizen.tvchannel.getCurrentProgram(success, fail, args[0]);
 	},
-	channelListenerId: '',
 	addChannelChangeListener: function (success, fail, args) {
-		this.channelListenerId = tizen.tvchannel.addChannelChangeListener(success, args[0]);
+		fail = null;
+		
+		tizen.tvchannel.addChannelChangeListener(success, args[0]);
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		tizen.tvchannel.removeChannelChangeListener(channelListenerId);
+		success = null;
+		fail = null;
+		args = null;
+		
+		tizen.tvchannel.removeChannelChangeListener();
 	}
 };
 
-require("cordova/exec/proxy").add("toast.tvchannel", module.exports);
+require('cordova/exec/proxy').add('toast.tvchannel', module.exports);

@@ -1,5 +1,9 @@
+'use strict';
+
 module.exports = {
 	getAvailableWindows: function (success, fail, args) {
+		args = null;
+		
 		tizen.tvwindow.getAvailableWindows(success, fail);
 	},
 	setSource: function (success, fail, args){

@@ -1,3 +1,4 @@
+'use strict';
 
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
@@ -9,9 +10,9 @@ tvchannelExport = {
 	tune: function (tuneOption, successCallback, errorCallback, type) {
 		argscheck.checkArgs('ooFS', 'tvchannel.tune', arguments);
 
-		successCallback['onsuccess'] = successCallback['onsuccess'] || function () {};
-		successCallback['onnosignal'] = successCallback['onnosignal'] || function () {};
-		successCallback['onprograminforeceived'] = successCallback['onprograminforeceived']|| function () {};
+		successCallback.onsuccess = successCallback.onsuccess || function () {};
+		successCallback.onnosignal = successCallback.onnosignal || function () {};
+		successCallback.onprograminforeceived = successCallback.onprograminforeceived || function () {};
 		errorCallback = errorCallback || function () {};
 		type = type || 'MAIN';
 

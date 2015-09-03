@@ -1,8 +1,15 @@
+'use strict';
+
 module.exports = {
 	getAvailableWindows: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		success(['MAIN']);
 	},
 	setSource: function (success, fail, args){
+		fail = null;
+
 		var element = '';
 
 		var randomColor = function () {
@@ -17,7 +24,7 @@ module.exports = {
 			}
 
 			return color;
-		}
+		};
 		
 		if (!document.getElementById('tvwindowshow')) {
 			element = document.createElement('div');
@@ -31,14 +38,19 @@ module.exports = {
 		success(args[0], args[1]);
 	},
 	getSource: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		var source = {};
 
-		source['type'] = 'HDMI';
-		source['number'] = '1';
+		source.type = 'HDMI';
+		source.number = '1';
 
 		success(source);
 	},
 	show: function (success, fail, args) {
+		fail = null;
+
 		var element = '';
 		var randomColor = function(){
 			var color = '#';
@@ -52,7 +64,7 @@ module.exports = {
 			}
 
 			return color;
-		}
+		};
 
 		if (!document.getElementById('tvwindowshow')) {
 			element = document.createElement('div');
@@ -72,6 +84,8 @@ module.exports = {
 		success(args[0], args[1]);
 	},
 	hide: function (success, fail, args) {
+		args = null;
+
 		var element = '';
 
 		if (document.getElementById('tvwindowshow')) {

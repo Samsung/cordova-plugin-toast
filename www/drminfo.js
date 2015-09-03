@@ -1,3 +1,5 @@
+'use strict';
+
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 

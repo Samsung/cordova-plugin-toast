@@ -1,7 +1,8 @@
+'use strict';
+
 module.exports = {
 	tune: function (success, fail, args) {
 		var element = '';
-		var source = {};
 		var randomColor = function(){
 			var color = '#';
 
@@ -14,7 +15,7 @@ module.exports = {
 			}
 
 			return color;
-		}
+		};
 		
 		if (!document.getElementById('tvwindowshow')) {
 			element = document.createElement('div');
@@ -25,23 +26,22 @@ module.exports = {
 		element.style.backgroundColor = randomColor();
 
 		var channelInfo = {
-			major: args[0]['major'],
-			minor: args[0]['minor'],
+			major: args[0].major,
+			minor: args[0].minor,
 			channelName: '',
-			programNumber: args[0]['programNumber'],
-			ptc: args[0]['ptc'],
+			programNumber: args[0].programNumber,
+			ptc: args[0].ptc,
 			lcn: '',
-			sourceID: args[0]['sourceID'],
+			sourceID: args[0].sourceID,
 			transportStreamID: '',
-			originalNetworkID: args[0]['originalNetworkID'],
-			serviceName:''
+			originalNetworkID: args[0].originalNetworkID,
+			serviceName: ''
 		};
 
 		success.onsuccess(channelInfo, args[1]);
 	},
 	tuneUp: function (success, fail, args) {
 		var element = '';
-		var source = {};
 		var randomColor = function(){
 			var color = '#';
 
@@ -54,7 +54,7 @@ module.exports = {
 			}
 
 			return color;
-		}
+		};
 		
 		if (!document.getElementById('tvwindowshow')) {
 			element = document.createElement('div');
@@ -81,7 +81,6 @@ module.exports = {
 	},
 	tuneDown: function (success, fail, args) {
 		var element = '';
-		var source = {};
 		var randomColor = function(){
 			var color = '#';
 
@@ -94,7 +93,7 @@ module.exports = {
 			}
 
 			return color;
-		}
+		};
 		
 		if (!document.getElementById('tvwindowshow')) {
 			element = document.createElement('div');
@@ -120,6 +119,9 @@ module.exports = {
 		success.onsuccess(channelInfo, args[1]);
 	},
 	findChannel: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		var channelInfo = [{
 			major: '',
 			minor: '',
@@ -147,6 +149,9 @@ module.exports = {
 		success(channelInfo);
 	},
 	getChannelList: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		var channelInfo = [{
 			major: '',
 			minor: '',
@@ -173,7 +178,10 @@ module.exports = {
 
 		success(channelInfo);
 	},
-	getCurrentChannel: function (success, args) {
+	getCurrentChannel: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		var channelInfo = [{
 			major: '',
 			minor: '',
@@ -190,6 +198,9 @@ module.exports = {
 		success(channelInfo);
 	},
 	getProgramList: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		var programInfo = {
 			title: '',
 			startTime: '',
@@ -202,6 +213,9 @@ module.exports = {
 		success(programInfo);
 	},
 	getCurrentProgram: function (success, fail, args) {
+		fail = null;
+		args = null;
+
 		var programInfo = {
 			title: '',
 			startTime: '',
@@ -213,45 +227,16 @@ module.exports = {
 
 		success(programInfo);
 	},
-	watcher : '',
 	addChannelChangeListener: function (success, fail, args) {
-		var element = '';
-		var channelInfo = {
-			major: '',
-			minor: '',
-			channelName: '',
-			programNumber: '',
-			ptc: '',
-			lcn: '',
-			sourceID: '',
-			transportStreamID: '',
-			originalNetworkID: '',
-			serviceName:''
-		};
-
-		if (!document.getElementById('tvwindowshow')) {
-			element = document.createElement('div');
-			element.id = 'tvwindowshow';
-		} else {
-			element = document.getElementById('tvwindowshow');
-		}
-
-		var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-		if (!this.watcher) {
-			this.watcher = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					success(channelInfo);
-				});
-			});
-			this.watcher.observe(element, { attributes : true });
-		}
+		success = null;
+		fail = null;
+		args = null;
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		if (this.watcher) {
-			this.watcher.disconnect();
-			this.watcher = '';
-		}
+		success = null;
+		fail = null;
+		args = null;
 	}
 };
 
-require("cordova/exec/proxy").add("toast.tvchannel", module.exports);
+require('cordova/exec/proxy').add('toast.tvchannel', module.exports);
