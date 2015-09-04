@@ -58,4 +58,28 @@ In the 2014's TV
 
 # How to Build
 
+# How to Test with TestRunner
+* You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory.
+* Please refer to below for running the tests:
+```shell
+$ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
+$ cd TestRunner
+$ cp -rf ../grunt-cordova-sectv/sample/* ./
+$ npm install
+$ cordova platform add browser
+$ cordova plugin add ../cordova-plugin-toast
+
+# Test on browser platform
+$ cordova build browser
+$ cordova emulate browser
+
+# Test on sectv-orsay platform
+$ grunt sectv-build:sectv-orsay sectv-compile:sectv-orsay
+# Run the application on target
+
+# Test on sectv-tizen platform
+$ grunt sectv-build:sectv-tizen sectv-compile:sectv-tizen
+# Run the application on target
+```
+
 # Known Issues
