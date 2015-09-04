@@ -61,6 +61,7 @@ In the 2014's TV
 # How to Test with TestRunner
 * You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory.
 * Please refer to below for running the tests:
+
 ```shell
 $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
 $ cd TestRunner
