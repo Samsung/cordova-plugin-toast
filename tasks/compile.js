@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var xml2js = require('xml2js');
 function trim (str) {
-    return (str + "").replace(/^\s+|\s+$/g, '');
+    return (str + '').replace(/^\s+|\s+$/g, '');
 }
 
 // Supporting dot('.') seperated expression. Not support array indexing.
@@ -32,13 +32,13 @@ function prepareDir(dirPath) {
     var tmp = dirPath.split(path.sep);
     var chkPath = '';
     for(var i=0, len=tmp.length; i<len; i++) {
-        chkPath += (i>0?path.sep:"") + tmp[i];
+        chkPath += (i>0?path.sep:'') + tmp[i];
         if(!fs.existsSync(chkPath)) {
             try {
                 fs.mkdirSync(chkPath);
             }
             catch(e) {
-                grunt.fail.fatal("Fail to create directory at " + path.resolve(chkPath));
+                grunt.fail.fatal('Fail to create directory at ' + path.resolve(chkPath));
             }
         }
     }
@@ -58,16 +58,16 @@ module.exports = function(grunt) {
             plugin = result;
         });
 
-        var pluginId = getValue(plugin, "plugin.$.id", "");
+        var pluginId = getValue(plugin, 'plugin.$.id', '');
 
         var jsMods = [];
-        var commMods = getValue(plugin, "plugin.js-module", []);
+        var commMods = getValue(plugin, 'plugin.js-module', []);
         jsMods = jsMods.concat(commMods);
-        var platforms = getValue(plugin, "plugin.platform", []);
+        var platforms = getValue(plugin, 'plugin.platform', []);
         for(var i=0; i<platforms.length; i++) {
-            var pfmName = getValue(platforms[i], "$.name", null);
+            var pfmName = getValue(platforms[i], '$.name', null);
             if(pfmName && pfmName === platformName) {
-                var pfmMods = getValue(platforms[i], "js-module", []);
+                var pfmMods = getValue(platforms[i], 'js-module', []);
                 jsMods = jsMods.concat(pfmMods);
                 break;  // handle first found platform only.
             }
@@ -80,37 +80,38 @@ module.exports = function(grunt) {
         }
 
         var content = '';
-        content += ";(function() {\n";
-        content += "var TOAST_VERSION = '"+TOAST_VERSION+"';\n";
-        content += "var require = cordova.require,\n";
-        content += "    define = cordova.define;\n\n";
+        content += ';(function() {\n';
+		content += '// jshint strict:false\n';
+        //content += 'var TOAST_VERSION = \''+TOAST_VERSION+'\';\n';
+        content += 'var require = cordova.require,\n';
+        content += '    define = cordova.define;\n\n';
 
         var lstClobbers = [],
             lstMerges = [],
             lstRuns = [];
         for(var i=0; i<jsMods.length; i++) {
-            var src = getValue(jsMods[i], "$.src", null);
-            var name = getValue(jsMods[i], "$.name", null);
+            var src = getValue(jsMods[i], '$.src', null);
+            var name = getValue(jsMods[i], '$.name', null);
             if(!src || !name) {
-                grunt.fail.warn("Invalid js-module definition- src: " + src + ", name: " + name);
+                grunt.fail.warn('Invalid js-module definition- src: ' + src + ', name: ' + name);
             }
-            var modId = pluginId + "." + name;
+            var modId = pluginId + '.' + name;
             try {
                 var srcContent = fs.readFileSync(src);
             }
             catch(e) {
-                grunt.fail.warn("Fail to read file at " + path.resolve(src)
-                    + ". Please check that the file exists. This path is retrived from plugin.xml.");
+                grunt.fail.warn('Fail to read file at ' + path.resolve(src)
+                    + '. Please check that the file exists. This path is retrived from plugin.xml.');
             }
             content += '// file: ' + src + '\n';
             content += wrapWithDefine(modId, srcContent) + '\n';
 
-            var clobbers = getValue(jsMods[i], "clobbers", null);
-            var merges = getValue(jsMods[i], "merges", null);
-            var runs = getValue(jsMods[i], "runs", null);
+            var clobbers = getValue(jsMods[i], 'clobbers', null);
+            var merges = getValue(jsMods[i], 'merges', null);
+            var runs = getValue(jsMods[i], 'runs', null);
             if(clobbers) {
                 for(var c=0; c<clobbers.length; c++) {
-                    var target = getValue(clobbers[c], "$.target", null);
+                    var target = getValue(clobbers[c], '$.target', null);
                     if(target) {
                         lstClobbers.push({
                             id: modId,
@@ -121,7 +122,7 @@ module.exports = function(grunt) {
             }
             if(merges) {
                 for(var m=0; m<merges.length; m++) {
-                    var target = getValue(merges[m], "$.target", null);
+                    var target = getValue(merges[m], '$.target', null);
                     if(target) {
                         lstMerges.push({
                             id: modId,
@@ -136,20 +137,20 @@ module.exports = function(grunt) {
         }
 
         if(lstClobbers.length > 0 || lstMerges.length > 0 || lstRuns.length > 0) {
-            content += 'var moduleMapper = require("cordova/modulemapper");\n';
+            content += 'var moduleMapper = require(\'cordova/modulemapper\');\n';
             for(var i=0; i<lstClobbers.length; i++) {
-                content += 'moduleMapper.clobbers("'+lstClobbers[i].id+'", "'+lstClobbers[i].target+'");\n';
+                content += 'moduleMapper.clobbers(\''+lstClobbers[i].id+'\', \''+lstClobbers[i].target+'\');\n';
             }
             for(var i=0; i<lstMerges.length; i++) {
-                content += 'moduleMapper.merges("'+lstMerges[i].id+'", "'+lstMerges[i].target+'"");\n';
+                content += 'moduleMapper.merges(\''+lstMerges[i].id+'\', \''+lstMerges[i].target+'\');\n';
             }
             for(var i=0; i<lstRuns.length; i++) {
-                content += 'moduleMapper.runs("'+lstRuns[i]+'");\n';
+                content += 'moduleMapper.runs(\''+lstRuns[i]+'\');\n';
             }
             content += 'moduleMapper.mapModules(window);\n';
         }
 
-        content += "})();\n\n";
+        content += '})();\n\n';
 
         //console.log(content);
 
@@ -162,10 +163,10 @@ module.exports = function(grunt) {
 
 function wrapWithDefine(id, content) {
     var PRE_LINES = [
-        "define(\""+id+"\", function(require, exports, module) {"
+        'define(\''+id+'\', function(require, exports, module) {'
     ];
     var POST_LINES = [
-        "});"
+        '});'
     ];
     return PRE_LINES.join('\n') + '\n' + content + '\n' + POST_LINES.join('\n') + '\n';
 }
