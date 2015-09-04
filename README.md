@@ -65,6 +65,7 @@ In the 2014's TV
 ```shell
 $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
 $ cd TestRunner
+$ npm install ../grunt-cordova-sectv
 $ cp -rf ../grunt-cordova-sectv/sample/* ./
 $ npm install
 $ cordova platform add browser
@@ -75,11 +76,11 @@ $ cordova build browser
 $ cordova emulate browser
 
 # Test on sectv-orsay platform
-$ grunt sectv-build:sectv-orsay sectv-compile:sectv-orsay
+$ grunt sectv-build:sectv-orsay sectv-package:sectv-orsay
 # Run the application on target
 
 # Test on sectv-tizen platform
-$ grunt sectv-build:sectv-tizen sectv-compile:sectv-tizen
+$ grunt sectv-build:sectv-tizen sectv-package:sectv-tizen
 # Run the application on target
 ```
 
