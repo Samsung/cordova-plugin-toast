@@ -2,7 +2,7 @@
 
 var channelChangeCallback = [];
 
-function getTvindowElement () {
+function getTvwindowElement () {
 	var element = '';
 	
 	if (!document.getElementById('tvwindowshow')) {
@@ -29,9 +29,15 @@ function randomColor () {
 	return color;
 }
 
+function fireChannelChangeEvent (channelInfo, args) {
+	for (var i = 0; i < channelChangeCallback.length; i++) {
+		channelChangeCallback[i](channelInfo, args);
+	}
+}
+
 module.exports = {
 	tune: function (success, fail, args) {
-		var element = getTvindowElement();
+		var element = getTvwindowElement();
 
 		element.style.backgroundColor = randomColor();
 
@@ -50,10 +56,11 @@ module.exports = {
 
 		setTimeout(function () {
 			success.onsuccess(channelInfo, args[1]);
+			fireChannelChangeEvent(channelInfo, args[1]);
 		}, 0);
 	},
 	tuneUp: function (success, fail, args) {
-		var element = getTvindowElement();
+		var element = getTvwindowElement();
 
 		element.style.backgroundColor = randomColor();
 
@@ -72,10 +79,11 @@ module.exports = {
 
 		setTimeout(function () {
 			success.onsuccess(channelInfo, args[1]);
+			fireChannelChangeEvent(channelInfo, args[1]);
 		}, 0);
 	},
 	tuneDown: function (success, fail, args) {
-		var element = getTvindowElement();
+		var element = getTvwindowElement();
 
 		element.style.backgroundColor = randomColor();
 
@@ -94,6 +102,7 @@ module.exports = {
 
 		setTimeout(function () {
 			success.onsuccess(channelInfo, args[1]);
+			fireChannelChangeEvent(channelInfo, args[1]);
 		}, 0);
 	},
 	findChannel: function (success, fail, args) {
@@ -220,8 +229,6 @@ module.exports = {
 		args = null;
 
 		channelChangeCallback.push(success);
-
-		console.log('[sk08.lee] channelChangeCallback : ' + channelChangeCallback);
 	},
 	removeChannelChangeListener: function (success, fail, args) {
 		fail = null;
@@ -232,8 +239,6 @@ module.exports = {
 				channelChangeCallback.splice(i, 1);
 			}
 		}
-
-		console.log('[sk08.lee] channelChangeCallback : ' + channelChangeCallback);
 	}
 };
 

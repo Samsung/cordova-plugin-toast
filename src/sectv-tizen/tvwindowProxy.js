@@ -10,8 +10,13 @@ module.exports = {
 		tizen.tvwindow.setSource(args[0], success, fail, args[1]);
 	},
 	getSource: function (success, fail, args) {
+		fail = null;
+
 		var source = tizen.tvwindow.getSource(args[0]);
-		success(source);
+
+		setTimeout(function () {
+			success(source);
+		}, 0);
 	},
 	show: function (success, fail, args) {
 		tizen.tvwindow.show(success, fail, args[0], args[1]);

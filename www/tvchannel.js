@@ -23,6 +23,9 @@ tvchannelExport = {
 	tuneUp: function (successCallback, errorCallback, tuneMode, type) {
 		argscheck.checkArgs('oFSS', 'tvchannel.tuneUp', arguments);
 
+		successCallback.onsuccess = successCallback.onsuccess || function () {};
+		successCallback.onnosignal = successCallback.onnosignal || function () {};
+		successCallback.onprograminforeceived = successCallback.onprograminforeceived || function () {};
 		errorCallback = errorCallback || function () {};
 		tuneMode = tuneMode || 'ALL';
 		type = type || 'MAIN';
@@ -34,6 +37,9 @@ tvchannelExport = {
 	tuneDown: function (successCallback, errorCallback, tuneMode, type) {
 		argscheck.checkArgs('oFSS', 'tvchannel.tuneDown', arguments);
 
+		successCallback.onsuccess = successCallback.onsuccess || function () {};
+		successCallback.onnosignal = successCallback.onnosignal || function () {};
+		successCallback.onprograminforeceived = successCallback.onprograminforeceived || function () {};
 		errorCallback = errorCallback || function () {};
 		tuneMode = tuneMode || 'ALL';
 		type = type || 'MAIN';

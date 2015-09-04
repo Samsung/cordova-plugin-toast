@@ -1,6 +1,6 @@
 'use strict';
 
-function getTvindowElement () {
+function getTvwindowElement () {
 	var element = '';
 	
 	if (!document.getElementById('tvwindowshow')) {
@@ -38,7 +38,7 @@ module.exports = {
 	},
 	setSource: function (success, fail, args){
 		fail = null;
-		var element = getTvindowElement();
+		var element = getTvwindowElement();
 
 		element.style.backgroundColor = randomColor();
 
@@ -61,7 +61,7 @@ module.exports = {
 	},
 	show: function (success, fail, args) {
 		fail = null;
-		var element = getTvindowElement();
+		var element = getTvwindowElement();
 
 		element.style.position = 'absolute';
 		element.style.left = args[0][0];

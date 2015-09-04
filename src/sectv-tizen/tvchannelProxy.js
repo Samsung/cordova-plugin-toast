@@ -1,5 +1,7 @@
 'use strict';
 
+var channelChangeCallback = [];
+
 module.exports = {
 	tune: function (success, fail, args) {
 		tizen.tvchannel.tune(args[0], success, fail, args[1]);
@@ -29,19 +31,32 @@ module.exports = {
 		tizen.tvchannel.getProgramList(args[0], args[1], success, fail, args[2]);
 	},
 	getCurrentProgram: function (success, fail, args) {
-		tizen.tvchannel.getCurrentProgram(success, fail, args[0]);
+		fail = null;
+
+		var channelProgram = tizen.tvchannel.getCurrentProgram(args[0]);
+
+		setTimeout(function () {
+			success(channelProgram);
+		}, 0);
 	},
 	addChannelChangeListener: function (success, fail, args) {
 		fail = null;
 		
-		tizen.tvchannel.addChannelChangeListener(success, args[0]);
+		channelChangeCallback.push({
+			callback: success,
+			id : tizen.tvchannel.addChannelChangeListener(success, args[0])
+		});
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		success = null;
 		fail = null;
 		args = null;
-		
-		tizen.tvchannel.removeChannelChangeListener();
+
+		for (var i = 0; i < channelChangeCallback.length; i++) {
+			if (channelChangeCallback[i].callback === success) {
+				tizen.tvchannel.removeChannelChangeListener(channelChangeCallback[i].id);
+				channelChangeCallback.splice(i, 1);
+			}
+		}
 	}
 };
 
