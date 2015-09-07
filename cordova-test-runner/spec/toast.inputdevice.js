@@ -72,7 +72,8 @@ describe('toast.inputdevice', function () {
 			// more arguments
 			expect(function () {
 				toast.inputdevice.getSupportedKeys(function () {}, function () {}, 0);
-			});
+			}).toThrowError(TypeError);
+
 		});
 	});
 
@@ -166,17 +167,121 @@ describe('toast.inputdevice', function () {
 
 	describe('toast.inputdevice.registerKey', function () {
 		it('throws TypeError when given arguments is not matched to spec.', function () {
+			// no argument
 			expect(function () {
 				toast.inputdevice.registerKey();
 			}).toThrowError(TypeError);
+
+			// invalid type for 1st argument
+			expect(function () {
+				toast.inputdevice.registerKey([]);
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey(new Date);
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey(0);
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey(function () {});
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey({});
+			}).toThrowError(TypeError);
+
+			// more argument
+			expect(function () {
+				toast.inputdevice.registerKey("Enter", 0);
+			}).toThrowError(TypeError);
+		});
+
+		it('throws RangeError when given keyName is not in the supported keys set.', function () {
+			expect(function () {
+				toast.inputdevice.registerKey('NOT_EXISTS_KEYNAME');
+			}).toThrowError(RangeError);
 		});
 	});
 
 	describe('toast.inputdevice.unregisterKey', function () {
 		it('throws TypeError when given arguments is not matched to spec.', function () {
+			// no argument
 			expect(function () {
-				toast.inputdevice.unregisterKey();
+				toast.inputdevice.registerKey();
+			}).toThrowError(TypeError);
+
+			// invalid type for 1st argument
+			expect(function () {
+				toast.inputdevice.registerKey([]);
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey(new Date);
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey(0);
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey(function () {});
+			}).toThrowError(TypeError);
+			expect(function () {
+				toast.inputdevice.registerKey({});
+			}).toThrowError(TypeError);
+
+			// more argument
+			expect(function () {
+				toast.inputdevice.registerKey("Enter", 0);
 			}).toThrowError(TypeError);
 		});
+
+		it('throws RangeError when given keyName is not in the supported keys set.', function () {
+			expect(function () {
+				toast.inputdevice.registerKey('NOT_EXISTS_KEYNAME');
+			}).toThrowError(RangeError);
+		});
+	});
+
+	describe('registerKey & unregisterKey combination', function () {
+		it('is available to register with registerKey method and the key is available to accept via keydown event.', function (done) {
+			expect(function () {
+				var keyData;
+				//toast.inputdevice.getKey('ColorF0Red', function (key) {
+				//	keyData = key;
+					toast.inputdevice.registerKey('ColorF0Red');
+					function onKeyDown (e) {
+						if(e.keyCode === keyData.code) {
+							ask.done(true);
+							window.removeEventListener('keydown', onKeyDown);
+						}
+					}
+					window.addEventListener('keydown', onKeyDown);
+					var ask = helper.ask("Press the RED key on the remote control", function (ok) {
+						ok===true ? (done()) : (done.fail());
+					}, 3000);
+				//});
+			}).toThrowError(RangeError);
+		}, 5000);
+		it('unregisters given key and the key is available to accept via keydown event.', function (done) {
+			expect(function () {
+				var keyData;
+				//toast.inputdevice.getKey('ColorF0Red', function (key) {
+				//	keyData = key;
+					toast.inputdevice.unregisterKey('ColorF0Red');
+					function onKeyDown (e) {
+						if(e.keyCode === keyData.code) {
+							ask.done(false);	// SHOULD NOT BE WORKED!!!
+							window.removeEventListener('keydown', onKeyDown);
+						}
+					}
+					window.addEventListener('keydown', onKeyDown);
+					var ask = helper.ask("Press the RED key on the remote control. It should not be worked! ;)", function (ok) {
+						if(ok === "TIMEOUT" || ok === true) {
+							done();
+						}
+						else {
+							done.fail();
+						}
+					}, 3000);
+				//});
+			}).toThrowError(RangeError);
+		}, 5000);
 	});
 });
