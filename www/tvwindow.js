@@ -49,6 +49,7 @@ tvwindowExport = {
 	hide: function (successCallback, errorCallback, type) {
 		argscheck.checkArgs('fFS', 'tvwindow.hide', arguments);
 		
+		errorCallback = errorCallback || function () {};
 		type = type || 'MAIN';
 
 		var args = [type];
