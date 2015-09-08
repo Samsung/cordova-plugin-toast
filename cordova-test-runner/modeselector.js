@@ -53,21 +53,21 @@
 
     var TESTRUNNER_TYPE_KEY = 'CORDOVA_TOAST_TESTRUNNER_TYPE';
 
-    document.body.innerHTML = "Please select mode:<br>" + "LEFT: Jasmine TestRunner<br>" + "RIGHT: Toast TestSuite<br><br>";
+    document.body.innerHTML = "Please select mode:<br>" + "LEFT: Jasmine TestRunner<br>" + "RIGHT: Toast TestSuite<br>";
     window.addEventListener('keydown', function(e) {
         switch (e.keyCode) {
             // LEFT
             case 37:
             case 4:
                 localStorage.setItem(TESTRUNNER_TYPE_KEY, 'JASMINE_RUNNER');
-                document.body.innerHTML += "SELECTED: " + localStorage.getItem(TESTRUNNER_TYPE_KEY) + "<br>Please restart the application.";
+                document.body.innerHTML += "<br>SELECTED: " + localStorage.getItem(TESTRUNNER_TYPE_KEY) + "<br>Please restart the application.";
                 break;
 
                 // RIGHT
             case 39:
             case 5:
                 localStorage.setItem(TESTRUNNER_TYPE_KEY, 'TESTSUITE');
-                document.body.innerHTML += "SELECTED: " + localStorage.getItem(TESTRUNNER_TYPE_KEY) + "<br>Please restart the application.";
+                document.body.innerHTML += "<br>SELECTED: " + localStorage.getItem(TESTRUNNER_TYPE_KEY) + "<br>Please restart the application.";
                 break;
         }
     });
