@@ -21,6 +21,9 @@
 	<js-module src='www/drminfo.js' name='drminfo'>
 		<clobbers target='toast.drminfo' />
 	</js-module>
+	<js-module src='www/application.js' name='application'>
+		<clobbers target='toast.application' />
+	</js-module>
 
 	<!-- browser -->
 	<platform name='browser'>
@@ -37,6 +40,9 @@
 			<runs />
 		</js-module>
 		<js-module src='src/browser/drminfoProxy.js' name='drminfoProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/browser/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
 	</platform>
@@ -58,6 +64,9 @@
 		<js-module src='src/sectv-orsay/drminfoProxy.js' name='drminfoProxy'>
 			<runs />
 		</js-module>
+		<js-module src='src/sectv-orsay/applicationProxy.js' name='applicationProxy'>
+			<runs />
+		</js-module>
 	</platform>
 
 	<!-- sectv-tizen -->
@@ -75,6 +84,9 @@
 			<runs />
 		</js-module>
 		<js-module src='src/sectv-tizen/drminfoProxy.js' name='drminfoProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/sectv-orsay/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
 	</platform>
