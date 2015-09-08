@@ -1,20 +1,37 @@
 (function() {
-    var type = localStorage.getItem('CORDOVA_TOAST_TESTRUNNER_TYPE');
+    var TESTRUNNER_TYPE_KEY = 'CORDOVA_TOAST_TESTRUNNER_TYPE';
+    var keyInfo = {
+        // Web
+        37: 'LEFT',
+        38: 'UP',
+        39: 'RIGHT',
+        40: 'DOWN',
+        13: 'ENTER',
+        27: 'RETURN',
+
+        // Orsay
+        4: 'LEFT',
+        5: 'RIGHT',
+        29460: 'UP',
+        29461: 'DOWN',
+        29443: 'ENTER',
+        88: 'RETURN',
+
+        // 15' Tizen TV
+        10009: 'RETURN'
+    };
+
+    document.addEventListener('deviceready', function () {
+        window.addEventListener('keydown', function(e) {
+            if (keyInfo[e.keyCode] === 'RETURN') {
+                toast.application.exit();
+            }
+        });
+    });
+
+    var type = localStorage.getItem(TESTRUNNER_TYPE_KEY);
     if (type) {
         var magicKey = ['LEFT', 'RIGHT', 'UP', 'DOWN', 'ENTER'];
-        var keyInfo = {
-            37: 'LEFT',
-            38: 'UP',
-            39: 'RIGHT',
-            40: 'DOWN',
-            13: 'ENTER',
-
-            4: 'LEFT',
-            5: 'RIGHT',
-            29460: 'UP',
-            29461: 'DOWN',
-            29443: 'ENTER'
-        };
         var cntMatched = 0;
         window.addEventListener('keydown', function(e) {
             var keyName = keyInfo[e.keyCode];
@@ -39,7 +56,7 @@
         instruction.style.fontSize = '15px';
         instruction.innerHTML = 'Press ' + magicKey.join(',') + ' to select test mode';
 
-        setTimeout(function () {    // append to the end of content
+        setTimeout(function() { // append to the end of content
             document.body.appendChild(instruction);
         }, 0);
 
@@ -47,11 +64,9 @@
     }
 
     function resetTestMode() {
-        localStorage.removeItem('CORDOVA_TOAST_TESTRUNNER_TYPE');
+        localStorage.removeItem(TESTRUNNER_TYPE_KEY);
         location.reload(true);
     }
-
-    var TESTRUNNER_TYPE_KEY = 'CORDOVA_TOAST_TESTRUNNER_TYPE';
 
     document.body.innerHTML = "Please select mode:<br>" + "LEFT: Jasmine TestRunner<br>" + "RIGHT: Toast TestSuite<br>";
     window.addEventListener('keydown', function(e) {

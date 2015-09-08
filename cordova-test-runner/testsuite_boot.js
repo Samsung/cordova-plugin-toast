@@ -30,6 +30,9 @@
                 var tester = getTester(tests[category][i].id, tests[category][i].feature);
                 var btn = tester.querySelector('.btn');
                 var testfn = tests[category][i].testfn;
+
+                // In the sectv-orsay platform, appendChild must be done before the addEventListener. Seems like platform's bug.
+                elContent.appendChild(tester);
                 btn.addEventListener('click', (function(fn, tester) {
                     return function() {
                         function report(msg) {
@@ -53,7 +56,6 @@
                         }
                     };
                 })(testfn, tester));
-                elContent.appendChild(tester);
             }
             elRow.appendChild(elContent);
 
