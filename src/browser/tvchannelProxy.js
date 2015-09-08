@@ -65,8 +65,6 @@ module.exports = {
 
 		element.style.backgroundColor = randomColor();
 
-		var channelInfo = '';
-
 		for (var i = 0; i < channelInfoList.length; i++) {
 			if (args[0].MAJOR == channelInfoList[i].MAJOR && args[0].MINOR == channelInfoList[i].MINOR) {
 				infoListIndex = i;
