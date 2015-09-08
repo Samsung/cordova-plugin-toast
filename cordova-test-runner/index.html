@@ -5,16 +5,22 @@
   <title>Jasmine Spec Runner v2.3.4</title>
 
   <link rel="stylesheet" href="lib/jasmine.css">
+  <link rel="stylesheet" href="lib/testsuite.css">
+  <link rel="stylesheet" href="lib/bootstrap.css">
 
   <script src="lib/jasmine.js"></script>
   <script src="lib/jasmine-html.js"></script>
-  <script src="boot.js"></script>
+  <script src="jasmine_boot.js"></script>
+  <script src="testsuite_boot.js"></script>
 
 </head>
 
 <body>
+  <script src="modeselector.js"></script>
   <script src="cordova.js"></script>
   <script src="toast.js"></script>
+
+  <!-- Jasmine specs -->
   <script src="spec/_specHelper.js"></script>
   <script src="spec/toast.js"></script>
   <script src="spec/toast.inputdevice.js"></script>
@@ -23,5 +29,13 @@
   <script src="spec/toast.tvaudiocontrol.js"></script>
   <script src="spec/toast.media.js"></script>
   <script src="spec/toast.drminfo.js"></script>
+
+  <!-- TestSuite -->
+  <script src="testsuite/toast.inputdevice.js"></script>
+  <script src="testsuite/toast.tvchannel.js"></script>
+  <script src="testsuite/toast.tvwindow.js"></script>
+  <script src="testsuite/toast.tvaudiocontrol.js"></script>
+  <script src="testsuite/toast.media.js"></script>
+  <script src="testsuite/toast.drminfo.js"></script>
 </body>
 </html>
