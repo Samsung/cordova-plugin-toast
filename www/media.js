@@ -4,9 +4,9 @@ var argscheck = require('cordova/argscheck'),
     exec = require('cordova/exec');
 
 var mediaObjects = null;
-var Media = function (src, successCallback, errorCallback, statusCallback, msgCallback){
+var Media = function (src, successCallback, errorCallback, statusCallback){
     if(!mediaObjects){
-        argscheck.checkArgs('sFFF', 'Media', arguments);
+        argscheck.checkArgs('sSFFF', 'Media', arguments);
         this.id = utils.createUUID();
         mediaObjects = {};
         mediaObjects[this.id] = this;
@@ -14,7 +14,7 @@ var Media = function (src, successCallback, errorCallback, statusCallback, msgCa
         this.successCallback = successCallback;
         this.errorCallback = errorCallback;
         this.statusCallback = statusCallback;
-        this.msgCallback = msgCallback;
+        this._containerElem = -1;
         this._duration = -1;
         this._position = -1;
         exec(null, this.errorCallback, 'toast.media', 'create', [this.id, this.src]);
@@ -34,11 +34,17 @@ var Media = function (src, successCallback, errorCallback, statusCallback, msgCa
  *                                  errorCallback(int errorCode) - OPTIONAL
  * @param statusCallback       The callback to be called when media status has changed.
  *                                  statusCallback(int statusCode) - OPTIONAL
- * @param msgCallback          The callback to be called when receive message from media(ex. position, subtitleChange etc)
- *                                  msgCallback(int messageType, any messageValue) - OPTIONAL
  */
-Media.getInstance = function(src, successCallback, errorCallback, statusCallback, msgCallback) {
-    return mediaObjects || new Media(src, successCallback, errorCallback, statusCallback, msgCallback);
+Media.getInstance = function(src, successCallback, errorCallback, statusCallback) {
+    if(mediaObjects && typeof mediaObjects == 'object'){
+        for(var key in mediaObjects){
+            if (mediaObjects.hasOwnProperty(key)){
+                return mediaObjects[key];
+            }
+        }
+    } else {
+        return new Media(src, successCallback, errorCallback, statusCallback);
+    }
 };
 
 // Media messages
@@ -47,6 +53,7 @@ Media.MEDIA_DURATION = 2;
 Media.MEDIA_POSITION = 3;
 Media.MEDIA_BUFFERINGPROGRESS = 4;
 Media.MEDIA_SUBTITLE = 5;
+Media.MEDIA_CONTAINER = 6;
 Media.MEDIA_ERROR = 9;
 
 // Media states
@@ -59,8 +66,8 @@ Media.MEDIA_PAUSED = 5;
 Media.MEDIA_STOPPED = 6;
 Media.MEDIA_MSG = ['None', 'LoadedMetaData', 'BufferingStart', 'BufferingComplete', 'Running', 'Paused', 'Stopped'];
 
-Media.prototype.setDisplayRect = function(rect){
-    exec(null, null, 'toast.media', 'setVideoDisplayRect', rect);
+Media.prototype.getContainerElem = function() {
+    return this._containerElem;
 };
 
 Media.prototype.play = function(options){
@@ -71,18 +78,18 @@ Media.prototype.stop = function() {
 	var me = this;
 	exec(function() {
 		me._position = 0;
-	}, null, 'toast.media', 'stopPlayingVideo', [this.id]);
+	}, this.errorCallback, 'toast.media', 'stopPlayingVideo', [this.id]);
 };
 
 Media.prototype.seekTo = function(milliseconds) {
 	var me = this;
 	exec(function(p) {
 		me._position = p;
-	}, null, 'toast.media', 'seekToVideo', [this.id, milliseconds]);
+	}, this.errorCallback, 'toast.media', 'seekToVideo', [this.id, milliseconds]);
 };
 
 Media.prototype.pause = function() {
-	exec(null, null, 'toast.media', 'pausePlayingVideo', [this.id]);
+	exec(null, this.errorCallback, 'toast.media', 'pausePlayingVideo', [this.id]);
 };
 
 Media.prototype.getDuration = function() {
@@ -122,14 +129,17 @@ Media.onStatus = function(id, msgType, value) {
                 break;
             case Media.MEDIA_POSITION :
                 media._position = Number(value);
-                media.msgCallback && media.msgCallback(Media.MEDIA_POSITION, value);
+                media.statusCallback && media.statusCallback(Media.MEDIA_POSITION, value);
                 break;
             case Media.MEDIA_BUFFERINGPROGRESS :
-                media.msgCallback && media.msgCallback(Media.MEDIA_BUFFERINGPROGRESS, value);
+                media.statusCallback && media.statusCallback(Media.MEDIA_BUFFERINGPROGRESS, value);
                 break;
             case Media.MEDIA_SUBTITLE :
-                media.msgCallback && media.msgCallback(Media.MEDIA_SUBTITLE, value);
-                break;    
+                media.statusCallback && media.statusCallback(Media.MEDIA_SUBTITLE, value);
+                break;
+            case Media.MEDIA_CONTAINER :
+                media._containerElem = value;
+                break;
             default :
                 console.error && console.error('Unhandled Media.onStatus :: ' + msgType);
                 break;

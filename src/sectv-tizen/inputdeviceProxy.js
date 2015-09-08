@@ -16,9 +16,11 @@ module.exports = {
 		fail = fail || function () {};
 		args = args || '';
 
-		var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]);
+		var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]).code;
 
-		success(inputDeviceKey);
+		setTimeout(function(){
+			success(inputDeviceKey);	
+		}, 0);
 	},
 	registerKey: function(success, fail, args){
 		success = success || function () {};
