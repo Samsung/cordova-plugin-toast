@@ -25,18 +25,38 @@
 	}
 
 	window.helper = {
-		alert: function (msg, callback) {
+		alert: function (msg, callback, timeout) {
 			function onKeyDown (e) {
-				if(e.keyCode === 13) {
-					done(true);
+				if(e.keyCode === 13 || e.keyCode === 29443) {
+					obj.done(true);
 					window.removeEventListener('keydown', onKeyDown);
 				}
 			}
 			window.addEventListener('keydown', onKeyDown);
-			var obj = ask(msg + "\n\nPress Enter to continue", function () {
+			var obj = helper.ask(msg + "<br><br>Press Enter to continue", function () {
 				window.removeEventListener('keydown', onKeyDown);
 				callback.apply(null, arguments);
-			});
+			}, timeout);
+			return obj
+		},
+		aOrB: function (msg, ab, callback, timeout) {
+			function onKeyDown (e) {
+				if(e.keyCode === 4 || e.keyCode === 37) {	// LEFT
+					obj.done(true);
+					window.removeEventListener('keydown', onKeyDown);
+				}
+				else if(e.keyCode === 5 || e.keyCode === 39) {	// RIGHT
+					obj.done(false);
+					window.removeEventListener('keydown', onKeyDown);
+				}
+			}
+			window.addEventListener('keydown', onKeyDown);
+			var obj = helper.ask(msg + "<br>"
+					+ "<div style='width: 50%; test-align: center; float:left; clear: left;'>PRESS ◀<br><br>"+ab[0]+"</div>"
+					+ "<div style='width: 50%; test-align: center; float:left; clear: right;'>PRESS ▶<br><br>"+ab[1]+"</div>", function () {
+				window.removeEventListener('keydown', onKeyDown);
+				callback.apply(null, arguments);
+			}, timeout);
 			return obj
 		},
 		ask: function (msg, callback, timeout) {
@@ -60,9 +80,9 @@
 				pop.innerHTML = msg + "<br><br>" + countSec + " sec remained";
 				var itvClose = setInterval(function () {
 					if(--countSec <= 0) {
-						handle.done("TIMEOUT");
 						itvClose && clearInterval(itvClose);
 						itvClose = null;
+						handle.done("TIMEOUT");
 					}
 					else {
 						pop.innerHTML = msg + "<br><br>" + countSec + " sec remained";

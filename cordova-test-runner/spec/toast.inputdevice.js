@@ -32,10 +32,12 @@ describe('toast.inputdevice', function () {
 
 	describe('toast.inputdevice.getSupportedKeys', function () {
 		it('throws TypeError when given arguments is not matched to spec.', function () {
-			// invalid type for 1st argument
+			// no argument
 			expect(function () {
 				toast.inputdevice.getSupportedKeys();
 			}).toThrowError(TypeError);
+			
+			// invalid type for 1st argument
 			expect(function () {
 				toast.inputdevice.getSupportedKeys(0);
 			}).toThrowError(TypeError);
@@ -68,21 +70,17 @@ describe('toast.inputdevice', function () {
 			expect(function () {
 				toast.inputdevice.getSupportedKeys(function () {}, new Date());
 			}).toThrowError(TypeError);
-
-			// more arguments
-			expect(function () {
-				toast.inputdevice.getSupportedKeys(function () {}, function () {}, 0);
-			}).toThrowError(TypeError);
-
 		});
 	});
 
 	describe('toast.inputdevice.getKey', function () {
 		it('throws TypeError when given arguments is not matched to spec.', function () {
-			// invalid type for 1st argument
+			// no argument
 			expect(function () {
 				toast.inputdevice.getKey();
 			}).toThrowError(TypeError);
+
+			// invalid type for 1st argument
 			expect(function () {
 				toast.inputdevice.getKey([]);
 			}).toThrowError(TypeError);
@@ -131,11 +129,6 @@ describe('toast.inputdevice', function () {
 			}).toThrowError(TypeError);
 			expect(function () {
 				toast.inputdevice.getKey("Enter", function () {}, {});
-			}).toThrowError(TypeError);
-
-			// more argument
-			expect(function () {
-				toast.inputdevice.getKey("Enter", function () {}, function () {}, 0);
 			}).toThrowError(TypeError);
 		});
 
@@ -188,11 +181,6 @@ describe('toast.inputdevice', function () {
 			expect(function () {
 				toast.inputdevice.registerKey({});
 			}).toThrowError(TypeError);
-
-			// more argument
-			expect(function () {
-				toast.inputdevice.registerKey("Enter", 0);
-			}).toThrowError(TypeError);
 		});
 
 		it('throws RangeError when given keyName is not in the supported keys set.', function () {
@@ -225,11 +213,6 @@ describe('toast.inputdevice', function () {
 			expect(function () {
 				toast.inputdevice.registerKey({});
 			}).toThrowError(TypeError);
-
-			// more argument
-			expect(function () {
-				toast.inputdevice.registerKey("Enter", 0);
-			}).toThrowError(TypeError);
 		});
 
 		it('throws RangeError when given keyName is not in the supported keys set.', function () {
@@ -243,10 +226,11 @@ describe('toast.inputdevice', function () {
 		it('is available to register with registerKey method and the key is available to accept via keydown event.', function (done) {
 			expect(function () {
 				var keyData;
-				//toast.inputdevice.getKey('ColorF0Red', function (key) {
-				//	keyData = key;
+				toast.inputdevice.getKey('ColorF0Red', function (key) {
+					keyData = key;
 					toast.inputdevice.registerKey('ColorF0Red');
 					function onKeyDown (e) {
+						e.preventDefault();
 						if(e.keyCode === keyData.code) {
 							ask.done(true);
 							window.removeEventListener('keydown', onKeyDown);
@@ -256,16 +240,17 @@ describe('toast.inputdevice', function () {
 					var ask = helper.ask("Press the RED key on the remote control", function (ok) {
 						ok===true ? (done()) : (done.fail());
 					}, 3000);
-				//});
+				});
 			}).toThrowError(RangeError);
 		}, 5000);
 		it('unregisters given key and the key is available to accept via keydown event.', function (done) {
 			expect(function () {
 				var keyData;
-				//toast.inputdevice.getKey('ColorF0Red', function (key) {
-				//	keyData = key;
+				toast.inputdevice.getKey('ColorF0Red', function (key) {
+					keyData = key;
 					toast.inputdevice.unregisterKey('ColorF0Red');
 					function onKeyDown (e) {
+						e.preventDefault();
 						if(e.keyCode === keyData.code) {
 							ask.done(false);	// SHOULD NOT BE WORKED!!!
 							window.removeEventListener('keydown', onKeyDown);
@@ -280,7 +265,7 @@ describe('toast.inputdevice', function () {
 							done.fail();
 						}
 					}, 3000);
-				//});
+				});
 			}).toThrowError(RangeError);
 		}, 5000);
 	});
