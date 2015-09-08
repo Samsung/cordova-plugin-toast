@@ -11,8 +11,8 @@ tvwindowExport = {
 		argscheck.checkArgs('fF', 'tvwindow.getAvailableWindows', arguments);
 
 		errorCallback = errorCallback || function () {};
+		
 		var args = [];
-
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'getAvailableWindows', args);
 	},
 	//void setSource (SystemInfoVideoSourceInfo videoSource, SourceChangedSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional WindowType? type)
