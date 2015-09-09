@@ -267,10 +267,10 @@ device.addEventListener('deviceready', function () {
 
 	media.open('http://mydomain.com/video.mp4');
 
-	// Play the video in full screen.
-	var elContainer = media.getContainerElement();
+	// Getting container element which is used for displaying the video.
 	// Video will be rendered in the container element. You can change the rect of video by changing the container's style.
 	// Before you change the container's style, the video will not be rendered on a screen, but its sound will be played in backgrond.
+	var elContainer = media.getContainerElement();
 
 	// OPTION 1: Let's set the render area to full screen.
 	elContainer.style.position = 'fixed';
