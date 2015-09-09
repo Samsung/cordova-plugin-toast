@@ -6,23 +6,23 @@ var channelChangeCallback = [];
 
 var infoListIndex = 0;
 var channelInfoList = [
-	{PTC: '16', MAJOR: '6',	MINOR: '1',	LCN: '0', SOURCEID: '1', PROGRAMNUMBER: '1', TRNSPORTSTREAMID: '5137', ORIGINALNETWORKID: '0', SERVICENAME:'SBS', CHANNELNAME: 'SBS'},
-	{PTC: '17',	MAJOR: '7',	MINOR: '1',	LCN: '0', SOURCEID: '2', PROGRAMNUMBER: '2', TRNSPORTSTREAMID: '2065', ORIGINALNETWORKID: '0', SERVICENAME:'KBS2', CHANNELNAME: 'KBS2'},
-	{PTC: '25',	MAJOR: '8',	MINOR: '1',	LCN: '0', SOURCEID: '1', PROGRAMNUMBER: '1', TRNSPORTSTREAMID: '4357', ORIGINALNETWORKID: '0', SERVICENAME:'OBS', CHANNELNAME: 'OBS'},
-	{PTC: '15', MAJOR: '9', MINOR: '1',	LCN: '0', SOURCEID: '2', PROGRAMNUMBER: '2', TRNSPORTSTREAMID: '1041', ORIGINALNETWORKID: '0', SERVICENAME:'KBS1', CHANNELNAME: 'KBS1'},
-	{PTC: '18',	MAJOR: '10', MINOR: '1', LCN: '0', SOURCEID: '1', PROGRAMNUMBER: '1', TRNSPORTSTREAMID: '4113', ORIGINALNETWORKID: '0', SERVICENAME:'EBS1',	CHANNELNAME: 'EBS1'},
-	{PTC: '18',	MAJOR: '10', MINOR: '2', LCN: '0', SOURCEID: '2', PROGRAMNUMBER: '2', TRNSPORTSTREAMID: '4113',	ORIGINALNETWORKID: '0',	SERVICENAME:'EBS2',	CHANNELNAME: 'EBS2'},
-	{PTC: '14',	MAJOR: '11', MINOR: '1', LCN: '0', SOURCEID: '1', PROGRAMNUMBER: '1', TRNSPORTSTREAMID: '3089',	ORIGINALNETWORKID: '0', SERVICENAME:'MBC', CHANNELNAME: 'MBC'}
+	{MAJOR: 6, MINOR: 1, CHANNELNAME: 'SBS', PROGRAMNUMBER: 1, PTC: 16, LCN: 0, SOURCEID: 1, TRNSPORTSTREAMID: 5137, ORIGINALNETWORKID: 0, SERVICENAME:'SBS'},
+	{MAJOR: 7, MINOR: 1, CHANNELNAME: 'KBS2', PROGRAMNUMBER: 2, PTC: 17, LCN: 0, SOURCEID: 2, TRNSPORTSTREAMID: 2065, ORIGINALNETWORKID: 0, SERVICENAME:'KBS2'},
+	{MAJOR: 8, MINOR: 1, CHANNELNAME: 'OBS', PROGRAMNUMBER: 1, PTC: 25, LCN: 0, SOURCEID: 1, TRNSPORTSTREAMID: 4357, ORIGINALNETWORKID: 0, SERVICENAME:'OBS'},
+	{MAJOR: 9, MINOR: 1, CHANNELNAME: 'KBS1', PROGRAMNUMBER: 2, PTC: 15, LCN: 0, SOURCEID: 2, TRNSPORTSTREAMID: 1041, ORIGINALNETWORKID: 0, SERVICENAME:'KBS1'},
+	{MAJOR: 10, MINOR: 1, CHANNELNAME: 'EBS1', PROGRAMNUMBER: 1, PTC: 18, LCN: 0, SOURCEID: 1, TRNSPORTSTREAMID: 4113, ORIGINALNETWORKID: 0, SERVICENAME:'EBS1'},
+	{MAJOR: 10, MINOR: 2, CHANNELNAME: 'EBS2', PROGRAMNUMBER: 2, PTC: 18, LCN: 0, SOURCEID: 2, TRNSPORTSTREAMID: 4113, ORIGINALNETWORKID: 0, SERVICENAME:'EBS2'},
+	{MAJOR: 11, MINOR: 1, CHANNELNAME: 'MBC', PROGRAMNUMBER: 1, PTC: 14, LCN: 0, SOURCEID: 1, TRNSPORTSTREAMID: 3089, ORIGINALNETWORKID: 0, SERVICENAME:'MBC'}
 ];
 var date = new Date();
 var programInfoList = [
-	{TITLE: 'Program Title 1', STARTTIME: date, DURATION: '3766', DETAILEDDESCRIPTION: 'Episode 2', LANGUAGE: 'KOREAN', RATING: ''},
-	{TITLE: 'Program Title 2', STARTTIME: date, DURATION: '3760', DETAILEDDESCRIPTION: 'Episode 1', LANGUAGE: 'KOREAN', RATING: ''},
-	{TITLE: 'Program Title 3', STARTTIME: date, DURATION: '3800', DETAILEDDESCRIPTION: 'Episode 4', LANGUAGE: 'KOREAN', RATING: ''},
-	{TITLE: 'Program Title 4', STARTTIME: date, DURATION: '3680', DETAILEDDESCRIPTION: 'Episode 8', LANGUAGE: 'KOREAN', RATING: ''},
-	{TITLE: 'Program Title 5', STARTTIME: date, DURATION: '3980', DETAILEDDESCRIPTION: 'Episode 9', LANGUAGE: 'KOREAN', RATING: ''},
-	{TITLE: 'Program Title 6', STARTTIME: date, DURATION: '2910', DETAILEDDESCRIPTION: 'Episode 3', LANGUAGE: 'KOREAN', RATING: ''},
-	{TITLE: 'Program Title 7', STARTTIME: date, DURATION: '3700', DETAILEDDESCRIPTION: 'Episode 5', LANGUAGE: 'KOREAN', RATING: ''}
+	{TITLE: 'Program Title 1', STARTTIME: date, DURATION: 3766, DETAILEDDESCRIPTION: 'Episode 2', LANGUAGE: 'KOREAN', RATING: ''},
+	{TITLE: 'Program Title 2', STARTTIME: date, DURATION: 3760, DETAILEDDESCRIPTION: 'Episode 1', LANGUAGE: 'KOREAN', RATING: ''},
+	{TITLE: 'Program Title 3', STARTTIME: date, DURATION: 3800, DETAILEDDESCRIPTION: 'Episode 4', LANGUAGE: 'KOREAN', RATING: ''},
+	{TITLE: 'Program Title 4', STARTTIME: date, DURATION: 3680, DETAILEDDESCRIPTION: 'Episode 8', LANGUAGE: 'KOREAN', RATING: ''},
+	{TITLE: 'Program Title 5', STARTTIME: date, DURATION: 980, DETAILEDDESCRIPTION: 'Episode 9', LANGUAGE: 'KOREAN', RATING: ''},
+	{TITLE: 'Program Title 6', STARTTIME: date, DURATION: 2910, DETAILEDDESCRIPTION: 'Episode 3', LANGUAGE: 'KOREAN', RATING: ''},
+	{TITLE: 'Program Title 7', STARTTIME: date, DURATION: 3700, DETAILEDDESCRIPTION: 'Episode 5', LANGUAGE: 'KOREAN', RATING: ''}
 ];
 
 function getTvwindowElement () {
@@ -63,11 +63,13 @@ module.exports = {
 		var match = false;
 		var element = getTvwindowElement();
 
-		element.style.backgroundColor = randomColor();
-
 		for (var i = 0; i < channelInfoList.length; i++) {
 			if (args[0].MAJOR == channelInfoList[i].MAJOR && args[0].MINOR == channelInfoList[i].MINOR) {
 				infoListIndex = i;
+
+				element.style.backgroundColor = randomColor();
+				element.innerHTML = 'Channel : ' + channelInfoList[infoListIndex].MAJOR + '-' + channelInfoList[infoListIndex].MINOR;
+
 				match = true;
 			}
 		}
@@ -90,13 +92,14 @@ module.exports = {
 	tuneUp: function (success, fail, args) {
 		var element = getTvwindowElement();
 
-		element.style.backgroundColor = randomColor();
-
 		if (infoListIndex < channelInfoList.length - 1) {
 			infoListIndex = infoListIndex + 1;
 		} else {
 			infoListIndex = 0;
 		}
+
+		element.style.backgroundColor = randomColor();
+		element.innerHTML = 'Channel : ' + channelInfoList[infoListIndex].MAJOR + '-' + channelInfoList[infoListIndex].MINOR;
 
 		setTimeout(function () {
 			success.onsuccess(channelInfoList[infoListIndex], windowType[0]);
@@ -106,13 +109,14 @@ module.exports = {
 	tuneDown: function (success, fail, args) {
 		var element = getTvwindowElement();
 
-		element.style.backgroundColor = randomColor();
-
 		if (0 < infoListIndex) {
 			infoListIndex = infoListIndex - 1;
 		} else {
 			infoListIndex = 6;
 		}
+
+		element.style.backgroundColor = randomColor();
+		element.innerHTML = 'Channel : ' + channelInfoList[infoListIndex].MAJOR + '-' + channelInfoList[infoListIndex].MINOR;
 
 		setTimeout(function () {
 			success.onsuccess(channelInfoList[infoListIndex], windowType[0]);

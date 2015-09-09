@@ -2,8 +2,10 @@
 
 var windowType = ['MAIN'];
 
-var systemInfoVideoSourceNumber = 1;
-var systemInfoVideoSourceTypeIndex = 0;
+var systemInfoVideoSource = {
+	type: 'TV',
+	number: 1
+};
 var systemInfoVideoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
 
 function getTvwindowElement () {
@@ -47,9 +49,11 @@ module.exports = {
 			
 			for (var i = 0; i < systemInfoVideoSourceTypeList.length; i++) {
 				if (args[0].type  == systemInfoVideoSourceTypeList[i]) {
-					systemInfoVideoSourceTypeIndex = i;
-					systemInfoVideoSourceNumber = args[0].number;
+					systemInfoVideoSource.type = systemInfoVideoSourceTypeList[i];
+					systemInfoVideoSource.number = args[0].number;
+					
 					element.style.backgroundColor = randomColor();
+					element.innerHTML = 'Source : ' + systemInfoVideoSource.type + ' ' + systemInfoVideoSource.number;
 
 					match = true;
 					break;
@@ -58,10 +62,7 @@ module.exports = {
 
 			if (match) {
 				setTimeout(function () {
-					success({
-						type: systemInfoVideoSourceTypeList[systemInfoVideoSourceTypeIndex],
-						number: systemInfoVideoSourceNumber
-					}, windowType[0]);
+					success(systemInfoVideoSource, windowType[0]);
 				}, 0);
 			} else {
 				setTimeout(function () {
@@ -84,10 +85,7 @@ module.exports = {
 	},
 	getSource: function (success, fail, args) {
 		setTimeout(function () {
-			success({
-				type: systemInfoVideoSourceTypeList[systemInfoVideoSourceTypeIndex],
-				number: systemInfoVideoSourceNumber
-			});
+			success(systemInfoVideoSource);
 		}, 0);
 	},
 	show: function (success, fail, args) {
@@ -117,6 +115,7 @@ module.exports = {
 				element.style.width = args[0][2];
 				element.style.height = args[0][3];
 				element.style.backgroundColor = randomColor();
+				element.innerHTML = 'Source : ' + systemInfoVideoSource.type + ' ' + systemInfoVideoSource.number;
 				document.getElementsByTagName('body')[0].appendChild(element);
 
 				setTimeout(function () {

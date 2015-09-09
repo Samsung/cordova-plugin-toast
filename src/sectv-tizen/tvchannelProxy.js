@@ -7,55 +7,35 @@ module.exports = {
 		try {
 			tizen.tvchannel.tune(args[0], success, fail, args[1]);
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	tuneUp: function (success, fail, args) {
 		try {
 			tizen.tvchannel.tuneUp(success, fail, args[0], args[1]);
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	tuneDown: function (success, fail, args) {
 		try {
 			tizen.tvchannel.tuneDown(success, fail, args[0], args[1]);
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	findChannel: function (success, fail, args) {
 		try {
 			tizen.tvchannel.findChannel(args[0], args[1], success, fail);
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	getChannelList: function (success, fail, args) {
 		try {
 			tizen.tvchannel.findChannel(args[0], args[1], success, fail);
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	getCurrentChannel: function (success, fail, args) {
@@ -76,22 +56,14 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	getProgramList: function (success, fail, args) {
 		try {
 			tizen.tvchannel.getProgramList(args[0], args[1], success, fail, args[2]);
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	getCurrentProgram: function (success, fail, args) {
@@ -112,11 +84,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw {
-				code: 9,
-				name: 'NOT_SUPPORTED_ERR',
-				message: 'Any other error occurs on platform.'
-			};
+			throw e;
 		}
 	},
 	addChannelChangeListener: function (success, fail, args) {

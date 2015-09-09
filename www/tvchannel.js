@@ -6,7 +6,6 @@ var argscheck = require('cordova/argscheck'),
 var tvchannelExport = {};
 
 tvchannelExport = {
-	//void tune (TuneOption tuneOption, TuneCallback successCallback, optional ErrorCallback? errorCallback, optional WindowType? type)
 	tune: function (tuneOption, successCallback, errorCallback, type) {
 		argscheck.checkArgs('ooFS', 'tvchannel.tune', arguments);
 
@@ -19,7 +18,6 @@ tvchannelExport = {
 		var args = [tuneOption, type];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'tune', args);
 	},
-	//void tuneUp (TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional WindowType? type)
 	tuneUp: function (successCallback, errorCallback, tuneMode, type) {
 		argscheck.checkArgs('oFSS', 'tvchannel.tuneUp', arguments);
 
@@ -33,7 +31,6 @@ tvchannelExport = {
 		var args = [tuneMode, type];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'tuneUp', args);
 	},
-	//void tuneDown (TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional WindowType? type)
 	tuneDown: function (successCallback, errorCallback, tuneMode, type) {
 		argscheck.checkArgs('oFSS', 'tvchannel.tuneDown', arguments);
 
@@ -47,7 +44,6 @@ tvchannelExport = {
 		var args = [tuneMode, type];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'tuneDown', args);
 	},
-	//void findChannel (long major, long minor, FindChannelSuccessCallback successCallback, optional ErrorCallback? errorCallback)
 	findChannel: function (major, minor, successCallback, errorCallback) {
 		argscheck.checkArgs('nnfF', 'tvchannel.findChannel', arguments);
 
@@ -56,7 +52,6 @@ tvchannelExport = {
 		var args = [major, minor];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'findChannel', args);
 	},
-	//void getChannelList (FindChannelSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? mode, optional long? nStart, optional long? number)
 	getChannelList: function (successCallback, errorCallback, mode, nStart, number) {
 		argscheck.checkArgs('fFSNN', 'tvchannel.getChannelList', arguments);
 
@@ -68,7 +63,6 @@ tvchannelExport = {
 		var args = [mode, nStart, number];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getChannelList', args);
 	},
-	//void getCurrentChannel (ChannelInfoSuccessCallback successCallback, optional ChannelInfoErrorCallback? errorCallback, optional WindowType? type)
 	getCurrentChannel: function (successCallback, errorCallback, type) {
 		argscheck.checkArgs('fFS', 'tvchannel.getCurrentChannel', arguments);
 
@@ -78,7 +72,6 @@ tvchannelExport = {
 		var args = [type];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getCurrentChannel', args);
 	},
-	//void getProgramList (ChannelInfo channelInfo, TZDate startTime, ProgramListSuccessCallback successCallback, optional ErrorCallback? errorCallback, optional unsigned long? duration)
 	getProgramList: function (channelInfo, startTime, successCallback, errorCallback, duration) {
 		argscheck.checkArgs('oofFN', 'tvchannel.getProgramList', arguments);
 
@@ -88,7 +81,6 @@ tvchannelExport = {
 		var args = [channelInfo, startTime, duration];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getProgramList', args);
 	},
-	//void getCurrentProgram (ProgramInfoSuccessCallback successCallback, optioncal ProgramInfoErrorCallback? errorCallback, optional WindowType? type)
 	getCurrentProgram: function (successCallback, errorCallback, type) {
 		argscheck.checkArgs('fFS', 'tvchannel.getCurrentProgram', arguments);
 
@@ -98,7 +90,6 @@ tvchannelExport = {
 		var args = [type];
 		exec(successCallback, errorCallback, 'toast.tvchannel', 'getCurrentProgram', args);
 	},
-	//void addChannelChangeListener (ChannelChangeCallback callback, optional WindowType? type)
 	addChannelChangeListener: function (callback, type) {
 		argscheck.checkArgs('fS', 'tvchannel.addChannelChangeListener', arguments);
 
@@ -107,7 +98,6 @@ tvchannelExport = {
 		var args = [type];
 		exec(callback, null, 'toast.tvchannel', 'addChannelChangeListener', args);
 	},
-	//void removeChannelChangeListener (ChannelChangeCallback callback)
 	removeChannelChangeListener: function (callback) {
 		argscheck.checkArgs('f', 'tvchannel.removeChannelChangeListener', arguments);
 
