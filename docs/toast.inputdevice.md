@@ -1,5 +1,5 @@
 # toast.inputdevice
-toast.inputdevice privides something
+toast.inputdevice privides TV's inputdevice related APIs.
 
 ## Supported platforms
 * browser
