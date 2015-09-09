@@ -5,6 +5,7 @@ toast.tvdevice privides something
 * browser
 * sectv-orsay
 * sectv-tizen
+	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```widl

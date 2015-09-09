@@ -5,7 +5,6 @@ toast.application privides APIs related with the application.
 * browser
 * sectv-orsay
 * sectv-tizen
-	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```widl
@@ -24,24 +23,24 @@ module Application {
 ## APIs
 ### void exit();
 This function terminates current application.
-	* Parameters
-		N/A
-	* Return value
-		N/A
-	* Exceptions
-		* throws TypeError
-			* If given arguments are not matched with API specification.
-		* throws Error
-			* if any error occured during the operation.
-	* Examples
-		1. Terminate current application when Return key pressed.
-			```javascript
-			window.addEventListener('keydown', function (e) {
-				if(e.keyCode === tvKeyCode.Return) {
-					toast.application.exit();
-				}
-			});
-			```
+* Parameters
+	N/A
+* Return value
+	N/A
+* Exceptions
+	* throws TypeError
+		* If given arguments are not matched with API specification.
+	* throws Error
+		* if any error occured during the operation.
+* Examples
+	1. Terminate current application when Return key pressed.
+		```javascript
+		window.addEventListener('keydown', function (e) {
+			if(e.keyCode === tvKeyCode.Return) {
+				toast.application.exit();
+			}
+		});
+		```
 
 ## See others
 toast.inputdevice
