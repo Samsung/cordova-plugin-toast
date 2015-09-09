@@ -1,5 +1,5 @@
 # Constructor toast.Media
-toast.Media play back video or audio files on a device.
+toast.Media play back video or audio files.
 
 ## Supported platforms
 * browser
