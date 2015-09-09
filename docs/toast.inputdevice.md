@@ -62,6 +62,7 @@ Supported Keys are different by each platforms.
 | MediaPause         | Yes* (F11)         | Yes*        | Yes*        |
 | MediaRewind        | Yes* (F12)         | Yes*        | Yes*        |
 | Tools              | Yes* (Context)     | Yes*        | Yes*        |
+| Others...          | Please refer to result of getSupportedKeys     |
 (Yes*: supported, but callling `registerKey` with the `keyName` is needed.)
 * Please refer to the result of `getSupportedKeys` method for more detail.
 * We recommend to use below d-pad keys for better user experience for TV device:

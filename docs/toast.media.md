@@ -57,7 +57,7 @@ module Media {
 Media constructor provides media player APIs.
 The Media's instance can be created with `getInstance` method which creates singleton instance. Creating an instance with `new` keyword is not allowed and InternalError will be thrown.
 * Throw
-	* throws InternalError
+	* throws TypeError
 		* if the constructor is invoked with `new` keyword.
 	* throws Error
 		* if unknown error occured.
