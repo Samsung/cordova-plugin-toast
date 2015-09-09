@@ -286,6 +286,10 @@ device.addEventListener('deviceready', function () {
 	elContainer.className = 'renderarea';	// .renderarea style could be pre-defined with CSS.
 	elPlayer.appendChild(elContainer);
 
+	// OPTION others...
+	// you can handle the container to show the video with any styles.
+	// The position will be calculated and the video will be displayed in the container.
+
 	// now, start play back!
 	media.play();
 });
