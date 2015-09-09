@@ -22,7 +22,7 @@ module Application {
 ```
 
 ## APIs
-* void exit();
+### void exit();
 This function terminates current application.
 	* Parameters
 		N/A
