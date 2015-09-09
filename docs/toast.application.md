@@ -17,7 +17,7 @@ module Application {
     [NoInterfaceObject] interface ApplicationManager {
         void exit();
     };
-}
+};
 ```
 
 ## APIs

@@ -1,5 +1,5 @@
-# {{Namespace}}
-{{Namespace}} privides something
+# toast.tvwindow
+toast.tvwindow privides something
 
 ## Supported platforms
 * browser

@@ -1,5 +1,5 @@
-# {{Namespace}}
-{{Namespace}} privides something
+# toast.tvchannel
+toast.tvchannel privides something
 
 ## Supported platforms
 * browser

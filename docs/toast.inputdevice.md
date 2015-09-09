@@ -40,7 +40,7 @@ module InputDevice {
 
 ## Supported Keys by platform
 Supported Keys are different by each platforms.
-(Yes*: supported, but callling registerKey with the keyName is needed.)
+
 | keyName            | browser (keyboard) | sectv-orsay | sectv-tizen |
 |--------------------|--------------------|-------------|-------------|
 | UpArrow            | Yes                | Yes         | Yes         |
@@ -61,9 +61,10 @@ Supported Keys are different by each platforms.
 | MediaPause         | Yes* (F11)         | Yes*        | Yes*        |
 | MediaRewind        | Yes* (F12)         | Yes*        | Yes*        |
 | Tools              | Yes* (Context)     | Yes*        | Yes*        |
-* Please refer to the result of getSupportedKeys method for more detail.
+(Yes*: supported, but callling `registerKey` with the `keyName` is needed.)
+* Please refer to the result of `getSupportedKeys` method for more detail.
 * We recommend to use below d-pad keys for better user experience for TV device:
-	UpArrow, DownArrow, LeftArrow, RightArrow, Enter and Return
+	`UpArrow`, `DownArrow`, `LeftArrow`, `RightArrow`, `Enter` and `Return`
 * keyCode of each keys could be different by platforms. So, we recommend to generate collection like below:
 ```javascript
 var tvKeyCode = {};
