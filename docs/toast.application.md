@@ -1,16 +1,17 @@
 # toast.application
-toast.application privides something
+toast.application privides APIs related with the application.
 
 ## Supported platforms
 * browser
 * sectv-orsay
 * sectv-tizen
+	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```widl
 module Application {
     [NoInterfaceObject] interface ApplicationManager {
-        readonly attribute ApplicationManager tvchannel;
+        readonly attribute ApplicationManager application;
     };
     Toast implements ApplicationManager;
 
@@ -21,33 +22,26 @@ module Application {
 ```
 
 ## APIs
-* {{Property Signature}}
-{{Description}}
-	* Examples
-		1. {{Example_Desc_1}}
-			```javascript
-			{{Example_Code_1}}
-			```
-
-* {{Method Signature}}
-provides global namespace named "toast" to provide APIs for TV application.
-Every toast APIs will be appended to this namespace.
+* void exit();
+This function terminates current application.
 	* Parameters
+		N/A
 	* Return value
+		N/A
 	* Exceptions
-		* {{Exception}}
-			* if {{something wrong...}}
+		* throws TypeError
+			* If given arguments are not matched with API specification.
+		* throws Error
+			* if any error occured during the operation.
 	* Examples
-		1. {{description}}
+		1. Terminate current application when Return key pressed.
 			```javascript
-			{{example_code}}
+			window.addEventListener('keydown', function (e) {
+				if(e.keyCode === tvKeyCode.Return) {
+					toast.application.exit();
+				}
+			});
 			```
 
 ## See others
-toast.application
-toast.drminfo
 toast.inputdevice
-toast.media
-toast.tvaudiocontrol
-toast.tvchannel
-toast.tvwindow
