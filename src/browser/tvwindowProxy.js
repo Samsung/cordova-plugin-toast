@@ -1,5 +1,11 @@
 'use strict';
 
+var windowType = ['MAIN'];
+
+var systemInfoVideoSourceNumber = 1;
+var systemInfoVideoSourceTypeIndex = 0;
+var systemInfoVideoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
+
 function getTvwindowElement () {
 	var element = '';
 	
@@ -29,61 +35,121 @@ function randomColor () {
 
 module.exports = {
 	getAvailableWindows: function (success, fail, args) {
-		fail = null;
-		args = null;
-
 		setTimeout(function () {
-			success(['MAIN']);
+			success(windowType);
 		}, 0);
 	},
 	setSource: function (success, fail, args){
-		fail = null;
+		var match = false;
 		var element = getTvwindowElement();
 
-		element.style.backgroundColor = randomColor();
+		if (args[0].type && args[0].number) {
+			
+			for (var i = 0; i < systemInfoVideoSourceTypeList.length; i++) {
+				if (args[0].type  == systemInfoVideoSourceTypeList[i]) {
+					systemInfoVideoSourceTypeIndex = i;
+					systemInfoVideoSourceNumber = args[0].number;
+					element.style.backgroundColor = randomColor();
 
-		setTimeout(function () {
-			success(args[0], args[1]);
-		}, 0);
+					match = true;
+					break;
+				}
+			}
+
+			if (match) {
+				setTimeout(function () {
+					success({
+						type: systemInfoVideoSourceTypeList[systemInfoVideoSourceTypeIndex],
+						number: systemInfoVideoSourceNumber
+					}, windowType[0]);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 17,
+						name: 'TYPE_MISMATCH_ERR',
+						message: 'Failed to find the source'
+					});
+				}, 0);	
+			}
+		} else {
+			setTimeout(function () {
+				fail({
+					code: 17,
+					name: 'TYPE_MISMATCH_ERR',
+					message: 'Failed to find the source'
+				});
+			}, 0);	
+		}
 	},
 	getSource: function (success, fail, args) {
-		fail = null;
-		args = null;
-
-		var source = {};
-
-		source.type = 'TV';
-		source.number = '1';
-
 		setTimeout(function () {
-			success(source);
+			success({
+				type: systemInfoVideoSourceTypeList[systemInfoVideoSourceTypeIndex],
+				number: systemInfoVideoSourceNumber
+			});
 		}, 0);
 	},
 	show: function (success, fail, args) {
-		fail = null;
+		var i = 0;
+		var match = 0;
+		var type1 = /^[1-9][0-9]*px$/;
+		var type2 = /^[1-9][0-9]*%$/;
 		var element = getTvwindowElement();
 
-		element.style.position = 'absolute';
-		element.style.left = args[0][0];
-		element.style.top = args[0][1];
-		element.style.width = args[0][2];
-		element.style.height = args[0][3];
-		element.style.backgroundColor = randomColor();
+		if (args[0].length == 4) {
+			for (i = 0; i < args[0].length; i++) {
+				if (typeof args[0][i] == 'number') {
+					args[0][i] = args[0][i] + 'px';
+				}
+			}
 
-		document.getElementsByTagName('body')[0].appendChild(element);
+			for (i = 0; i < args[0].length; i++) {
+				if (type1.test(args[0][i]) || type2.test(args[0][i]) || args[0][i] == '0px' || args[0][i] == '0%'){
+					match = match + 1;
+				}
+			}
 
-		setTimeout(function () {
-			success(args[0], args[1]);
-		}, 0);
+			if (match == 4) {
+				element.style.position = 'absolute';
+				element.style.left = args[0][0];
+				element.style.top = args[0][1];
+				element.style.width = args[0][2];
+				element.style.height = args[0][3];
+				element.style.backgroundColor = randomColor();
+				document.getElementsByTagName('body')[0].appendChild(element);
+
+				setTimeout(function () {
+					success([
+						element.style.left,
+						element.style.top,
+						element.style.width,
+						element.style.height
+					], windowType[0]);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 17,
+						name: 'TYPE_MISMATCH_ERR',
+						message: 'Values are wrong.'
+					});
+				}, 0);
+			}
+		} else {
+			setTimeout(function () {
+				fail({
+					code: 17,
+					name: 'TYPE_MISMATCH_ERR',
+					message: 'Values are wrong.'
+				});
+			}, 0);
+		}
 	},
 	hide: function (success, fail, args) {
-		args = null;
+		var element = document.getElementById('tvwindowshow');
 
-		var element = '';
-
-		if (document.getElementById('tvwindowshow')) {
-			element = document.getElementById('tvwindowshow');
-
+		if (element) {
 			document.getElementsByTagName('body')[0].removeChild(element);
 
 			setTimeout(function () {
@@ -91,17 +157,19 @@ module.exports = {
 			}, 0);
 		} else {
 			setTimeout(function () {
-				fail();
+				fail({
+					code: 11,
+					name: 'INVALID_STATE_ERR',
+					message: 'There are no window.'
+				});
 			}, 0);
 		}
 	},
 	getRect: function (success, fail, args) {
-		var element = '';
+		var element = document.getElementById('tvwindowshow');
 		var rectangle = [];
 
-		if (document.getElementById('tvwindowshow')) {
-			element = document.getElementById('tvwindowshow');
-
+		if (element) {
 			rectangle[0] = element.style.left;
 			rectangle[1] = element.style.top;
 			rectangle[2] = element.style.width;
@@ -145,17 +213,25 @@ module.exports = {
 				}
 
 				setTimeout(function () {
-					success(rectangle, args[1]);
+					success(rectangle, windowType[0]);
 				}, 0);
 			} else {
 				setTimeout(function () {
-					fail();
+					fail({
+						code: 17,
+						name: 'TYPE_MISMATCH_ERR',
+						message: 'Values are wrong.'
+					});
 				}, 0);
 			}
 
 		} else {
 			setTimeout(function () {
-				fail();
+				fail({
+					code: 11,
+					name: 'INVALID_STATE_ERR',
+					message: 'There are no window.'
+				});
 			}, 0);
 		}
 	}

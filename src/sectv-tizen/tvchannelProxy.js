@@ -4,53 +4,128 @@ var channelChangeCallback = [];
 
 module.exports = {
 	tune: function (success, fail, args) {
-		tizen.tvchannel.tune(args[0], success, fail, args[1]);
+		try {
+			tizen.tvchannel.tune(args[0], success, fail, args[1]);
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	tuneUp: function (success, fail, args) {
-		tizen.tvchannel.tuneUp(success, fail, args[0], args[1]);
+		try {
+			tizen.tvchannel.tuneUp(success, fail, args[0], args[1]);
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	tuneDown: function (success, fail, args) {
-		tizen.tvchannel.tuneDown(success, fail, args[0], args[1]);
+		try {
+			tizen.tvchannel.tuneDown(success, fail, args[0], args[1]);
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	findChannel: function (success, fail, args) {
-		tizen.tvchannel.findChannel(args[0], args[1], success, fail);
+		try {
+			tizen.tvchannel.findChannel(args[0], args[1], success, fail);
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	getChannelList: function (success, fail, args) {
-		tizen.tvchannel.findChannel(args[0], args[1], success, fail);
+		try {
+			tizen.tvchannel.findChannel(args[0], args[1], success, fail);
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	getCurrentChannel: function (success, fail, args) {
-		fail = null;
-		
-		var channelInfo = tizen.tvchannel.getCurrentChannel(args[0]);
+		try {
+			var channelInfo = tizen.tvchannel.getCurrentChannel(args[0]);
 
-		setTimeout(function () {
-			success(channelInfo);
-		}, 0);
+			if (typeof channelInfo == 'object') {
+				setTimeout(function () {
+					success(channelInfo);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 9,
+						name: 'NOT_SUPPORTED_ERR',
+						message: 'Any other error occurs on platform.'
+					});
+				}, 0);
+			}
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	getProgramList: function (success, fail, args) {
-		tizen.tvchannel.getProgramList(args[0], args[1], success, fail, args[2]);
+		try {
+			tizen.tvchannel.getProgramList(args[0], args[1], success, fail, args[2]);
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	getCurrentProgram: function (success, fail, args) {
-		fail = null;
+		try {
+			var channelProgram = tizen.tvchannel.getCurrentProgram(args[0]);
 
-		var channelProgram = tizen.tvchannel.getCurrentProgram(args[0]);
-
-		setTimeout(function () {
-			success(channelProgram);
-		}, 0);
+			if (typeof channelProgram == 'object') {
+				setTimeout(function () {
+					success(channelProgram);
+				}, 0);	
+			} else {
+				setTimeout(function () {
+					fail({
+							code: 9,
+							name: 'NOT_SUPPORTED_ERR',
+							message: 'Any other error occurs on platform.'
+						});
+				}, 0);
+			}
+		} catch (e) {
+			throw {
+				code: 9,
+				name: 'NOT_SUPPORTED_ERR',
+				message: 'Any other error occurs on platform.'
+			};
+		}
 	},
 	addChannelChangeListener: function (success, fail, args) {
-		fail = null;
-		
 		channelChangeCallback.push({
 			callback: success,
 			id : tizen.tvchannel.addChannelChangeListener(success, args[0])
 		});
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		fail = null;
-		args = null;
-
 		for (var i = 0; i < channelChangeCallback.length; i++) {
 			if (channelChangeCallback[i].callback === success) {
 				tizen.tvchannel.removeChannelChangeListener(channelChangeCallback[i].id);

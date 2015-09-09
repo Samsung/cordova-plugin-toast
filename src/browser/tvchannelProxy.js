@@ -1,8 +1,10 @@
 'use strict';
 
+var windowType = ['MAIN'];
+
 var channelChangeCallback = [];
 
-var listIndex = 0;
+var infoListIndex = 0;
 var channelInfoList = [
 	{PTC: '16', MAJOR: '6',	MINOR: '1',	LCN: '0', SOURCEID: '1', PROGRAMNUMBER: '1', TRNSPORTSTREAMID: '5137', ORIGINALNETWORKID: '0', SERVICENAME:'SBS', CHANNELNAME: 'SBS'},
 	{PTC: '17',	MAJOR: '7',	MINOR: '1',	LCN: '0', SOURCEID: '2', PROGRAMNUMBER: '2', TRNSPORTSTREAMID: '2065', ORIGINALNETWORKID: '0', SERVICENAME:'KBS2', CHANNELNAME: 'KBS2'},
@@ -58,30 +60,30 @@ function fireChannelChangeEvent (channelInfo, args) {
 
 module.exports = {
 	tune: function (success, fail, args) {
+		var match = false;
 		var element = getTvwindowElement();
 
 		element.style.backgroundColor = randomColor();
 
-		var channelInfo = '';
-
 		for (var i = 0; i < channelInfoList.length; i++) {
 			if (args[0].MAJOR == channelInfoList[i].MAJOR && args[0].MINOR == channelInfoList[i].MINOR) {
-				channelInfo = channelInfoList[i];
+				infoListIndex = i;
+				match = true;
 			}
 		}
 
-		if (!channelInfo) {
+		if (match) {
+			setTimeout(function () {
+				success.onsuccess(channelInfoList[infoListIndex], windowType[0]);
+				fireChannelChangeEvent(channelInfoList[infoListIndex], windowType[0]);
+			}, 0);
+		} else {
 			setTimeout(function () {
 				fail({
 					code: 8,
 					name: 'NOT_FOUND_ERR',
 					message: 'Failed to find the channel'
 				});
-			}, 0);
-		} else {
-			setTimeout(function () {
-				success.onsuccess(channelInfo, args[1]);
-				fireChannelChangeEvent(channelInfo, args[1]);
 			}, 0);
 		}
 	},
@@ -90,16 +92,15 @@ module.exports = {
 
 		element.style.backgroundColor = randomColor();
 
-		if (listIndex < channelInfoList.length - 1) {
-			listIndex = listIndex + 1;
+		if (infoListIndex < channelInfoList.length - 1) {
+			infoListIndex = infoListIndex + 1;
 		} else {
-			listIndex = 0;
+			infoListIndex = 0;
 		}
-		var channelInfo = channelInfoList[listIndex];
 
 		setTimeout(function () {
-			success.onsuccess(channelInfo, args[1]);
-			fireChannelChangeEvent(channelInfo, args[1]);
+			success.onsuccess(channelInfoList[infoListIndex], windowType[0]);
+			fireChannelChangeEvent(channelInfoList[infoListIndex], windowType[0]);
 		}, 0);
 	},
 	tuneDown: function (success, fail, args) {
@@ -107,16 +108,15 @@ module.exports = {
 
 		element.style.backgroundColor = randomColor();
 
-		if (0 < listIndex) {
-			listIndex = listIndex - 1;
+		if (0 < infoListIndex) {
+			infoListIndex = infoListIndex - 1;
 		} else {
-			listIndex = 6;
+			infoListIndex = 6;
 		}
-		var channelInfo = channelInfoList[listIndex];
 
 		setTimeout(function () {
-			success.onsuccess(channelInfo, args[1]);
-			fireChannelChangeEvent(channelInfo, args[1]);
+			success.onsuccess(channelInfoList[infoListIndex], windowType[0]);
+			fireChannelChangeEvent(channelInfoList[infoListIndex], windowType[0]);
 		}, 0);
 	},
 	findChannel: function (success, fail, args) {
@@ -145,45 +145,26 @@ module.exports = {
 		}
 	},
 	getChannelList: function (success, fail, args) {
-		fail = null;
-		args = null;
-
 		setTimeout(function () {
 			success(channelInfoList);
 		}, 0);
 	},
 	getCurrentChannel: function (success, fail, args) {
-		fail = null;
-		args = null;
-
-		var channelInfo = channelInfoList[listIndex];
-
 		setTimeout(function () {
-			success(channelInfo);
+			success(channelInfoList[infoListIndex]);
 		}, 0);
 	},
 	getProgramList: function (success, fail, args) {
-		fail = null;
-		args = null;
-
 		setTimeout(function () {
 			success(programInfoList);
 		}, 0);
 	},
 	getCurrentProgram: function (success, fail, args) {
-		fail = null;
-		args = null;
-
-		var programInfo = programInfoList[listIndex];
-
 		setTimeout(function () {
-			success(programInfo);
+			success(programInfoList[infoListIndex]);
 		}, 0);
 	},
 	addChannelChangeListener: function (success, fail, args) {
-		fail = null;
-		args = null;
-
 		channelChangeCallback.push(success);
 	},
 	removeChannelChangeListener: function (success, fail, args) {
