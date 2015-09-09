@@ -22,6 +22,7 @@ module Media {
 		long getDuration() raises(Error);
 		long getCurrentPosition() raises(Error);
 		long setListener(MediaEventListener listener) raises(Error);
+		DOMElement getContainerElement();
 	};
 	[Callback, NoInterfaceObject] interface MediaEventListener {
 		void onevent(MediaEvent mediaEvent);
@@ -36,10 +37,10 @@ module Media {
 	};
 
 	dictionary MediaEventData {
-		MediaState state;
-		long duration;
-		long position;
-		long bufferingPercentage;
+		MediaState? state;
+		long? duration;
+		long? position;
+		long? bufferingPercentage;
 	};
 };
 ```
