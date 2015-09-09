@@ -18,7 +18,7 @@ module.exports = {
 	},
 	getSource: function (success, fail, args) {
 		try {
-			var source = webapis.tv.window.getSource(_windowID);
+			var source = webapis.tv.window.getSource(args[0]);
 
 			setTimeout(function () {
 				success(source);
@@ -66,7 +66,7 @@ module.exports = {
 	},
 	getRect: function (success, fail, args) {
 		try {
-			webaspi.tv.window.getRect(success, fail);
+			webapis.tv.window.getRect(success, fail);
 		} catch (e) {
 
 		}
