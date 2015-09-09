@@ -5,6 +5,7 @@ toast.tvwindow privides something
 * browser
 * sectv-orsay
 * sectv-tizen
+    * Privilege `http://tizen.org/privilege/tv.window"/>` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```widl
@@ -44,7 +45,7 @@ module TVWindow {
                        optional WindowType? type) raises (Error);
 
         void getSource(VideoSourceInfoCallback successCallback,
-                       ErrorCallback errorCallback,
+                       optional ErrorCallback? errorCallback,
                        optional WindowType? type) raises(Error);
 
         void show(WindowRectangleCallback successCallback,
@@ -80,33 +81,66 @@ module TVWindow {
 ```
 
 ## APIs
-* {{Property Signature}}
-{{Description}}
-	* Examples
-		1. {{Example_Desc_1}}
-			```javascript
-			{{Example_Code_1}}
-			```
 
-* {{Method Signature}}
-provides global namespace named "toast" to provide APIs for TV application.
-Every toast APIs will be appended to this namespace.
-	* Parameters
-	* Return value
-	* Exceptions
-		* {{Exception}}
-			* if {{something wrong...}}
-	* Examples
-		1. {{description}}
-			```javascript
-			{{example_code}}
-			```
+### void getAvailableWindows(WindowTypeArrayCallback successCallback, optional ErrorCallback? errorCallback);
+This function retrieves information of the available windows.
+* Parameters
+    * successCallback: The method to call when a list of available windows are retrieved successfully.
+    * errorCallback: The method to invoke when an error occurs.
+* Return value
+    N/A
+* Exceptions
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws RangeError
+        * if given value is not in the set or range of allowed values.
+    * throws Error
+        * if unknown error occured.
+* Examples
+    1. Getting available windows.
+        ```javascript
+        var i;
+        toast.tvwindow.getAvailableWindows(function(windowType) {
+            for (i = 0; i < windowType.length; i++) {
+                console.log('windowType['+ i + ']:' + windowType[i]);
+            }
+        }, function(err) {
+            console.log('err.code:' + err.code);
+            console.log('err.name:' + err.name);
+            console.log('err.message:' + err.message);
+        });
+        ```
+
+### void setSource(VideoSourceInfo videoSource, VideoSourceChangedCallback successCallback, optional ErrorCallback? errorCallback, optional WindowType? type);
+This function retrieves information of the available windows.
+* Parameters
+    * videoSource: 
+    * successCallback: The method to call when a list of available windows are retrieved successfully.
+    * errorCallback: The method to invoke when an error occurs.
+    * type:
+* Return value
+    N/A
+* Exceptions
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws RangeError
+        * if given value is not in the set or range of allowed values.
+    * throws Error
+        * if unknown error occured.
+* Examples
+    1. Getting available windows.
+        ```javascript
+        var i;
+        toast.tvwindow.getAvailableWindows(function(windowType) {
+            for (i = 0; i < windowType.length; i++) {
+                console.log('windowType['+ i + ']:' + windowType[i]);
+            }
+        }, function(err) {
+            console.log('err.code:' + err.code);
+            console.log('err.name:' + err.name);
+            console.log('err.message:' + err.message);
+        });
+        ```
 
 ## See others
-toast.application
-toast.drminfo
-toast.inputdevice
-toast.media
-toast.tvaudiocontrol
-toast.tvchannel
 toast.tvwindow
