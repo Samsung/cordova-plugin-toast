@@ -1,5 +1,5 @@
 # Constructor toast.Media
-toast.Media play back video or audio files on a device.
+toast.Media play back video or audio files.
 
 ## Supported platforms
 * browser
@@ -56,6 +56,11 @@ module Media {
 ### [Constructor()] interface Media
 Media constructor provides media player APIs.
 The Media's instance can be created with `getInstance` method which creates singleton instance. Creating an instance with `new` keyword is not allowed and InternalError will be thrown.
+* Throw
+	* throws TypeError
+		* if the constructor is invoked with `new` keyword.
+	* throws Error
+		* if unknown error occured.
 * Examples
 	1. Creates media instance to play back.
 		```javascript
@@ -262,10 +267,10 @@ device.addEventListener('deviceready', function () {
 
 	media.open('http://mydomain.com/video.mp4');
 
-	// Play the video in full screen.
-	var elContainer = media.getContainerElement();
+	// Getting container element which is used for displaying the video.
 	// Video will be rendered in the container element. You can change the rect of video by changing the container's style.
 	// Before you change the container's style, the video will not be rendered on a screen, but its sound will be played in backgrond.
+	var elContainer = media.getContainerElement();
 
 	// OPTION 1: Let's set the render area to full screen.
 	elContainer.style.position = 'fixed';
@@ -280,6 +285,10 @@ device.addEventListener('deviceready', function () {
 	var elPlayer = document.querySelecter(".videoplayer")
 	elContainer.className = 'renderarea';	// .renderarea style could be pre-defined with CSS.
 	elPlayer.appendChild(elContainer);
+
+	// OPTION others...
+	// you can handle the container to show the video with any styles.
+	// The position will be calculated and the video will be displayed in the container.
 
 	// now, start play back!
 	media.play();
