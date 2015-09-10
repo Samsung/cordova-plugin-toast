@@ -1,6 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 var xml2js = require('xml2js');
+var grunt = require('grunt');
+
 function trim (str) {
     return (str + '').replace(/^\s+|\s+$/g, '');
 }
@@ -80,9 +82,9 @@ module.exports = function(grunt) {
         }
 
         var content = '';
+        content += '/* Cordova plugin TOAST version '+TOAST_VERSION+' ('+grunt.template.today("yyyy-mm-dd HH:MM:ss Z")+') */\n';
         content += ';(function() {\n';
 		content += '// jshint strict:false\n';
-        //content += 'var TOAST_VERSION = \''+TOAST_VERSION+'\';\n';
         content += 'var require = cordova.require,\n';
         content += '    define = cordova.define;\n\n';
 
