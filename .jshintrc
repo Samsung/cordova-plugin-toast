@@ -6,7 +6,7 @@
     "camelcase"     : true,    // true: Identifiers must be in camelCase
     "curly"         : true,     // true: Require {} for every new block or scope
     "eqeqeq"        : false,     // true: Require triple equals (===) for comparison
-    "forin"         : true,     // true: Require filtering for..in loops with obj.hasOwnProperty()
+    "forin"         : false,     // true: Require filtering for..in loops with obj.hasOwnProperty()
     "freeze"        : true,     // true: prohibits overwriting prototypes of native objects such as Array, Date etc.
     "immed"         : false,    // true: Require immediate invocations to be wrapped in parens e.g. `(function () { } ());`
     "indent"        : 4,        // {int} Number of spaces to use for indentation
@@ -27,7 +27,7 @@
                                 //   true     : all variables, last function parameter
                                 //   "vars"   : all variables only
                                 //   "strict" : all variables, all function parameters
-    "strict"        : true,     // true: Requires all functions run in ES5 Strict Mode
+    "strict"        : false,     // true: Requires all functions run in ES5 Strict Mode
     "maxparams"     : false,    // {int} Max number of formal params allowed per function
     "maxdepth"      : false,    // {int} Max depth of nested blocks (within functions)
     "maxstatements" : false,    // {int} Max number statements per function
