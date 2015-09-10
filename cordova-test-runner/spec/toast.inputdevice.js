@@ -141,7 +141,7 @@ describe('toast.inputdevice', function () {
 
 		it('invokes the successCallback with requested key\'s InputDeviceKey object.', function (done) {
 			toast.inputdevice.getSupportedKeys(function (suppKeys) {
-				toast.inputdevice.getKey(suppKeys[0], function (devKey) {
+				toast.inputdevice.getKey(suppKeys[0].name, function (devKey) {
 					expect(devKey).toBeDefined();
 					expect(devKey.name).toBeDefined();
 					expect(devKey.name).toBe(suppKeys[0]);
