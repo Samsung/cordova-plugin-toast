@@ -1,76 +1,97 @@
 /* jshint loopfunc: true */
 (function() {
     var tests = {};
-    var count = 0;
     window.testsuite = function(category, feature, testfn) {
         tests[category] = tests[category] || [];
         tests[category].push({
-            id: count++,
             feature: feature,
             testfn: testfn
         });
     };
     var TEST_TIMEOUT = 10000;
 
-    function renderTests() {
-        var container = document.createElement('table');
-        container.className = 'container';
-        for (var category in tests) {
-            var elRow = document.createElement('tr');
-            elRow.className = 'row';
-
-            var elCate = document.createElement('td');
-            elCate.className = 'category';
-            elCate.innerHTML = category;
-            elRow.appendChild(elCate);
-
-            var elContent = document.createElement('td');
-            for (var i = 0; i < tests[category].length; i++) {
-                var tester = getTester(tests[category][i].id, tests[category][i].feature);
-                var btn = tester.querySelector('.btn');
-                var testfn = tests[category][i].testfn;
-
-                // In the sectv-orsay platform, appendChild must be done before the addEventListener. Seems like platform's bug.
-                elContent.appendChild(tester);
-                btn.addEventListener('click', (function(fn, tester) {
-                    return function() {
-                        function report(msg) {
-                            tmrTest && clearTimeout(tmrTest);
-                            setReportHTML(msg);
-                        }
-
-                        function setReportHTML(msg) {
-                            tester.querySelector('.report').innerHTML = '[' + Date.now() + ']' + msg;
-                        }
-
-                        setReportHTML('wait...');
-                        try {
-                            var tmrTest = setTimeout(function() {
-                                tmrTest = null;
-                                setReportHTML('TIMEOUT');
-                            }, TEST_TIMEOUT);
-                            fn(report);
-                        } catch (e) {
-                            setReportHTML('Exception: ' + e);
-                        }
-                    };
-                })(testfn, tester));
+    function createElem(tagName, attributes, children) {
+        var elem = document.createElement(tagName);
+        for(var attr in attributes) {
+            if(attr === 'className') {
+                elem.setAttribute('class', attributes[attr]);
             }
-            elRow.appendChild(elContent);
-
-            container.appendChild(elRow);
+            else {
+                elem.setAttribute(attr, attributes[attr]);
+            }
         }
-        var head = document.createElement('h1');
-        head.innerHTML = 'Cordova TOAST TestSuite';
-        document.body.appendChild(head);
-        document.body.appendChild(container);
+        if(typeof children === 'string') {
+            elem.appendChild(document.createTextNode(children));
+        }
+        else {
+            for(var i=0; children && i<children.length; i++) {
+                elem.appendChild(children[i]);
+            }
+        }
+        return elem;
     }
 
-    function getTester(id, feature) {
+    var tester = {};
+    function renderTests() {
+        var count = 0;
+        document.body.appendChild(createElem('h1', {}, 'Cordova TOAST TestSuite'));
+        var container = createElem('div', {className: 'container'});
+        document.body.appendChild(container);
+        for (var category in tests) {
+            for (var i = 0; i < tests[category].length; i++) {
+                var testerId = count++;
+                var fields = [];
+                fields.push(createElem('div', {className: 'col-md-2'}, category));
+                fields.push(createElem('div', {className: 'col-md-3'}, [
+                    createElem('button', {className: 'btn btn-default', testerId: testerId}, tests[category][i].feature)
+                ]));
+                var reporter = createElem('div', {className: 'col-md-7 reporter'+testerId});
+                fields.push(reporter);
+
+                var row = createElem('div', {className: 'row'}, fields);
+                container.appendChild(row);
+
+                tester[testerId] = tests[category][i].testfn;
+            }
+        }
+
+        document.body.addEventListener('click', function (e) {
+            if(e.target.tagName.toUpperCase() === 'BUTTON' && e.target.getAttribute('testerId') !== null) {
+                var testerId = parseInt(e.target.getAttribute('testerId'));
+                if(typeof tester[testerId] === 'function') {
+                    var testfn = tester[testerId];
+                    var reporter = document.querySelector('.reporter'+testerId);
+                    function report(msg) {
+                        tmrTest && clearTimeout(tmrTest);
+                        setReportHTML(msg);
+                    }
+                    report.append = function (el) {
+                        reporter.appendChild(el);
+                    }
+
+                    function setReportHTML(msg) {
+                        reporter.innerHTML = '[' + Date.now() + ']' + msg;
+                    }
+
+                    setReportHTML('wait...');
+                    try {
+                        var tmrTest = setTimeout(function() {
+                            tmrTest = null;
+                            setReportHTML('TIMEOUT');
+                        }, TEST_TIMEOUT);
+                        testfn(report);
+                    } catch (e) {
+                        setReportHTML('Exception: ' + e);
+                    }
+                }
+            }
+        });
+    }
+
+    function getTester(category, test) {
         var tester = document.createElement('div');
         tester.className = 'row';
-        tester.setAttribute('id', id);
-        tester.innerHTML = '<table class="testfeature"><tr><td class="feature"><a class="btn btn-default">'+ feature + '</a></td>' +
+        tester.innerHTML = '<table class="testfeature" testid="'+test.id+'" testid="'+test.id+'"><tr><td class="feature"><a class="btn btn-default">'+ test.feature + '</a></td>' +
                             '<td class="report">ready</td></tr></table>';
         return tester;
     }

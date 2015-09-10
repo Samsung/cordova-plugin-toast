@@ -11,8 +11,7 @@ describe('toast.application', function () {
 	});
 	it('should not contain a property that is not exists in the specs.', function () {
 		for(var prop in toast.application) {
-			expect([
-				'exit'].indexOf(prop) >= 0).toBeTruthy();
+			expect(['exit'].indexOf(prop) >= 0).toBeTruthy();
 		}
 	});
 });
