@@ -1,4 +1,3 @@
-/* globals helper */
 describe('toast.application', function () {
 	it('should be defined as "toast.application" namespace.', function () {
 		expect(window.toast).toBeDefined();

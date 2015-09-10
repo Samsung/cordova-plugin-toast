@@ -61,17 +61,17 @@
                 if(typeof tester[testerId] === 'function') {
                     var testfn = tester[testerId];
                     var reporter = document.querySelector('.reporter'+testerId);
-                    function report(msg) {
+                    var report = function (msg) {
                         tmrTest && clearTimeout(tmrTest);
                         setReportHTML(msg);
-                    }
+                    };
                     report.append = function (el) {
                         reporter.appendChild(el);
-                    }
+                    };
 
-                    function setReportHTML(msg) {
+                    var setReportHTML = function (msg) {
                         reporter.innerHTML = '[' + Date.now() + ']' + msg;
-                    }
+                    };
 
                     setReportHTML('wait...');
                     try {
@@ -86,14 +86,6 @@
                 }
             }
         });
-    }
-
-    function getTester(category, test) {
-        var tester = document.createElement('div');
-        tester.className = 'row';
-        tester.innerHTML = '<table class="testfeature" testid="'+test.id+'" testid="'+test.id+'"><tr><td class="feature"><a class="btn btn-default">'+ test.feature + '</a></td>' +
-                            '<td class="report">ready</td></tr></table>';
-        return tester;
     }
 
     var type = localStorage.getItem('CORDOVA_TOAST_TESTRUNNER_TYPE');
