@@ -6,4 +6,4 @@ module.exports = {
 	}
 };
 
-require('cordova/exec/proxy').add('toast.application',module.exports);
+require('cordova/exec/proxy').add('toast.application', module.exports);
