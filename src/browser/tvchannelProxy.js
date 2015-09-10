@@ -1,7 +1,6 @@
 'use strict';
 
 var windowType = ['MAIN'];
-
 var channelChangeCallback = [];
 
 var infoListIndex = 0;
@@ -52,9 +51,9 @@ function randomColor () {
 	return color;
 }
 
-function fireChannelChangeEvent (channelInfo, args) {
+function fireChannelChangeEvent (channelInfo, windowType) {
 	for (var i = 0; i < channelChangeCallback.length; i++) {
-		channelChangeCallback[i](channelInfo, args);
+		channelChangeCallback[i](channelInfo, windowType);
 	}
 }
 
@@ -172,9 +171,6 @@ module.exports = {
 		channelChangeCallback.push(success);
 	},
 	removeChannelChangeListener: function (success, fail, args) {
-		fail = null;
-		args = null;
-
 		for (var i = 0; i < channelChangeCallback.length; i++) {
 			if (channelChangeCallback[i] === success) {
 				channelChangeCallback.splice(i, 1);

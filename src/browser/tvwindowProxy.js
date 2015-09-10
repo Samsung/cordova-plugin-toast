@@ -109,7 +109,7 @@ module.exports = {
 			}
 
 			if (match == 4) {
-				element.style.position = 'absolute';
+				element.style.position = 'fixed';
 				element.style.left = args[0][0];
 				element.style.top = args[0][1];
 				element.style.width = args[0][2];
