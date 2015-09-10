@@ -1,12 +1,11 @@
 'use strict';
 
-var windowType = ['MAIN'];
-
-var systemInfoVideoSource = {
+var windowTypeList = ['MAIN'];
+var videoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
+var videoSource = {
 	type: 'TV',
 	number: 1
 };
-var systemInfoVideoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
 
 function getTvwindowElement () {
 	var element = '';
@@ -38,7 +37,7 @@ function randomColor () {
 module.exports = {
 	getAvailableWindows: function (success, fail, args) {
 		setTimeout(function () {
-			success(windowType);
+			success(windowTypeList);
 		}, 0);
 	},
 	setSource: function (success, fail, args){
@@ -47,13 +46,13 @@ module.exports = {
 
 		if (args[0].type && args[0].number) {
 			
-			for (var i = 0; i < systemInfoVideoSourceTypeList.length; i++) {
-				if (args[0].type  == systemInfoVideoSourceTypeList[i]) {
-					systemInfoVideoSource.type = systemInfoVideoSourceTypeList[i];
-					systemInfoVideoSource.number = args[0].number;
+			for (var i = 0; i < videoSourceTypeList.length; i++) {
+				if (args[0].type  == videoSourceTypeList[i]) {
+					videoSource.type = videoSourceTypeList[i];
+					videoSource.number = args[0].number;
 					
 					element.style.backgroundColor = randomColor();
-					element.innerHTML = 'Source : ' + systemInfoVideoSource.type + ' ' + systemInfoVideoSource.number;
+					element.innerHTML = 'Source : ' + videoSource.type + ' ' + videoSource.number;
 
 					match = true;
 					break;
@@ -62,14 +61,14 @@ module.exports = {
 
 			if (match) {
 				setTimeout(function () {
-					success(systemInfoVideoSource, windowType[0]);
+					success(videoSource, windowTypeList[0]);
 				}, 0);
 			} else {
 				setTimeout(function () {
 					fail({
 						code: 17,
 						name: 'TYPE_MISMATCH_ERR',
-						message: 'Failed to find the source'
+						message: 'Failed to find the source.'
 					});
 				}, 0);	
 			}
@@ -78,14 +77,14 @@ module.exports = {
 				fail({
 					code: 17,
 					name: 'TYPE_MISMATCH_ERR',
-					message: 'Failed to find the source'
+					message: 'Failed to find the source.'
 				});
 			}, 0);	
 		}
 	},
 	getSource: function (success, fail, args) {
 		setTimeout(function () {
-			success(systemInfoVideoSource);
+			success(videoSource);
 		}, 0);
 	},
 	show: function (success, fail, args) {
@@ -115,7 +114,7 @@ module.exports = {
 				element.style.width = args[0][2];
 				element.style.height = args[0][3];
 				element.style.backgroundColor = randomColor();
-				element.innerHTML = 'Source : ' + systemInfoVideoSource.type + ' ' + systemInfoVideoSource.number;
+				element.innerHTML = 'Source : ' + videoSource.type + ' ' + videoSource.number;
 				document.getElementsByTagName('body')[0].appendChild(element);
 
 				setTimeout(function () {
@@ -124,7 +123,7 @@ module.exports = {
 						element.style.top,
 						element.style.width,
 						element.style.height
-					], windowType[0]);
+					], windowTypeList[0]);
 				}, 0);
 			} else {
 				setTimeout(function () {
@@ -212,7 +211,7 @@ module.exports = {
 				}
 
 				setTimeout(function () {
-					success(rectangle, windowType[0]);
+					success(rectangle, windowTypeList[0]);
 				}, 0);
 			} else {
 				setTimeout(function () {
