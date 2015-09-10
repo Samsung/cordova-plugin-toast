@@ -31,8 +31,14 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['www/**/*.js', 'src/**/*.js'],
-      tasks: ['jshint:src', 'compile']
+      'sectv-orsay': {
+        files: ['www/**/*.js', 'src/sectv-orsay/*.js'],
+        tasks: ['jshint:src', 'compile:sectv-orsay']
+      },
+      'sectv-tizen': {
+        files: ['www/**/*.js', 'src/sectv-tizen/*.js'],
+        tasks: ['jshint:src', 'compile:sectv-tizen']
+      }
     }
   });
 

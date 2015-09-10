@@ -1,4 +1,5 @@
 (function () {
+	
 	var popup = null;
 	function getPopup () {
 		return popup || (popup=createPopup());
