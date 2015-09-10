@@ -4,38 +4,24 @@ var argscheck = require('cordova/argscheck'),
     exec = require('cordova/exec');
 
 var mediaObjects = null;
-var Media = function (src, successCallback, errorCallback, statusCallback){
+
+var Media = function (){
     if(!mediaObjects){
-        argscheck.checkArgs('sSFFF', 'Media', arguments);
         this.id = utils.createUUID();
         mediaObjects = {};
         mediaObjects[this.id] = this;
-        this.src = src;
-        this.successCallback = successCallback;
-        this.errorCallback = errorCallback;
-        this.statusCallback = statusCallback;
+        this._mediaEventCallBack = {};
         this._containerElem = -1;
         this._duration = -1;
         this._position = -1;
-        exec(null, this.errorCallback, 'toast.media', 'create', [this.id, this.src]);
+        exec(null, null, 'toast.media', 'create',[this.id]);
     } else {
         throw Error('Media instance exists already. toast Media supported single instance');
     }
     
 };
-/**
- * This class provides access to the device media, interfaces to both sound and video
- *
- * @constructor
- * @param src                   The file name or url to play
- * @param successCallback       The callback to be called when the file is done playing.
- *                                  successCallback()
- * @param errorCallback         The callback to be called if there is an error.
- *                                  errorCallback(int errorCode) - OPTIONAL
- * @param statusCallback       The callback to be called when media status has changed.
- *                                  statusCallback(int statusCode) - OPTIONAL
- */
-Media.getInstance = function(src, successCallback, errorCallback, statusCallback) {
+
+Media.getInstance = function() {
     if(mediaObjects && typeof mediaObjects == 'object'){
         for(var key in mediaObjects){
             if (mediaObjects.hasOwnProperty(key)){
@@ -43,105 +29,106 @@ Media.getInstance = function(src, successCallback, errorCallback, statusCallback
             }
         }
     } else {
-        return new Media(src, successCallback, errorCallback, statusCallback);
+        return new Media();
     }
 };
 
-// Media messages
-Media.MEDIA_STATE = 1;
-Media.MEDIA_DURATION = 2;
-Media.MEDIA_POSITION = 3;
-Media.MEDIA_BUFFERINGPROGRESS = 4;
-Media.MEDIA_SUBTITLE = 5;
-Media.MEDIA_CONTAINER = 6;
-Media.MEDIA_ERROR = 9;
+// Media EventType
+Media.EVENT_STATE = 'STATE';
+Media.EVENT_DURATION = 'DURATION';
+Media.EVENT_POSITION = 'POSITION';
+Media.EVENT_BUFFERINGPROGRESS = 'BUFFERINGPROGRESS';
+//Media.MEDIA_SUBTITLE = 5;
 
 // Media states
-Media.MEDIA_NONE = 0;
-Media.MEDIA_LOADEDMETADATA = 1;
-Media.MEDIA_BUFFERINGSTART = 2;
-Media.MEDIA_BUFFERINGCOMPLETE = 3;
-Media.MEDIA_RUNNING = 4;
-Media.MEDIA_PAUSED = 5;
-Media.MEDIA_STOPPED = 6;
-Media.MEDIA_MSG = ['None', 'LoadedMetaData', 'BufferingStart', 'BufferingComplete', 'Running', 'Paused', 'Stopped'];
+Media.STATE_IDLE = 'IDLE';
+Media.STATE_PLAYING = 'PLAYING';
+Media.STATE_PAUSED = 'PAUSED';
+Media.STATE_STALLED = 'STALLED';
+Media.STATE_SEEK = 'SEEK';
 
-Media.prototype.getContainerElem = function() {
+Media._MEDIA_CONTAINER = 'CONTAINER';
+Media._MEDIA_ERROR = 'ERROR';
+
+
+Media.prototype.open = function(mediaUrl) {
+    argscheck.checkArgs('s', 'Media.open', arguments);
+    this.src = mediaUrl;
+    exec(null, null, 'toast.media', 'open', [this.id,this.src]);
+};
+
+Media.prototype.getContainerElement = function() {
     return this._containerElem;
 };
 
-Media.prototype.play = function(options){
-	exec(null, null, 'toast.media', 'startPlayingVideo', [this.id, this.src, options]);
+Media.prototype.play = function(){
+    exec(null, null, 'toast.media', 'play', [this.id]);
 };
 
 Media.prototype.stop = function() {
-	var me = this;
-	exec(function() {
-		me._position = 0;
-	}, this.errorCallback, 'toast.media', 'stopPlayingVideo', [this.id]);
+    var me = this;
+    exec(function(p) {
+        me._position = p;
+    }, null, 'toast.media', 'stop', [this.id]);
 };
 
 Media.prototype.seekTo = function(milliseconds) {
 	var me = this;
 	exec(function(p) {
 		me._position = p;
-	}, this.errorCallback, 'toast.media', 'seekToVideo', [this.id, milliseconds]);
+	}, null, 'toast.media', 'seekTo', [this.id, milliseconds]);
 };
 
 Media.prototype.pause = function() {
-	exec(null, this.errorCallback, 'toast.media', 'pausePlayingVideo', [this.id]);
+	exec(null, null, 'toast.media', 'pause', [this.id]);
 };
 
 Media.prototype.getDuration = function() {
-	return this._duration;
+    return this._duration;
 };
 
-Media.prototype.getCurrentPosition = function(success, fail) {
-	var me = this;
-	exec(function(p) {
-		me._position = p;
-		success(p);
-	}, fail, 'toast.media', 'getCurrentPositionVideo', [this.id]);
+Media.prototype.getCurrentPosition = function() {
+    return this._position;
 };
 
-/**
- * Media has message update.
- * PRIVATE
- *
- * @param msgType       The 'type' of update this is
- * @param value         Use of value is determined by the msgType
- */
-Media.onStatus = function(id, msgType, value) {
+Media.prototype.setListener = function(listener) {
+    argscheck.checkArgs('o', 'Media.setListener', arguments);
+    argscheck.checkArgs('F', 'Media.setListener', [arguments[0].onevent]);
+    argscheck.checkArgs('F', 'Media.setListener', [arguments[0].onerror]);
+
+    mediaObjects[this.id]._mediaEventCallBack = listener;
+};
+
+Media.prototype.unsetListener = function() {
+     mediaObjects[this.id]._mediaEventCallBack = {};
+};
+
+Media.mediaEvent = function(id, value) {
     var media = mediaObjects[id];
     if(media) {
-        switch(msgType) {
-            case Media.MEDIA_STATE :
-                media.statusCallback && media.statusCallback(value);
-                if(value == Media.MEDIA_STOPPED) {
-                    media.successCallback && media.successCallback();
-                }
+        switch(value.type) {
+            case Media.EVENT_STATE :
+                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
                 break;
-            case Media.MEDIA_DURATION :
-                media._duration = value;
+            case Media.EVENT_DURATION :
+                media._duration = value.data.duration;
+                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
                 break;
-            case Media.MEDIA_ERROR :
-                media.errorCallback && media.errorCallback(value);
+            case Media.EVENT_POSITION :
+                media._position = Number(value.data.position);
+                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
                 break;
-            case Media.MEDIA_POSITION :
-                media._position = Number(value);
-                media.statusCallback && media.statusCallback(Media.MEDIA_POSITION, value);
+            case Media.EVENT_BUFFERINGPROGRESS :
+                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
                 break;
-            case Media.MEDIA_BUFFERINGPROGRESS :
-                media.statusCallback && media.statusCallback(Media.MEDIA_BUFFERINGPROGRESS, value);
+            case Media._MEDIA_CONTAINER :
+                media._containerElem = value.data.containerElem;
                 break;
-            case Media.MEDIA_SUBTITLE :
-                media.statusCallback && media.statusCallback(Media.MEDIA_SUBTITLE, value);
-                break;
-            case Media.MEDIA_CONTAINER :
-                media._containerElem = value;
-                break;
+            case Media._MEDIA_ERROR :
+                media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
+                break;    
             default :
-                console.error && console.error('Unhandled Media.onStatus :: ' + msgType);
+                console.error && console.error('Unhandled Media.mediaEvent :: ' + value.type);
                 break;
         }
     }
