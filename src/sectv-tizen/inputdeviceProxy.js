@@ -2,39 +2,79 @@
 
 module.exports = {
 	getSupportedKeys: function (success, fail, args) {
-		args = args || '';
-		fail = fail || function () {};
-		
-		var supportedKeys = [];
-		supportedKeys = tizen.tvinputdevice.getSupportedKeys();
+		try 
+		{		
+			var supportedKeys = [];
+			supportedKeys = tizen.tvinputdevice.getSupportedKeys();
 
-		setTimeout(function(){
-			success(supportedKeys);
-		}, 0);
+			if(typeof supportedKeys == 'object')
+			{
+				setTimeout(function(){
+					success(supportedKeys);
+				}, 0);
+			} 
+			else 
+			{
+				setTimeout(function(){
+					fail({
+						code: 9,
+						name: 'NOT_SUPPORTED_ERR',
+						message: 'Any other error occurs on platform.'
+					});
+				}, 0);			
+			}
+		}
+		catch (e)
+		{
+			throw e;
+		}
 	},
 	getKey: function(success, fail, args){
-		fail = fail || function () {};
-		args = args || '';
+		try
+		{
+			var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]).code;
 
-		var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]).code;
-
-		setTimeout(function(){
-			success(inputDeviceKey);	
-		}, 0);
+			if(typeof inputDeviceKey == 'number')
+			{
+				setTimeout(function(){
+					success(inputDeviceKey);	
+				}, 0);
+			}
+			else
+			{
+				setTimeout(function(){
+					fail({
+						code: 9,
+						name: 'NOT_SUPPORTED_ERR',
+						message: 'Any other error occurs on platform.'
+					});
+				}, 0);			
+			}
+		}
+		catch (e)
+		{
+			throw e;		
+		}
 	},
 	registerKey: function(success, fail, args){
-		success = success || function () {};
-		fail = fail || function () {};
-		args = args || '';
-
-		tizen.tvinputdevice.registerKey(args[0]);
+		try
+		{
+			tizen.tvinputdevice.registerKey(args[0]);
+		}
+		catch (e)
+		{
+			throw e;
+		}
 	},
 	unregisterKey: function(success, fail, args){
-		success = success || function () {};
-		fail = fail || function () {};
-		args = args || '';
-		
-		tizen.tvinputdevice.unregisterKey(args[0]);
+		try
+		{
+			tizen.tvinputdevice.unregisterKey(args[0]);
+		}
+		catch (e)
+		{
+			throw e;
+		}
 	}
 };
 
