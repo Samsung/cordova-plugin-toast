@@ -59,21 +59,17 @@ module.exports = {
 	},
 	getKey: function(success, fail, args){
 		try {
-
-			for(var i = 0; i < supportedKeys.length; i++){
+			for(var i = 0; i < supportedKeys.length; i++) {
 				if(supportedKeys[i].name === args[0]){
 					break;
 				}
 			}
-
-			if(i != supportedKeys.length)
-			{
+			if(i != supportedKeys.length) {
 				setTimeout(function(){
-					success(supportedKeys[i].code);
+					success(supportedKeys[i]);
 				}, 0);
 			}
-			else
-			{
+			else {
 				setTimeout(function(){
 					fail({
 						code: 0,
@@ -90,7 +86,7 @@ module.exports = {
 	registerKey: function(success, fail, args){
 		success = success || function () {};
 		fail = fail || function () {};
-		args = args || '';
+
 	},
 	unregisterKey: function(success, fail, args){
 		success = success || function () {};

@@ -144,7 +144,7 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.getKey(suppKeys[0].name, function (devKey) {
 					expect(devKey).toBeDefined();
 					expect(devKey.name).toBeDefined();
-					expect(devKey.name).toBe(suppKeys[0]);
+					expect(devKey.name).toBe(suppKeys[0].name);
 					expect(devKey.code).toBeDefined();
 					expect(typeof devKey.code).toBe('number');
 					done();
