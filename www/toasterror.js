@@ -1,4 +1,5 @@
 'use strict';
+
 // we just use DOMError for now.
 // we'll implement this when more information need to be passed with the error.
 function ToastError (name, message) {
