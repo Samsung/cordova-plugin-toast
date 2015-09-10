@@ -1,6 +1,5 @@
 /* jshint loopfunc: true */
 (function() {
-
     var tests = {};
     var count = 0;
     window.testsuite = function(category, feature, testfn) {
@@ -14,19 +13,18 @@
     var TEST_TIMEOUT = 10000;
 
     function renderTests() {
-        var container = document.createElement('div');
+        var container = document.createElement('table');
         container.className = 'container';
         for (var category in tests) {
-            var elRow = document.createElement('div');
+            var elRow = document.createElement('tr');
             elRow.className = 'row';
 
-            var elCate = document.createElement('div');
-            elCate.className = 'col-md-2';
+            var elCate = document.createElement('td');
+            elCate.className = 'category';
             elCate.innerHTML = category;
             elRow.appendChild(elCate);
 
-            var elContent = document.createElement('div');
-            elContent.className = 'col-md-10';
+            var elContent = document.createElement('td');
             for (var i = 0; i < tests[category].length; i++) {
                 var tester = getTester(tests[category][i].id, tests[category][i].feature);
                 var btn = tester.querySelector('.btn');
@@ -42,7 +40,7 @@
                         }
 
                         function setReportHTML(msg) {
-                            tester.querySelector('.result').innerHTML = '[' + Date.now() + ']' + msg;
+                            tester.querySelector('.report').innerHTML = '[' + Date.now() + ']' + msg;
                         }
 
                         setReportHTML('wait...');
@@ -72,8 +70,8 @@
         var tester = document.createElement('div');
         tester.className = 'row';
         tester.setAttribute('id', id);
-        tester.innerHTML = '<div class="col-md-5"><a class="btn btn-default">'+ feature + '</a></div>' +
-                            '<div class="col-md-7 result">ready</div>';
+        tester.innerHTML = '<table class="testfeature"><tr><td class="feature"><a class="btn btn-default">'+ feature + '</a></td>' +
+                            '<td class="report">ready</td></tr></table>';
         return tester;
     }
 

@@ -322,7 +322,8 @@ describe('toast.tvwindow', function() {
             function testSourceChange(callback) {
                 var flag = true;
                 toast.tvwindow.setSource({
-                    type: 'TV'
+                    type: 'TV',
+                    number: 1
                 }, function() {
                     flag = false;
 

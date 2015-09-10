@@ -8,7 +8,6 @@
  [jasmine-gem]: http://github.com/pivotal/jasmine-gem
  */
 /* globals jasmineRequire */
-
 (function() {
     /**
      * ## Require &amp; Instantiate
