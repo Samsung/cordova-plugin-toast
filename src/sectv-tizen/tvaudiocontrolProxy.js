@@ -2,280 +2,155 @@
 
 module.exports = {
 	setMute: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var source = {};
-		// var randomColor = function(){
-		// 	var color = '#';
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// 	for(var i = 0; i < 6; i++){
-		// 		if(Math.floor(Math.random() * 2) === 0){
-		// 		color = color + '0';
-		// 		} else {
-		// 			color = color + 'f';
-		// 		}   
-		// 	}
-
-		// 	return color;
-		// }
-		
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.style.backgroundColor = randomColor();
-
-		// var channelInfo = {
-		// 	major: args[0]['major'],
-		// 	minor: args[0]['minor'],
-		// 	channelName: '',
-		// 	programNumber: args[0]['programNumber'],
-		// 	ptc: args[0]['ptc'],
-		// 	lcn: '',
-		// 	sourceID: args[0]['sourceID'],
-		// 	transportStreamID: '',
-		// 	originalNetworkID: args[0]['originalNetworkID'],
-		// 	serviceName:''
-		// };
-
-		// success.onsuccess(channelInfo, args[1]);
+			if(typeof args[0] == 'boolean'){
+				tizen.tvaudiocontrol.setMute(args[0]);
+			}
+		} catch (e) {
+			throw e;
+		}
 	},
-	tuneUp: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var source = {};
-		// var randomColor = function(){
-		// 	var color = '#';
+	isMute: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// 	for(var i = 0; i < 6; i++){
-		// 		if(Math.floor(Math.random() * 2) === 0){
-		// 		color = color + '0';
-		// 		} else {
-		// 			color = color + 'f';
-		// 		}   
-		// 	}
+			var result = tizen.tvaudiocontrol.isMute();
 
-		// 	return color;
-		// }
-		
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.style.backgroundColor = randomColor();
-
-		// var channelInfo = {
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// };
-
-		// success.onsuccess(channelInfo, args[1]);
+			if (typeof result == 'boolean') {
+				setTimeout(function () {
+					success(result);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 8,
+						name: 'NOT_FOUND_ERR'
+					});
+				}, 0);
+			}
+		} catch (e) {
+			throw e;
+		}
 	},
-	tuneDown: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var source = {};
-		// var randomColor = function(){
-		// 	var color = '#';
+	setVolume: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// 	for(var i = 0; i < 6; i++){
-		// 		if(Math.floor(Math.random() * 2) === 0){
-		// 		color = color + '0';
-		// 		} else {
-		// 			color = color + 'f';
-		// 		}   
-		// 	}
-
-		// 	return color;
-		// }
-		
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.style.backgroundColor = randomColor();
-
-		// var channelInfo = {
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// };
-
-		// success.onsuccess(channelInfo, args[1]);
+			tizen.tvaudiocontrol.setVolume(args[0]);
+		} catch (e) {
+			throw e;
+		}
 	},
-	findChannel: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var channelInfo = [{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// },{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// }];
+	setVolumeUp: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// success(channelInfo);
+			tizen.tvaudiocontrol.setVolumeUp();
+		} catch (e) {
+			throw e;
+		}	
 	},
-	getChannelList: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var channelInfo = [{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// },{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// }];
+	setVolumeDown: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// success(channelInfo);
+			tizen.tvaudiocontrol.setVolumeDown();
+		} catch (e) {
+			throw e;
+		}
 	},
-	getCurrentChannel: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var channelInfo = [{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// }];
-	},
-	getProgramList: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var programInfo = {
-		// 	title: '',
-		// 	startTime: '',
-		// 	duration: '',
-		// 	detailedDescription: '',
-		// 	language: '',
-		// 	rating: ''
-		// };
+	getVolume: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// success(programInfo);
-	},
-	getCurrentProgram: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var programInfo = {
-		// 	title: '',
-		// 	startTime: '',
-		// 	duration: '',
-		// 	detailedDescription: '',
-		// 	language: '',
-		// 	rating: ''
-		// };
-	},
-	addChannelChangeListener: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var channelInfo = {
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// };
+			var result = tizen.tvaudiocontrol.getVolume();
 
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.addEventListener('DOMAttrModified', function () {
-		// 	success(channelInfo, args[1]);
-		// });
+			if (typeof result == 'number') {
+				setTimeout(function () {
+					success(result);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 8,
+						name: 'NOT_FOUND_ERR'
+					});
+				}, 0);
+			}
+		} catch (e) {
+			throw e;
+		}
 	},
-	removeChannelChangeListener: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = ''
+	setVolumeChangeListener: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.removeEventListener('DOMAttrModified');
+			tizen.tvaudiocontrol.setVolumeChangeListener(success);
+		} catch (e) {
+			throw e;
+		}
+	},
+	unsetVolumeChangeListener: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
+
+			tizen.tvaudiocontrol.unsetVolumeChangeListener();
+		} catch (e) {
+			throw e;
+		}
+	},
+	getOutputMode: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
+
+			var result = tizen.tvaudiocontrol.getOutputMode();
+
+			if (typeof result == 'object') {
+				setTimeout(function () {
+					success(result);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 8,
+						name: 'NOT_FOUND_ERR'
+					});
+				}, 0);
+			}
+		} catch (e) {
+			throw e;
+		}
+	},
+	playSound: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
+
+			tizen.tvaudiocontrol.playSound(args[0]);
+		} catch (e) {
+			throw e;
+		}
 	}
 };
 

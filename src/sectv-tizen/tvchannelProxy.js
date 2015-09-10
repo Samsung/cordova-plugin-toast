@@ -33,7 +33,7 @@ module.exports = {
 	},
 	getChannelList: function (success, fail, args) {
 		try {
-			tizen.tvchannel.findChannel(args[0], args[1], success, fail);
+			tizen.tvchannel.getChannelList(success, fail, args[0], args[1], args[2]);
 		} catch (e) {
 			throw e;
 		}
@@ -68,11 +68,11 @@ module.exports = {
 	},
 	getCurrentProgram: function (success, fail, args) {
 		try {
-			var channelProgram = tizen.tvchannel.getCurrentProgram(args[0]);
+			var programInfo = tizen.tvchannel.getCurrentProgram(args[0]);
 
-			if (typeof channelProgram == 'object') {
+			if (typeof programInfo == 'object') {
 				setTimeout(function () {
-					success(channelProgram);
+					success(programInfo);
 				}, 0);	
 			} else {
 				setTimeout(function () {
