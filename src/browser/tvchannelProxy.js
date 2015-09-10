@@ -2,7 +2,6 @@
 
 var windowType = ['MAIN'];
 var channelChangeCallback = [];
-
 var infoListIndex = 0;
 var channelInfoList = [
 	{MAJOR: 6, MINOR: 1, CHANNELNAME: 'SBS', PROGRAMNUMBER: 1, PTC: 16, LCN: 0, SOURCEID: 1, TRNSPORTSTREAMID: 5137, ORIGINALNETWORKID: 0, SERVICENAME:'SBS'},
