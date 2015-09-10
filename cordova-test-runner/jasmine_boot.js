@@ -1,5 +1,5 @@
 /**
- Starting with version 2.0, this file "boots" Jasmine, performing all of the necessary initialization before executing the loaded environment and all of a project's specs. This file should be loaded after `jasmine.js` and `jasmine_html.js`, but before any project source files or spec files are loaded. Thus this file can also be used to customize Jasmine for a project.
+ Starting with version 2.0, this file 'boots' Jasmine, performing all of the necessary initialization before executing the loaded environment and all of a project's specs. This file should be loaded after `jasmine.js` and `jasmine_html.js`, but before any project source files or spec files are loaded. Thus this file can also be used to customize Jasmine for a project.
 
  If a project is using Jasmine via the standalone distribution, this file can be customized directly. If a project is using Jasmine via the [Ruby gem][jasmine-gem], this file can be copied into the support directory via `jasmine copy_boot_js`. Other environments (e.g., Python) will have different mechanisms.
 
@@ -7,6 +7,7 @@
 
  [jasmine-gem]: http://github.com/pivotal/jasmine-gem
  */
+/* globals jasmineRequire */
 
 (function() {
     /**
@@ -50,10 +51,10 @@
         }
     });
 
-    var catchingExceptions = queryString.getParam("catch");
-    env.catchExceptions(typeof catchingExceptions === "undefined" ? true : catchingExceptions);
+    var catchingExceptions = queryString.getParam('catch');
+    env.catchExceptions(typeof catchingExceptions === 'undefined' ? true : catchingExceptions);
 
-    var throwingExpectationFailures = queryString.getParam("throwFailures");
+    var throwingExpectationFailures = queryString.getParam('throwFailures');
     env.throwOnExpectationFailure(throwingExpectationFailures);
 
     /**
@@ -63,10 +64,10 @@
     var htmlReporter = new jasmine.HtmlReporter({
         env: env,
         onRaiseExceptionsClick: function() {
-            queryString.navigateWithNewParam("catch", !env.catchingExceptions());
+            queryString.navigateWithNewParam('catch', !env.catchingExceptions());
         },
         onThrowExpectationsClick: function() {
-            queryString.navigateWithNewParam("throwFailures", !env.throwingExpectationFailures());
+            queryString.navigateWithNewParam('throwFailures', !env.throwingExpectationFailures());
         },
         addToExistingQueryString: function(key, value) {
             return queryString.fullStringWithNewParam(key, value);
@@ -94,7 +95,7 @@
      */
     var specFilter = new jasmine.HtmlSpecFilter({
         filterString: function() {
-            return queryString.getParam("spec");
+            return queryString.getParam('spec');
         }
     });
 
@@ -126,7 +127,7 @@
     // };
     document.addEventListener('deviceready', function() {
         var type = localStorage.getItem('CORDOVA_TOAST_TESTRUNNER_TYPE');
-        if (type !== "JASMINE_RUNNER") {
+        if (type !== 'JASMINE_RUNNER') {
             return;
         }
         htmlReporter.initialize();
@@ -137,7 +138,9 @@
      * Helper function for readability above.
      */
     function extend(destination, source) {
-        for (var property in source) destination[property] = source[property];
+        for (var property in source) {
+            destination[property] = source[property];
+        }
         return destination;
     }
 

@@ -1,3 +1,4 @@
+/* jshint loopfunc: true */
 (function() {
 
     var tests = {};
@@ -9,7 +10,7 @@
             feature: feature,
             testfn: testfn
         });
-    }
+    };
     var TEST_TIMEOUT = 10000;
 
     function renderTests() {
@@ -41,18 +42,18 @@
                         }
 
                         function setReportHTML(msg) {
-                            tester.querySelector('.result').innerHTML = "[" + Date.now() + "]" + msg;
+                            tester.querySelector('.result').innerHTML = '[' + Date.now() + ']' + msg;
                         }
 
-                        setReportHTML("wait...");
+                        setReportHTML('wait...');
                         try {
                             var tmrTest = setTimeout(function() {
                                 tmrTest = null;
-                                setReportHTML("TIMEOUT");
+                                setReportHTML('TIMEOUT');
                             }, TEST_TIMEOUT);
                             fn(report);
                         } catch (e) {
-                            setReportHTML("Exception: " + e);
+                            setReportHTML('Exception: ' + e);
                         }
                     };
                 })(testfn, tester));
@@ -71,12 +72,13 @@
         var tester = document.createElement('div');
         tester.className = 'row';
         tester.setAttribute('id', id);
-        tester.innerHTML = '' + '<div class="col-md-5"><a class="btn btn-default">' + feature + '</a></div>' + '<div class="col-md-7 result">ready</div>';
+        tester.innerHTML = '<div class="col-md-5"><a class="btn btn-default">'+ feature + '</a></div>' +
+                            '<div class="col-md-7 result">ready</div>';
         return tester;
     }
 
     var type = localStorage.getItem('CORDOVA_TOAST_TESTRUNNER_TYPE');
-    if (type !== "TESTSUITE") {
+    if (type !== 'TESTSUITE') {
         return;
     }
     document.addEventListener('deviceready', function() {

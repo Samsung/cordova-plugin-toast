@@ -1,3 +1,4 @@
+/* globals helper */
 describe('toast.inputdevice', function () {
 	it('should be defined as "toast.inputdevice" namespace.', function () {
 		expect(window.toast).toBeDefined();
@@ -48,7 +49,7 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.getSupportedKeys({});
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getSupportedKeys("DUMMY");
+				toast.inputdevice.getSupportedKeys('DUMMY');
 			}).toThrowError(TypeError);
 			expect(function () {
 				toast.inputdevice.getSupportedKeys(new Date());
@@ -65,7 +66,7 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.getSupportedKeys(function () {}, {});
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getSupportedKeys(function () {}, "DUMMY");
+				toast.inputdevice.getSupportedKeys(function () {}, 'DUMMY');
 			}).toThrowError(TypeError);
 			expect(function () {
 				toast.inputdevice.getSupportedKeys(function () {}, new Date());
@@ -85,7 +86,7 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.getKey([]);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey(new Date);
+				toast.inputdevice.getKey(new Date());
 			}).toThrowError(TypeError);
 			expect(function () {
 				toast.inputdevice.getKey(0);
@@ -99,36 +100,36 @@ describe('toast.inputdevice', function () {
 
 			// invalid type for 2nd argument
 			expect(function () {
-				toast.inputdevice.getKey("Enter", []);
+				toast.inputdevice.getKey('Enter', []);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", new Date);
+				toast.inputdevice.getKey('Enter', new Date());
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", 0);
+				toast.inputdevice.getKey('Enter', 0);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", "DUMMY");
+				toast.inputdevice.getKey('Enter', 'DUMMY');
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", {});
+				toast.inputdevice.getKey('Enter', {});
 			}).toThrowError(TypeError);
 
 			// invalid type for 3rd argument
 			expect(function () {
-				toast.inputdevice.getKey("Enter", function () {}, []);
+				toast.inputdevice.getKey('Enter', function () {}, []);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", function () {}, new Date);
+				toast.inputdevice.getKey('Enter', function () {}, new Date());
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", function () {}, 0);
+				toast.inputdevice.getKey('Enter', function () {}, 0);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", function () {}, "DUMMY");
+				toast.inputdevice.getKey('Enter', function () {}, 'DUMMY');
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.getKey("Enter", function () {}, {});
+				toast.inputdevice.getKey('Enter', function () {}, {});
 			}).toThrowError(TypeError);
 		});
 
@@ -140,7 +141,7 @@ describe('toast.inputdevice', function () {
 
 		it('invokes the successCallback with requested key\'s InputDeviceKey object.', function (done) {
 			toast.inputdevice.getSupportedKeys(function (suppKeys) {
-				toast.inputdevice.getKey(suppKeys[0], function (devKey) {
+				toast.inputdevice.getKey(suppKeys[0].name, function (devKey) {
 					expect(devKey).toBeDefined();
 					expect(devKey.name).toBeDefined();
 					expect(devKey.name).toBe(suppKeys[0]);
@@ -170,7 +171,7 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.registerKey([]);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.registerKey(new Date);
+				toast.inputdevice.registerKey(new Date());
 			}).toThrowError(TypeError);
 			expect(function () {
 				toast.inputdevice.registerKey(0);
@@ -202,7 +203,7 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.registerKey([]);
 			}).toThrowError(TypeError);
 			expect(function () {
-				toast.inputdevice.registerKey(new Date);
+				toast.inputdevice.registerKey(new Date());
 			}).toThrowError(TypeError);
 			expect(function () {
 				toast.inputdevice.registerKey(0);
@@ -237,7 +238,7 @@ describe('toast.inputdevice', function () {
 						}
 					}
 					window.addEventListener('keydown', onKeyDown);
-					var ask = helper.ask("Press the RED key on the remote control", function (ok) {
+					var ask = helper.ask('Press the RED key on the remote control', function (ok) {
 						ok===true ? (done()) : (done.fail());
 					}, 3000);
 				});
@@ -257,8 +258,8 @@ describe('toast.inputdevice', function () {
 						}
 					}
 					window.addEventListener('keydown', onKeyDown);
-					var ask = helper.ask("Press the RED key on the remote control. It should not be worked! ;)", function (ok) {
-						if(ok === "TIMEOUT" || ok === true) {
+					var ask = helper.ask('Press the RED key on the remote control. It should not be worked! ;)', function (ok) {
+						if(ok === 'TIMEOUT' || ok === true) {
 							done();
 						}
 						else {

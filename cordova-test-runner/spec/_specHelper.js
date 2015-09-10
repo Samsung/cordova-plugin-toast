@@ -4,12 +4,12 @@
 		return popup || (popup=createPopup());
 	}
 	function createPopup () {
-		var pop = document.createElement("div");
+		var pop = document.createElement('div');
 		var width = window.innerWidth;
 		var height = window.innerHeight;
 		var POPUP_HEIGHT = 300;
 
-		pop.style.position = "fixed";
+		pop.style.position = 'fixed';
 		pop.style.width = width + 'px';
 		pop.style.height = POPUP_HEIGHT + 'px';
 
@@ -33,11 +33,11 @@
 				}
 			}
 			window.addEventListener('keydown', onKeyDown);
-			var obj = helper.ask(msg + "<br><br>Press Enter to continue", function () {
+			var obj = this.ask(msg + '<br><br>Press Enter to continue', function () {
 				window.removeEventListener('keydown', onKeyDown);
 				callback.apply(null, arguments);
 			}, timeout);
-			return obj
+			return obj;
 		},
 		aOrB: function (msg, ab, callback, timeout) {
 			function onKeyDown (e) {
@@ -51,20 +51,20 @@
 				}
 			}
 			window.addEventListener('keydown', onKeyDown);
-			var obj = helper.ask(msg + "<br>"
-					+ "<div style='width: 50%; test-align: center; float:left; clear: left;'>PRESS ◀<br><br>"+ab[0]+"</div>"
-					+ "<div style='width: 50%; test-align: center; float:left; clear: right;'>PRESS ▶<br><br>"+ab[1]+"</div>", function () {
+			var obj = this.ask(msg + '<br>' +
+					'<div style="width: 50%; test-align: center; float:left; clear: left;">PRESS ◀<br><br>'+ab[0]+'</div>' +
+					'<div style="width: 50%; test-align: center; float:left; clear: right;">PRESS ▶<br><br>'+ab[1]+'</div>', function () {
 				window.removeEventListener('keydown', onKeyDown);
 				callback.apply(null, arguments);
 			}, timeout);
-			return obj
+			return obj;
 		},
 		ask: function (msg, callback, timeout) {
 			var pop = getPopup();
 			pop.innerHTML = msg;
 			pop.style.backgroundColor = 'rgba('+parseInt(Math.random()*128, 10)+', '+parseInt(Math.random()*128, 10)+', '+parseInt(Math.random()*128, 10)+', 0.8)';
 			pop.style.display = 'block';
-			handle = {
+			var handle = {
 				popup: {
 					setHTML: function (html) {
 						pop.innerHTML = html;
@@ -77,15 +77,15 @@
 			};
 			if(typeof timeout === 'number') {
 				var countSec = Math.ceil(timeout/1000);
-				pop.innerHTML = msg + "<br><br>" + countSec + " sec remained";
+				pop.innerHTML = msg + '<br><br>' + countSec + ' sec remained';
 				var itvClose = setInterval(function () {
 					if(--countSec <= 0) {
 						itvClose && clearInterval(itvClose);
 						itvClose = null;
-						handle.done("TIMEOUT");
+						handle.done('TIMEOUT');
 					}
 					else {
-						pop.innerHTML = msg + "<br><br>" + countSec + " sec remained";
+						pop.innerHTML = msg + '<br><br>' + countSec + ' sec remained';
 					}
 				}, 1000);
 			}

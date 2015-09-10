@@ -14,6 +14,12 @@ module.exports = function(grunt) {
             jshintrc: '.jshintrc',
         },
         src: ['platform_www/**/*.js']
+      },
+      testrunner: {
+        options: {
+            jshintrc: '.jshintrc',
+        },
+        src: ['cordova-test-runner/**/*.js']
       }
     },
     compile: {
@@ -23,12 +29,18 @@ module.exports = function(grunt) {
       "sectv-tizen": {
           //dest: "platform_www/sectv-tizen/toast.js" // default
       }
+    },
+    watch: {
+      files: ['www/**/*.js', 'src/**/*.js'],
+      tasks: ['jshint:src', 'compile']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadTasks('tasks');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint:src', 'compile', 'jshint:build']);
+  grunt.registerTask('jenkins', ['jshint:src', 'compile', 'jshint:build', 'jshint:testrunner']);
 };
