@@ -10,7 +10,7 @@ toast.Media play back video or audio files.
 ```widl
 module Media {
 	enum MediaEventType {"STATE", "DURATION", "POSITION", "BUFFERINGPROGRESS"};
-	enum MediaState {"IDLE", "PLAYING", "PAUSED", "SEEK"};
+	enum MediaState {"IDLE", "PLAYING", "PAUSED", "STALLED", "SEEK"};
 
 	[Constructor()]
 	interface Media {
