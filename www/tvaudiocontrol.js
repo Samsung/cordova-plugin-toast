@@ -68,7 +68,7 @@ tvaudiocontrolExport = {
 	},
 	//void playSound(AudioBeepType type)
 	playSound: function (type) {
-		argscheck.checkArgs('o', 'tvaudiocontrol.getOutputMode', arguments);
+		argscheck.checkArgs('s', 'tvaudiocontrol.getOutputMode', arguments);
 
 		var args = [type];
 		exec(null, null, 'toast.tvaudiocontrol', 'playSound', args);

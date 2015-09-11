@@ -9,6 +9,8 @@ module.exports = {
 
 			if(typeof args[0] == 'boolean'){
 				tizen.tvaudiocontrol.setMute(args[0]);
+			}else{
+				console.error('TypeError');
 			}
 		} catch (e) {
 			throw e;
