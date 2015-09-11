@@ -7,11 +7,7 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			if(typeof args[0] == 'boolean'){
-				tizen.tvaudiocontrol.setMute(args[0]);
-			}else{
-				console.error('TypeError');
-			}
+			tizen.tvaudiocontrol.setMute(args[0]);
 		} catch (e) {
 			throw e;
 		}
@@ -115,41 +111,6 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.unsetVolumeChangeListener();
-		} catch (e) {
-			throw e;
-		}
-	},
-	getOutputMode: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			var result = tizen.tvaudiocontrol.getOutputMode();
-
-			if (typeof result == 'object') {
-				setTimeout(function () {
-					success(result);
-				}, 0);
-			} else {
-				setTimeout(function () {
-					fail({
-						code: 8,
-						name: 'NOT_FOUND_ERR'
-					});
-				}, 0);
-			}
-		} catch (e) {
-			throw e;
-		}
-	},
-	playSound: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			tizen.tvaudiocontrol.playSound(args[0]);
 		} catch (e) {
 			throw e;
 		}
