@@ -1,17 +1,49 @@
 'use strict';
 
+var windowTypeList = ['MAIN'];
+var videoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
+var videoSource = {
+	type: 0,
+	number: 1
+};
+
 module.exports = {
 	getAvailableWindows: function (success, fail, args) {
 		try {
-			webapis.tv.window.getAvailableWindow(success, fail);
+			webapis.tv.window.getAvailableWindow(function (type) {
+				success([windowTypeList[type]]);
+			}, fail);
 		} catch (e) {
 			throw e;
 		}
-		
 	},
 	setSource: function (success, fail, args){
 		try {
-			webapis.tv.window.setSource(args[0], success, fail, args[1]);
+			var i = 0;
+			var windowType = 0;
+
+			if (args[1] == 'MAIN') {
+				windowType = 0;
+			}
+
+			if (args[0].type && args[0].number) {
+				for (i = 0; i < videoSourceTypeList.length; i++) {
+					if (args[0].type == videoSourceTypeList[i]) {
+						videoSource.type = i;
+						videoSource.number = args[0].number;
+
+						webapis.tv.window.setSource(videoSource, success, fail, windowType);
+					}
+				}
+			} else {
+				setTimeout(function () {
+					fail({
+						code: 17,
+						name: 'TYPE_MISMATCH_ERR',
+						message: 'Failed to find the source.'
+					});
+				}, 0);	
+			}
 		} catch (e) {
 			throw e;
 		}
@@ -70,7 +102,6 @@ module.exports = {
 		} catch (e) {
 
 		}
-
 	}
 };
 

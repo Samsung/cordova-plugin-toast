@@ -2,19 +2,16 @@
 
 module.exports = {
 	getSupportedKeys: function (success, fail, args) {
-		try 
-		{		
+		try {		
 			var supportedKeys = [];
 			supportedKeys = tizen.tvinputdevice.getSupportedKeys();
 
-			if(typeof supportedKeys == 'object')
-			{
+			if(typeof supportedKeys == 'object') {
 				setTimeout(function(){
 					success(supportedKeys);
 				}, 0);
 			} 
-			else 
-			{
+			else {
 				setTimeout(function(){
 					fail({
 						code: 9,
@@ -23,25 +20,20 @@ module.exports = {
 					});
 				}, 0);			
 			}
-		}
-		catch (e)
-		{
+		} catch (e) {
 			throw e;
 		}
 	},
 	getKey: function(success, fail, args){
-		try
-		{
-			var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]).code;
+		try	{
+			var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]);
 
-			if(typeof inputDeviceKey == 'number')
-			{
+			if(typeof inputDeviceKey == 'object') {
 				setTimeout(function(){
 					success(inputDeviceKey);	
 				}, 0);
 			}
-			else
-			{
+			else {
 				setTimeout(function(){
 					fail({
 						code: 9,
@@ -50,29 +42,21 @@ module.exports = {
 					});
 				}, 0);			
 			}
-		}
-		catch (e)
-		{
+		} catch (e) {
 			throw e;		
 		}
 	},
 	registerKey: function(success, fail, args){
-		try
-		{
+		try {
 			tizen.tvinputdevice.registerKey(args[0]);
-		}
-		catch (e)
-		{
+		} catch (e) {
 			throw e;
 		}
 	},
 	unregisterKey: function(success, fail, args){
-		try
-		{
+		try	{
 			tizen.tvinputdevice.unregisterKey(args[0]);
-		}
-		catch (e)
-		{
+		} catch (e) {
 			throw e;
 		}
 	}

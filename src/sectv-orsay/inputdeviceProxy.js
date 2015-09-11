@@ -59,45 +59,60 @@ var supportedKeys = [
 module.exports = {
 
 	getSupportedKeys: function (success, fail, args) {
-		fail = fail || function () {};
-		args = args || '';
+		try {
+			fail = fail || function () {};
+			args = args || '';
 
-		setTimeout(function(){
-			success(supportedKeys);
-		}, 0);
+			setTimeout(function(){
+				success(supportedKeys);
+			}, 0);
+		} catch (e) {
+			throw e;
+		}
 	},
 	getKey: function(success, fail, args){
-
-		for(var i = 0; i < supportedKeys.length; i++){
-			if(supportedKeys[i].name === args[0]){
-				break;
+		try {
+			for(var i = 0; i < supportedKeys.length; i++) {
+				if(supportedKeys[i].name === args[0]){
+					break;
+				}
 			}
-		}
-		
-		if(i != supportedKeys.length)
-		{
-			setTimeout(function(){
-				success(supportedKeys[i].code);
-			}, 0);
+			
+			if(i != supportedKeys.length) {
+				setTimeout(function(){
+					success(supportedKeys[i]);
+				}, 0);
+			}
+			else {
+				setTimeout(function(){
+					fail({
+						code: 0,
+						name: 'NOT_SUPPORTED_ERR',
+						message: 'Any other error occurs on platform.'					
+					});
+				}, 0);
+			}
+		} catch (e) {
+			throw e;
 		}
 	},
 	registerKey: function(success, fail, args){
-		success = success || function () {};
-		fail = fail || function () {};
-		args = args || '';
-
-		var SEF = require('cordova/plugin/SEF');
-		var AppCommonPlugin = SEF.get('AppCommon');
-		AppCommonPlugin.Execute('RegisterKey',args[0]);
+		try {
+			var SEF = require('cordova/plugin/SEF');
+			var AppCommonPlugin = SEF.get('AppCommon');
+			AppCommonPlugin.Execute('RegisterKey',args[0]);
+		} catch (e) {
+			throw e;
+		}
 	},
 	unregisterKey: function(success, fail, args){
-		success = success || function () {};
-		fail = fail || function () {};
-		args = args || '';
-
-		var SEF = require('cordova/plugin/SEF');
-		var AppCommonPlugin = SEF.get('AppCommon');
-		AppCommonPlugin.Execute('UnregisterKey',args[0]);
+		try {
+			var SEF = require('cordova/plugin/SEF');
+			var AppCommonPlugin = SEF.get('AppCommon');
+			AppCommonPlugin.Execute('UnregisterKey',args[0]);
+		} catch (e) {
+			throw e;
+		}
 	}
 };
 
