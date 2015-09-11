@@ -50,18 +50,18 @@ Supported Keys are different by each platforms.
 | RightArrow         | Yes                | Yes         | Yes         |
 | Enter              | Yes                | Yes         | Yes         |
 | Return             | Yes (ESC)          | Yes         | Yes         |
-| ColorF0Red         | Yes* (F1)          | Yes*        | Yes*        |
-| ColorF1Green       | Yes* (F2)          | Yes*        | Yes*        |
-| ColorF2Yellow      | Yes* (F3)          | Yes*        | Yes*        |
-| ColorF3Blue        | Yes* (F4)          | Yes*        | Yes*        |
-| MediaRecord        | Yes* (F5)          | Yes*        | Yes*        |
-| MediaPlayPause     | Yes* (F7)          | No          | Yes*        |
-| MediaStop          | Yes* (F8)          | Yes*        | Yes*        |
-| MediaFastForward   | Yes* (F9)          | Yes*        | Yes*        |
-| MediaPlay          | Yes* (F10)         | Yes*        | Yes*        |
-| MediaPause         | Yes* (F11)         | Yes*        | Yes*        |
-| MediaRewind        | Yes* (F12)         | Yes*        | Yes*        |
-| Tools              | Yes* (Context)     | Yes*        | Yes*        |
+| ColorF0Red         | Yes (F1)           | Yes*        | Yes*        |
+| ColorF1Green       | Yes (F2)           | Yes*        | Yes*        |
+| ColorF2Yellow      | Yes (F3)           | Yes*        | Yes*        |
+| ColorF3Blue        | Yes (F4)           | Yes*        | Yes*        |
+| MediaRecord        | Yes (F5)           | Yes*        | Yes*        |
+| MediaPlayPause     | Yes (F6)           | No          | Yes*        |
+| MediaStop          | Yes (F7)           | Yes*        | Yes*        |
+| MediaFastForward   | Yes (F8)           | Yes*        | Yes*        |
+| MediaPlay          | Yes (F9)           | Yes*        | Yes*        |
+| MediaPause         | Yes (F10)          | Yes*        | Yes*        |
+| MediaRewind        | Yes (F11)          | Yes*        | Yes*        |
+| Tools              | Yes (Context)      | Yes*        | Yes*        |
 (Yes*: supported, but callling `registerKey` with the `keyName` is needed.)
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:

@@ -67,7 +67,7 @@ module.exports = {
 				success(supportedKeys);
 			}, 0);
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	},
 	getKey: function(success, fail, args){
@@ -93,7 +93,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	},
 	registerKey: function(success, fail, args){
@@ -102,7 +102,7 @@ module.exports = {
 			var AppCommonPlugin = SEF.get('AppCommon');
 			AppCommonPlugin.Execute('RegisterKey',args[0]);
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	},
 	unregisterKey: function(success, fail, args){
@@ -111,7 +111,7 @@ module.exports = {
 			var AppCommonPlugin = SEF.get('AppCommon');
 			AppCommonPlugin.Execute('UnregisterKey',args[0]);
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	}
 };
