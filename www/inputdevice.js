@@ -14,7 +14,7 @@ inputdeviceExport = {
 		exec(callback, error, 'toast.inputdevice', 'getSupportedKeys', args);
 	},
 	getKey: function (keyName, callback, error) {
-		argscheck.checkArgs('sfF', 'inputdevice.getKey', arguments); 
+		argscheck.checkArgs('sfF', 'inputdevice.getKey', arguments);
 		callback = callback || function () {};
 		error = error || function () {};
 		var args = [];

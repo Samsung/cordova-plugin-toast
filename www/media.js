@@ -15,7 +15,8 @@ var Media = function (){
         this._duration = -1;
         this._position = -1;
         exec(null, null, 'toast.media', 'create',[this.id]);
-    } else {
+    }
+    else {
         throw Error('Media instance exists already. toast Media supported single instance');
     }
     
@@ -28,7 +29,8 @@ Media.getInstance = function() {
                 return mediaObjects[key];
             }
         }
-    } else {
+    }
+    else {
         return new Media();
     }
 };
@@ -49,7 +51,6 @@ Media.STATE_SEEK = 'SEEK';
 
 Media._MEDIA_CONTAINER = 'CONTAINER';
 Media._MEDIA_ERROR = 'ERROR';
-
 
 Media.prototype.open = function(mediaUrl) {
     argscheck.checkArgs('s', 'Media.open', arguments);

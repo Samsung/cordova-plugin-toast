@@ -22,6 +22,26 @@ module.exports = function(grunt) {
         src: ['cordova-test-runner/**/*.js']
       }
     },
+    jscs: {
+      src: {
+        options: {
+            config: '.jscsrc',
+        },
+        src: ['www/**/*.js', 'src/**/*.js']
+      },
+      build: {
+        options: {
+            config: '.jscsrc',
+        },
+        src: ['platform_www/**/*.js']
+      },
+      testrunner: {
+        options: {
+            config: '.jscsrc',
+        },
+        src: ['cordova-test-runner/**/*.js']
+      }
+    },
     compile: {
       "sectv-orsay": {
           //dest: "platform_www/sectv-orsay/toast.js" // default
@@ -43,6 +63,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadTasks('tasks');
 
