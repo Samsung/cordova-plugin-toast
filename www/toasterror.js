@@ -1,3 +1,4 @@
+// DO NOT USE THIS MODULE
 'use strict';
 
 // we just use DOMError for now.
