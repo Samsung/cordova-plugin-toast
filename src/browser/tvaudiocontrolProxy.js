@@ -6,172 +6,141 @@ var volumeChangeCallback = '';
 
 module.exports = {
 	setMute: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			isMute = args[0];
+		isMute = args[0];
 
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-		} catch (e) {
-			throw e;
-		}
+		var muteEl = getMuteElement();
+		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
 	},
 	isMute: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			var result = isMute;
+		var result = isMute;
 
-			if (typeof result == 'boolean') {
-				setTimeout(function () {
-					success(result);
-				}, 0);
-			} else {
-				setTimeout(function () {
-					var error = new Error();
-					error.name = 'TypeMismatchError';
-					error.message = 'TypeMismatchError';
-					fail(error);
-				}, 0);
-			}
-		} catch (e) {
-			throw e;
+		if (typeof result == 'boolean') {
+			setTimeout(function () {
+				success(result);
+			}, 0);
+		} else {
+			setTimeout(function () {
+				var error = new Error();
+				error.name = 'TypeMismatchError';
+				error.message = 'TypeMismatchError';
+				fail(error);
+			}, 0);
 		}
 	},
 	setVolume: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			volume = args[0];
+		volume = args[0];
 
-			if(volumeChangeCallback){
-				volumeChangeCallback(volume);
-			}
-
-			isMute = false;
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + volume;
-		} catch (e) {
-			throw e;
+		if(volumeChangeCallback){
+			volumeChangeCallback(volume);
 		}
+
+		isMute = false;
+		var muteEl = getMuteElement();
+		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+
+		var volumeEl = getVolumeElement();
+		volumeEl.innerHTML = 'volume : ' + volume;
 	},
 	setVolumeUp: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			if(volume < 100){
-				volume++;
-			}
+		if(volume < 100){
+			volume++;
+		}
 
-			if(volumeChangeCallback){
-				volumeChangeCallback(volume);
-			}
+		if(volumeChangeCallback){
+			volumeChangeCallback(volume);
+		}
 
-			isMute = false;
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+		isMute = false;
+		var muteEl = getMuteElement();
+		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
 
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + volume;
-		} catch (e) {
-			throw e;
-		}	
+		var volumeEl = getVolumeElement();
+		volumeEl.innerHTML = 'volume : ' + volume;
 	},
 	setVolumeDown: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			if(volume > 0){
-				volume--;
-			}
-
-			if(volumeChangeCallback){
-				volumeChangeCallback(volume);
-			}
-
-			isMute = false;
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + volume;
-		} catch (e) {
-			throw e;
+		if(volume > 0){
+			volume--;
 		}
+
+		if(volumeChangeCallback){
+			volumeChangeCallback(volume);
+		}
+
+		isMute = false;
+		var muteEl = getMuteElement();
+		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+
+		var volumeEl = getVolumeElement();
+		volumeEl.innerHTML = 'volume : ' + volume;
 	},
 	getVolume: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			var result = volume;
+		var result = volume;
 
-			if (typeof result == 'number') {
-				setTimeout(function () {
-					success(result);
+		if (typeof result == 'number') {
+			setTimeout(function () {
+				success(result);
 
-					var volumeEl = getVolumeElement();
-					volumeEl.innerHTML = 'volume : ' + result;
-				}, 0);
-			} else {
-				setTimeout(function () {
-					var error = new Error();
-					error.name = 'TypeMismatchError';
-					error.message = 'TypeMismatchError';
-					fail(error);
-				}, 0);
-			}
-		} catch (e) {
-			throw e;
+				var volumeEl = getVolumeElement();
+				volumeEl.innerHTML = 'volume : ' + result;
+			}, 0);
+		} else {
+			setTimeout(function () {
+				var error = new Error();
+				error.name = 'TypeMismatchError';
+				error.message = 'TypeMismatchError';
+				fail(error);
+			}, 0);
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			if (typeof success == 'function'){
-				volumeChangeCallback = success;
-			}
-
-			var changeEl = getVolumeChangeListenerElement();
-			changeEl.innerHTML = 'volume change listener : attached';
-		} catch (e) {
-			throw e;
+		if (typeof success == 'function'){
+			volumeChangeCallback = success;
 		}
+
+		var changeEl = getVolumeChangeListenerElement();
+		changeEl.innerHTML = 'volume change listener : attached';
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			volumeChangeCallback = '';
+		volumeChangeCallback = '';
 
-			var changeEl = getVolumeChangeListenerElement();
-			changeEl.innerHTML = 'volume change listener : dettached';
-		} catch (e) {
-			throw e;
-		}
+		var changeEl = getVolumeChangeListenerElement();
+		changeEl.innerHTML = 'volume change listener : dettached';
 	}
 };
 
+// tvaudio browser simulator UI
 function getSoundBox(){
 	var element = '';
 
