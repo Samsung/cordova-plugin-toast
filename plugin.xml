@@ -41,6 +41,8 @@
 		<js-module src='src/browser/tvchannelProxy.js' name='tvchannelProxy'>
 			<runs />
 		</js-module>
+		<js-module src='src/browser/sampleEPG.js' name='sampleEPG'>
+		</js-module>
 		<js-module src='src/browser/tvaudiocontrolProxy.js' name='tvaudiocontrolProxy'>
 			<runs />
 		</js-module>
