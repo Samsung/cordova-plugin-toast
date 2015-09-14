@@ -27,6 +27,8 @@
 	<js-module src='www/media.js' name='media'>
 		<clobbers target='toast.media' />
 	</js-module>
+	<js-module src='www/util.js' name='util'>
+	</js-module>
 
 	<!-- browser -->
 	<platform name='browser'>
@@ -97,6 +99,8 @@
 		</js-module>
 		<js-module src='src/sectv-tizen/mediaProxy.js' name='mediaProxy'>
 			<runs />
+		</js-module>
+		<js-module src='src/sectv-tizen/tizenutil.js' name='tizenutil'>
 		</js-module>
 	</platform>
 </plugin>
