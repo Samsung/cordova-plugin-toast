@@ -6,58 +6,44 @@ var argscheck = require('cordova/argscheck'),
 var tvwindowExport = {};
 
 tvwindowExport = {
-	getAvailableWindows: function (successCallback, errorCallback) {
-		argscheck.checkArgs('fF', 'tvwindow.getAvailableWindows', arguments);
-
-		errorCallback = errorCallback || function () {};
-		
-		var args = [];
-		exec(successCallback, errorCallback, 'toast.tvwindow', 'getAvailableWindows', args);
-	},
-	setSource: function (videoSource, successCallback, errorCallback, type) {
-		argscheck.checkArgs('ofFS', 'tvwindow.setSource', arguments);
+	setSource: function (videoSource, successCallback, errorCallback) {
+		argscheck.checkArgs('ofF', 'tvwindow.setSource', arguments);
 		
 		errorCallback = errorCallback || function () {};
-		type = type || 'MAIN';
 
-		var args = [videoSource, type];
+		var args = [videoSource];
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'setSource', args);
 	},
-	getSource: function (successCallback, errorCallback, type) {
-		argscheck.checkArgs('fFS', 'tvwindow.getSource', arguments);
+	getSource: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvwindow.getSource', arguments);
         
         errorCallback = errorCallback || function () {};
-		type = type || 'MAIN';
 
-        var args = [type];
+        var args = [];
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'getSource', args);
 	},
-	show: function (successCallback, errorCallback, rectangle, type) {
-		argscheck.checkArgs('fFaS', 'tvwindow.show', arguments);
+	show: function (successCallback, errorCallback, rectangle) {
+		argscheck.checkArgs('fFa', 'tvwindow.show', arguments);
 
 		errorCallback = errorCallback || function () {};
-		type = type || 'MAIN';
 
-		var args = [rectangle, type];
+		var args = [rectangle];
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'show', args);
 	},
-	hide: function (successCallback, errorCallback, type) {
-		argscheck.checkArgs('fFS', 'tvwindow.hide', arguments);
+	hide: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvwindow.hide', arguments);
 		
 		errorCallback = errorCallback || function () {};
-		type = type || 'MAIN';
 
-		var args = [type];
+		var args = [];
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'hide', args);
 	},
-	getRect: function (successCallback, errorCallback, unit, type) {
-		argscheck.checkArgs('fFSS', 'tvwindow.getRect', arguments);
+	getRect: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvwindow.getRect', arguments);
 		
 		errorCallback = errorCallback || function () {};
-		unit = unit || 'px';
-		type = type || 'MAIN';
 
-		var args = [unit, type];
+		var args = [];
 		exec(successCallback, errorCallback, 'toast.tvwindow', 'getRect', args);
 	}
 };
