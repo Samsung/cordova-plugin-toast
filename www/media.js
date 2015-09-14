@@ -13,7 +13,8 @@ var Media = function (){
         this._duration = -1;
         this._position = -1;
         exec(null, null, 'toast.media', 'create',[this.id]);
-    } else {
+    } 
+    else {
         throw new RangeError('Media instance exists already. toast Media supported single instance');
     }
 };
@@ -37,6 +38,7 @@ Media.EVENT_STATE = 'STATE';
 Media.EVENT_DURATION = 'DURATION';
 Media.EVENT_POSITION = 'POSITION';
 Media.EVENT_BUFFERINGPROGRESS = 'BUFFERINGPROGRESS';
+
 //Media.MEDIA_SUBTITLE = 5;
 
 // Media states
@@ -67,7 +69,7 @@ Media.prototype.stop = function() {
     var me = this;
     exec(function() {
         me._position = -1;
-        me._duration = -1; 
+        me._duration = -1;
     }, null, 'toast.media', 'stop', [this.id]);
 };
 
@@ -94,7 +96,7 @@ Media.prototype.setListener = function(listener) {
     argscheck.checkArgs('o', 'Media.setListener', arguments);
     if(arguments[0].onevent && typeof arguments[0].onevent !== 'function') {
         throw new TypeError('Type of listener.onevnet is not function');
-    } 
+    }
     if(arguments[0].onerror && typeof arguments[0].onerror !== 'function') {
         throw new TypeError('Type of listener.onerror is not function');
     }
@@ -109,33 +111,33 @@ Media.mediaEvent = function(id, value) {
     var media = mediaObjects[id];
     if(media) {
         switch(value.type) {
-            case Media.EVENT_STATE :
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media.EVENT_DURATION :
-                media._duration = value.data.duration;
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media.EVENT_POSITION :
-                media._position = Number(value.data.position);
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media.EVENT_BUFFERINGPROGRESS :
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media._MEDIA_CONTAINER :
-                media._containerElem = value.data.containerElem;
-                break;
-            case Media._MEDIA_ERROR :
-                media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
-                break;    
-            default :
-                console.error && console.error('Unhandled Media.mediaEvent :: ' + value.type);
-                break;
+        case Media.EVENT_STATE :
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media.EVENT_DURATION :
+            media._duration = value.data.duration;
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media.EVENT_POSITION :
+            media._position = Number(value.data.position);
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media.EVENT_BUFFERINGPROGRESS :
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media._MEDIA_CONTAINER :
+            media._containerElem = value.data.containerElem;
+            break;
+        case Media._MEDIA_ERROR :
+            media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
+            break;
+        default :
+            console.log('Unhandled Media.mediaEvent :: ' + value.type);
+            break;
         }
     }
     else {
-         console.error && console.error('Received Media.onStatus callback for unknown media:: ' + id);
+         console.log('Received Media.onStatus callback for unknown media:: ' + id);
     }
 };
 
