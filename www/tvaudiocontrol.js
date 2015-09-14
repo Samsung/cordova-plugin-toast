@@ -3,9 +3,7 @@
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 
-var tvaudiocontrolExport = {};
-
-tvaudiocontrolExport = {
+var tvaudiocontrolExport = {
 	setMute: function (mute) {
 		argscheck.checkArgs('*', 'tvaudiocontrol.setMute', arguments);
 

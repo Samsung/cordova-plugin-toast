@@ -15,7 +15,7 @@ var drminfoExport = {
 		argscheck.checkArgs('fFo', 'drminfo.getEsn', arguments);
 		errorCallback = errorCallback || function () {};
 
-		var args = [];
+		var args = [compName];
 		exec(successCallback, errorCallback, 'toast.drminfo', 'getEsn', args);
 	},
 	getSdiId: function (successCallback, errorCallback) {

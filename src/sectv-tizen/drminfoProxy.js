@@ -9,15 +9,17 @@ module.exports = {
 
 			var result = webapis.drminfo.getVersion();
 
-			if (typeof result == 'boolean') {
+			if (typeof result == 'string') {
 				setTimeout(function () {
 					success(result);
 				}, 0);
 			} else {
-				var error = new Error();
-				error.name = 'UnknownError';
-				error.message = 'UnknownError';
-				fail(error);
+				setTimeout(function () {
+					var error = new Error();
+					error.name = 'UnknownError';
+					error.message = 'UnknownError';
+					fail(error);
+				}, 0);
 			}
 		} catch (e) {
 			throw e;
@@ -31,15 +33,17 @@ module.exports = {
 
 			var result = webapis.drminfo.getEsn(args[0]);
 
-			if (typeof result == 'boolean') {
+			if (typeof result == 'string') {
 				setTimeout(function () {
 					success(result);
 				}, 0);
 			} else {
-				var error = new Error();
-				error.name = 'UnknownError';
-				error.message = 'UnknownError';
-				fail(error);
+				setTimeout(function () {
+					var error = new Error();
+					error.name = 'UnknownError';
+					error.message = 'UnknownError';
+					fail(error);
+				}, 0);
 			}
 		} catch (e) {
 			throw e;
@@ -53,15 +57,17 @@ module.exports = {
 
 			var result = webapis.drminfo.getSdiId();
 
-			if (typeof result == 'boolean') {
+			if (typeof result == 'string') {
 				setTimeout(function () {
 					success(result);
 				}, 0);
 			} else {
-				var error = new Error();
-				error.name = 'UnknownError';
-				error.message = 'UnknownError';
-				fail(error);
+				setTimeout(function () {
+					var error = new Error();
+					error.name = 'UnknownError';
+					error.message = 'UnknownError';
+					fail(error);
+				}, 0);
 			}
 		} catch (e) {
 			throw e;

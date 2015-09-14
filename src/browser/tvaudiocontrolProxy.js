@@ -33,10 +33,10 @@ module.exports = {
 				}, 0);
 			} else {
 				setTimeout(function () {
-					fail({
-						code: 8,
-						name: 'NOT_FOUND_ERR'
-					});
+					var error = new Error();
+					error.name = 'TypeMismatchError';
+					error.message = 'TypeMismatchError';
+					fail(error);
 				}, 0);
 			}
 		} catch (e) {
@@ -130,10 +130,10 @@ module.exports = {
 				}, 0);
 			} else {
 				setTimeout(function () {
-					fail({
-						code: 8,
-						name: 'NOT_FOUND_ERR'
-					});
+					var error = new Error();
+					error.name = 'TypeMismatchError';
+					error.message = 'TypeMismatchError';
+					fail(error);
 				}, 0);
 			}
 		} catch (e) {
