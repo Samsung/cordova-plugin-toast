@@ -95,5 +95,8 @@
 		<js-module src='src/sectv-tizen/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
+		<js-module src='src/sectv-tizen/mediaProxy.js' name='mediaProxy'>
+			<runs />
+		</js-module>
 	</platform>
 </plugin>

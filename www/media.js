@@ -3,8 +3,6 @@ var argscheck = require('cordova/argscheck'),
     utils = require('cordova/utils'),
     exec = require('cordova/exec');
 
-var mediaObjects = null;
-
 var Media = function (){
     if(!mediaObjects){
         this.id = utils.createUUID();
@@ -15,13 +13,12 @@ var Media = function (){
         this._duration = -1;
         this._position = -1;
         exec(null, null, 'toast.media', 'create',[this.id]);
+    } else {
+        throw new RangeError('Media instance exists already. toast Media supported single instance');
     }
-    else {
-        throw Error('Media instance exists already. toast Media supported single instance');
-    }
-    
 };
 
+var mediaObjects = null;
 Media.getInstance = function() {
     if(mediaObjects && typeof mediaObjects == 'object'){
         for(var key in mediaObjects){
@@ -68,20 +65,21 @@ Media.prototype.play = function(){
 
 Media.prototype.stop = function() {
     var me = this;
-    exec(function(p) {
-        me._position = p;
+    exec(function() {
+        me._position = -1;
+        me._duration = -1; 
     }, null, 'toast.media', 'stop', [this.id]);
 };
 
 Media.prototype.seekTo = function(milliseconds) {
-	var me = this;
-	exec(function(p) {
-		me._position = p;
-	}, null, 'toast.media', 'seekTo', [this.id, milliseconds]);
+    var me = this;
+    exec(function(p) {
+        me._position = p;
+    }, null, 'toast.media', 'seekTo', [this.id, milliseconds]);
 };
 
 Media.prototype.pause = function() {
-	exec(null, null, 'toast.media', 'pause', [this.id]);
+    exec(null, null, 'toast.media', 'pause', [this.id]);
 };
 
 Media.prototype.getDuration = function() {
@@ -94,9 +92,12 @@ Media.prototype.getCurrentPosition = function() {
 
 Media.prototype.setListener = function(listener) {
     argscheck.checkArgs('o', 'Media.setListener', arguments);
-    argscheck.checkArgs('F', 'Media.setListener', [arguments[0].onevent]);
-    argscheck.checkArgs('F', 'Media.setListener', [arguments[0].onerror]);
-
+    if(arguments[0].onevent && typeof arguments[0].onevent !== 'function') {
+        throw new TypeError('Type of listener.onevnet is not function');
+    } 
+    if(arguments[0].onerror && typeof arguments[0].onerror !== 'function') {
+        throw new TypeError('Type of listener.onerror is not function');
+    }
     mediaObjects[this.id]._mediaEventCallBack = listener;
 };
 

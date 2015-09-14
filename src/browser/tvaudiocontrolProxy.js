@@ -1,11 +1,7 @@
 'use strict';
 
-var audioOutputMode = [ 'PCM', 'DOLBY', 'DTS', 'AAC' ];
-var audioBeepType = [ 'UP', 'DOWN', 'LEFT', 'RIGHT', 'PAGE_LEFT', 'PAGE_RIGHT', 'BACK', 'SELECT', 'CANCEL', 'WARNING', 'KEYPAD', 'KEYPAD_ENTER', 'KEYPAD_DEL', 'MOVE', 'PREPARING' ];
-
 var isMute = false;
 var volume = 0;
-var currentBeepType = audioBeepType[0];
 var volumeChangeCallback = '';
 
 module.exports = {
@@ -15,14 +11,10 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			if(typeof args[0] == 'boolean'){
-				isMute = args[0];
+			isMute = args[0];
 
-				var muteEl = getMuteElement();
-				muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-			}else{
-				console.error('TypeError');
-			}
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
 		} catch (e) {
 			throw e;
 		}
@@ -41,10 +33,10 @@ module.exports = {
 				}, 0);
 			} else {
 				setTimeout(function () {
-					fail({
-						code: 8,
-						name: 'NOT_FOUND_ERR'
-					});
+					var error = new Error();
+					error.name = 'TypeMismatchError';
+					error.message = 'TypeMismatchError';
+					fail(error);
 				}, 0);
 			}
 		} catch (e) {
@@ -62,6 +54,10 @@ module.exports = {
 			if(volumeChangeCallback){
 				volumeChangeCallback(volume);
 			}
+
+			isMute = false;
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
 
 			var volumeEl = getVolumeElement();
 			volumeEl.innerHTML = 'volume : ' + volume;
@@ -83,6 +79,10 @@ module.exports = {
 				volumeChangeCallback(volume);
 			}
 
+			isMute = false;
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+
 			var volumeEl = getVolumeElement();
 			volumeEl.innerHTML = 'volume : ' + volume;
 		} catch (e) {
@@ -102,6 +102,10 @@ module.exports = {
 			if(volumeChangeCallback){
 				volumeChangeCallback(volume);
 			}
+
+			isMute = false;
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
 
 			var volumeEl = getVolumeElement();
 			volumeEl.innerHTML = 'volume : ' + volume;
@@ -126,10 +130,10 @@ module.exports = {
 				}, 0);
 			} else {
 				setTimeout(function () {
-					fail({
-						code: 8,
-						name: 'NOT_FOUND_ERR'
-					});
+					var error = new Error();
+					error.name = 'TypeMismatchError';
+					error.message = 'TypeMismatchError';
+					fail(error);
 				}, 0);
 			}
 		} catch (e) {
@@ -165,47 +169,6 @@ module.exports = {
 		} catch (e) {
 			throw e;
 		}
-	},
-	getOutputMode: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			var result = audioOutputMode;
-
-			if (typeof result == 'object') {
-				setTimeout(function () {
-					success(result);
-
-					var outputmodeEl = getOutputModeElement();
-					outputmodeEl.innerHTML = 'output mode : ' + result;
-				}, 0);
-			} else {
-				setTimeout(function () {
-					fail({
-						code: 8,
-						name: 'NOT_FOUND_ERR'
-					});
-				}, 0);
-			}
-		} catch (e) {
-			throw e;
-		}
-	},
-	playSound: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			currentBeepType = args[0];
-
-			var playsoundEl = getPlaySoundElement();
-			playsoundEl.innerHTML = 'playsound : ' + currentBeepType;
-		} catch (e) {
-			throw e;
-		}
 	}
 };
 
@@ -217,7 +180,7 @@ function getSoundBox(){
 		element.id = 'soundbox';
 		element.style.outline = '1px solid';
 		element.style.width = '300px';
-		element.style.height = '100px';
+		element.style.height = '60px';
 		element.style.margin = '5px';
 
 		document.body.appendChild(element);
@@ -235,7 +198,7 @@ function getMuteElement(){
 		element = document.createElement('div');
 		element.id = 'mute';
 		element.style.width = '100%';
-		element.style.height = '20%';
+		element.style.height = '30%';
 		element.innerHTML = 'mute : ';
 
 		getSoundBox().appendChild(element);
@@ -253,7 +216,7 @@ function getVolumeElement(){
 		element = document.createElement('div');
 		element.id = 'volume';
 		element.style.width = '100%';
-		element.style.height = '20%';
+		element.style.height = '30%';
 		element.innerHTML = 'volume : ';
 
 		getSoundBox().appendChild(element);
@@ -271,48 +234,12 @@ function getVolumeChangeListenerElement(){
 		element = document.createElement('div');
 		element.id = 'volumechange';
 		element.style.width = '100%';
-		element.style.height = '20%';
+		element.style.height = '30%';
 		element.innerHTML = 'volume change listener : ';
 
 		getSoundBox().appendChild(element);
 	} else{
 		element = document.getElementById('volumechange');
-	}
-
-	return element;
-}
-
-function getOutputModeElement(){
-	var element = '';
-
-	if(!document.getElementById('outputmode')){
-		element = document.createElement('div');
-		element.id = 'outputmode';
-		element.style.width = '100%';
-		element.style.height = '20%';
-		element.innerHTML = 'output mode : ';
-
-		getSoundBox().appendChild(element);
-	} else{
-		element = document.getElementById('outputmode');
-	}
-
-	return element;
-}
-
-function getPlaySoundElement(){
-	var element = '';
-
-	if(!document.getElementById('playsound')){
-		element = document.createElement('div');
-		element.id = 'playsound';
-		element.style.width = '100%';
-		element.style.height = '20%';
-		element.innerHTML = 'playsound : ';
-
-		getSoundBox().appendChild(element);
-	} else{
-		element = document.getElementById('playsound');
 	}
 
 	return element;

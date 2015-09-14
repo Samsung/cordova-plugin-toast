@@ -21,7 +21,7 @@ module.exports = {
 				}, 0);			
 			}
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	},
 	getKey: function(success, fail, args){
@@ -43,21 +43,21 @@ module.exports = {
 				}, 0);			
 			}
 		} catch (e) {
-			throw e;		
+			throw new Error(e.message);		
 		}
 	},
 	registerKey: function(success, fail, args){
 		try {
 			tizen.tvinputdevice.registerKey(args[0]);
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	},
 	unregisterKey: function(success, fail, args){
 		try	{
 			tizen.tvinputdevice.unregisterKey(args[0]);
 		} catch (e) {
-			throw e;
+			throw new Error(e.message);
 		}
 	}
 };

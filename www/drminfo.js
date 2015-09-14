@@ -3,26 +3,27 @@
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 
-var drminfoExport = {};
+var drminfoExport = {
+	getVersion: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'drminfo.getVersion', arguments);
+		errorCallback = errorCallback || function () {};
 
-drminfoExport = {
-	//DOMString getVersion()
-	getVersion: function () {
 		var args = [];
-		exec(null, null, 'toast.drminfo', 'getVersion', args);
+		exec(successCallback, errorCallback, 'toast.drminfo', 'getVersion', args);
 	},
+	getEsn: function (successCallback, errorCallback, compName) {
+		argscheck.checkArgs('fFo', 'drminfo.getEsn', arguments);
+		errorCallback = errorCallback || function () {};
 
-	//DOMString getEsn(DOMString compName)
-	getEsn: function (compName) {
-		argscheck.checkArgs('s', 'inputdevice.unregisterKey', arguments);
 		var args = [compName];
-		exec(null, null, 'toast.drminfo', 'getEsn', args);
+		exec(successCallback, errorCallback, 'toast.drminfo', 'getEsn', args);
 	},
+	getSdiId: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'drminfo.getSdiId', arguments);
+		errorCallback = errorCallback || function () {};
 
-	//DOMString getSdiId()
-	getSdiId: function () {
 		var args = [];
-		exec(null, null, 'toast.drminfo', 'getSdiId', args);
+		exec(successCallback, errorCallback, 'toast.drminfo', 'getSdiId', args);
 	}
 };
 

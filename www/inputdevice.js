@@ -3,9 +3,7 @@
 var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 
-var inputdeviceExport = {};
-
-inputdeviceExport = {
+var inputdeviceExport = {
 	getSupportedKeys: function (callback, error) {
 		argscheck.checkArgs('fF', 'inputdevice.getSupportedKeys', arguments);
 		callback = callback || function () {};
