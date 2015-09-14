@@ -120,6 +120,22 @@ function getValueOf(exp, base) {
     return curValue;
 }
 
+/**
+ * getBoundingRect has argument 'mode' as 2nd parameter.
+ * This will determine which rectangle would be returned.
+ * +-----------------------+--> mode: 'margin'
+ * |        margin         |
+ * |  +-----------------+--+--> mode: default(undefined)
+ * |  |     border      |  |
+ * |  |  +-----------+--+--+--> mode: 'innerborder'
+ * |  |  |  padding  |  |  |
+ * |  |  |  +-----+--+--+--+--> mode: 'innerpadding'
+ * |  |  |  |     |  |  |  |
+ * |  |  |  +-----+  |  |  |
+ * |  |  +-----------+  |  |
+ * |  +-----------------+  |
+ * +-----------------------+
+ */
 function getBoundingRect(el, mode) {
     var width = 0,
         height = 0,
