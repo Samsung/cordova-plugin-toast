@@ -1,3 +1,4 @@
+var date = new Date();
 module.exports = {
 	channelList: [
 		{major: 6, minor: 1, channelName: 'SBS', programNumber: 1, ptc: 16, lcn: 0, sourceID: 1, transportStreamID: 5137, originalNetworkID: 0, serviceName:'SBS'},
