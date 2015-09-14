@@ -1,7 +1,7 @@
 'use strict';
 
 // dummy data from tizen
-var dummyVersion = '0.1';
+var dummyVersion = '1.0';
 var dummyEsn = 'TIZENKEY';
 var dummySdiId = 'TIZENKEY';
 
