@@ -1,17 +1,17 @@
 'use strict';
 function createError (message, name) {
 	var err = new Error();
-	err.message = message || "";
-	err.name = name || "Error";
+	err.message = message || '';
+	err.name = name || 'Error';
 	return err;
 }
 
 createError.fromWebAPIException = function (webapiex) {
-	err = createError(webapiex.message, webapiex.name);
+	var err = createError(webapiex.message, webapiex.name);
 	if(webapiex.stack) {
 		err.stack = webapiex.stack;
 	}
-	return 
+	return err;
 };
 
 createError.fromWebAPIError = function (webapierr) {

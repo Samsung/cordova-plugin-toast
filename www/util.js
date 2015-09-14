@@ -50,8 +50,9 @@ function removeClass(element, classnm) {
 }
 
 function addClass(element, classnm) {
+    var i;
     if (element instanceof window.NodeList) {
-        for (var i = 0; i < element.length; i++) {
+        for (i = 0; i < element.length; i++) {
             addClass(element[i], classnm);
         }
         return;
@@ -62,7 +63,7 @@ function addClass(element, classnm) {
     var tmp = classnm.split(' ');
     if (tmp.length > 1) {
         var success = true;
-        for (var i = 0; i < tmp.length; i++) {
+        for (i = 0; i < tmp.length; i++) {
             if (!addClass(element, tmp[i])) {
                 success = false;
             }
@@ -123,10 +124,22 @@ function getBoundingRect(el, mode) {
     var width = 0,
         height = 0,
         left = 0,
-        top = 0;
+        top = 0,
+        borderLeft,
+        borderRight,
+        borderTop,
+        borderBottom,
+        marginLeft,
+        marginRight,
+        marginTop,
+        marginBottom,
+        paddingLeft,
+        paddingRight,
+        paddingTop,
+        paddingBottom;
     if (el && el === el.window) { // window
-        var width = el.document.documentElement.clientWidth;
-        var height = el.document.documentElement.clientHeight;
+        width = el.document.documentElement.clientWidth;
+        height = el.document.documentElement.clientHeight;
         return {
             left: 0,
             top: 0,
@@ -137,8 +150,8 @@ function getBoundingRect(el, mode) {
         };
     }
     if (el && el.nodeType && el.nodeType === 9) { // document
-        var width = Math.max(el.body.scrollWidth, el.documentElement.scrollWidth, el.body.offsetWidth, el.documentElement.offsetWidth, el.documentElement.clientWidth);
-        var height = Math.max(el.body.scrollHeight, el.documentElement.scrollHeight, el.body.offsetHeight, el.documentElement.offsetHeight, el.documentElement.clientHeight);
+        width = Math.max(el.body.scrollWidth, el.documentElement.scrollWidth, el.body.offsetWidth, el.documentElement.offsetWidth, el.documentElement.clientWidth);
+        height = Math.max(el.body.scrollHeight, el.documentElement.scrollHeight, el.body.offsetHeight, el.documentElement.offsetHeight, el.documentElement.clientHeight);
         return {
             left: 0,
             top: 0,
@@ -168,16 +181,22 @@ function getBoundingRect(el, mode) {
         }
         width = clientRect.width;
         height = clientRect.height;
-    } else {
-        var boxsizing = getStyle(el, 'box-sizing');
-        var width = parseInt(el.offsetWidth, 10);
+    } else if (typeof el.offsetWidth !== 'undefined' || typeof el.offsetHeight !== 'undefined') {
+        left = parseInt(el.offsetLeft, 10);
+        top = parseInt(el.offsetTop, 10);
+        width = parseInt(el.offsetWidth, 10);
+        height = parseInt(el.offsetHeight, 10);
+    }
+    else {
+        return null;
     }
 
+    // including margin as bounding rect
     if (mode && mode === 'margin') {
-        var marginLeft = parseInt(getStyle(el, 'marginLeft'), 10) || 0;
-        var marginRight = parseInt(getStyle(el, 'marginRight'), 10) || 0;
-        var marginTop = parseInt(getStyle(el, 'marginTop'), 10) || 0;
-        var marginBottom = parseInt(getStyle(el, 'marginBottom'), 10) || 0;
+        marginLeft = parseInt(getStyle(el, 'marginLeft'), 10) || 0;
+        marginRight = parseInt(getStyle(el, 'marginRight'), 10) || 0;
+        marginTop = parseInt(getStyle(el, 'marginTop'), 10) || 0;
+        marginBottom = parseInt(getStyle(el, 'marginBottom'), 10) || 0;
         left -= marginLeft;
         top -= marginTop;
         width += marginLeft + marginRight;
@@ -198,10 +217,10 @@ function getBoundingRect(el, mode) {
             }
         };
     } else if (mode && mode === 'innerborder') {
-        var borderLeft = parseInt(getStyle(el, 'borderLeftWidth'), 10) || 0;
-        var borderRight = parseInt(getStyle(el, 'borderRightWidth'), 10) || 0;
-        var borderTop = parseInt(getStyle(el, 'borderTopWidth'), 10) || 0;
-        var borderBottom = parseInt(getStyle(el, 'borderBottomWidth'), 10) || 0;
+        borderLeft = parseInt(getStyle(el, 'borderLeftWidth'), 10) || 0;
+        borderRight = parseInt(getStyle(el, 'borderRightWidth'), 10) || 0;
+        borderTop = parseInt(getStyle(el, 'borderTopWidth'), 10) || 0;
+        borderBottom = parseInt(getStyle(el, 'borderBottomWidth'), 10) || 0;
         left += borderLeft;
         top += borderTop;
         width -= borderLeft + borderRight;
@@ -222,14 +241,14 @@ function getBoundingRect(el, mode) {
             }
         };
     } else if (mode && mode === 'innerpadding') {
-        var borderLeft = parseInt(getStyle(el, 'borderLeftWidth'), 10) || 0;
-        var borderRight = parseInt(getStyle(el, 'borderRightWidth'), 10) || 0;
-        var borderTop = parseInt(getStyle(el, 'borderTopWidth'), 10) || 0;
-        var borderBottom = parseInt(getStyle(el, 'borderBottomWidth'), 10) || 0;
-        var paddingLeft = parseInt(getStyle(el, 'paddingLeft'), 10) || 0;
-        var paddingRight = parseInt(getStyle(el, 'paddingRight'), 10) || 0;
-        var paddingTop = parseInt(getStyle(el, 'paddingTop'), 10) || 0;
-        var paddingBottom = parseInt(getStyle(el, 'paddingBottom'), 10) || 0;
+        borderLeft = parseInt(getStyle(el, 'borderLeftWidth'), 10) || 0;
+        borderRight = parseInt(getStyle(el, 'borderRightWidth'), 10) || 0;
+        borderTop = parseInt(getStyle(el, 'borderTopWidth'), 10) || 0;
+        borderBottom = parseInt(getStyle(el, 'borderBottomWidth'), 10) || 0;
+        paddingLeft = parseInt(getStyle(el, 'paddingLeft'), 10) || 0;
+        paddingRight = parseInt(getStyle(el, 'paddingRight'), 10) || 0;
+        paddingTop = parseInt(getStyle(el, 'paddingTop'), 10) || 0;
+        paddingBottom = parseInt(getStyle(el, 'paddingBottom'), 10) || 0;
         left += borderLeft + paddingLeft;
         top += borderTop + paddingTop;
         width -= borderLeft + paddingLeft + paddingRight + borderRight;
@@ -429,6 +448,7 @@ module.exports = {
     addClass: addClass,
     getElementExp: getElementExp,
     isRemoteUrl: isRemoteUrl,
+    getValueOf: getValueOf,
     getBoundingRect: getBoundingRect,
     getPosition: getPosition,
     getOffsetParent: getOffsetParent,
