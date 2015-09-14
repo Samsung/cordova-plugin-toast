@@ -1,9 +1,9 @@
 'use strict';
 
 // dummy data from tizen
-var dummyVersion = "0.1";
-var dummyEsn = "TIZENKEY";
-var dummySdiId = "TIZENKEY";
+var dummyVersion = '0.1';
+var dummyEsn = 'TIZENKEY';
+var dummySdiId = 'TIZENKEY';
 
 module.exports = {
 	getVersion: function (success, fail, args) {
