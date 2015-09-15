@@ -33,7 +33,7 @@ module.exports = {
                         name: 'TYPE_MISMATCH_ERR',
                         message: 'Failed to find the source.'
                     });
-                }, 0);    
+                }, 0);
             }
         }
         catch (e) {
@@ -46,7 +46,7 @@ module.exports = {
 
             setTimeout(function () {
                 success(source);
-            }, 0);    
+            }, 0);
         }
         catch (e) {
             throw e;
@@ -70,7 +70,7 @@ module.exports = {
                 setTimeout(function () {
                     fail();
                 }, 0);
-            }    
+            }
         }
         catch (e) {
             throw e;

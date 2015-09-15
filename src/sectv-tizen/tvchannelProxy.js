@@ -1,11 +1,14 @@
 'use strict';
 
+//var tizenutil = require('cordova-plugin-toast.tizenutil');
+var windowType = 'MAIN';
+
 var channelChangeCallback = [];
 
 module.exports = {
     tune: function (success, fail, args) {
         try {
-            tizen.tvchannel.tune(args[0], success, fail, args[1]);
+            tizen.tvchannel.tune(args[0], success, fail, windowType);
         }
         catch (e) {
             throw e;
@@ -13,7 +16,7 @@ module.exports = {
     },
     tuneUp: function (success, fail, args) {
         try {
-            tizen.tvchannel.tuneUp(success, fail, args[0], args[1]);
+            tizen.tvchannel.tuneUp(success, fail, args[0], windowType);
         }
         catch (e) {
             throw e;
@@ -21,7 +24,7 @@ module.exports = {
     },
     tuneDown: function (success, fail, args) {
         try {
-            tizen.tvchannel.tuneDown(success, fail, args[0], args[1]);
+            tizen.tvchannel.tuneDown(success, fail, args[0], windowType);
         }
         catch (e) {
             throw e;
@@ -45,7 +48,7 @@ module.exports = {
     },
     getCurrentChannel: function (success, fail, args) {
         try {
-            var channelInfo = tizen.tvchannel.getCurrentChannel(args[0]);
+            var channelInfo = tizen.tvchannel.getCurrentChannel(windowType);
 
             if (typeof channelInfo == 'object') {
                 setTimeout(function () {
@@ -76,7 +79,7 @@ module.exports = {
     },
     getCurrentProgram: function (success, fail, args) {
         try {
-            var programInfo = tizen.tvchannel.getCurrentProgram(args[0]);
+            var programInfo = tizen.tvchannel.getCurrentProgram(windowType);
 
             if (typeof programInfo == 'object') {
                 setTimeout(function () {
@@ -104,7 +107,7 @@ module.exports = {
     },
     removeChannelChangeListener: function (success, fail, args) {
         for (var i = 0; i < channelChangeCallback.length; i++) {
-            if (channelChangeCallback[i].callback === success) {
+            if (success === channelChangeCallback[i].callback) {
                 tizen.tvchannel.removeChannelChangeListener(channelChangeCallback[i].id);
                 channelChangeCallback.splice(i, 1);
             }

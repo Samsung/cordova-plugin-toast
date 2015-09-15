@@ -1,6 +1,6 @@
 'use strict';
 
-var browserTV = require('cordova-plugin-toast.sampleEPG');
+var sampleEPG = require('cordova-plugin-toast.sampleEPG');
 var channelChangeCallback = [];
 var listIndex = 0;
 
@@ -44,30 +44,33 @@ module.exports = {
         var match = false;
         var element = getTvwindowElement();
 
-        for (var i = 0; i < browserTV.channelList.length; i++) {
-            if (args[0].major == browserTV.channelList[i].major && args[0].minor == browserTV.channelList[i].minor) {
+        for (var i = 0; i < sampleEPG.channelList.length; i++) {
+            if (args[0].major == sampleEPG.channelList[i].major && args[0].minor == sampleEPG.channelList[i].minor) {
                 listIndex = i;
 
                 element.style.backgroundColor = randomColor();
-                element.innerHTML = 'Channel : ' + browserTV.channelList[listIndex].major + '-' + browserTV.channelList[listIndex].minor;
+                element.innerHTML = 'Channel : ' + sampleEPG.channelList[listIndex].major + '-' + sampleEPG.channelList[listIndex].minor;
 
                 match = true;
                 break;
             }
         }
         if (!match) {
-            throw new RangeError('Failed to find the channel.');
+            setTimeout(function () {
+                fail(new Error('Fail to find channel.'));
+            }, 0);
         }
-
-        setTimeout(function () {
-            success.onsuccess(browserTV.channelList[listIndex]);
-            fireChannelChangeEvent(browserTV.channelList[listIndex]);
-        }, 0);
+        else {
+            setTimeout(function () {
+                success.onsuccess(sampleEPG.channelList[listIndex]);
+                fireChannelChangeEvent(sampleEPG.channelList[listIndex]);
+            }, 0);
+        }
     },
     tuneUp: function (success, fail, args) {
         var element = getTvwindowElement();
 
-        if (listIndex < browserTV.channelList.length - 1) {
+        if (listIndex < sampleEPG.channelList.length - 1) {
             listIndex = listIndex + 1;
         }
         else {
@@ -75,11 +78,11 @@ module.exports = {
         }
 
         element.style.backgroundColor = randomColor();
-        element.innerHTML = 'Channel : ' + browserTV.channelList[listIndex].major + '-' + browserTV.channelList[listIndex].minor;
+        element.innerHTML = 'Channel : ' + sampleEPG.channelList[listIndex].major + '-' + sampleEPG.channelList[listIndex].minor;
 
         setTimeout(function () {
-            success.onsuccess(browserTV.channelList[listIndex]);
-            fireChannelChangeEvent(browserTV.channelList[listIndex]);
+            success.onsuccess(sampleEPG.channelList[listIndex]);
+            fireChannelChangeEvent(sampleEPG.channelList[listIndex]);
         }, 0);
     },
     tuneDown: function (success, fail, args) {
@@ -93,49 +96,53 @@ module.exports = {
         }
 
         element.style.backgroundColor = randomColor();
-        element.innerHTML = 'Channel : ' + browserTV.channelList[listIndex].major + '-' + browserTV.channelList[listIndex].minor;
+        element.innerHTML = 'Channel : ' + sampleEPG.channelList[listIndex].major + '-' + sampleEPG.channelList[listIndex].minor;
 
         setTimeout(function () {
-            success.onsuccess(browserTV.channelList[listIndex]);
-            fireChannelChangeEvent(browserTV.channelList[listIndex]);
+            success.onsuccess(sampleEPG.channelList[listIndex]);
+            fireChannelChangeEvent(sampleEPG.channelList[listIndex]);
         }, 0);
     },
     findChannel: function (success, fail, args) {
         var channelInfoIndex = 0;
         var channelInfo = [];
 
-        for (var i = 0; i < browserTV.channelList.length; i++) {
-            if (args[0] == browserTV.channelList[i].major && args[1] == browserTV.channelList[i].minor) {
-                channelInfo[channelInfoIndex] = browserTV.channelList[i];
+        for (var i = 0; i < sampleEPG.channelList.length; i++) {
+            if (args[0] == sampleEPG.channelList[i].major && args[1] == sampleEPG.channelList[i].minor) {
+                channelInfo[channelInfoIndex] = sampleEPG.channelList[i];
                 channelInfoIndex = channelInfoIndex + 1;
             }
         }
 
         if (!channelInfo) {
-            throw new RangeError('Failed to find the channel.');
+            setTimeout(function () {
+                fail(new Error('Fail to find channel.'));
+            }, 0);
         }
-        setTimeout(function () {
-            success(channelInfo);
-        }, 0);
+        else {
+            setTimeout(function () {
+                success(channelInfo);
+            }, 0);
+        }
     },
     getChannelList: function (success, fail, args) {
         setTimeout(function () {
-            success(browserTV.channelList);
+            success(sampleEPG.channelList);
         }, 0);
     },
     getCurrentChannel: function (success, fail, args) {
         setTimeout(function () {
-            success(browserTV.channelList[listIndex]);
+            success(sampleEPG.channelList[listIndex]);
         }, 0);
     },
     getProgramList: function (success, fail, args) {
         setTimeout(function () {
-            success(browserTV.programList);
+            success(sampleEPG.programList);
         }, 0);
     },
     getCurrentProgram: function (success, fail, args) {
         setTimeout(function () {
-            success(browserTV.programList[listIndex]);
+            success(sampleEPG.programList[listIndex]);
         }, 0);
     },
     addChannelChangeListener: function (success, fail, args) {
@@ -143,7 +150,7 @@ module.exports = {
     },
     removeChannelChangeListener: function (success, fail, args) {
         for (var i = 0; i < channelChangeCallback.length; i++) {
-            if (channelChangeCallback[i] === success) {
+            if (success === channelChangeCallback[i]) {
                 channelChangeCallback.splice(i, 1);
             }
         }
