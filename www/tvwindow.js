@@ -3,13 +3,14 @@
 var argscheck = require('cordova/argscheck'),
     exec = require('cordova/exec');
 
-var tvwindowExport = {};
-
-tvwindowExport = {
+var tvwindowExport = {
     setSource: function (videoSource, successCallback, errorCallback) {
         argscheck.checkArgs('ofF', 'tvwindow.setSource', arguments);
-        if(!videoSource.type || !videoSource.number) {
-            throw new TypeError('VideoSource is wrong.');
+        if(!videoSource.type || typeof videoSource.type != 'string') {
+            throw new TypeError('videoSource.type is not a string.');
+        }
+        if(!videoSource.number || typeof videoSource.number != 'number') {
+            throw new TypeError('videoSource.number is not a number.');
         }
 
         errorCallback = errorCallback || function () {};
@@ -27,17 +28,17 @@ tvwindowExport = {
     },
     show: function (successCallback, errorCallback, rectangle) {
         argscheck.checkArgs('fFa', 'tvwindow.show', arguments);
-        if(rectangle[0] && typeof rectangle[0] !== 'number') {
+        if(!rectangle[0] || typeof rectangle[0] != 'number') {
             throw new TypeError('rectangle[0] is not a number.');
         }
-        if(rectangle[1] && typeof rectangle[1] !== 'number') {
+        if(!rectangle[1] || typeof rectangle[1] != 'number') {
             throw new TypeError('rectangle[1] is not a number.');
         }
-        if(rectangle[2] && typeof rectangle[2] !== 'number') {
+        if(!rectangle[2] || typeof rectangle[2] != 'number') {
             throw new TypeError('rectangle[2] is not a number.');
         }
-        if(rectangle[3] && typeof rectangle[3] !== 'number') {
-            throw new TypeError('rectangle[0] is not a number.');
+        if(!rectangle[3] || typeof rectangle[3] != 'number') {
+            throw new TypeError('rectangle[3] is not a number.');
         }
 
         errorCallback = errorCallback || function () {};
