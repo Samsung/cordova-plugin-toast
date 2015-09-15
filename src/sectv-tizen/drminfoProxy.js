@@ -26,7 +26,7 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	getEsn: function(success, fail, args){
@@ -52,7 +52,7 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	getSdiId: function(success, fail, args){
@@ -78,7 +78,7 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	}
 };

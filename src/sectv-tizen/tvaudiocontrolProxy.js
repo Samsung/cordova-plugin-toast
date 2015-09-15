@@ -12,7 +12,7 @@ module.exports = {
 			tizen.tvaudiocontrol.setMute(args[0]);
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	isMute: function (success, fail, args) {
@@ -38,7 +38,7 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	setVolume: function (success, fail, args) {
@@ -50,7 +50,7 @@ module.exports = {
 			tizen.tvaudiocontrol.setVolume(args[0]);
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
@@ -62,7 +62,7 @@ module.exports = {
 			tizen.tvaudiocontrol.setVolumeUp();
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
@@ -74,7 +74,7 @@ module.exports = {
 			tizen.tvaudiocontrol.setVolumeDown();
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	getVolume: function (success, fail, args) {
@@ -100,7 +100,7 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
@@ -112,7 +112,7 @@ module.exports = {
 			tizen.tvaudiocontrol.setVolumeChangeListener(success);
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
@@ -124,7 +124,7 @@ module.exports = {
 			tizen.tvaudiocontrol.unsetVolumeChangeListener();
 		}
 		catch (e) {
-			throw tizenutil.fromWebAPIException(e);
+			throw tizenutil.createError.fromWebAPIException(e);
 		}
 	}
 };
