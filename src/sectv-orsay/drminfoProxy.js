@@ -1,5 +1,7 @@
 'use strict';
 
+var SEF = require('cordova/plugin/SEF');
+
 var version = '1.0';
 
 module.exports = {
@@ -33,14 +35,13 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			var sef = getSefObject();
-			sef.Open('ExternalWidgetInterface', '1.000', 'ExternalWidgetInterface');
+			var sef = SEF.get('ExternalWidgetInterface');
 			var result = sef.Execute('GetESN', args[0]);
-			sef.Close();
-
-			if (typeof result == 'string') {
+			
+			if (result) {
 				setTimeout(function () {
 					success(result);
+					SEF.close();
 				}, 0);
 			} else {
 				setTimeout(function () {
@@ -48,6 +49,7 @@ module.exports = {
 					error.name = 'UnknownError';
 					error.message = 'UnknownError';
 					fail(error);
+					SEF.close();
 				}, 0);
 			}
 		} catch (e) {
@@ -60,14 +62,13 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			var sef = getSefObject();
-			sef.Open('ExternalWidgetInterface', '1.000', 'ExternalWidgetInterface');
+			var sef = SEF.get('ExternalWidgetInterface');
 			var result = sef.Execute('GetSDI_ID');
-			sef.Close();
-
-			if (typeof result == 'string') {
+			
+			if (result) {
 				setTimeout(function () {
 					success(result);
+					SEF.close();
 				}, 0);
 			} else {
 				setTimeout(function () {
@@ -75,6 +76,7 @@ module.exports = {
 					error.name = 'UnknownError';
 					error.message = 'UnknownError';
 					fail(error);
+					SEF.close();
 				}, 0);
 			}
 		} catch (e) {
@@ -82,27 +84,5 @@ module.exports = {
 		}
 	}
 };
-
-function getSefObject(){
-	var object = '';
-
-	if(!document.getElementById('pluginSef')){
-		object = document.createElement('object');
-		object.id = 'pluginSef';
-		object.border = '0';
-		object.setAttribute('classid', 'clsid:SAMSUNG-INFOLINK-SEF');
-		object.style.opacity = '0.0';
-		object.style.position = 'absolute';
-		object.style.visibility = 'hidden';
-		object.style.width = '0px';
-		object.style.height = '0px';
-
-		document.body.appendChild(object);
-	}else{
-		object = document.getElementById('pluginSef');
-	}
-
-	return object;
-}
 
 require('cordova/exec/proxy').add('toast.drminfo',module.exports);
