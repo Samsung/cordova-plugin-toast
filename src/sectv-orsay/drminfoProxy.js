@@ -17,7 +17,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'UnknownError';
@@ -25,7 +26,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -37,13 +39,14 @@ module.exports = {
 
 			var sef = SEF.get('ExternalWidgetInterface');
 			var result = sef.Execute('GetESN', args[0]);
-			
+
 			if (result) {
 				setTimeout(function () {
 					success(result);
 					SEF.close();
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'UnknownError';
@@ -52,7 +55,8 @@ module.exports = {
 					SEF.close();
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -64,13 +68,14 @@ module.exports = {
 
 			var sef = SEF.get('ExternalWidgetInterface');
 			var result = sef.Execute('GetSDI_ID');
-			
+
 			if (result) {
 				setTimeout(function () {
 					success(result);
 					SEF.close();
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'UnknownError';
@@ -79,7 +84,8 @@ module.exports = {
 					SEF.close();
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	}

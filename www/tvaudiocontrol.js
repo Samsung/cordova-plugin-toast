@@ -15,7 +15,7 @@ var tvaudiocontrolExport = {
 		}
 
 		var args = [mute];
-		exec(null, null, 'toast.tvaudiocontrol', 'setMute', args);	
+		exec(null, null, 'toast.tvaudiocontrol', 'setMute', args);
 	},
 	isMute: function (successCallback, errorCallback) {
 		argscheck.checkArgs('fF', 'tvaudiocontrol.isMute', arguments);
@@ -47,7 +47,7 @@ var tvaudiocontrolExport = {
 	},
 	setVolumeChangeListener: function (callback) {
 		argscheck.checkArgs('f', 'tvaudiocontrol.setVolumeChangeListener', arguments);
-		
+
 		var args = [];
 		exec(callback, null, 'toast.tvaudiocontrol', 'setVolumeChangeListener', args);
 	},

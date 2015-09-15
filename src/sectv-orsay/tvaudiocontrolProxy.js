@@ -10,7 +10,8 @@ module.exports = {
 			args = args || '';
 
 			webapis.audiocontrol.setMute(args[0]);
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -26,7 +27,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'TypeMismatchError';
@@ -34,7 +36,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -49,7 +52,8 @@ module.exports = {
 			if((volumeChangeCallback) && (typeof args[0] == 'number')){
 				volumeChangeCallback(args[0]);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -64,12 +68,13 @@ module.exports = {
 			if(volumeChangeCallback){
 				var volume = webapis.audiocontrol.getVolume();
 				if((typeof volume == 'number') && (volume != -1)){
-					volumeChangeCallback(volume);	
+					volumeChangeCallback(volume);
 				}
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
-		}	
+		}
 	},
 	setVolumeDown: function (success, fail, args) {
 		try {
@@ -82,10 +87,11 @@ module.exports = {
 			if(volumeChangeCallback){
 				var volume = webapis.audiocontrol.getVolume();
 				if((typeof volume == 'number') && (volume != -1)){
-					volumeChangeCallback(volume);	
+					volumeChangeCallback(volume);
 				}
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -101,7 +107,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'TypeMismatchError';
@@ -109,7 +116,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -122,8 +130,8 @@ module.exports = {
 			if (typeof success == 'function'){
 				volumeChangeCallback = success;
 			}
-
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	},
@@ -134,7 +142,8 @@ module.exports = {
 			args = args || '';
 
 			volumeChangeCallback = '';
-		} catch (e) {
+		}
+		catch (e) {
 			throw e;
 		}
 	}

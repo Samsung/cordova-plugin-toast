@@ -15,7 +15,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'UnknownError';
@@ -23,7 +24,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -39,7 +41,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'UnknownError';
@@ -47,7 +50,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -63,7 +67,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'UnknownError';
@@ -71,7 +76,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	}

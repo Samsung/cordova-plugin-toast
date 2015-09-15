@@ -10,7 +10,8 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.setMute(args[0]);
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -26,7 +27,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'TypeMismatchError';
@@ -34,7 +36,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -45,7 +48,8 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.setVolume(args[0]);
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -56,9 +60,10 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.setVolumeUp();
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
-		}	
+		}
 	},
 	setVolumeDown: function (success, fail, args) {
 		try {
@@ -67,7 +72,8 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.setVolumeDown();
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -83,7 +89,8 @@ module.exports = {
 				setTimeout(function () {
 					success(result);
 				}, 0);
-			} else {
+			}
+			else {
 				setTimeout(function () {
 					var error = new Error();
 					error.name = 'TypeMismatchError';
@@ -91,7 +98,8 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -102,7 +110,8 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.setVolumeChangeListener(success);
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	},
@@ -113,7 +122,8 @@ module.exports = {
 			args = args || '';
 
 			tizen.tvaudiocontrol.unsetVolumeChangeListener();
-		} catch (e) {
+		}
+		catch (e) {
 			throw tizenutil.fromWebAPIException(e);
 		}
 	}

@@ -26,7 +26,8 @@ module.exports = {
 			setTimeout(function () {
 				success(result);
 			}, 0);
-		} else {
+		}
+		else {
 			setTimeout(function () {
 				var error = new Error();
 				error.name = 'TypeMismatchError';
@@ -107,7 +108,8 @@ module.exports = {
 				var volumeEl = getVolumeElement();
 				volumeEl.innerHTML = 'volume : ' + result;
 			}, 0);
-		} else {
+		}
+		else {
 			setTimeout(function () {
 				var error = new Error();
 				error.name = 'TypeMismatchError';
@@ -153,7 +155,8 @@ function getSoundBox(){
 		element.style.margin = '5px';
 
 		document.body.appendChild(element);
-	} else{
+	}
+	else{
 		element = document.getElementById('soundbox');
 	}
 
@@ -171,7 +174,8 @@ function getMuteElement(){
 		element.innerHTML = 'mute : ';
 
 		getSoundBox().appendChild(element);
-	} else{
+	}
+	else{
 		element = document.getElementById('mute');
 	}
 
@@ -189,7 +193,8 @@ function getVolumeElement(){
 		element.innerHTML = 'volume : ';
 
 		getSoundBox().appendChild(element);
-	} else{
+	}
+	else{
 		element = document.getElementById('volume');
 	}
 
@@ -207,7 +212,8 @@ function getVolumeChangeListenerElement(){
 		element.innerHTML = 'volume change listener : ';
 
 		getSoundBox().appendChild(element);
-	} else{
+	}
+	else{
 		element = document.getElementById('volumechange');
 	}
 
