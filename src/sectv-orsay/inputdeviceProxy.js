@@ -67,7 +67,9 @@ module.exports = {
 				success(supportedKeys);
 			}, 0);
 		} catch (e) {
-			throw new Error(e.message);
+			var error = new Error(e.message);
+			error.name = e.name;
+			throw error;
 		}
 	},
 	getKey: function(success, fail, args){
@@ -85,33 +87,73 @@ module.exports = {
 			}
 			else {
 				setTimeout(function(){
-					fail({
-						code: 0,
-						name: 'NOT_SUPPORTED_ERR',
-						message: 'Any other error occurs on platform.'					
-					});
+					var error = new RangeError('keyName is not in the supported keys set.');
+					error.name = 'RangeError';
+					fail(error);
 				}, 0);
 			}
 		} catch (e) {
-			throw new Error(e.message);
+			var error = new Error(e.message);
+			error.name = e.name;
+			throw error;
 		}
 	},
 	registerKey: function(success, fail, args){
 		try {
-			var SEF = require('cordova/plugin/SEF');
-			var AppCommonPlugin = SEF.get('AppCommon');
-			AppCommonPlugin.Execute('RegisterKey',args[0]);
+			for(var i = 0; i < supportedKeys.length; i++) {
+				if(supportedKeys[i].name === args[0]){
+					break;
+				}
+			}
+			if(i != supportedKeys.length) {
+				var SEF = require('cordova/plugin/SEF');
+				var AppCommonPlugin = SEF.get('AppCommon');
+				AppCommonPlugin.Execute('RegisterKey',args[0]);
+			}
+			else {
+					var error = new RangeError('keyName is not in the supported keys set.');
+					error.name = 'RangeError';
+					throw error;
+			}			
+
 		} catch (e) {
-			throw new Error(e.message);
+			if(error.name == 'RangeError') {
+				throw e;
+			}
+			else {
+				var error = new Error(e.message);
+				error.name = e.name;
+				throw error;
+			}
 		}
 	},
 	unregisterKey: function(success, fail, args){
 		try {
-			var SEF = require('cordova/plugin/SEF');
-			var AppCommonPlugin = SEF.get('AppCommon');
-			AppCommonPlugin.Execute('UnregisterKey',args[0]);
+			for(var i = 0; i < supportedKeys.length; i++) {
+				if(supportedKeys[i].name === args[0]){
+					break;
+				}
+			}
+			if(i != supportedKeys.length) {
+				var SEF = require('cordova/plugin/SEF');
+				var AppCommonPlugin = SEF.get('AppCommon');
+				AppCommonPlugin.Execute('UnregisterKey',args[0]);
+			}
+			else {
+					var error = new RangeError('keyName is not in the supported keys set.');
+					error.name = 'RangeError';
+					throw error;
+			}			
+
 		} catch (e) {
-			throw new Error(e.message);
+			if(error.name == 'RangeError') {
+				throw e;
+			}
+			else {
+				var error = new Error(e.message);
+				error.name = e.name;
+				throw error;
+			}
 		}
 	}
 };
