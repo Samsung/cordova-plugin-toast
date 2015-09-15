@@ -28,11 +28,14 @@ module.exports = {
 				success(supportedKeys);
 			}, 0);
 		} catch (e) {
-			throw e;
+			var error = new Error(e.message);
+			error.name = e.name;
+			throw error;
 		}
 	},
 	getKey: function(success, fail, args){
 		try {
+			console.log(args[0]);
 			for(var i = 0; i < supportedKeys.length; i++) {
 				if(supportedKeys[i].name === args[0]){
 					break;
@@ -44,16 +47,16 @@ module.exports = {
 				}, 0);
 			}
 			else {
-				setTimeout(function(){
-					fail({
-						code: 0,
-						name: 'NOT_SUPPORTED_ERR',
-						message: 'Any other error occurs on platform.'					
-					});
+					setTimeout(function(){
+					var error = new RangeError('keyName is not in the supported keys set.');
+					error.name = 'RangeError';
+					fail(error);
 				}, 0);
 			}
 		} catch(e) {
-			throw e;
+			var error = new Error(e.message);
+			error.name = e.name;
+			throw error;
 		}	
 	},
 	registerKey: function(success, fail, args){
@@ -63,7 +66,9 @@ module.exports = {
 			}
 		}
 		if(i == supportedKeys.length) {
-			throw new RangeError('keyName is not in the supported keys set.');
+			var error = new RangeError('keyName is not in the supported keys set.');
+			error.name = 'RangeError';
+			throw error;
 		}
 	},
 	unregisterKey: function(success, fail, args){
@@ -73,7 +78,9 @@ module.exports = {
 			}
 		}
 		if(i == supportedKeys.length) {
-			throw new RangeError('keyName is not in the supported keys set.');
+			var error = new RangeError('keyName is not in the supported keys set.');
+			error.name = 'RangeError';
+			throw error;		
 		}
 	}
 };

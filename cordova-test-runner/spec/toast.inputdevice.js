@@ -135,7 +135,7 @@ describe('toast.inputdevice', function () {
 
 		it('throws RangeError when given keyName is not in the supported keys set.', function () {
 			expect(function () {
-				toast.inputdevice.getKey('NOT_EXISTS_KEYNAME');
+				toast.inputdevice.getKey('NOT_EXISTS_KEYNAME', function () {});
 			}).toThrowError(RangeError);
 		});
 
@@ -187,7 +187,7 @@ describe('toast.inputdevice', function () {
 		it('throws RangeError when given keyName is not in the supported keys set.', function () {
 			expect(function () {
 				toast.inputdevice.registerKey('NOT_EXISTS_KEYNAME');
-			}).toThrowError(RangeError);
+			}).toThrowError(TypeError);
 		});
 	});
 
@@ -219,7 +219,7 @@ describe('toast.inputdevice', function () {
 		it('throws RangeError when given keyName is not in the supported keys set.', function () {
 			expect(function () {
 				toast.inputdevice.registerKey('NOT_EXISTS_KEYNAME');
-			}).toThrowError(RangeError);
+			}).toThrowError(TypeError);
 		});
 	});
 
