@@ -53,13 +53,16 @@ module.exports = {
             }
         }
 
-        if (!match) {
-            throw new RangeError('Failed to find the source.');
+        if (match) {
+            setTimeout(function () {
+                success(videoSource);
+            }, 0);
         }
-
-        setTimeout(function () {
-            success(videoSource);
-        }, 0);
+        else {
+            setTimeout(function () {
+                fail(new Error('Fail to find source.'));
+            }, 0);
+        }
     },
     getSource: function (success, fail, args) {
         setTimeout(function () {
@@ -90,32 +93,38 @@ module.exports = {
     hide: function (success, fail, args) {
         var element = document.getElementById('tvwindowshow');
 
-        if (!element) {
-            throw new Error('There are no window.');
+        if (element) {
+            document.getElementsByTagName('body')[0].removeChild(element);
+
+            setTimeout(function () {
+                success();
+            }, 0);
         }
-
-        document.getElementsByTagName('body')[0].removeChild(element);
-
-        setTimeout(function () {
-            success();
-        }, 0);
+        else {
+            setTimeout(function () {
+                fail(new Error('There are no window.'));
+            }, 0);
+        }
     },
     getRect: function (success, fail, args) {
         var element = document.getElementById('tvwindowshow');
         var rectangle = [];
 
-        if (!element) {
-            throw new Error('There are no window.');
+        if (element) {
+            rectangle[0] = element.style.left;
+            rectangle[1] = element.style.top;
+            rectangle[2] = element.style.width;
+            rectangle[3] = element.style.height;
+
+            setTimeout(function () {
+                success(rectangle);
+            }, 0);
         }
-
-        rectangle[0] = element.style.left;
-        rectangle[1] = element.style.top;
-        rectangle[2] = element.style.width;
-        rectangle[3] = element.style.height;
-
-        setTimeout(function () {
-            success(rectangle);
-        }, 0);
+        else {
+            setTimeout(function () {
+                fail(new Error('There are no window.'));
+            }, 0);
+        }
     }
 };
 

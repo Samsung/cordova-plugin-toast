@@ -52,9 +52,9 @@ module.exports = {
                 element.innerHTML = 'Channel : ' + browserTV.channelList[listIndex].major + '-' + browserTV.channelList[listIndex].minor;
 
                 match = true;
+                break;
             }
         }
-
         if (!match) {
             throw new RangeError('Failed to find the channel.');
         }
