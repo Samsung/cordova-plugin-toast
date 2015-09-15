@@ -1,5 +1,7 @@
 'use strict';
 
+var tizenutil = require('cordova-plugin-toast.tizenutil');
+
 module.exports = {
 	getVersion: function (success, fail, args) {
 		try {
@@ -22,7 +24,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	getEsn: function(success, fail, args){
@@ -46,7 +48,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	getSdiId: function(success, fail, args){
@@ -70,7 +72,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	}
 };

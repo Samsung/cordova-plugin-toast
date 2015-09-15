@@ -1,5 +1,7 @@
 'use strict';
 
+var tizenutil = require('cordova-plugin-toast.tizenutil');
+
 module.exports = {
 	setMute: function (success, fail, args) {
 		try {
@@ -9,7 +11,7 @@ module.exports = {
 
 			tizen.tvaudiocontrol.setMute(args[0]);
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	isMute: function (success, fail, args) {
@@ -33,7 +35,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	setVolume: function (success, fail, args) {
@@ -44,7 +46,7 @@ module.exports = {
 
 			tizen.tvaudiocontrol.setVolume(args[0]);
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
@@ -55,7 +57,7 @@ module.exports = {
 
 			tizen.tvaudiocontrol.setVolumeUp();
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}	
 	},
 	setVolumeDown: function (success, fail, args) {
@@ -66,7 +68,7 @@ module.exports = {
 
 			tizen.tvaudiocontrol.setVolumeDown();
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	getVolume: function (success, fail, args) {
@@ -90,7 +92,7 @@ module.exports = {
 				}, 0);
 			}
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
@@ -101,7 +103,7 @@ module.exports = {
 
 			tizen.tvaudiocontrol.setVolumeChangeListener(success);
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
@@ -112,7 +114,7 @@ module.exports = {
 
 			tizen.tvaudiocontrol.unsetVolumeChangeListener();
 		} catch (e) {
-			throw e;
+			throw tizenutil.fromWebAPIException(e);
 		}
 	}
 };
