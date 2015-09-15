@@ -1,281 +1,142 @@
 'use strict';
 
+var volumeChangeCallback = '';
+
 module.exports = {
 	setMute: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var source = {};
-		// var randomColor = function(){
-		// 	var color = '#';
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// 	for(var i = 0; i < 6; i++){
-		// 		if(Math.floor(Math.random() * 2) === 0){
-		// 		color = color + '0';
-		// 		} else {
-		// 			color = color + 'f';
-		// 		}   
-		// 	}
-
-		// 	return color;
-		// }
-		
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.style.backgroundColor = randomColor();
-
-		// var channelInfo = {
-		// 	major: args[0]['major'],
-		// 	minor: args[0]['minor'],
-		// 	channelName: '',
-		// 	programNumber: args[0]['programNumber'],
-		// 	ptc: args[0]['ptc'],
-		// 	lcn: '',
-		// 	sourceID: args[0]['sourceID'],
-		// 	transportStreamID: '',
-		// 	originalNetworkID: args[0]['originalNetworkID'],
-		// 	serviceName:''
-		// };
-
-		// success.onsuccess(channelInfo, args[1]);
+			webapis.audiocontrol.setMute(args[0]);
+		} catch (e) {
+			throw e;
+		}
 	},
-	tuneUp: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var source = {};
-		// var randomColor = function(){
-		// 	var color = '#';
+	isMute: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// 	for(var i = 0; i < 6; i++){
-		// 		if(Math.floor(Math.random() * 2) === 0){
-		// 		color = color + '0';
-		// 		} else {
-		// 			color = color + 'f';
-		// 		}   
-		// 	}
+			var result = webapis.audiocontrol.getMute();
 
-		// 	return color;
-		// }
-		
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.style.backgroundColor = randomColor();
-
-		// var channelInfo = {
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// };
-
-		// success.onsuccess(channelInfo, args[1]);
+			if (typeof result == 'boolean') {
+				setTimeout(function () {
+					success(result);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					var error = new Error();
+					error.name = 'TypeMismatchError';
+					error.message = 'TypeMismatchError';
+					fail(error);
+				}, 0);
+			}
+		} catch (e) {
+			throw e;
+		}
 	},
-	tuneDown: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var source = {};
-		// var randomColor = function(){
-		// 	var color = '#';
+	setVolume: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// 	for(var i = 0; i < 6; i++){
-		// 		if(Math.floor(Math.random() * 2) === 0){
-		// 		color = color + '0';
-		// 		} else {
-		// 			color = color + 'f';
-		// 		}   
-		// 	}
+			webapis.audiocontrol.setVolume(args[0]);
 
-		// 	return color;
-		// }
-		
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.style.backgroundColor = randomColor();
-
-		// var channelInfo = {
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// };
-
-		// success.onsuccess(channelInfo, args[1]);
+			if((volumeChangeCallback) && (typeof args[0] == 'number')){
+				volumeChangeCallback(args[0]);
+			}
+		} catch (e) {
+			throw e;
+		}
 	},
-	findChannel: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var channelInfo = [{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// },{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// }];
+	setVolumeUp: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// success(channelInfo);
-	},
-	getChannelList: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var channelInfo = [{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// },{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// }];
+			webapis.audiocontrol.setVolumeUp();
 
-		// success(channelInfo);
+			if(volumeChangeCallback){
+				var volume = webapis.audiocontrol.getVolume();
+				if(typeof volume == 'number' && (volume != -1){
+					volumeChangeCallback(volume);	
+				}
+			}
+		} catch (e) {
+			throw e;
+		}	
 	},
-	getCurrentChannel: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var channelInfo = [{
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// }];
-	},
-	getProgramList: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var programInfo = {
-		// 	title: '',
-		// 	startTime: '',
-		// 	duration: '',
-		// 	detailedDescription: '',
-		// 	language: '',
-		// 	rating: ''
-		// };
+	setVolumeDown: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// success(programInfo);
-	},
-	getCurrentProgram: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var programInfo = {
-		// 	title: '',
-		// 	startTime: '',
-		// 	duration: '',
-		// 	detailedDescription: '',
-		// 	language: '',
-		// 	rating: ''
-		// };
-	},
-	addChannelChangeListener: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = '';
-		// var channelInfo = {
-		// 	major: '',
-		// 	minor: '',
-		// 	channelName: '',
-		// 	programNumber: '',
-		// 	ptc: '',
-		// 	lcn: '',
-		// 	sourceID: '',
-		// 	transportStreamID: '',
-		// 	originalNetworkID: '',
-		// 	serviceName:''
-		// };
+			webapis.audiocontrol.setVolumeDown();
 
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.addEventListener('DOMAttrModified', function () {
-		// 	success(channelInfo, args[1]);
-		// });
+			if(volumeChangeCallback){
+				var volume = webapis.audiocontrol.getVolume();
+				if(typeof volume == 'number' && (volume != -1){
+					volumeChangeCallback(volume);	
+				}
+			}
+		} catch (e) {
+			throw e;
+		}
 	},
-	removeChannelChangeListener: function (success, fail, args) {
-		success = null;
-		fail = null;
-		args = null;
-		// var element = ''
+	getVolume: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
 
-		// if (!document.getElementById('tvwindowshow')) {
-		// 	element = document.createElement('div');
-		// 	element.id = 'tvwindowshow';
-		// } else {
-		// 	element = document.getElementById('tvwindowshow');
-		// }
-		// element.removeEventListener('DOMAttrModified');
+			var result = webapis.audiocontrol.getVolume();
+
+			if (typeof result == 'number' && (result != -1)) {
+				setTimeout(function () {
+					success(result);
+				}, 0);
+			} else {
+				setTimeout(function () {
+					var error = new Error();
+					error.name = 'TypeMismatchError';
+					error.message = 'TypeMismatchError';
+					fail(error);
+				}, 0);
+			}
+		} catch (e) {
+			throw e;
+		}
+	},
+	setVolumeChangeListener: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
+
+			if (typeof success == 'function'){
+				volumeChangeCallback = success;
+			}
+
+		} catch (e) {
+			throw e;
+		}
+	},
+	unsetVolumeChangeListener: function (success, fail, args) {
+		try {
+			success = success || function () {};
+			fail = fail || function() {};
+			args = args || '';
+
+			volumeChangeCallback = '';
+		} catch (e) {
+			throw e;
+		}
 	}
 };
 
