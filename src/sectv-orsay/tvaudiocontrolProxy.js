@@ -63,7 +63,7 @@ module.exports = {
 
 			if(volumeChangeCallback){
 				var volume = webapis.audiocontrol.getVolume();
-				if(typeof volume == 'number' && (volume != -1){
+				if((typeof volume == 'number') && (volume != -1)){
 					volumeChangeCallback(volume);	
 				}
 			}
@@ -81,7 +81,7 @@ module.exports = {
 
 			if(volumeChangeCallback){
 				var volume = webapis.audiocontrol.getVolume();
-				if(typeof volume == 'number' && (volume != -1){
+				if((typeof volume == 'number') && (volume != -1)){
 					volumeChangeCallback(volume);	
 				}
 			}
