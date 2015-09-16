@@ -11,7 +11,9 @@ module.exports = {
 		} catch (e) {
 			var error = new Error(e.message);
 			error.name = e.name;
-			throw error;
+			setTimeout(function(){
+				fail(e);
+			}, 0);			
 		}
 	},
 	getKey: function(success, fail, args){
@@ -21,30 +23,52 @@ module.exports = {
 				success(inputDeviceKey);	
 			}, 0);
 		} catch (e) {
+			var error;
 			if(e.name === 'InvalidValuesError') {
-				throw toast.tizenutil.createError.fromWebAPIException(e, RangeError);
+				error = new RangeError(e.message);
 			}
-			throw toast.tizenutil.createError.fromWebAPIException(e);
+			else {
+				error = new Error(e.message);
+			}
+			error.name = e.name;
+			setTimeout(function(){
+				fail(error);
+			}, 0);
+			
 		}
 	},
 	registerKey: function(success, fail, args){
 		try {
 			tizen.tvinputdevice.registerKey(args[0]);
 		} catch (e) {
+			var error;
 			if(e.name === 'InvalidValuesError') {
-				throw toast.tizenutil.createError.fromWebAPIException(e, RangeError);
+				error = new RangeError(e.message);
 			}
-			throw toast.tizenutil.createError.fromWebAPIException(e);
+			else {
+				error = new Error(e.message);
+			}
+			error.name = e.name;
+			setTimeout(function(){
+				fail(error);
+			}, 0);
 		}
 	},
 	unregisterKey: function(success, fail, args){
 		try	{
 			tizen.tvinputdevice.unregisterKey(args[0]);
 		} catch (e) {
+			var error;
 			if(e.name === 'InvalidValuesError') {
-				throw toast.tizenutil.createError.fromWebAPIException(e, RangeError);
+				error = new RangeError(e.message);
 			}
-			throw toast.tizenutil.createError.fromWebAPIException(e);
+			else {
+				error = new Error(e.message);
+			}
+			error.name = e.name;
+			setTimeout(function(){
+				fail(error);
+			}, 0);
 		}
 	}
 };

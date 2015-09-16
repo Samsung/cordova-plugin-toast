@@ -223,7 +223,7 @@ describe('toast.inputdevice', function () {
 					expect(ok).toBeTruthy();
 					window.removeEventListener('keydown', onKeyDown);
 					toast.inputdevice.unregisterKey('ColorF0Red');
-					done()
+					done();
 				});
 			});
 		}, 5000);

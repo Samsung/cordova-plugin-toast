@@ -53,23 +53,35 @@ var supportedKeys = [
 	{name : 'PanelEnter', code: 309},
 	{name : 'PanelSource', code: 612},
 	{name : 'PanelMenu', code: 613},
-	{name : 'PanelPower', code: 614}
+	{name : 'PanelPower', code: 614},
+	{name : 'Power', code: 76},
+	{name : 'TV', code: 77},
+	{name : 'TTXMIX', code: 650},
+	{name : 'Subtitle', code: 652},
+	{name : 'Aspect', code: 653},
+	{name : 'DolbySRR', code: 654},
+	{name : 'WLink', code: 115},
+	{name : 'CC', code: 118},
+	{name : 'Content', code: 261},
+	{name : 'FavCH', code: 256},
+	{name : 'EMode', code: 148},
+	{name : 'DMA', code: 260}
+
 ];
 
 module.exports = {
 
 	getSupportedKeys: function (success, fail, args) {
 		try {
-			fail = fail || function () {};
-			args = args || '';
-
 			setTimeout(function(){
 				success(supportedKeys);
 			}, 0);
 		} catch (e) {
 			var error = new Error(e.message);
 			error.name = e.name;
-			throw error;
+			setTimeout(function(){
+				fail(error);
+			}, 0);			
 		}
 	},
 	getKey: function(success, fail, args){
@@ -79,23 +91,24 @@ module.exports = {
 					break;
 				}
 			}
-			
 			if(i != supportedKeys.length) {
 				setTimeout(function(){
 					success(supportedKeys[i]);
 				}, 0);
 			}
 			else {
+				var error = new RangeError('keyName is not in the supported keys set.');
+				error.name = 'RangeError';
 				setTimeout(function(){
-					var error = new RangeError('keyName is not in the supported keys set.');
-					error.name = 'RangeError';
 					fail(error);
-				}, 0);
+				}, 0);				
 			}
 		} catch (e) {
 			var error = new Error(e.message);
 			error.name = e.name;
-			throw error;
+			setTimeout(function(){
+				fail(e);
+			}, 0);			
 		}
 	},
 	registerKey: function(success, fail, args){
@@ -108,23 +121,23 @@ module.exports = {
 			if(i != supportedKeys.length) {
 				var SEF = require('cordova/plugin/SEF');
 				var AppCommonPlugin = SEF.get('AppCommon');
-				AppCommonPlugin.Execute('RegisterKey',args[0]);
+				AppCommonPlugin.Execute('RegisterKey',supportedKeys[i].code);
 			}
 			else {
 					var error = new RangeError('keyName is not in the supported keys set.');
 					error.name = 'RangeError';
-					throw error;
+					setTimeout(function(){
+						fail(error);
+					}, 0);				
 			}			
 
 		} catch (e) {
-			if(error.name == 'RangeError') {
-				throw e;
-			}
-			else {
-				var error = new Error(e.message);
-				error.name = e.name;
-				throw error;
-			}
+			var error = new Error(e.message);
+			error.name = e.name;
+			setTimeout(function(){
+				fail(error);
+			}, 0);
+			
 		}
 	},
 	unregisterKey: function(success, fail, args){
@@ -137,23 +150,22 @@ module.exports = {
 			if(i != supportedKeys.length) {
 				var SEF = require('cordova/plugin/SEF');
 				var AppCommonPlugin = SEF.get('AppCommon');
-				AppCommonPlugin.Execute('UnregisterKey',args[0]);
+				AppCommonPlugin.Execute('UnregisterKey',supportedKeys[i].code);
 			}
 			else {
 					var error = new RangeError('keyName is not in the supported keys set.');
 					error.name = 'RangeError';
-					throw error;
+					setTimeout(function(){
+						fail(error);
+					}, 0);					
 			}			
 
 		} catch (e) {
-			if(error.name == 'RangeError') {
-				throw e;
-			}
-			else {
-				var error = new Error(e.message);
-				error.name = e.name;
-				throw error;
-			}
+			var error = new Error(e.message);
+			error.name = e.name;
+			setTimeout(function(){
+				fail(error);
+			}, 0);			
 		}
 	}
 };

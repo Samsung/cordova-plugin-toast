@@ -28,7 +28,9 @@ module.exports = {
 				success(supportedKeys);
 			}, 0);
 		} catch (e) {
-			fail(e);
+			setTimeout(function(){
+				fail(e);
+			}, 0);
 		}
 	},
 	getKey: function(success, fail, args){
@@ -47,10 +49,14 @@ module.exports = {
 			else {
 				var error = new RangeError('keyName is not in the supported keys set.');
 				error.name = 'RangeError';
-				fail(error);
+				setTimeout(function(){
+					fail(error);
+				}, 0);
 			}
 		} catch(e) {
-			fail(e);
+			setTimeout(function(){
+				fail(e);
+			}, 0);
 		}	
 	},
 	registerKey: function(success, fail, args){
@@ -62,7 +68,9 @@ module.exports = {
 		if(i == supportedKeys.length) {
 			var error = new RangeError('keyName is not in the supported keys set.');
 			error.name = 'RangeError';
-			fail(error);
+			setTimeout(function(){
+				fail(error);
+			}, 0);
 		}
 	},
 	unregisterKey: function(success, fail, args){
@@ -74,7 +82,9 @@ module.exports = {
 		if(i == supportedKeys.length) {
 			var error = new RangeError('keyName is not in the supported keys set.');
 			error.name = 'RangeError';
-			fail(error);
+			setTimeout(function(){
+				fail(error);
+			}, 0);
 		}
 	}
 };
