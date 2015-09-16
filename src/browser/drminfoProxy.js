@@ -7,66 +7,30 @@ var dummySdiId = 'TIZENKEY';
 
 module.exports = {
 	getVersion: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
-
-		var result = dummyVersion;
-
-		if (typeof result == 'string') {
-			setTimeout(function () {
-				success(result);
-			}, 0);
+		try{
+			var result = dummyVersion;
+			success(result);
 		}
-		else {
-			setTimeout(function () {
-				var error = new Error();
-				error.name = 'UnknownError';
-				error.message = 'UnknownError';
-				fail(error);
-			}, 0);
+		catch(e) {
+			fail(new Error('failed to getVersion'));
 		}
 	},
 	getEsn: function(success, fail, args){
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
-
-		var result = dummyEsn;
-
-		if (typeof result == 'string') {
-			setTimeout(function () {
-				success(result);
-			}, 0);
+		try{
+			var result = dummyEsn;
+			success(result);
 		}
-		else {
-			setTimeout(function () {
-				var error = new Error();
-				error.name = 'UnknownError';
-				error.message = 'UnknownError';
-				fail(error);
-			}, 0);
+		catch(e) {
+			fail(new Error('failed to getEsn'));
 		}
 	},
 	getSdiId: function(success, fail, args){
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
-
-		var result = dummySdiId;
-
-		if (typeof result == 'string') {
-			setTimeout(function () {
-				success(result);
-			}, 0);
+		try{
+			var result = dummySdiId;
+			success(result);
 		}
-		else {
-			setTimeout(function () {
-				var error = new Error();
-				error.name = 'UnknownError';
-				error.message = 'UnknownError';
-				fail(error);
-			}, 0);
+		catch(e) {
+			fail(new Error('failed to getSdiId'));
 		}
 	}
 };

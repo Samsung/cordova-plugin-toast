@@ -3,10 +3,6 @@
 module.exports = {
 	getVersion: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = webapis.drminfo.getVersion();
 
 			setTimeout(function () {
@@ -14,15 +10,11 @@ module.exports = {
 			}, 0);
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	getEsn: function(success, fail, args){
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = webapis.drminfo.getEsn(args[0]);
 
 			setTimeout(function () {
@@ -30,15 +22,11 @@ module.exports = {
 			}, 0);
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	getSdiId: function(success, fail, args){
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = webapis.drminfo.getSdiId();
 
 			setTimeout(function () {
@@ -46,7 +34,7 @@ module.exports = {
 			}, 0);
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	}
 };

@@ -51,11 +51,11 @@ var tvaudiocontrolExport = {
 		var args = [];
 		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'getVolume', args);
 	},
-	setVolumeChangeListener: function (successCallback, errorCallback) {
-		argscheck.checkArgs('fF', 'tvaudiocontrol.setVolumeChangeListener', arguments);
+	setVolumeChangeListener: function (callback, successCallback, errorCallback) {
+		argscheck.checkArgs('ffF', 'tvaudiocontrol.setVolumeChangeListener', arguments);
 		errorCallback = errorCallback || function () {};
 
-		var args = [];
+		var args = [callback];
 		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setVolumeChangeListener', args);
 	},
 	unsetVolumeChangeListener: function (successCallback, errorCallback) {

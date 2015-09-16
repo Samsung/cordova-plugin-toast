@@ -4,28 +4,21 @@ var volumeChangeCallback = '';
 
 module.exports = {
 	setMute: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try {
+			var result = webapis.audiocontrol.setMute(args[0]);
 
-		var result = webapis.audiocontrol.setMute(args[0]);
-
-		if (result) {
-			setTimeout(function () {
-				success();
-			}, 0);
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
-		else{
-			var e = new RangeError('failed to setMute');
-			fail && fail(e);
+		catch (e) {
+			fail(e);
 		}
 	},
 	isMute: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = webapis.audiocontrol.getMute();
 
 			if (typeof result == 'boolean') {
@@ -33,25 +26,13 @@ module.exports = {
 					success(result);
 				}, 0);
 			}
-			else {
-				setTimeout(function () {
-					var error = new Error();
-					error.name = 'TypeMismatchError';
-					error.message = 'TypeMismatchError';
-					fail(error);
-				}, 0);
-			}
 		}
 		catch (e) {
-			throw e;
+			fail(e);
 		}
 	},
 	setVolume: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var isMute = webapis.audiocontrol.getMute();
 			if(isMute){
 				webapis.audiocontrol.setMute(false);
@@ -62,17 +43,14 @@ module.exports = {
 			if((volumeChangeCallback) && (typeof args[0] == 'number')){
 				volumeChangeCallback(args[0]);
 			}
+			success();
 		}
 		catch (e) {
-			throw e;
+			fail(e);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var isMute = webapis.audiocontrol.getMute();
 			if(isMute){
 				webapis.audiocontrol.setMute(false);
@@ -86,17 +64,14 @@ module.exports = {
 					volumeChangeCallback(volume);
 				}
 			}
+			success();
 		}
 		catch (e) {
-			throw e;
+			fail(e);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var isMute = webapis.audiocontrol.getMute();
 			if(isMute){
 				webapis.audiocontrol.setMute(false);
@@ -110,61 +85,46 @@ module.exports = {
 					volumeChangeCallback(volume);
 				}
 			}
+			success();
 		}
 		catch (e) {
-			throw e;
+			fail(e);
 		}
 	},
 	getVolume: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		var result = webapis.audiocontrol.getVolume();
 
-			var result = webapis.audiocontrol.getVolume();
-
-			if (typeof result == 'number' && (result != -1)) {
-				setTimeout(function () {
-					success(result);
-				}, 0);
-			}
-			else {
-				setTimeout(function () {
-					var error = new Error();
-					error.name = 'TypeMismatchError';
-					error.message = 'TypeMismatchError';
-					fail(error);
-				}, 0);
-			}
+		if (result != -1) {
+			setTimeout(function () {
+				success(result);
+			}, 0);
 		}
-		catch (e) {
-			throw e;
+		else {
+			setTimeout(function () {
+				var e = new Error('failed to getVolume');
+				fail(e);
+			}, 0);
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			if (typeof success == 'function'){
-				volumeChangeCallback = success;
-			}
+		volumeChangeCallback = args[0];
+		if(volumeChangeCallback){
+			success();
 		}
-		catch (e) {
-			throw e;
+		else{
+			var e = new Error('failed to setVolumeChangeListener');
+			fail(e);
 		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			volumeChangeCallback = '';
+		volumeChangeCallback = '';
+		
+		if(!volumeChangeCallback){
+			success();
 		}
-		catch (e) {
-			throw e;
+		else{
+			var e = new Error('failed to unsetVolumeChangeListener');
+			fail(e);
 		}
 	}
 };

@@ -3,10 +3,6 @@
 module.exports = {
 	setMute: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.setMute(args[0]);
 
 			if (result) {
@@ -16,15 +12,11 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	isMute: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.isMute();
 
 			if (typeof result == 'boolean') {
@@ -34,15 +26,11 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	setVolume: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.setVolume(args[0]);
 
 			if (result) {
@@ -52,15 +40,11 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.setVolumeUp();
 
 			if (result) {
@@ -70,15 +54,11 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.setVolumeDown();
 
 			if (result) {
@@ -88,15 +68,11 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	getVolume: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.getVolume();
 
 			if (typeof result == 'number') {
@@ -106,16 +82,12 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
-			var result = tizen.tvaudiocontrol.setVolumeChangeListener(success);
+			var result = tizen.tvaudiocontrol.setVolumeChangeListener(args[0]);
 
 			if (result) {
 				setTimeout(function () {
@@ -124,15 +96,11 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
 		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
-
 			var result = tizen.tvaudiocontrol.unsetVolumeChangeListener();
 
 			if (result) {
@@ -142,7 +110,7 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail && fail(e);
+			fail(e);
 		}
 	}
 };
