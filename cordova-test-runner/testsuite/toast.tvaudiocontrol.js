@@ -16,7 +16,7 @@
         });
     });
     testsuite('toast.tvaudiocontrol', 'setVolume() to \'5\'', function(report) {
-        toast.tvaudiocontrol.setSource(5);
+        toast.tvaudiocontrol.setVolume(5);
         report('OK');
     });
     testsuite('toast.tvaudiocontrol', 'setVolumeUp()', function(report) {
@@ -38,6 +38,7 @@
         toast.tvaudiocontrol.setVolumeChangeListener(function(value) {
             report('Success: volume changes to ' + value);
         });
+        report('OK');
     });
     testsuite('toast.tvaudiocontrol', 'unsetVolumeChangeListener()', function(report) {
         toast.tvaudiocontrol.unsetVolumeChangeListener();
