@@ -37,7 +37,7 @@ module.exports = {
 			if(isMute){
 				webapis.audiocontrol.setMute(false);
 			}
-			
+
 			webapis.audiocontrol.setVolume(args[0]);
 
 			if((volumeChangeCallback) && (typeof args[0] == 'number')){
@@ -118,7 +118,7 @@ module.exports = {
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
 		volumeChangeCallback = '';
-		
+
 		if(!volumeChangeCallback){
 			success();
 		}
