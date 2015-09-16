@@ -3,13 +3,11 @@
 module.exports = {
 	setMute: function (success, fail, args) {
 		try {
-			var result = tizen.tvaudiocontrol.setMute(args[0]);
+			tizen.tvaudiocontrol.setMute(args[0]);
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		catch (e) {
 			fail(e);
@@ -31,13 +29,11 @@ module.exports = {
 	},
 	setVolume: function (success, fail, args) {
 		try {
-			var result = tizen.tvaudiocontrol.setVolume(args[0]);
+			tizen.tvaudiocontrol.setVolume(args[0]);
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		catch (e) {
 			fail(e);
@@ -45,13 +41,11 @@ module.exports = {
 	},
 	setVolumeUp: function (success, fail, args) {
 		try {
-			var result = tizen.tvaudiocontrol.setVolumeUp();
+			tizen.tvaudiocontrol.setVolumeUp();
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		catch (e) {
 			fail(e);
@@ -59,13 +53,11 @@ module.exports = {
 	},
 	setVolumeDown: function (success, fail, args) {
 		try {
-			var result = tizen.tvaudiocontrol.setVolumeDown();
+			tizen.tvaudiocontrol.setVolumeDown();
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		catch (e) {
 			fail(e);
@@ -87,13 +79,11 @@ module.exports = {
 	},
 	setVolumeChangeListener: function (success, fail, args) {
 		try {
-			var result = tizen.tvaudiocontrol.setVolumeChangeListener(args[0]);
+			tizen.tvaudiocontrol.setVolumeChangeListener(args[0]);
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		catch (e) {
 			fail(e);
@@ -101,13 +91,11 @@ module.exports = {
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
 		try {
-			var result = tizen.tvaudiocontrol.unsetVolumeChangeListener();
+			tizen.tvaudiocontrol.unsetVolumeChangeListener();
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		catch (e) {
 			fail(e);
