@@ -6,139 +6,131 @@ var volumeChangeCallback = '';
 
 module.exports = {
 	setMute: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			isMute = args[0];
 
-		isMute = args[0];
-
-		var muteEl = getMuteElement();
-		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+			success();
+		}
+		catch(e) {
+			fail(new Error('failed to setMute'));
+		}
 	},
 	isMute: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
-
-		var result = isMute;
-
-		if (typeof result == 'boolean') {
-			setTimeout(function () {
-				success(result);
-			}, 0);
+		try{
+			var result = isMute;
+			success(result);
 		}
-		else {
-			setTimeout(function () {
-				var error = new Error();
-				error.name = 'TypeMismatchError';
-				error.message = 'TypeMismatchError';
-				fail(error);
-			}, 0);
+		catch(e) {
+			fail(new Error('failed to isMute'));
 		}
 	},
 	setVolume: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			volume = args[0];
 
-		volume = args[0];
+			if(volumeChangeCallback){
+				volumeChangeCallback(volume);
+			}
 
-		if(volumeChangeCallback){
-			volumeChangeCallback(volume);
+			isMute = false;
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+
+			var volumeEl = getVolumeElement();
+			volumeEl.innerHTML = 'volume : ' + volume;
+
+			success();
 		}
-
-		isMute = false;
-		var muteEl = getMuteElement();
-		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-		var volumeEl = getVolumeElement();
-		volumeEl.innerHTML = 'volume : ' + volume;
+		catch(e) {
+			fail(new Error('failed to setVolume'));
+		}
 	},
 	setVolumeUp: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			if(volume < 100){
+				volume++;
+			}
 
-		if(volume < 100){
-			volume++;
+			if(volumeChangeCallback){
+				volumeChangeCallback(volume);
+			}
+
+			isMute = false;
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+
+			var volumeEl = getVolumeElement();
+			volumeEl.innerHTML = 'volume : ' + volume;
+
+			success();
 		}
-
-		if(volumeChangeCallback){
-			volumeChangeCallback(volume);
+		catch(e) {
+			fail(new Error('failed to setVolumeUp'));
 		}
-
-		isMute = false;
-		var muteEl = getMuteElement();
-		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-		var volumeEl = getVolumeElement();
-		volumeEl.innerHTML = 'volume : ' + volume;
 	},
 	setVolumeDown: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			if(volume > 0){
+				volume--;
+			}
 
-		if(volume > 0){
-			volume--;
+			if(volumeChangeCallback){
+				volumeChangeCallback(volume);
+			}
+
+			isMute = false;
+			var muteEl = getMuteElement();
+			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
+
+			var volumeEl = getVolumeElement();
+			volumeEl.innerHTML = 'volume : ' + volume;
+
+			success();
 		}
-
-		if(volumeChangeCallback){
-			volumeChangeCallback(volume);
+		catch(e) {
+			fail(new Error('failed to setVolumeDown'));
 		}
-
-		isMute = false;
-		var muteEl = getMuteElement();
-		muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-		var volumeEl = getVolumeElement();
-		volumeEl.innerHTML = 'volume : ' + volume;
 	},
 	getVolume: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			var result = volume;
 
-		var result = volume;
+			var volumeEl = getVolumeElement();
+			volumeEl.innerHTML = 'volume : ' + result;
 
-		if (typeof result == 'number') {
-			setTimeout(function () {
-				success(result);
-
-				var volumeEl = getVolumeElement();
-				volumeEl.innerHTML = 'volume : ' + result;
-			}, 0);
+			success(result);
 		}
-		else {
-			setTimeout(function () {
-				var error = new Error();
-				error.name = 'TypeMismatchError';
-				error.message = 'TypeMismatchError';
-				fail(error);
-			}, 0);
+		catch(e) {
+			fail(new Error('failed to getVolume'));
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			volumeChangeCallback = args[0];
 
-		if (typeof success == 'function'){
-			volumeChangeCallback = success;
+			var changeEl = getVolumeChangeListenerElement();
+			changeEl.innerHTML = 'volume change listener : attached';
+
+			success();
 		}
-
-		var changeEl = getVolumeChangeListenerElement();
-		changeEl.innerHTML = 'volume change listener : attached';
+		catch(e) {
+			fail(new Error('failed to setVolumeChangeListener'));
+		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
-		success = success || function () {};
-		fail = fail || function() {};
-		args = args || '';
+		try{
+			volumeChangeCallback = '';
 
-		volumeChangeCallback = '';
+			var changeEl = getVolumeChangeListenerElement();
+			changeEl.innerHTML = 'volume change listener : dettached';
 
-		var changeEl = getVolumeChangeListenerElement();
-		changeEl.innerHTML = 'volume change listener : dettached';
+			success();
+		}
+		catch(e) {
+			fail(new Error('failed to unsetVolumeChangeListener'));
+		}
 	}
 };
 

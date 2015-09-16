@@ -133,12 +133,6 @@ describe('toast.inputdevice', function () {
 			}).toThrowError(TypeError);
 		});
 
-		it('throws RangeError when given keyName is not in the supported keys set.', function () {
-			expect(function () {
-				toast.inputdevice.getKey('NOT_EXISTS_KEYNAME', function () {});
-			}).toThrowError(RangeError);
-		});
-
 		it('invokes the successCallback with requested key\'s InputDeviceKey object.', function (done) {
 			toast.inputdevice.getSupportedKeys(function (suppKeys) {
 				toast.inputdevice.getKey(suppKeys[0].name, function (devKey) {
@@ -183,12 +177,6 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.registerKey({});
 			}).toThrowError(TypeError);
 		});
-
-		it('throws RangeError when given keyName is not in the supported keys set.', function () {
-			expect(function () {
-				toast.inputdevice.registerKey('NOT_EXISTS_KEYNAME');
-			}).toThrowError(TypeError);
-		});
 	});
 
 	describe('toast.inputdevice.unregisterKey', function () {
@@ -215,59 +203,29 @@ describe('toast.inputdevice', function () {
 				toast.inputdevice.registerKey({});
 			}).toThrowError(TypeError);
 		});
-
-		it('throws RangeError when given keyName is not in the supported keys set.', function () {
-			expect(function () {
-				toast.inputdevice.registerKey('NOT_EXISTS_KEYNAME');
-			}).toThrowError(TypeError);
-		});
 	});
 
 	describe('registerKey & unregisterKey combination', function () {
 		it('is available to register with registerKey method and the key is available to accept via keydown event.', function (done) {
-			expect(function () {
-				var keyData;
-				toast.inputdevice.getKey('ColorF0Red', function (key) {
-					keyData = key;
-					toast.inputdevice.registerKey('ColorF0Red');
-					function onKeyDown (e) {
-						e.preventDefault();
-						if(e.keyCode === keyData.code) {
-							ask.done(true);
-							window.removeEventListener('keydown', onKeyDown);
-						}
+			var keyData;
+			toast.inputdevice.getKey('ColorF0Red', function (key) {
+				keyData = key;
+				toast.inputdevice.registerKey('ColorF0Red');
+				function onKeyDown (e) {
+					e.preventDefault();
+					if(e.keyCode === keyData.code) {
+						ask.done(true);
+						window.removeEventListener('keydown', onKeyDown);
 					}
-					window.addEventListener('keydown', onKeyDown);
-					var ask = helper.ask('Press the RED key on the remote control', function (ok) {
-						ok===true ? (done()) : (done.fail());
-					}, 3000);
-				});
-			}).toThrowError(RangeError);
-		}, 5000);
-		it('unregisters given key and the key is available to accept via keydown event.', function (done) {
-			expect(function () {
-				var keyData;
-				toast.inputdevice.getKey('ColorF0Red', function (key) {
-					keyData = key;
+				}
+				window.addEventListener('keydown', onKeyDown);
+				var ask = helper.ask('Press the RED key on the remote control', function (ok) {
+					expect(ok).toBeTruthy();
+					window.removeEventListener('keydown', onKeyDown);
 					toast.inputdevice.unregisterKey('ColorF0Red');
-					function onKeyDown (e) {
-						e.preventDefault();
-						if(e.keyCode === keyData.code) {
-							ask.done(false);	// SHOULD NOT BE WORKED!!!
-							window.removeEventListener('keydown', onKeyDown);
-						}
-					}
-					window.addEventListener('keydown', onKeyDown);
-					var ask = helper.ask('Press the RED key on the remote control. It should not be worked! ;)', function (ok) {
-						if(ok === 'TIMEOUT' || ok === true) {
-							done();
-						}
-						else {
-							done.fail();
-						}
-					}, 3000);
+					done()
 				});
-			}).toThrowError(RangeError);
+			});
 		}, 5000);
 	});
 });
