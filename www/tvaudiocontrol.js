@@ -4,18 +4,17 @@ var argscheck = require('cordova/argscheck'),
 	exec = require('cordova/exec');
 
 var tvaudiocontrolExport = {
-	setMute: function (mute) {
-		argscheck.checkArgs('*', 'tvaudiocontrol.setMute', arguments);
+	setMute: function (mute, successCallback, errorCallback) {
+		argscheck.checkArgs('*fF', 'tvaudiocontrol.setMute', arguments);
+		errorCallback = errorCallback || function () {};
 
 		if(typeof mute != 'boolean'){
-			var error = new Error();
-			error.name = 'TypeMismatchError';
-			error.message = 'TypeMismatchError';
+			var error = new TypeError('First parameter needs to be boolean type.');
 			throw error;
 		}
 
 		var args = [mute];
-		exec(null, null, 'toast.tvaudiocontrol', 'setMute', args);
+		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setMute', args);
 	},
 	isMute: function (successCallback, errorCallback) {
 		argscheck.checkArgs('fF', 'tvaudiocontrol.isMute', arguments);
@@ -24,19 +23,26 @@ var tvaudiocontrolExport = {
 		var args = [];
 		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'isMute', args);
 	},
-	setVolume: function (volume) {
-		argscheck.checkArgs('n', 'tvaudiocontrol.setVolume', arguments);
+	setVolume: function (volume, successCallback, errorCallback) {
+		argscheck.checkArgs('nfF', 'tvaudiocontrol.setVolume', arguments);
+		errorCallback = errorCallback || function () {};
 
 		var args = [volume];
-		exec(null, null, 'toast.tvaudiocontrol', 'setVolume', args);
+		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setVolume', args);
 	},
-	setVolumeUp: function () {
+	setVolumeUp: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvaudiocontrol.setVolumeUp', arguments);
+		errorCallback = errorCallback || function () {};
+
 		var args = [];
-		exec(null, null, 'toast.tvaudiocontrol', 'setVolumeUp', args);
+		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setVolumeUp', args);
 	},
-	setVolumeDown: function () {
+	setVolumeDown: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvaudiocontrol.setVolumeDown', arguments);
+		errorCallback = errorCallback || function () {};
+
 		var args = [];
-		exec(null, null, 'toast.tvaudiocontrol', 'setVolumeDown', args);
+		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setVolumeDown', args);
 	},
 	getVolume: function (successCallback, errorCallback) {
 		argscheck.checkArgs('fF', 'tvaudiocontrol.getVolume', arguments);
@@ -45,15 +51,19 @@ var tvaudiocontrolExport = {
 		var args = [];
 		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'getVolume', args);
 	},
-	setVolumeChangeListener: function (callback) {
-		argscheck.checkArgs('f', 'tvaudiocontrol.setVolumeChangeListener', arguments);
+	setVolumeChangeListener: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvaudiocontrol.setVolumeChangeListener', arguments);
+		errorCallback = errorCallback || function () {};
 
 		var args = [];
-		exec(callback, null, 'toast.tvaudiocontrol', 'setVolumeChangeListener', args);
+		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'setVolumeChangeListener', args);
 	},
-	unsetVolumeChangeListener: function () {
+	unsetVolumeChangeListener: function (successCallback, errorCallback) {
+		argscheck.checkArgs('fF', 'tvaudiocontrol.unsetVolumeChangeListener', arguments);
+		errorCallback = errorCallback || function () {};
+
 		var args = [];
-		exec(null, null, 'toast.tvaudiocontrol', 'unsetVolumeChangeListener', args);
+		exec(successCallback, errorCallback, 'toast.tvaudiocontrol', 'unsetVolumeChangeListener', args);
 	}
 };
 

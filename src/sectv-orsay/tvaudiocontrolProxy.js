@@ -4,15 +4,20 @@ var volumeChangeCallback = '';
 
 module.exports = {
 	setMute: function (success, fail, args) {
-		try {
-			success = success || function () {};
-			fail = fail || function() {};
-			args = args || '';
+		success = success || function () {};
+		fail = fail || function() {};
+		args = args || '';
 
-			webapis.audiocontrol.setMute(args[0]);
+		var result = webapis.audiocontrol.setMute(args[0]);
+
+		if (result) {
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
-		catch (e) {
-			throw e;
+		else{
+			var e = new RangeError('failed to setMute');
+			fail && fail(e);
 		}
 	},
 	isMute: function (success, fail, args) {

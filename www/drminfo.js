@@ -11,8 +11,8 @@ var drminfoExport = {
 		var args = [];
 		exec(successCallback, errorCallback, 'toast.drminfo', 'getVersion', args);
 	},
-	getEsn: function (successCallback, errorCallback, compName) {
-		argscheck.checkArgs('fFs', 'drminfo.getEsn', arguments);
+	getEsn: function (compName, successCallback, errorCallback) {
+		argscheck.checkArgs('sfF', 'drminfo.getEsn', arguments);
 		errorCallback = errorCallback || function () {};
 
 		var args = [compName];

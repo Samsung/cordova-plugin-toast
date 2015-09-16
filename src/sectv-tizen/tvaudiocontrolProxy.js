@@ -1,7 +1,5 @@
 'use strict';
 
-var tizenutil = require('cordova-plugin-toast.tizenutil');
-
 module.exports = {
 	setMute: function (success, fail, args) {
 		try {
@@ -9,10 +7,16 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			tizen.tvaudiocontrol.setMute(args[0]);
+			var result = tizen.tvaudiocontrol.setMute(args[0]);
+
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	isMute: function (success, fail, args) {
@@ -28,17 +32,9 @@ module.exports = {
 					success(result);
 				}, 0);
 			}
-			else {
-				setTimeout(function () {
-					var error = new Error();
-					error.name = 'TypeMismatchError';
-					error.message = 'TypeMismatchError';
-					fail(error);
-				}, 0);
-			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	setVolume: function (success, fail, args) {
@@ -47,10 +43,16 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			tizen.tvaudiocontrol.setVolume(args[0]);
+			var result = tizen.tvaudiocontrol.setVolume(args[0]);
+
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
@@ -59,10 +61,16 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			tizen.tvaudiocontrol.setVolumeUp();
+			var result = tizen.tvaudiocontrol.setVolumeUp();
+
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
@@ -71,10 +79,16 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			tizen.tvaudiocontrol.setVolumeDown();
+			var result = tizen.tvaudiocontrol.setVolumeDown();
+
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	getVolume: function (success, fail, args) {
@@ -90,17 +104,9 @@ module.exports = {
 					success(result);
 				}, 0);
 			}
-			else {
-				setTimeout(function () {
-					var error = new Error();
-					error.name = 'TypeMismatchError';
-					error.message = 'TypeMismatchError';
-					fail(error);
-				}, 0);
-			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	setVolumeChangeListener: function (success, fail, args) {
@@ -109,10 +115,16 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			tizen.tvaudiocontrol.setVolumeChangeListener(success);
+			var result = tizen.tvaudiocontrol.setVolumeChangeListener(success);
+
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
@@ -121,10 +133,16 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
-			tizen.tvaudiocontrol.unsetVolumeChangeListener();
+			var result = tizen.tvaudiocontrol.unsetVolumeChangeListener();
+
+			if (result) {
+				setTimeout(function () {
+					success();
+				}, 0);
+			}
 		}
 		catch (e) {
-			throw tizenutil.createError.fromWebAPIException(e);
+			fail && fail(e);
 		}
 	}
 };
