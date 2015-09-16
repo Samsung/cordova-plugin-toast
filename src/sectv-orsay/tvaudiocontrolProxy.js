@@ -47,6 +47,11 @@ module.exports = {
 			fail = fail || function() {};
 			args = args || '';
 
+			var isMute = webapis.audiocontrol.getMute();
+			if(isMute){
+				webapis.audiocontrol.setMute(false);
+			}
+			
 			webapis.audiocontrol.setVolume(args[0]);
 
 			if((volumeChangeCallback) && (typeof args[0] == 'number')){
@@ -62,6 +67,11 @@ module.exports = {
 			success = success || function () {};
 			fail = fail || function() {};
 			args = args || '';
+
+			var isMute = webapis.audiocontrol.getMute();
+			if(isMute){
+				webapis.audiocontrol.setMute(false);
+			}
 
 			webapis.audiocontrol.setVolumeUp();
 
@@ -81,6 +91,11 @@ module.exports = {
 			success = success || function () {};
 			fail = fail || function() {};
 			args = args || '';
+
+			var isMute = webapis.audiocontrol.getMute();
+			if(isMute){
+				webapis.audiocontrol.setMute(false);
+			}
 
 			webapis.audiocontrol.setVolumeDown();
 
