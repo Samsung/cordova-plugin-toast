@@ -1,4 +1,3 @@
-/* globals helper */
 describe('toast.tvaudiocontrol', function() {
     it('should be defined as "toast.tvaudiocontrol" namespace.', function() {
         expect(window.toast).toBeDefined();

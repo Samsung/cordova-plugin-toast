@@ -1,4 +1,3 @@
-/* globals helper */
 describe('toast.drminfo', function() {
     it('should be defined as "toast.drminfo" namespace.', function() {
         expect(window.toast).toBeDefined();
