@@ -27,7 +27,10 @@ describe('toast.drminfo', function() {
     });
     describe('toast.drminfo.getVersion', function() {
         it('returns plugin version as string', function () {
-            var version = toast.drminfo.getVersion(function(){});
+            var version = '';
+            toast.drminfo.getVersion(function(value){
+                version = value;
+            });
             expect(version).toBeDefined();
             expect(typeof version).toBe('string');
         });
@@ -96,7 +99,10 @@ describe('toast.drminfo', function() {
     });
     describe('toast.drminfo.getSdi', function() {
         it('returns SDI(Samsung Device Identifier) as string', function () {
-            var sdi = toast.drminfo.getSdiId(function(){});
+            var sdi = '';
+            toast.drminfo.getSdiId(function(value){
+                sdi = value;
+            });
             expect(sdi).toBeDefined();
             expect(typeof sdi).toBe('string');
         });
