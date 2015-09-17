@@ -1,18 +1,6 @@
 'use strict';
 
 module.exports = {
-	getVersion: function (success, fail, args) {
-		try {
-			var result = webapis.drminfo.getVersion();
-
-			setTimeout(function () {
-				success(result);
-			}, 0);
-		}
-		catch (e) {
-			fail(e);
-		}
-	},
 	getEsn: function(success, fail, args){
 		try {
 			var result = webapis.drminfo.getEsn(args[0]);
@@ -25,7 +13,7 @@ module.exports = {
 			fail(e);
 		}
 	},
-	getSdiId: function(success, fail, args){
+	getSdi: function(success, fail, args){
 		try {
 			var result = webapis.drminfo.getSdiId();
 
