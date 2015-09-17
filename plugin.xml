@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin xmlns='http://www.phonegap.com/ns/plugins/1.0' id='com.sec.toast' version='0.1.0'>
+<plugin xmlns='http://www.phonegap.com/ns/plugins/1.0' id='cordova-plugin-toast' version='0.1.0'>
 	<name>cordova-plugin-toast</name>
 
 	<engines>
