@@ -1,5 +1,5 @@
-# toast.drminfo
-toast.drminfo privides something
+# toast.tvaudiocontrol
+toast.tvaudiocontrol privides something
 
 ## Supported platforms
 * browser
@@ -8,18 +8,22 @@ toast.drminfo privides something
 
 ## Full WebIDL
 ```widl
-module DRMInfo {
-    [NoInterfaceObject] interface DRMInfoManager {
-        readonly attribute DRMInfoManager drminfo;
+module TVAudioControl {
+    [NoInterfaceObject] interface TVAudioControlManager {
+        readonly attribute TVAudioControlManager tvaudiocontrol;
     };
-    Toast implements DRMInfoManager;
+    Toast implements TVAudioControlManager;
 
-    [NoInterfaceObject] interface DRMInfoManager {
-        void getEsn(DOMString component, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
-        void getSdi(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+    [NoInterfaceObject] interface TVAudioControlManager {
+        void setMute(boolean mute, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        boolean isMute(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void setVolume(unsigned short volume, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void setVolumeUp(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void setVolumeDown(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void getVolume(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void setVolumeChangeListener(DOMStringCallback callback, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void unsetVolumeChangeListener(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
     };
-
-    callback DOMStringCallback = void (DOMString str);
 };
 ```
 
