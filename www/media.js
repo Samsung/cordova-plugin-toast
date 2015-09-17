@@ -12,6 +12,7 @@ var Media = function (){
         this._containerElem = -1;
         this._duration = -1;
         this._position = -1;
+        this.hooks = {};
         exec(null, null, 'toast.media', 'create',[this.id]);
     } 
     else {
@@ -51,10 +52,42 @@ Media.STATE_SEEK = 'SEEK';
 Media._MEDIA_CONTAINER = 'CONTAINER';
 Media._MEDIA_ERROR = 'ERROR';
 
+Media.prototype.registerHook = function (hook, fn) {
+    this.hooks[hook] = this.hooks[hook] || [];
+    this.hooks[hook].push(fn);
+};
+Media.prototype.unregisterHook = function (hook, fn) {
+    if(!this.hooks[hook]) {
+        return;
+    }
+    for(var i=this.hooks[hook].length-1; i>=0; i--) {
+        if(this.hooks[hook][i] === fn) {
+            this.hooks[hook].splice(i, 1);
+        }
+    }
+};
+Media.prototype.attachPlugin = function (plugin) {
+    if(plugin.onAttachToMedia) {
+        plugin.onAttachToMedia(this);
+    }
+};
+function invokeHooks (hook, args) {
+    var media = args[0];
+    args = args.slice(1);
+    if(!media.hooks[hook]) {
+        return;
+    }
+    for(var i=0; i<media.hooks[hook].length; i++) {
+        media.hooks[hook][i](media, args);
+    }
+}
+
 Media.prototype.open = function(mediaUrl) {
     argscheck.checkArgs('s', 'Media.open', arguments);
     this.src = mediaUrl;
+    invokeHooks('beforeopen', [this].concat(arguments));
     exec(null, null, 'toast.media', 'open', [this.id,this.src]);
+    invokeHooks('afteropen', [this].concat(arguments));
 };
 
 Media.prototype.getContainerElement = function() {
@@ -62,7 +95,9 @@ Media.prototype.getContainerElement = function() {
 };
 
 Media.prototype.play = function(){
+    invokeHooks('beforeplay', [this].concat(arguments));
     exec(null, null, 'toast.media', 'play', [this.id]);
+    invokeHooks('afterplay', [this].concat(arguments));
 };
 
 Media.prototype.stop = function() {
