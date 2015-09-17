@@ -12,13 +12,8 @@ function onDeviceReady() {
 }
 ```
 
-# Installation
-```shell
-$ cordova plugin add {{Local or git path to this project}}
-```
-
 # How to use
-## browser as a cordova platform
+## Platform `browser`
 You can develop your cordova TV application by using chrome browser with simulated Toast API.
 ```shell
 $ cordova platform add browser
@@ -27,20 +22,22 @@ $ cordova build browser
 $ cordova emulate browser
 ```
 
-## Samsung Tizen TV
+## Platform `sectv-tizen`: Samsung Tizen TV
 In the 2015's TV
 1. Copy the platform_www/sectv-tizen/toast.js to your cordova `www` directory root.
-2. Insert below code to your `index.html`
+2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
 ```HTML
+<script src="cordova.js"></script>	<!-- existing -->
 <script src="toast.js"></script>
 ```
 3. Package your `www` directory using Samsung Tizen TV SDK
 
-## Legacy Samsung Smart TV
+## Platform `sectv-orsay`: Legacy Samsung Smart TV (A.K.A Orsay)
 In the 2014's TV
 1. Copy the platform_www/sectv-orsay/toast.js to your cordova `www` directory root.
-2. Insert below code to your `index.html`
+2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
 ```HTML
+<script src="cordova.js"></script>	<!-- existing -->
 <script src="toast.js"></script>
 ```
 3. Zip your `www` directory
@@ -57,6 +54,14 @@ In the 2014's TV
 ```
 
 # How to Build
+* platform `browser`
+	* For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add`. Please see "How to use" section for details.
+* platform `sectv-orsay` and `sectv-tizen`
+	* Run below command
+	```
+	$ grunt compile
+	```
+	It will create the `toast.js` in the `platform_www/<platform>` directory of the project's root.
 
 # How to Test with TestRunner
 * You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory.
@@ -85,3 +90,4 @@ $ grunt sectv-build:sectv-tizen sectv-package:sectv-tizen
 ```
 
 # Known Issues
+Not yet
