@@ -21,7 +21,9 @@ function onDeviceReady() {
      |  |-sectv-orsay/ ........ Plugin implementation for the platform `sectv-orsay`
      |  '-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
      |-tasks/ ................. custom grunt tasks to build the toast.js
-     '-www/ ................... Platform independent modules for the plugin TOAST
+     |-www/ ................... Platform independent modules for the plugin TOAST
+     |-Gruntfile.js ........... Gruntfile to build the toast.js
+     '-plugin.xml ............. Cordova Plugin configuration for TOAST
 ```
 
 # How to Build
