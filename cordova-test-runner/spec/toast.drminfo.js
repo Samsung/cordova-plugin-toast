@@ -26,14 +26,17 @@ describe('toast.drminfo', function() {
         }
     });
     describe('toast.drminfo.getVersion', function() {
-        it('returns plugin version as string', function () {
-            var version = '';
+        it('returns plugin version as string', function (done) {
+            var version = null;
             toast.drminfo.getVersion(function(value){
                 version = value;
+                expect(version).toBeDefined();
+                expect(typeof version).toBe('string');
+                done();
+            }, function(){
+                done.fail();
             });
-            expect(version).toBeDefined();
-            expect(typeof version).toBe('string');
-        });
+        }, 3000);
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
@@ -76,14 +79,17 @@ describe('toast.drminfo', function() {
         });
     });
     describe('toast.drminfo.getEsn', function() {
-        it('returns Esn value as string', function () {
-            var esn = '';
+        it('returns Esn value as string', function (done) {
+            var esn = null;
             toast.drminfo.getEsn('WIDEVINE', function(value){
                 esn = value;
-            }, function(){});
-            expect(esn).toBeDefined();
-            expect(typeof esn).toBe('string');
-        });
+                expect(esn).toBeDefined();
+                expect(typeof esn).toBe('string');
+                done();
+            }, function(){
+                done.fail();
+            });
+        }, 3000);
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
@@ -146,14 +152,17 @@ describe('toast.drminfo', function() {
         });
     });
     describe('toast.drminfo.getSdiId', function() {
-        it('returns SDI(Samsung Device Identifier) as string', function () {
-            var sdi = '';
+        it('returns SDI(Samsung Device Identifier) as string', function (done) {
+            var sdi = null;
             toast.drminfo.getSdiId(function(value){
                 sdi = value;
+                expect(sdi).toBeDefined();
+                expect(typeof sdi).toBe('string');
+                done();
+            }, function(){
+                done.fail();
             });
-            expect(sdi).toBeDefined();
-            expect(typeof sdi).toBe('string');
-        });
+        }, 3000);
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
