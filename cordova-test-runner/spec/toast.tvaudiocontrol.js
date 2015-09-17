@@ -1,364 +1,460 @@
 /* globals helper */
-describe('toast.tvwindow', function() {
-    it('should be defined as "toast.tvwindow" namespace.', function() {
+describe('toast.tvaudiocontrol', function() {
+    it('should be defined as "toast.tvaudiocontrol" namespace.', function() {
         expect(window.toast).toBeDefined();
-        expect(window.toast.tvwindow).toBeDefined();
+        expect(window.toast.tvaudiocontrol).toBeDefined();
     });
-
-    it('should contain a "getAvailableWindows" function.', function() {
-        expect(window.toast.tvwindow.getAvailableWindows).toBeDefined();
-        expect(typeof window.toast.tvwindow.getAvailableWindows).toBe('function');
+    it('should contain a "setMute" function.', function() {
+        expect(window.toast.tvaudiocontrol.setMute).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.setMute).toBe('function');
     });
-    it('should contain a "setSource" function.', function() {
-        expect(window.toast.tvwindow.setSource).toBeDefined();
-        expect(typeof window.toast.tvwindow.setSource).toBe('function');
+    it('should contain a "isMute" function.', function() {
+        expect(window.toast.tvaudiocontrol.isMute).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.isMute).toBe('function');
     });
-    it('should contain a "getSource" function.', function() {
-        expect(window.toast.tvwindow.getSource).toBeDefined();
-        expect(typeof window.toast.tvwindow.getSource).toBe('function');
+    it('should contain a "setVolume" function.', function() {
+        expect(window.toast.tvaudiocontrol.setVolume).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.setVolume).toBe('function');
     });
-    it('should contain a "show" function.', function() {
-        expect(window.toast.tvwindow.show).toBeDefined();
-        expect(typeof window.toast.tvwindow.show).toBe('function');
+    it('should contain a "setVolumeUp" function.', function() {
+        expect(window.toast.tvaudiocontrol.setVolumeUp).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.setVolumeUp).toBe('function');
     });
-    it('should contain a "hide" function.', function() {
-        expect(window.toast.tvwindow.hide).toBeDefined();
-        expect(typeof window.toast.tvwindow.hide).toBe('function');
+    it('should contain a "setVolumeDown" function.', function() {
+        expect(window.toast.tvaudiocontrol.setVolumeDown).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.setVolumeDown).toBe('function');
     });
-    it('should contain a "getRect" function.', function() {
-        expect(window.toast.tvwindow.getRect).toBeDefined();
-        expect(typeof window.toast.tvwindow.getRect).toBe('function');
+    it('should contain a "getVolume" function.', function() {
+        expect(window.toast.tvaudiocontrol.getVolume).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.getVolume).toBe('function');
+    });
+    it('should contain a "setMute" function.', function() {
+        expect(window.toast.tvaudiocontrol.setMute).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.setMute).toBe('function');
+    });
+    it('should contain a "setVolumeChangeListener" function.', function() {
+        expect(window.toast.tvaudiocontrol.setVolumeChangeListener).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.setVolumeChangeListener).toBe('function');
+    });
+    it('should contain a "unsetVolumeChangeListener" function.', function() {
+        expect(window.toast.tvaudiocontrol.unsetVolumeChangeListener).toBeDefined();
+        expect(typeof window.toast.tvaudiocontrol.unsetVolumeChangeListener).toBe('function');
     });
     it('should not contain a property that is not exists in the specs.', function() {
-        for (var prop in toast.tvwindow) {
+        for (var prop in toast.tvaudiocontrol) {
             expect([
-                'getAvailableWindows',
-                'setSource',
-                'getSource',
-                'show',
-                'hide',
-                'getRect'
+                'setMute',
+                'isMute',
+                'setVolume',
+                'setVolumeUp',
+                'setVolumeDown',
+                'getVolume',
+                'setVolumeChangeListener',
+                'unsetVolumeChangeListener'
             ].indexOf(prop) >= 0).toBeTruthy();
         }
     });
-
-    describe('toast.tvwindow.getAvailableWindows', function() {
+    describe('toast.tvaudiocontrol.setMute', function() {
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
-                toast.tvwindow.getAvailableWindows();
+                toast.tvaudiocontrol.setMute();
             }).toThrowError(TypeError);
 
             // invalid type for 1st argument
             expect(function() {
-                toast.tvwindow.getAvailableWindows([]);
+                toast.tvaudiocontrol.setMute([]);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.getAvailableWindows(new Date());
+                toast.tvaudiocontrol.setMute(new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.getAvailableWindows(0);
+                toast.tvaudiocontrol.setMute('');
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.getAvailableWindows('DUMMY');
+                toast.tvaudiocontrol.setMute({});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.getAvailableWindows({});
-            }).toThrowError(TypeError);
-
-            // invalid type for 2nd argument
-            expect(function() {
-                toast.tvwindow.getAvailableWindows(function() {}, []);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.getAvailableWindows(function() {}, new Date());
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.getAvailableWindows(function() {}, 0);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.getAvailableWindows(function() {}, 'DUMMY');
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.getAvailableWindows(function() {}, {});
-            }).toThrowError(TypeError);
-        });
-
-        it('gets list of available windows', function(done) {
-            function successCB(availableWindows) {
-                expect(availableWindows).toBeDefined();
-                expect(typeof availableWindows.length).toBe('number');
-                for (var i = 0; i < availableWindows.length; i++) {
-                    console.log('Window [' + i + '] = ' + availableWindows[i]);
-                }
-                done();
-            }
-
-            function errorCB() {
-                done.fail();
-            }
-
-            toast.tvwindow.getAvailableWindows(successCB, errorCB);
-        }, 3000);
-    });
-
-    describe('toast.tvwindow.show', function() {
-        it('throws TypeError when given arguments is not matched to spec.', function() {
-            // no argument
-            expect(function() {
-                toast.tvwindow.show();
-            }).toThrowError(TypeError);
-
-            // invalid type for 1st argument
-            expect(function() {
-                toast.tvwindow.show([]);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show(new Date());
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show(0);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show('DUMMY');
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show({});
+                toast.tvaudiocontrol.setMute(function(){});
             }).toThrowError(TypeError);
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvwindow.show(function() {}, []);
+                toast.tvaudiocontrol.setMute(true, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, new Date());
+                toast.tvaudiocontrol.setMute(true, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, 0);
+                toast.tvaudiocontrol.setMute(true, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, 'DUMMY');
+                toast.tvaudiocontrol.setMute(true, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, {});
+                toast.tvaudiocontrol.setMute(true, false);
             }).toThrowError(TypeError);
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, new Date());
+                toast.tvaudiocontrol.setMute(true, function(){}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, 0);
+                toast.tvaudiocontrol.setMute(true, function(){}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, 'DUMMY');
+                toast.tvaudiocontrol.setMute(true, function(){}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, function() {});
+                toast.tvaudiocontrol.setMute(true, function(){}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, {});
-            }).toThrowError(TypeError);
-
-            // invalid type for 4th argument
-            expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, ['0', '0', '100px', '100px'], []);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, ['0', '0', '100px', '100px'], new Date());
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, ['0', '0', '100px', '100px'], 0);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, ['0', '0', '100px', '100px'], function() {});
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, ['0', '0', '100px', '100px'], {});
+                toast.tvaudiocontrol.setMute(true, function(){}, false);
             }).toThrowError(TypeError);
         });
     });
-
-    describe('toast.tvwindow.setSource', function() {
+    describe('toast.tvaudiocontrol.isMute', function() {
+        it('returns mute value as boolean', function () {
+            var mute = '';
+            toast.tvaudiocontrol.isMute(function(value){
+                mute = value;
+            }, function(){});
+            expect(mute).toBeDefined();
+            expect(typeof mute).toBe('boolean');
+        });
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
-                toast.tvwindow.setSource();
+                toast.tvaudiocontrol.isMute();
             }).toThrowError(TypeError);
 
             // invalid type for 1st argument
             expect(function() {
-                toast.tvwindow.setSource([], function() {});
+                toast.tvaudiocontrol.isMute([]);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource(new Date(), function() {});
+                toast.tvaudiocontrol.isMute(new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource(0, function() {});
+                toast.tvaudiocontrol.isMute(0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource('DUMMY', function() {});
+                toast.tvaudiocontrol.isMute({});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource(function() {}, function() {});
+                toast.tvaudiocontrol.isMute(false);
             }).toThrowError(TypeError);
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, []);
+                toast.tvaudiocontrol.isMute(function(){}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, new Date());
+                toast.tvaudiocontrol.isMute(function(){}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, 0);
+                toast.tvaudiocontrol.isMute(function(){}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, 'DUMMY');
+                toast.tvaudiocontrol.isMute(function(){}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, {});
+                toast.tvaudiocontrol.isMute(function(){}, false);
+            }).toThrowError(TypeError);
+        });
+    });
+    describe('toast.tvaudiocontrol.setVolume', function() {
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolume();
+            }).toThrowError(TypeError);
+
+            // invalid type for 1st argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolume([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume('');
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(false);
+            }).toThrowError(TypeError);
+
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(5, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(5, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(5, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(5, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolume(5, false);
             }).toThrowError(TypeError);
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, []);
+                toast.tvaudiocontrol.setVolume(5, function(){}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, new Date());
+                toast.tvaudiocontrol.setVolume(5, function(){}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, 0);
+                toast.tvaudiocontrol.setVolume(5, function(){}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, 'DUMMY');
+                toast.tvaudiocontrol.setVolume(5, function(){}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, {});
-            }).toThrowError(TypeError);
-
-            // invalid type for 4th argument
-            expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, function() {}, []);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, function() {}, new Date());
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, function() {}, 0);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, function() {}, function() {});
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.tvwindow.setSource({
-                    type: 'TV'
-                }, function() {}, function() {}, {});
+                toast.tvaudiocontrol.setVolume(5, function(){}, false);
             }).toThrowError(TypeError);
         });
     });
+    describe('toast.tvaudiocontrol.setVolumeUp', function() {
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp();
+            }).toThrowError(TypeError);
 
-    describe('show/hide/setSource/getSource combination', function(done) {
-        it('works well...', function(done) {
-            afterEach(function () {
-                toast.tvwindow.hide(function() {});
-            });
+            // invalid type for 1st argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(false);
+            }).toThrowError(TypeError);
 
-            testShow(function() {
-                testSourceChange(function() {
-                    testHide(function() {
-                        done();
-                    });
-                });
-            });
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeUp(function(){}, false);
+            }).toThrowError(TypeError);
+        });
+    });
+    describe('toast.tvaudiocontrol.setVolumeDown', function() {
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown();
+            }).toThrowError(TypeError);
 
-            function testShow(callback) {
-                var flag = true;
-                toast.tvwindow.show(function(windowRect, type) {
-                    flag = false;
-                    expect(windowRect).toBeDefined();
-                    expect(windowRect.length).toBe(4);
-                    expect(type).toBeDefined();
-                    expect(typeof type).toBe('string');
-                    helper.aOrB('Can you see the TV hole window on the screen?', ['YES', 'NO'], function(yes) {
-                        expect(yes).toBe(true);
-                        callback();
-                    });
-                }, function() {
-                    done.fail();
-                }, ['100px', '100px', '320px', '180px']);
-                // the flag must be true if the successCallback is invoked asynchronously as expected.
-                expect(flag).toBeTruthy();
-            }
+            // invalid type for 1st argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(false);
+            }).toThrowError(TypeError);
 
-            function testSourceChange(callback) {
-                var flag = true;
-                toast.tvwindow.setSource({
-                    type: 'TV',
-                    number: 1
-                }, function() {
-                    flag = false;
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeDown(function(){}, false);
+            }).toThrowError(TypeError);
+        });
+    });
+    describe('toast.tvaudiocontrol.getVolume', function() {
+        it('returns mute value as number', function () {
+            var volume = '';
+            toast.tvaudiocontrol.getVolume(function(value){
+                volume = value;
+            }, function(){});
+            expect(volume).toBeDefined();
+            expect(typeof volume).toBe('number');
+        });
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.tvaudiocontrol.getVolume();
+            }).toThrowError(TypeError);
 
-                    var flag2 = true;
-                    toast.tvwindow.getSource(function(source) {
-                        flag2 = false;
-                        expect(source).toBeDefined();
-                        expect(source.type).toBe('TV');
-                        helper.aOrB('Can you see the \"TV\" source in the hole window?', ['YES', 'NO'], function(yes) {
-                            expect(yes).toBe(true);
-                            callback();
-                        });
-                    }, function() {
-                        done.fail(); // ERROR: setSource
-                    });
-                    expect(flag2).toBeTruthy();
-                }, function() {
-                    done.fail(); // ERROR: setSource
-                });
-                expect(flag).toBeTruthy();
-            }
+            // invalid type for 1st argument
+            expect(function() {
+                toast.tvaudiocontrol.getVolume([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(false);
+            }).toThrowError(TypeError);
 
-            function testHide(callback) {
-                var flag = true;
-                toast.tvwindow.hide(function() {
-                    flag = false;
-                    helper.aOrB('Is the TV hole window hidden now?', ['YES', 'NO'], function(yes) {
-                        expect(yes).toBe(true);
-                        callback();
-                    });
-                }, function() {
-                    done.fail();
-                });
-                expect(flag).toBeTruthy();
-            }
-        }, 60000);
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.getVolume(function(){}, false);
+            }).toThrowError(TypeError);
+        });
+    });
+    describe('toast.tvaudiocontrol.setVolumeChangeListener', function() {
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener();
+            }).toThrowError(TypeError);
+
+            // invalid type for 1st argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener('');
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(false);
+            }).toThrowError(TypeError);
+
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, false);
+            }).toThrowError(TypeError);
+
+            // invalid type for 3rd argument
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, false);
+            }).toThrowError(TypeError);
+        });
+    });
+    describe('toast.tvaudiocontrol.unsetVolumeChangeListener', function() {
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener();
+            }).toThrowError(TypeError);
+
+            // invalid type for 1st argument
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(false);
+            }).toThrowError(TypeError);
+
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, false);
+            }).toThrowError(TypeError);
+        });
     });
 });
