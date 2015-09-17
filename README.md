@@ -32,7 +32,7 @@ function onDeviceReady() {
 	```
 	$ grunt compile
 	```
-	It will create the `toast.js` in the `platform_www/<platform>` directory of the project's root.
+	It will creates the `toast.js` for each platforms in the `platform_www/<platform>` directories of project's root.
 
 # How to use
 ## Platform "browser"
