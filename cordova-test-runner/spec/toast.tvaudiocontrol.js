@@ -114,14 +114,17 @@ describe('toast.tvaudiocontrol', function() {
         });
     });
     describe('toast.tvaudiocontrol.isMute', function() {
-        it('returns mute value as boolean', function () {
+        it('returns mute value as boolean', function (done) {
             var mute = '';
             toast.tvaudiocontrol.isMute(function(value){
                 mute = value;
-            }, function(){});
-            expect(mute).toBeDefined();
-            expect(typeof mute).toBe('boolean');
-        });
+                expect(mute).toBeDefined();
+                expect(typeof mute).toBe('boolean');
+                done();
+            }, function(){
+                done.fail();
+            });
+        }, 3000);
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
@@ -307,14 +310,17 @@ describe('toast.tvaudiocontrol', function() {
         });
     });
     describe('toast.tvaudiocontrol.getVolume', function() {
-        it('returns mute value as number', function () {
+        it('returns volume value as number', function (done) {
             var volume = '';
             toast.tvaudiocontrol.getVolume(function(value){
                 volume = value;
-            }, function(){});
-            expect(volume).toBeDefined();
-            expect(typeof volume).toBe('number');
-        });
+                expect(volume).toBeDefined();
+                expect(typeof volume).toBe('number');
+                done();
+            }, function(){
+                done.fail();
+            });
+        }, 3000);
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
