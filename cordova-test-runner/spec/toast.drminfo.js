@@ -145,7 +145,7 @@ describe('toast.drminfo', function() {
             }).toThrowError(TypeError);
         });
     });
-    describe('toast.drminfo.getSdi', function() {
+    describe('toast.drminfo.getSdiId', function() {
         it('returns SDI(Samsung Device Identifier) as string', function () {
             var sdi = '';
             toast.drminfo.getSdiId(function(value){
