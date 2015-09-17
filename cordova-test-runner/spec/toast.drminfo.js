@@ -34,8 +34,56 @@ describe('toast.drminfo', function() {
             expect(version).toBeDefined();
             expect(typeof version).toBe('string');
         });
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.drminfo.getVersion();
+            }).toThrowError(TypeError);
+
+            // invalid type for 1st argument
+            expect(function() {
+                toast.drminfo.getVersion([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(false);
+            }).toThrowError(TypeError);
+
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.drminfo.getVersion(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getVersion(function(){}, false);
+            }).toThrowError(TypeError);
+        });
     });
     describe('toast.drminfo.getEsn', function() {
+        it('returns Esn value as string', function () {
+            var esn = '';
+            toast.drminfo.getEsn('WIDEVINE', function(value){
+                esn = value;
+            }, function(){});
+            expect(esn).toBeDefined();
+            expect(typeof esn).toBe('string');
+        });
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
@@ -105,6 +153,46 @@ describe('toast.drminfo', function() {
             });
             expect(sdi).toBeDefined();
             expect(typeof sdi).toBe('string');
+        });
+        it('throws TypeError when given arguments is not matched to spec.', function() {
+            // no argument
+            expect(function() {
+                toast.drminfo.getSdiId();
+            }).toThrowError(TypeError);
+
+            // invalid type for 1st argument
+            expect(function() {
+                toast.drminfo.getSdiId([]);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId({});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(false);
+            }).toThrowError(TypeError);
+
+            // invalid type for 2nd argument
+            expect(function() {
+                toast.drminfo.getSdiId(function(){}, []);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(function(){}, new Date());
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(function(){}, 0);
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(function(){}, {});
+            }).toThrowError(TypeError);
+            expect(function() {
+                toast.drminfo.getSdiId(function(){}, false);
+            }).toThrowError(TypeError);
         });
     });
 });
