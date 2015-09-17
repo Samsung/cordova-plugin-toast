@@ -4,79 +4,21 @@ describe('toast.drminfo', function() {
         expect(window.toast).toBeDefined();
         expect(window.toast.drminfo).toBeDefined();
     });
-    it('should contain a "getVersion" function.', function() {
-        expect(window.toast.drminfo.getVersion).toBeDefined();
-        expect(typeof window.toast.drminfo.getVersion).toBe('function');
-    });
     it('should contain a "getEsn" function.', function() {
         expect(window.toast.drminfo.getEsn).toBeDefined();
         expect(typeof window.toast.drminfo.getEsn).toBe('function');
     });
-    it('should contain a "getSdiId" function.', function() {
-        expect(window.toast.drminfo.getSdiId).toBeDefined();
-        expect(typeof window.toast.drminfo.getSdiId).toBe('function');
+    it('should contain a "getSdi" function.', function() {
+        expect(window.toast.drminfo.getSdi).toBeDefined();
+        expect(typeof window.toast.drminfo.getSdi).toBe('function');
     });
     it('should not contain a property that is not exists in the specs.', function() {
         for (var prop in toast.drminfo) {
             expect([
-                'getVersion',
                 'getEsn',
-                'getSdiId'
+                'getSdi'
             ].indexOf(prop) >= 0).toBeTruthy();
         }
-    });
-    describe('toast.drminfo.getVersion', function() {
-        it('returns plugin version as string', function (done) {
-            var version = null;
-            toast.drminfo.getVersion(function(value){
-                version = value;
-                expect(version).toBeDefined();
-                expect(typeof version).toBe('string');
-                done();
-            }, function(){
-                done.fail();
-            });
-        }, 3000);
-        it('throws TypeError when given arguments is not matched to spec.', function() {
-            // no argument
-            expect(function() {
-                toast.drminfo.getVersion();
-            }).toThrowError(TypeError);
-
-            // invalid type for 1st argument
-            expect(function() {
-                toast.drminfo.getVersion([]);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(new Date());
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(0);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion({});
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(false);
-            }).toThrowError(TypeError);
-
-            // invalid type for 2nd argument
-            expect(function() {
-                toast.drminfo.getVersion(function(){}, []);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(function(){}, new Date());
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(function(){}, 0);
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(function(){}, {});
-            }).toThrowError(TypeError);
-            expect(function() {
-                toast.drminfo.getVersion(function(){}, false);
-            }).toThrowError(TypeError);
-        });
     });
     describe('toast.drminfo.getEsn', function() {
         it('returns Esn value as string', function (done) {
@@ -151,10 +93,10 @@ describe('toast.drminfo', function() {
             }).toThrowError(TypeError);
         });
     });
-    describe('toast.drminfo.getSdiId', function() {
+    describe('toast.drminfo.getSdi', function() {
         it('returns SDI(Samsung Device Identifier) as string', function (done) {
             var sdi = null;
-            toast.drminfo.getSdiId(function(value){
+            toast.drminfo.getSdi(function(value){
                 sdi = value;
                 expect(sdi).toBeDefined();
                 expect(typeof sdi).toBe('string');
@@ -166,41 +108,41 @@ describe('toast.drminfo', function() {
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
-                toast.drminfo.getSdiId();
+                toast.drminfo.getSdi();
             }).toThrowError(TypeError);
 
             // invalid type for 1st argument
             expect(function() {
-                toast.drminfo.getSdiId([]);
+                toast.drminfo.getSdi([]);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(new Date());
+                toast.drminfo.getSdi(new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(0);
+                toast.drminfo.getSdi(0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId({});
+                toast.drminfo.getSdi({});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(false);
+                toast.drminfo.getSdi(false);
             }).toThrowError(TypeError);
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.drminfo.getSdiId(function(){}, []);
+                toast.drminfo.getSdi(function(){}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(function(){}, new Date());
+                toast.drminfo.getSdi(function(){}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(function(){}, 0);
+                toast.drminfo.getSdi(function(){}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(function(){}, {});
+                toast.drminfo.getSdi(function(){}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdiId(function(){}, false);
+                toast.drminfo.getSdi(function(){}, false);
             }).toThrowError(TypeError);
         });
     });
