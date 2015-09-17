@@ -2,7 +2,7 @@
 Cordova plugin that provides TV Specific functionalities.
 
 # About this project
-This plugin defines a global toast object, which provides an API for TV specific functionalities that is based on [Cordova](https://cordova.apache.org/) project.
+This plugin defines a global `toast` object, which provides an API for TV specific functionalities that is based on [Cordova](https://cordova.apache.org/) project.
 
 Although the object provides the global scoped `toast` object, it is not available until after the `deviceready` event which is provided by Cordova.
 ```javascript
@@ -14,12 +14,14 @@ function onDeviceReady() {
 # Project Structure
 ```
     ./
-     |-src/
-     |  |-cordova.js ........ common Cordova stuff
-     |  |-common/ ........... base modules shared across platfoms
-     |-tasks/ ............... custom grunt tasks
-     |-tests/ ............... unit tests
-     '-pkg/ ................. generated platform cordova.js files
+     |-cordova-test-runner/ ... TestRunner/TestSuite Cordova application
+     |-docs/ .................. Documents which is including API Specification.
+     |-src/ ................... Platform dependent modules for the plugin TOAST
+     |  |-browser/ ............ Plugin implementation for the platform `browser`
+     |  |-sectv-orsay/ ........ Plugin implementation for the platform `sectv-orsay`
+     |  '-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
+     |-tasks/ ................. custom grunt tasks to build the toast.js
+     '-www/ ................... Platform independent modules for the plugin TOAST
 ```
 
 # How to Build
