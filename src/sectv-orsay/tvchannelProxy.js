@@ -1,120 +1,83 @@
 'use strict';
 
-var windowType = ['MAIN'];
+var sefObject = require('cordova/plugin/SEF');
+
+var windowType = 0;
 var channelChangeCallback = [];
 
-function fireChannelChangeEvent (channelInfo, windowType) {
+var setChannel = {
+    up: 3,
+    down: 4
+};
+var tuneModeList = {
+    ALL: 0,
+    DIGITAL: 1,
+    ANALOG: 2,
+    FAVORITE: 3
+};
+
+function fireChannelChangeEvent (channelInfo) {
     for (var i = 0; i < channelChangeCallback.length; i++) {
-        channelChangeCallback[i](channelInfo, windowType);
+        channelChangeCallback[i](channelInfo);
     }
 }
 
 module.exports = {
     tune: function (success, fail, args) {
-        try {
-            webapis.tv.channel.tune(args[0], success, fail, args[1]);
+        var result = sefObject.get('Window').Execute('SetChannel', args[0].major, args[0].minor);
 
+        if (result) {
+            var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
             setTimeout(function () {
-                fireChannelChangeEvent(webapis.tv.channel.getCurrentChannel(windowType[0]), windowType[0]);
+                success.onsuccess(channelInfo);
+                fireChannelChangeEvent(channelInfo);
             }, 0);
-        }
-        catch (e) {
-            throw e;
+        } else {
+            setTimeout(function () {
+                success.onnosignal();
+            }, 0);
         }
     },
     tuneUp: function (success, fail, args) {
-        try {
-            webapis.tv.channel.tuneUp(success, fail, args[0], args[1]);
+        sefObject.get('Window').Execute('SetChannel_Seek', setChannel.up, tuneModeList[args[0]]);
 
-            setTimeout(function () {
-                fireChannelChangeEvent(webapis.tv.channel.getCurrentChannel(windowType[0]), windowType[0]);
-            }, 0);
-        }
-        catch (e) {
-            throw e;
-        }
+        var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
+        setTimeout(function () {
+            success.onsuccess(channelInfo);
+            fireChannelChangeEvent(channelInfo);
+        }, 0);
     },
     tuneDown: function (success, fail, args) {
-        try {
-            webapis.tv.channel.tuneDown(success, fail, args[0], args[1]);
-
-            setTimeout(function () {
-                fireChannelChangeEvent(webapis.tv.channel.getCurrentChannel(windowType[0]), windowType[0]);
-            }, 0);
-        }
-        catch (e) {
-            throw e;
-        }
+        sefObject.get('Window').Execute('SetChannel_Seek', setChannel.down, tuneModeList[args[0]]);
+        
+        setTimeout(function () {
+            var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
+            success.onsuccess(channelInfo);
+            fireChannelChangeEvent(channelInfo);
+        }, 0);
     },
     findChannel: function (success, fail, args) {
-        try {
-            webapis.tv.channel.findChannel(args[0], args[1], success, fail);
-        }
-        catch (e) {
-            throw e;
-        }
+        webapis.tv.channel.findChannel(args[0], args[1], success, fail);
     },
     getChannelList: function (success, fail, args) {
-        try {
-            webapis.tv.channel.getChannelList(success, fail, args[0], args[1], args[2]);
-        }
-        catch (e) {
-            throw e;
-        }
+        webapis.tv.channel.getChannelList(success, fail, tuneModeList[args[0]], args[1], args[2]);
     },
     getCurrentChannel: function (success, fail, args) {
-        try {
-            var channelInfo = webapis.tv.channel.getCurrentChannel(args[0]);
+        var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
 
-            if (typeof channelInfo == 'object') {
-                setTimeout(function () {
-                    success(channelInfo);
-                }, 0);
-            }
-            else {
-                setTimeout(function () {
-                    fail({
-                        code: 9,
-                        name: 'NOT_SUPPORTED_ERR',
-                        message: 'Any other error occurs on platform.'
-                    });
-                }, 0);
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        setTimeout(function () {
+            success(channelInfo);
+        }, 0);
     },
     getProgramList: function (success, fail, args) {
-        try {
-            webapis.tv.channel.getProgramList(args[0], args[1], success, fail, args[2]);
-        }
-        catch (e) {
-            throw e;
-        }
+        webapis.tv.channel.getProgramList(args[0], args[1], success, fail, args[2]);
     },
     getCurrentProgram: function (success, fail, args) {
-        try {
-            var programInfo = webapis.tv.channel.getCurrentProgram(args[0]);
+        var programInfo = webapis.tv.channel.getCurrentProgram(windowType);
 
-            if (typeof programInfo == 'object') {
-                setTimeout(function () {
-                    success(programInfo);
-                }, 0);
-            }
-            else {
-                setTimeout(function () {
-                    fail({
-                        code: 9,
-                        name: 'NOT_SUPPORTED_ERR',
-                        message: 'Any other error occurs on platform.'
-                    });
-                }, 0);
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        setTimeout(function () {
+            success(programInfo);
+        }, 0);
     },
     addChannelChangeListener: function (success, fail, args) {
         channelChangeCallback.push(success);

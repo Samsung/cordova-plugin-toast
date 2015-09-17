@@ -55,15 +55,15 @@ module.exports = {
                 break;
             }
         }
-        if (!match) {
+        if (match) {
             setTimeout(function () {
-                fail(new Error('Fail to find channel.'));
+                success.onsuccess(sampleEPG.channelList[listIndex]);
+                fireChannelChangeEvent(sampleEPG.channelList[listIndex]);
             }, 0);
         }
         else {
             setTimeout(function () {
-                success.onsuccess(sampleEPG.channelList[listIndex]);
-                fireChannelChangeEvent(sampleEPG.channelList[listIndex]);
+                success.onnosignal();
             }, 0);
         }
     },
@@ -114,14 +114,14 @@ module.exports = {
             }
         }
 
-        if (!channelInfo) {
+        if (channelInfo) {
             setTimeout(function () {
-                fail(new Error('Fail to find channel.'));
+                success(channelInfo);
             }, 0);
         }
         else {
             setTimeout(function () {
-                success(channelInfo);
+                fail(new Error('Fail to find channel.'));
             }, 0);
         }
     },

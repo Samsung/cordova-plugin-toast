@@ -3,7 +3,7 @@
 var sefObject = require('cordova/plugin/SEF');
 
 var videoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
-var videoSourceSEFList = {
+var videoSourceList = {
     TV1: 0,
     AV1: 15, AV2: 16, AV3: 17, AV4: 18,
     SVIDEO1: 19, SVIDEO2: 20, SVIDEO3: 21, SVIDEO4: 22,
@@ -19,25 +19,19 @@ var videoSource = {
     type: 'TV',
     number: 1
 };
+var windowRect = ['', '', '', ''];
 
 module.exports = {
     setSource: function (success, fail, args){
         var videoSourceStr = args[0].type + args[0].number;
 
-        if (videoSourceSEFList[videoSourceStr] !== undefined) {
-            sefObject.get('Window').Execute('SetSource', videoSourceSEFList[videoSourceStr]);
-            videoSource.type = args[0].type;
-            videoSource.number = args[0].number;
+        sefObject.get('Window').Execute('SetSource', videoSourceList[videoSourceStr]);
+        videoSource.type = args[0].type;
+        videoSource.number = args[0].number;
 
-            setTimeout(function () {
-                success(videoSource);
-            }, 0);
-        }
-        else {
-            setTimeout(function () {
-                fail();
-            }, 0);
-        }
+        setTimeout(function () {
+            success(videoSource);
+        }, 0);
     },
     getSource: function (success, fail, args) {
         var source = webapis.tv.window.getSource(windowType);
@@ -65,18 +59,18 @@ module.exports = {
         }, windowType);
 
         if (result) {
+            windowRect[0] = args[0][0] + 'px';
+            windowRect[1] = args[0][1] + 'px';
+            windowRect[2] = args[0][2] + 'px';
+            windowRect[3] = args[0][3] + 'px';
+
             sefObject.get('Window').Execute('SetPreviousSource');
             document.getElementById('_plugin_Window').style.position = 'fixed';
 
             result = webapis.tv.window.show(windowType);
             if (result) {
                 setTimeout(function () {
-                    success({
-                        left: args[0][0] + 'px',
-                        top: args[0][1] + 'px',
-                        width: args[0][2] + 'px',
-                        height: args[0][3] + 'px'
-                    });
+                    success(windowRect);
                 }, 0);
             }
             else {
@@ -92,10 +86,15 @@ module.exports = {
         }
     },
     hide: function (success, fail, args) {
-        sefObject.get('Window').Execute('SetSource', videoSourceSEFList.MEDIA);
+        sefObject.get('Window').Execute('SetSource', videoSourceList.MEDIA);
 
         var result = webapis.tv.window.hide(windowType);
         if (result) {
+            windowRect[0] = '';
+            windowRect[1] = '';
+            windowRect[2] = '';
+            windowRect[3] = '';
+
             setTimeout(function () {
                 success();
             }, 0);
@@ -107,7 +106,16 @@ module.exports = {
         }
     },
     getRect: function (success, fail, args) {
-        webapis.tv.window.getRect(success, fail);
+        if (windowRect[0]) {
+            setTimeout(function () {
+                success(windowRect);
+            }, 0);
+        }
+        else {
+            setTimeout(function () {
+                fail();
+            }, 0);
+        }
     }
 };
 

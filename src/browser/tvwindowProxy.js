@@ -78,7 +78,7 @@ module.exports = {
         element.style.width = args[0][2] + 'px';
         element.style.height = args[0][3] + 'px';
         element.style.backgroundColor = randomColor();
-        element.innerHTML = 'Source : ' + videoSource.type + ' ' + videoSource.number;
+        element.innerHTML = 'Source : ' + videoSource.type + videoSource.number;
         document.getElementsByTagName('body')[0].appendChild(element);
 
         setTimeout(function () {

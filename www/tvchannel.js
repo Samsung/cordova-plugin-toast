@@ -30,7 +30,7 @@ var tvchannelExport = {
         exec(successCallback, errorCallback, 'toast.tvchannel', 'tune', args);
     },
     tuneUp: function (successCallback, errorCallback, tuneMode) {
-        argscheck.checkArgs('oFSS', 'tvchannel.tuneUp', arguments);
+        argscheck.checkArgs('oFS', 'tvchannel.tuneUp', arguments);
         if(!successCallback.onsuccess || typeof successCallback.onsuccess != 'function') {
             throw new TypeError('successCallback.onsuccess is not a function.');
         }
@@ -59,7 +59,7 @@ var tvchannelExport = {
         exec(successCallback, errorCallback, 'toast.tvchannel', 'tuneUp', args);
     },
     tuneDown: function (successCallback, errorCallback, tuneMode) {
-        argscheck.checkArgs('oFSS', 'tvchannel.tuneDown', arguments);
+        argscheck.checkArgs('oFS', 'tvchannel.tuneDown', arguments);
         if(!successCallback.onsuccess || typeof successCallback.onsuccess != 'function') {
             throw new TypeError('successCallback.onsuccess is not a function.');
         }
@@ -151,7 +151,7 @@ var tvchannelExport = {
         exec(successCallback, errorCallback, 'toast.tvchannel', 'getProgramList', args);
     },
     getCurrentProgram: function (successCallback, errorCallback) {
-        argscheck.checkArgs('fFS', 'tvchannel.getCurrentProgram', arguments);
+        argscheck.checkArgs('fF', 'tvchannel.getCurrentProgram', arguments);
 
         errorCallback = errorCallback || function () {};
 
@@ -159,7 +159,7 @@ var tvchannelExport = {
         exec(successCallback, errorCallback, 'toast.tvchannel', 'getCurrentProgram', args);
     },
     addChannelChangeListener: function (callback) {
-        argscheck.checkArgs('fS', 'tvchannel.addChannelChangeListener', arguments);
+        argscheck.checkArgs('f', 'tvchannel.addChannelChangeListener', arguments);
 
         var args = [];
         exec(callback, null, 'toast.tvchannel', 'addChannelChangeListener', args);

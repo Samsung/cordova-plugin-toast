@@ -1,5 +1,16 @@
 'use strict';
 
+var videoSourceList = [
+    'TV1',
+    'AV1', 'AV2', 'AV3', 'AV4',
+    'SVIDEO1', 'SVIDEO2', 'SVIDEO3', 'SVIDEO4',
+    'COMP1', 'COMP2', 'COMP3', 'COMP4',
+    'PC1', 'PC2', 'PC3', 'PC4',
+    'HDMI1', 'HDMI2', 'HDMI3', 'HDMI4',
+    'SCART1', 'SCART2', 'SCART3', 'SCART4',
+    'DVI1', 'DVI2', 'DVI3', 'DVI4'
+];
+
 var argscheck = require('cordova/argscheck'),
     exec = require('cordova/exec');
 
@@ -11,6 +22,16 @@ var tvwindowExport = {
         }
         if(!videoSource.number || typeof videoSource.number != 'number') {
             throw new TypeError('videoSource.number is not a number.');
+        }
+        var match = false;
+        for (var i = 0; i < videoSourceList.length; i++) {
+            if (videoSource.type + videoSource.number == videoSourceList[i]) {
+                match = true;
+                break;
+            }
+        }
+        if (!match) {
+            throw new RangeError('videoSource is wrong.');
         }
 
         errorCallback = errorCallback || function () {};
