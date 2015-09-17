@@ -190,8 +190,8 @@ function getBoundingRect(el, mode) {
         } else {
             left += clientRect.left;
             top += clientRect.top;
-            left += (window.pageXOffset || el.ownerDocument.documentElement.scrollLeft || document.body.scrollLeft);
-            top += (window.pageYOffset || el.ownerDocument.documentElement.scrollTop || document.body.scrollTop);
+            // left += (window.pageXOffset || el.ownerDocument.documentElement.scrollLeft || document.body.scrollLeft);
+            // top += (window.pageYOffset || el.ownerDocument.documentElement.scrollTop || document.body.scrollTop);
             left -= el.ownerDocument.documentElement.clientLeft;
             top -= el.ownerDocument.documentElement.clientTop;
         }

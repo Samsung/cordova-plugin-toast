@@ -15,9 +15,11 @@ module DRMInfo {
     Toast implements DRMInfoManager;
 
     [NoInterfaceObject] interface DRMInfoManager {
-        void getEsn(DOMString component);
-        void getSdi();
+        void getEsn(DOMString component, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void getSdi(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
     };
+
+    callback DOMStringCallback = void (DOMString str);
 };
 ```
 
