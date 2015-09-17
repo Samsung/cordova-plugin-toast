@@ -8,9 +8,6 @@ module.exports = {
 	setMute: function (success, fail, args) {
 		try{
 			isMute = args[0];
-
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
 			success();
 		}
 		catch(e) {
@@ -35,12 +32,6 @@ module.exports = {
 			}
 
 			isMute = false;
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + volume;
-
 			success();
 		}
 		catch(e) {
@@ -58,12 +49,6 @@ module.exports = {
 			}
 
 			isMute = false;
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + volume;
-
 			success();
 		}
 		catch(e) {
@@ -81,12 +66,6 @@ module.exports = {
 			}
 
 			isMute = false;
-			var muteEl = getMuteElement();
-			muteEl.innerHTML = isMute ? 'mute : ON' : 'mute : OFF';
-
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + volume;
-
 			success();
 		}
 		catch(e) {
@@ -96,10 +75,6 @@ module.exports = {
 	getVolume: function (success, fail, args) {
 		try{
 			var result = volume;
-
-			var volumeEl = getVolumeElement();
-			volumeEl.innerHTML = 'volume : ' + result;
-
 			success(result);
 		}
 		catch(e) {
@@ -109,10 +84,6 @@ module.exports = {
 	setVolumeChangeListener: function (success, fail, args) {
 		try{
 			volumeChangeCallback = args[0];
-
-			var changeEl = getVolumeChangeListenerElement();
-			changeEl.innerHTML = 'volume change listener : attached';
-
 			success();
 		}
 		catch(e) {
@@ -122,10 +93,6 @@ module.exports = {
 	unsetVolumeChangeListener: function (success, fail, args) {
 		try{
 			volumeChangeCallback = '';
-
-			var changeEl = getVolumeChangeListenerElement();
-			changeEl.innerHTML = 'volume change listener : dettached';
-
 			success();
 		}
 		catch(e) {
@@ -133,83 +100,5 @@ module.exports = {
 		}
 	}
 };
-
-// tvaudio browser simulator UI
-function getSoundBox(){
-	var element = '';
-
-	if(!document.getElementById('soundbox')){
-		element = document.createElement('div');
-		element.id = 'soundbox';
-		element.style.outline = '1px solid';
-		element.style.width = '300px';
-		element.style.height = '60px';
-		element.style.margin = '5px';
-
-		document.body.appendChild(element);
-	}
-	else{
-		element = document.getElementById('soundbox');
-	}
-
-	return element;
-}
-
-function getMuteElement(){
-	var element = '';
-
-	if(!document.getElementById('mute')){
-		element = document.createElement('div');
-		element.id = 'mute';
-		element.style.width = '100%';
-		element.style.height = '30%';
-		element.innerHTML = 'mute : ';
-
-		getSoundBox().appendChild(element);
-	}
-	else{
-		element = document.getElementById('mute');
-	}
-
-	return element;
-}
-
-function getVolumeElement(){
-	var element = '';
-
-	if(!document.getElementById('volume')){
-		element = document.createElement('div');
-		element.id = 'volume';
-		element.style.width = '100%';
-		element.style.height = '30%';
-		element.innerHTML = 'volume : ';
-
-		getSoundBox().appendChild(element);
-	}
-	else{
-		element = document.getElementById('volume');
-	}
-
-	return element;
-}
-
-function getVolumeChangeListenerElement(){
-	var element = '';
-
-	if(!document.getElementById('volumechange')){
-		element = document.createElement('div');
-		element.id = 'volumechange';
-		element.style.width = '100%';
-		element.style.height = '30%';
-		element.innerHTML = 'volume change listener : ';
-
-		getSoundBox().appendChild(element);
-	}
-	else{
-		element = document.getElementById('volumechange');
-	}
-
-	return element;
-}
 
 require('cordova/exec/proxy').add('toast.tvaudiocontrol', module.exports);
