@@ -13,7 +13,7 @@ var Media = function (){
         this._duration = -1;
         this._position = -1;
         this.hooks = {};
-        exec(null, null, 'toast.media', 'create',[this.id]);
+        exec(null, null, 'toast.Media', 'create',[this.id]);
     } 
     else {
         throw new RangeError('Media instance exists already. toast Media supported single instance');
@@ -86,7 +86,7 @@ Media.prototype.open = function(mediaUrl) {
     argscheck.checkArgs('s', 'Media.open', arguments);
     this.src = mediaUrl;
     invokeHooks('beforeopen', [this].concat(arguments));
-    exec(null, null, 'toast.media', 'open', [this.id,this.src]);
+    exec(null, null, 'toast.Media', 'open', [this.id,this.src]);
     invokeHooks('afteropen', [this].concat(arguments));
 };
 
@@ -96,7 +96,7 @@ Media.prototype.getContainerElement = function() {
 
 Media.prototype.play = function(){
     invokeHooks('beforeplay', [this].concat(arguments));
-    exec(null, null, 'toast.media', 'play', [this.id]);
+    exec(null, null, 'toast.Media', 'play', [this.id]);
     invokeHooks('afterplay', [this].concat(arguments));
 };
 
@@ -105,18 +105,18 @@ Media.prototype.stop = function() {
     exec(function() {
         me._position = -1;
         me._duration = -1;
-    }, null, 'toast.media', 'stop', [this.id]);
+    }, null, 'toast.Media', 'stop', [this.id]);
 };
 
 Media.prototype.seekTo = function(milliseconds) {
     var me = this;
     exec(function(p) {
         me._position = p;
-    }, null, 'toast.media', 'seekTo', [this.id, milliseconds]);
+    }, null, 'toast.Media', 'seekTo', [this.id, milliseconds]);
 };
 
 Media.prototype.pause = function() {
-    exec(null, null, 'toast.media', 'pause', [this.id]);
+    exec(null, null, 'toast.Media', 'pause', [this.id]);
 };
 
 Media.prototype.getDuration = function() {
