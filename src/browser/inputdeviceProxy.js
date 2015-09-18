@@ -72,6 +72,7 @@ module.exports = {
 				fail(error);
 			}, 0);
 		}
+		success();
 	},
 	unregisterKey: function(success, fail, args){
 		for(var i = 0; i < supportedKeys.length; i++) {
@@ -86,6 +87,7 @@ module.exports = {
 				fail(error);
 			}, 0);
 		}
+		success();
 	}
 };
 

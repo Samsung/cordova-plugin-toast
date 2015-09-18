@@ -40,6 +40,7 @@ module.exports = {
 	registerKey: function(success, fail, args){
 		try {
 			tizen.tvinputdevice.registerKey(args[0]);
+			success();
 		} catch (e) {
 			var error;
 			if(e.name === 'InvalidValuesError') {
@@ -57,6 +58,7 @@ module.exports = {
 	unregisterKey: function(success, fail, args){
 		try	{
 			tizen.tvinputdevice.unregisterKey(args[0]);
+			success();
 		} catch (e) {
 			var error;
 			if(e.name === 'InvalidValuesError') {

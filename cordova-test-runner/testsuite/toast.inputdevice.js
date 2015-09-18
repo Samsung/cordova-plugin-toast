@@ -16,13 +16,15 @@
     });
 
     testsuite('toast.inputdevice', 'registerKey(\'ColorF0Red\')', function(report) {
-        toast.inputdevice.registerKey('ColorF0Red');
-        report('OK');
+        toast.inputdevice.registerKey('ColorF0Red', function () {
+            report('OK');
+        });
     });
 
     testsuite('toast.inputdevice', 'unregisterKey(\'ColorF0Red\')', function(report) {
-        toast.inputdevice.unregisterKey('ColorF0Red');
-        report('OK');
+        toast.inputdevice.unregisterKey('ColorF0Red', function () {
+            report('OK');
+        });
     });
 
     function getKeyDownHandler(report) {
