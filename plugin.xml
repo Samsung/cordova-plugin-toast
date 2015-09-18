@@ -52,7 +52,7 @@
 		<js-module src='src/browser/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
-		<js-module src='src/browser/MediaProxy.js' name='MediaProxy'>
+		<js-module src='src/browser/mediaProxy.js' name='mediaProxy'>
 			<runs />
 		</js-module>
 	</platform>
@@ -102,7 +102,7 @@
 		<js-module src='src/sectv-tizen/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
-		<js-module src='src/sectv-tizen/MediaProxy.js' name='MediaProxy'>
+		<js-module src='src/sectv-tizen/mediaProxy.js' name='mediaProxy'>
 			<runs />
 		</js-module>
 		<js-module src='src/sectv-tizen/tizenutil.js' name='tizenutil'>
