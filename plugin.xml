@@ -24,8 +24,8 @@
 	<js-module src='www/application.js' name='application'>
 		<clobbers target='toast.application' />
 	</js-module>
-	<js-module src='www/media.js' name='media'>
-		<clobbers target='toast.media' />
+	<js-module src='www/Media.js' name='Media'>
+		<clobbers target='toast.Media' />
 	</js-module>
 	<js-module src='www/util.js' name='util'>
 	</js-module>
@@ -52,7 +52,7 @@
 		<js-module src='src/browser/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
-		<js-module src='src/browser/mediaProxy.js' name='mediaProxy'>
+		<js-module src='src/browser/MediaProxy.js' name='MediaProxy'>
 			<runs />
 		</js-module>
 	</platform>
@@ -102,7 +102,7 @@
 		<js-module src='src/sectv-tizen/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
-		<js-module src='src/sectv-tizen/mediaProxy.js' name='mediaProxy'>
+		<js-module src='src/sectv-tizen/MediaProxy.js' name='MediaProxy'>
 			<runs />
 		</js-module>
 		<js-module src='src/sectv-tizen/tizenutil.js' name='tizenutil'>
