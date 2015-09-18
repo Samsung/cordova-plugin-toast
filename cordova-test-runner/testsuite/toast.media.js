@@ -1,23 +1,23 @@
 /* globals testsuite */
 (function() {
     var mediaIns = null;
-    testsuite('toast.media', 'getInstance()', function(report) {
+    testsuite('toast.Media', 'getInstance()', function(report) {
         try {
-            mediaIns = toast.media.getInstance();
-            report('Success: toast.media.getInstance()');
+            mediaIns = toast.Media.getInstance();
+            report('Success: toast.Media.getInstance()');
         } catch (err){
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'open()', function(report) {
+    testsuite('toast.Media', 'open()', function(report) {
         try {
             mediaIns.open('http://media.w3.org/2010/05/sintel/trailer.mp4');
-            report('Success: toast.media.open(\'http://media.w3.org/2010/05/sintel/trailer.mp4\')');
+            report('Success: toast.Media.open(\'http://media.w3.org/2010/05/sintel/trailer.mp4\')');
         } catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'getContainerElement()', function(report) {
+    testsuite('toast.Media', 'getContainerElement()', function(report) {
         try {
             var elContainer = mediaIns.getContainerElement();
             elContainer.style.left = '0px';
@@ -31,7 +31,7 @@
         }
         
     });
-    testsuite('toast.media', 'setListener()', function(report) {
+    testsuite('toast.Media', 'setListener()', function(report) {
         try {
             mediaIns.setListener({
                 onevent: function (evt) {
@@ -61,31 +61,31 @@
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'unsetListener()', function(report) {
+    testsuite('toast.Media', 'unsetListener()', function(report) {
         try {
             mediaIns.unsetListener();
-            report('Success: toast.media.unsetListener()');
+            report('Success: toast.Media.unsetListener()');
         } catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'play()', function(report) {
+    testsuite('toast.Media', 'play()', function(report) {
         try {
             mediaIns.play();
-            report('Success: toast.media.play()');
+            report('Success: toast.Media.play()');
         } catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'pause()', function(report) {
+    testsuite('toast.Media', 'pause()', function(report) {
         try {
             mediaIns.pause();
-            report('Success: toast.media.pause()');
+            report('Success: toast.Media.pause()');
         } catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'seekTo() to \'FF 3s\'', function(report) {
+    testsuite('toast.Media', 'seekTo() to \'FF 3s\'', function(report) {
         try {
             var curPosition = mediaIns.getCurrentPosition();
             mediaIns.seekTo(curPosition + 3000);
@@ -94,7 +94,7 @@
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'getDuration()', function(report) {
+    testsuite('toast.Media', 'getDuration()', function(report) {
         try {
             var duration = mediaIns.getDuration();
             report('Success: ' + duration);
@@ -102,7 +102,7 @@
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'getCurrentPosition()', function(report) {
+    testsuite('toast.Media', 'getCurrentPosition()', function(report) {
         try {
             var position = mediaIns.getCurrentPosition();
             report('Success: ' + position);
@@ -110,10 +110,10 @@
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.media', 'stop()', function(report) {
+    testsuite('toast.Media', 'stop()', function(report) {
         try {
             mediaIns.stop();
-            report('Success: toast.media.stop()');
+            report('Success: toast.Media.stop()');
         } catch(err){
             report('Error: ' + JSON.stringify(err));
         }
