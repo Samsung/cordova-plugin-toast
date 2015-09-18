@@ -77,6 +77,9 @@
 		<js-module src='src/sectv-orsay/applicationProxy.js' name='applicationProxy'>
 			<runs />
 		</js-module>
+		<js-module src='src/sectv-orsay/mediaProxy.js' name='mediaProxy'>
+			<runs />
+		</js-module>
 		<js-module src='src/sectv-orsay/MediaPluginWideVine.js' name='MediaPluginWideVine'>
 			<clobbers target='toast.MediaPluginWideVine' />
 		</js-module>
