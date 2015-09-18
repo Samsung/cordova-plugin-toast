@@ -1,6 +1,7 @@
 'use strict';
 
 var sefObject = require('cordova/plugin/SEF');
+var sefWindow = sefObject.get('Window');
 
 var windowType = 0;
 var channelChangeCallback = [];
@@ -24,60 +25,100 @@ function fireChannelChangeEvent (channelInfo) {
 
 module.exports = {
     tune: function (success, fail, args) {
-        var result = sefObject.get('Window').Execute('SetChannel', args[0].major, args[0].minor);
+        try {
+            var result = sefWindow.Execute('SetChannel', args[0].major, args[0].minor);
 
-        if (result) {
+            if (result) {
+                var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
+                setTimeout(function () {
+                    success.onsuccess(channelInfo);
+                    fireChannelChangeEvent(channelInfo);
+                }, 0);
+            } else {
+                setTimeout(function () {
+                    success.onnosignal();
+                }, 0);
+            }
+        }
+        catch (e) {
+            fail(e);
+        }
+    },
+    tuneUp: function (success, fail, args) {
+        try {
+            sefWindow.Execute('SetChannel_Seek', setChannel.up, tuneModeList[args[0]]);
+
             var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
             setTimeout(function () {
                 success.onsuccess(channelInfo);
                 fireChannelChangeEvent(channelInfo);
             }, 0);
-        } else {
-            setTimeout(function () {
-                success.onnosignal();
-            }, 0);
+        }
+        catch (e) {
+            fail(e);
         }
     },
-    tuneUp: function (success, fail, args) {
-        sefObject.get('Window').Execute('SetChannel_Seek', setChannel.up, tuneModeList[args[0]]);
-
-        var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
-        setTimeout(function () {
-            success.onsuccess(channelInfo);
-            fireChannelChangeEvent(channelInfo);
-        }, 0);
-    },
     tuneDown: function (success, fail, args) {
-        sefObject.get('Window').Execute('SetChannel_Seek', setChannel.down, tuneModeList[args[0]]);
-        
-        setTimeout(function () {
-            var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
-            success.onsuccess(channelInfo);
-            fireChannelChangeEvent(channelInfo);
-        }, 0);
+        try {
+            sefWindow.Execute('SetChannel_Seek', setChannel.down, tuneModeList[args[0]]);
+            
+            setTimeout(function () {
+                var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
+                success.onsuccess(channelInfo);
+                fireChannelChangeEvent(channelInfo);
+            }, 0);
+        }
+        catch (e) {
+            fail(e);
+        }
     },
     findChannel: function (success, fail, args) {
-        webapis.tv.channel.findChannel(args[0], args[1], success, fail);
+        try {
+            webapis.tv.channel.findChannel(args[0], args[1], success, fail);
+        }
+        catch (e) {
+            fail(e);
+        }
     },
     getChannelList: function (success, fail, args) {
-        webapis.tv.channel.getChannelList(success, fail, tuneModeList[args[0]], args[1], args[2]);
+        try {
+            webapis.tv.channel.getChannelList(success, fail, tuneModeList[args[0]], args[1], args[2]);
+        }
+        catch (e) {
+            fail(e);
+        }
     },
     getCurrentChannel: function (success, fail, args) {
-        var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
+        try {
+            var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);
 
-        setTimeout(function () {
-            success(channelInfo);
-        }, 0);
+            setTimeout(function () {
+                success(channelInfo);
+            }, 0);
+        }
+        catch (e) {
+            fail(e);
+        }
     },
     getProgramList: function (success, fail, args) {
-        webapis.tv.channel.getProgramList(args[0], args[1], success, fail, args[2]);
+        try {
+            webapis.tv.channel.getProgramList(args[0], args[1], success, fail, args[2]);
+        }
+        catch (e) {
+            fail(e);
+        }
     },
     getCurrentProgram: function (success, fail, args) {
-        var programInfo = webapis.tv.channel.getCurrentProgram(windowType);
+        try {
+            var programInfo = webapis.tv.channel.getCurrentProgram(windowType);
 
-        setTimeout(function () {
-            success(programInfo);
-        }, 0);
+            setTimeout(function () {
+                success(programInfo);
+            }, 0);
+        }
+        catch (e) {
+            fail(e);
+        }
     },
     addChannelChangeListener: function (success, fail, args) {
         channelChangeCallback.push(success);

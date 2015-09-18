@@ -11,7 +11,7 @@ module.exports = {
             tizen.tvchannel.tune(args[0], success, fail, windowType);
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     tuneUp: function (success, fail, args) {
@@ -19,7 +19,7 @@ module.exports = {
             tizen.tvchannel.tuneUp(success, fail, args[0], windowType);
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     tuneDown: function (success, fail, args) {
@@ -27,7 +27,7 @@ module.exports = {
             tizen.tvchannel.tuneDown(success, fail, args[0], windowType);
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     findChannel: function (success, fail, args) {
@@ -35,7 +35,7 @@ module.exports = {
             tizen.tvchannel.findChannel(args[0], args[1], success, fail);
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     getChannelList: function (success, fail, args) {
@@ -43,7 +43,7 @@ module.exports = {
             tizen.tvchannel.getChannelList(success, fail, args[0], args[1], args[2]);
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     getCurrentChannel: function (success, fail, args) {
@@ -66,7 +66,7 @@ module.exports = {
             }
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     getProgramList: function (success, fail, args) {
@@ -74,7 +74,7 @@ module.exports = {
             tizen.tvchannel.getProgramList(args[0], args[1], success, fail, args[2]);
         }
         catch (e) {
-            throw e;
+            fail(e);
         }
     },
     getCurrentProgram: function (success, fail, args) {
@@ -96,7 +96,7 @@ module.exports = {
                 }, 0);
             }
         } catch (e) {
-            throw e;
+            fail(e);
         }
     },
     addChannelChangeListener: function (success, fail, args) {

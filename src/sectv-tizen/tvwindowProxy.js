@@ -1,6 +1,5 @@
 'use strict';
 
-var tizenutil = require('cordova-plugin-toast.tizenutil');
 var windowType = 'MAIN';
 
 module.exports = {
@@ -31,7 +30,7 @@ module.exports = {
 
         }
         catch (e) {
-            throw tizenutil.createError.fromWebAPIException(e);
+            fail(e);
         }
     },
     getSource: function (success, fail, args) {
@@ -43,15 +42,20 @@ module.exports = {
             }, 0);
         }
         catch (e) {
-            throw tizenutil.createError.fromWebAPIException(e);
+            fail(e);
         }
     },
     show: function (success, fail, args) {
+        args[0][0] = args[0][0] + 'px';
+        args[0][1] = args[0][1] + 'px';
+        args[0][2] = args[0][2] + 'px';
+        args[0][3] = args[0][3] + 'px';
+
         try {
             tizen.tvwindow.show(success, fail, args[0], windowType);
         }
         catch (e) {
-            throw tizenutil.createError.fromWebAPIException(e);
+            fail(e);
         }
     },
     hide: function (success, fail, args) {
@@ -59,7 +63,7 @@ module.exports = {
             tizen.tvwindow.hide(success, fail, windowType);
         }
         catch (e) {
-            throw tizenutil.createError.fromWebAPIException(e);
+            fail(e);
         }
     },
     getRect: function (success, fail, args) {
@@ -67,7 +71,7 @@ module.exports = {
             tizen.tvwindow.getRect(success, fail, 'px', windowType);
         }
         catch (e) {
-            throw tizenutil.createError.fromWebAPIException(e);
+            fail(e);
         }
     }
 };
