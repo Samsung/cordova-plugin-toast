@@ -6,28 +6,27 @@ var argscheck = require('cordova/argscheck'),
 var inputdeviceExport = {
 	getSupportedKeys: function (callback, error) {
 		argscheck.checkArgs('fF', 'inputdevice.getSupportedKeys', arguments);
-		callback = callback || function () {};
-		error = error || function () {};
 		var args = [];
+		error = error || function () {};
 		exec(callback, error, 'toast.inputdevice', 'getSupportedKeys', args);
 	},
 	getKey: function (keyName, callback, error) {
 		argscheck.checkArgs('sfF', 'inputdevice.getKey', arguments);
-		callback = callback || function () {};
+		var args = [keyName];
 		error = error || function () {};
-		var args = [];
-		args[0] = keyName;
 		exec(callback, error, 'toast.inputdevice', 'getKey', args);
 	},
-	registerKey: function (keyName) {
-		argscheck.checkArgs('s', 'inputdevice.registerKey', arguments);
+	registerKey: function (keyName, callback, error) {
+		argscheck.checkArgs('sfF', 'inputdevice.registerKey', arguments);
 		var args = [keyName];
-		exec(null, null, 'toast.inputdevice', 'registerKey', args);
+		error = error || function () {};
+		exec(callback, error, 'toast.inputdevice', 'registerKey', args);
 	},
-	unregisterKey: function (keyName) {
-		argscheck.checkArgs('s', 'inputdevice.unregisterKey', arguments);
+	unregisterKey: function (keyName, callback, error) {
+		argscheck.checkArgs('sfF', 'inputdevice.unregisterKey', arguments);
 		var args = [keyName];
-		exec(null, null, 'toast.inputdevice', 'unregisterKey', args);
+		error = error || function () {};
+		exec(callback, error, 'toast.inputdevice', 'unregisterKey', args);
 	}
 };
 

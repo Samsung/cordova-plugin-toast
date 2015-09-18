@@ -69,6 +69,9 @@ var supportedKeys = [
 
 ];
 
+var SEF = require('cordova/plugin/SEF');
+var AppCommonPlugin = SEF.get('AppCommon');
+
 module.exports = {
 
 	getSupportedKeys: function (success, fail, args) {
@@ -113,67 +116,76 @@ module.exports = {
 	},
 	registerKey: function(success, fail, args){
 		try {
-			var SEF = require('cordova/plugin/SEF');
-			var AppCommonPlugin = SEF.get('AppCommon');
+			var error;
 			for(var i = 0; i < supportedKeys.length; i++) {
 				if(supportedKeys[i].name === args[0]){
 					break;
 				}
 			}
 			if(i != supportedKeys.length) {
-				AppCommonPlugin.Execute('RegisterKey',supportedKeys[i].code);
-				success();
-				SEF.close();
+				var result = AppCommonPlugin.Execute('RegisterKey',supportedKeys[i].code);
+				if(result > 0) {
+					success();
+				}
+				else {
+					error = new Error('registerKey error');
+					error.name = 'registerKey error';
+					setTimeout(function(){
+						fail(error);
+					}, 0);						
+				}
 			}
 			else {
-					var error = new RangeError('keyName is not in the supported keys set.');
+					error = new RangeError('keyName is not in the supported keys set.');
 					error.name = 'RangeError';
 					setTimeout(function(){
 						fail(error);
-						SEF.close();
 					}, 0);				
 			}			
 
 		} catch (e) {
-			var error = new Error(e.message);
+			error = new Error(e.message);
 			error.name = e.name;
 			setTimeout(function(){
 				fail(error);
-				SEF.close();
 			}, 0);
 			
 		}
 	},
 	unregisterKey: function(success, fail, args){
 		try {
-			var SEF = require('cordova/plugin/SEF');
-			var AppCommonPlugin = SEF.get('AppCommon');
-
+			var error;
 			for(var i = 0; i < supportedKeys.length; i++) {
 				if(supportedKeys[i].name === args[0]){
 					break;
 				}
 			}
 			if(i != supportedKeys.length) {
-				AppCommonPlugin.Execute('UnregisterKey',supportedKeys[i].code);
-				success();
-				SEF.close();
+				var result = AppCommonPlugin.Execute('UnregisterKey',supportedKeys[i].code);
+				if(result > 0) {
+					success();
+				}
+				else {
+					error = new Error('UnregisterKey error');
+					error.name = 'UnregisterKey error';
+					setTimeout(function(){
+						fail(error);
+					}, 0);						
+				}
 			}
 			else {
-					var error = new RangeError('keyName is not in the supported keys set.');
+					error = new RangeError('keyName is not in the supported keys set.');
 					error.name = 'RangeError';
 					setTimeout(function(){
 						fail(error);
-						SEF.close();
 					}, 0);					
 			}			
 
 		} catch (e) {
-			var error = new Error(e.message);
+			error = new Error(e.message);
 			error.name = e.name;
 			setTimeout(function(){
 				fail(error);
-				SEF.close();
 			}, 0);			
 		}
 	}

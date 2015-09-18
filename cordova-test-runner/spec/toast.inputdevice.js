@@ -209,23 +209,23 @@ describe('toast.inputdevice', function () {
 		it('is available to register with registerKey method and the key is available to accept via keydown event.', function (done) {
 			var keyData;
 			toast.inputdevice.getKey('ColorF0Red', function (key) {
-			keyData = key;
-			toast.inputdevice.registerKey('ColorF0Red', function () {});
+				keyData = key;
 				function onKeyDown (e) {
 					e.preventDefault();
 					if(e.keyCode === keyData.code) {
 						ask.done(true);
-						window.removeEventListener('keydown', onKeyDown);
-					}o
+					}
 				}
-				window.addEventListener('keydown', onKeyDown);
+				toast.inputdevice.registerKey('ColorF0Red', function () {
+					window.addEventListener('keydown', onKeyDown);
+				});
 				var ask = helper.ask('Press the RED key on the remote control', function (ok) {
 					expect(ok).toBeTruthy();
 					window.removeEventListener('keydown', onKeyDown);
-					toast.inputdevice.unregisterKey('ColorF0Red');
+					toast.inputdevice.unregisterKey('ColorF0Red', function () {});
 					done();
 				});					
 			});
-		}, 5000);
+		}, 10000);
 	});
 });
