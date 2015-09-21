@@ -308,39 +308,39 @@ describe('Video playback feature of toast.Media', function() {
         media.play();
     }, 100000);
 
-    it('does NOT throws Error when "play" is called before "open"', function (done) {
+    it('does NOT throws Error when "play" is called before "open"', function () {
         expect(function () {
             media.play();
-        }).toThrowError();
+        }).not.toThrow();
     });
-    it('does NOT throws Error when "pause" is called before "open"', function (done) {
+    it('does NOT throws Error when "pause" is called before "open"', function () {
         expect(function () {
             media.pause();
-        }).not.toThrowError();
+        }).not.toThrow();
     });
-    it('does NOT throws Error when "seekTo" is called before "open"', function (done) {
+    it('does NOT throws Error when "seekTo" is called before "open"', function () {
         expect(function () {
             media.seekTo(1000);
-        }).not.toThrowError();
+        }).not.toThrow();
     });
-    it('does NOT throws Error when "pause" is called before "open"', function (done) {
+    it('does NOT throws Error when "pause" is called before "open"', function () {
         expect(function () {
             media.pause();
-        }).not.toThrowError();
+        }).not.toThrow();
     });
-    it('does NOT throws Error when "pause" is called before "open"', function (done) {
+    it('does NOT throws Error when "pause" is called before "open"', function () {
         expect(function () {
             media.pause();
-        }).not.toThrowError();
+        }).not.toThrow();
     });
-    it('does NOT throws Error when "pause" is called before "open"', function (done) {
+    it('does NOT throws Error when "pause" is called before "open"', function () {
         expect(function () {
             media.pause();
-        }).not.toThrowError();
+        }).not.toThrow();
     });
-    it('does NOT throws Error when "stop" is called before "open"', function (done) {
+    it('does NOT throws Error when "stop" is called before "open"', function () {
         expect(function () {
             media.stop();
-        }).not.toThrowError();
+        }).not.toThrow();
     });
 });
