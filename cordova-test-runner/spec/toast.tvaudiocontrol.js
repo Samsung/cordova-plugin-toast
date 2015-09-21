@@ -291,7 +291,11 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setVolumeUp(function(){
                     toast.tvaudiocontrol.getVolume(function(value){
                         console.log('currentVolume after volume up : ' + value);
-                        expect(value).toBe(currentVolume + 1);
+                        if(currentVolume < 100){
+                            expect(value).toBe(currentVolume + 1);
+                        }else{
+                            expect(value).toBe(currentVolume);
+                        }
                         done();
                     });
                 });
@@ -349,7 +353,11 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setVolumeDown(function(){
                     toast.tvaudiocontrol.getVolume(function(value){
                         console.log('currentVolume after volume down : ' + value);
-                        expect(value).toBe(currentVolume + 1);
+                        if(currentVolume > 0){
+                            expect(value).toBe(currentVolume - 1);
+                        }else{
+                            expect(value).toBe(currentVolume);
+                        }
                         done();
                     });
                 });
