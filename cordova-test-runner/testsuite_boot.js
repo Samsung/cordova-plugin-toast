@@ -60,17 +60,16 @@
                 var testerId = parseInt(e.target.getAttribute('testerId'));
                 if(typeof tester[testerId] === 'function') {
                     var testfn = tester[testerId];
-                    var reporter = document.querySelector('.reporter'+testerId);
                     var report = function (msg) {
                         tmrTest && clearTimeout(tmrTest);
                         setReportHTML(msg);
                     };
                     report.append = function (el) {
-                        reporter.appendChild(el);
+                        document.querySelector('.reporter'+testerId).appendChild(el);
                     };
 
                     var setReportHTML = function (msg) {
-                        reporter.innerHTML = '[' + Date.now() + ']' + msg;
+                        document.querySelector('.reporter'+testerId).innerHTML = '[' + Date.now() + ']' + msg;
                     };
 
                     setReportHTML('wait...');

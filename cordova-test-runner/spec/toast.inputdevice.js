@@ -220,11 +220,12 @@ describe('toast.inputdevice', function () {
 					window.addEventListener('keydown', onKeyDown);
 				});
 				var ask = helper.ask('Press the RED key on the remote control', function (ok) {
+					expect(ok).not.toBe('TIMEOUT');
 					expect(ok).toBeTruthy();
 					window.removeEventListener('keydown', onKeyDown);
 					toast.inputdevice.unregisterKey('ColorF0Red', function () {});
 					done();
-				});					
+				}, 5000);					
 			});
 		}, 10000);
 	});

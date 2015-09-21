@@ -111,6 +111,28 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setMute(true, function(){}, false);
             }).toThrowError(TypeError);
         });
+
+        it('is the state of mute changed, as you expected?', function (done) {
+            var mute = '';
+            toast.tvaudiocontrol.isMute(function(value){
+                mute = value;
+                console.log('mute state before setMute : ' + value);
+            }, function(){
+                done.fail();
+            });
+
+            toast.tvaudiocontrol.setMute(!mute, function(){
+                toast.tvaudiocontrol.isMute(function(value){
+                    expect(value).toBe(!mute);
+                    console.log('mute state after setMute : ' + value);
+                    done();
+                }, function(){
+                    done.fail();
+                });
+            }, function(){
+                done.fail();
+            })
+        }, 3000);
     });
     describe('toast.tvaudiocontrol.isMute', function() {
         it('returns mute value as boolean', function (done) {
@@ -223,6 +245,24 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setVolume(5, function(){}, false);
             }).toThrowError(TypeError);
         });
+
+        it('is the volume set to 5, as you expected?', function (done) {
+            var expectValue = 5;
+
+            toast.tvaudiocontrol.setVolume(expectValue, function(){
+                var volume = '';
+                toast.tvaudiocontrol.getVolume(function(value){
+                    volume = value;
+                    expect(volume).toBeDefined();
+                    expect(volume).toBe(expectValue);
+                    done();
+                }, function(){
+                    done.fail();
+                });
+            }, function(){
+                done.fail();
+            });
+        },3000);
     });
     describe('toast.tvaudiocontrol.setVolumeUp', function() {
         it('throws TypeError when given arguments is not matched to spec.', function() {
@@ -265,6 +305,28 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setVolumeUp(function(){}, false);
             }).toThrowError(TypeError);
         });
+
+        it('is the volume increased 1 level, as you expected?', function (done) {
+            var currentVolume = null;
+            toast.tvaudiocontrol.getVolume(function(value){
+                currentVolume = value;
+                console.log('currentVolume before volume up: ' + currentVolume);
+
+                toast.tvaudiocontrol.setVolumeUp(function(){
+                    toast.tvaudiocontrol.getVolume(function(value){
+                        console.log('currentVolume after volume up : ' + value);
+                        if(currentVolume < 100){
+                            expect(value).toBe(currentVolume + 1);
+                        }else{
+                            expect(value).toBe(currentVolume);
+                        }
+                        done();
+                    });
+                }, function(){
+                    done.fail();
+                });
+            });
+        },3000);
     });
     describe('toast.tvaudiocontrol.setVolumeDown', function() {
         it('throws TypeError when given arguments is not matched to spec.', function() {
@@ -307,6 +369,28 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setVolumeDown(function(){}, false);
             }).toThrowError(TypeError);
         });
+
+        it('is the volume decreased 1 level, as you expected?', function (done) {
+            var currentVolume = null;
+            toast.tvaudiocontrol.getVolume(function(value){
+                currentVolume = value;
+                console.log('currentVolume before volume down: ' + currentVolume);
+
+                toast.tvaudiocontrol.setVolumeDown(function(){
+                    toast.tvaudiocontrol.getVolume(function(value){
+                        console.log('currentVolume after volume down : ' + value);
+                        if(currentVolume > 0){
+                            expect(value).toBe(currentVolume - 1);
+                        }else{
+                            expect(value).toBe(currentVolume);
+                        }
+                        done();
+                    });
+                }, function(){
+                    done.fail();
+                });
+            });
+        },3000);
     });
     describe('toast.tvaudiocontrol.getVolume', function() {
         it('returns volume value as number', function (done) {
