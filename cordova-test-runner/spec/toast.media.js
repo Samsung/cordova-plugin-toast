@@ -8,13 +8,6 @@ describe('Constructor toast.Media', function() {
         expect(window.toast.Media.getInstance).toBeDefined();
         expect(typeof window.toast.Media.getInstance).toBe('function');
     });
-    it('should not contain a property that is not exists in the specs.', function() {
-        for (var prop in toast.Media) {
-            expect([
-                'getInstance'
-            ].indexOf(prop) >= 0).toBeTruthy();
-        }
-    });
 });
 describe('Instance of toast.Media', function() {
     var media = null;
@@ -64,23 +57,9 @@ describe('Instance of toast.Media', function() {
         expect(media.stop).toBeDefined();
         expect(typeof media.stop).toBe('function');
     });
-    it('should not contain a property that is not exists in the specs.', function() {
-        for (var prop in toast.Media) {
-            expect([
-                'open',
-                'play',
-                'stop',
-                'pause',
-                'seekTo',
-                'getDuration',
-                'getCurrentPosition',
-                'setListener',
-                'unsetListener',
-                'getContainerElement'
-            ].indexOf(prop) >= 0).toBeTruthy();
-        }
-    });
 });
+
+
 describe('Video playback feature of toast.Media', function() {
     var media = null;
     var SAMPLE_VIDEO_URL = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
@@ -92,9 +71,11 @@ describe('Video playback feature of toast.Media', function() {
         media = toast.Media.getInstance();
     });
     afterEach(function() {
+        media.unsetListener();
         media.stop();
         media = null;
     });
+   
     it('plays video well...', function (done) {
         media.open(SAMPLE_VIDEO_URL);
         var state = null;
@@ -124,7 +105,7 @@ describe('Video playback feature of toast.Media', function() {
                             waitForPlay = false;
                             setTimeout(function () {
                                 waitForCurrentTime = true;
-                            }, 1000);
+                            }, 2000);
                             setTimeout(function () {
                                 waitForPause = true;
                                 media.pause();
@@ -167,8 +148,7 @@ describe('Video playback feature of toast.Media', function() {
                             expect(evt.data.position > 1000).toBeTruthy();
                             waitForCurrentTime = false;
                         }
-                        if(waitForSeekForward) {
-                            expect(evt.data.position > waitForSeekForward).toBeTruthy();
+                        if(waitForSeekForward && evt.data.position > waitForSeekForward) {
                             waitForSeekForward = false;
                             setTimeout(function () {
                                 var curPos = media.getCurrentPosition();
@@ -176,8 +156,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekBackward = curPos;
                             }, 3000);
                         }
-                        if(waitForSeekBackward) {
-                            expect(evt.data.position < waitForSeekBackward).toBeTruthy();
+                        if(waitForSeekBackward && evt.data.position < waitForSeekBackward) {
                             waitForSeekBackward = false;
                             setTimeout(function () {
                                 waitForStop = true;
@@ -231,7 +210,7 @@ describe('Video playback feature of toast.Media', function() {
                             waitForPlay = false;
                             setTimeout(function () {
                                 waitForCurrentTime = true;
-                            }, 1000);
+                            }, 2000);
                             setTimeout(function () {
                                 waitForPause = true;
                                 media.pause();
@@ -274,8 +253,7 @@ describe('Video playback feature of toast.Media', function() {
                             expect(evt.data.position > 1000).toBeTruthy();
                             waitForCurrentTime = false;
                         }
-                        if(waitForSeekForward) {
-                            expect(evt.data.position > waitForSeekForward).toBeTruthy();
+                        if(waitForSeekForward && evt.data.position > waitForSeekForward) {
                             waitForSeekForward = false;
                             setTimeout(function () {
                                 var curPos = media.getCurrentPosition();
@@ -283,8 +261,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekBackward = curPos;
                             }, 3000);
                         }
-                        if(waitForSeekBackward) {
-                            expect(evt.data.position < waitForSeekBackward).toBeTruthy();
+                        if(waitForSeekBackward && evt.data.position < waitForSeekBackward) {
                             waitForSeekBackward = false;
                             setTimeout(function () {
                                 waitForStop = true;
@@ -321,21 +298,6 @@ describe('Video playback feature of toast.Media', function() {
     it('does NOT throws Error when "seekTo" is called before "open"', function () {
         expect(function () {
             media.seekTo(1000);
-        }).not.toThrow();
-    });
-    it('does NOT throws Error when "pause" is called before "open"', function () {
-        expect(function () {
-            media.pause();
-        }).not.toThrow();
-    });
-    it('does NOT throws Error when "pause" is called before "open"', function () {
-        expect(function () {
-            media.pause();
-        }).not.toThrow();
-    });
-    it('does NOT throws Error when "pause" is called before "open"', function () {
-        expect(function () {
-            media.pause();
         }).not.toThrow();
     });
     it('does NOT throws Error when "stop" is called before "open"', function () {

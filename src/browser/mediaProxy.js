@@ -110,6 +110,7 @@ function getMediaEventVaule (type,data) {
 module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
+        
         console.log('media::create() - id =' + id);
         
         mediaObjects[id] = document.createElement('video');
@@ -147,9 +148,17 @@ module.exports = {
         var id = args[0], 
             src = args[1];
         
+        console.log('media::open() - id =' + id + ' src =' + src);
+        
         mediaObjects[id].src = src;
-        mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
         mediaObjects[id].load();
+        mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
+        mediaObjects[id].addEventListener('ended', mediaObjects[id].onEndedCB);
+        mediaObjects[id].addEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
+        mediaObjects[id].addEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
+        mediaObjects[id].addEventListener('playing', mediaObjects[id].onPlayingCB);
+        mediaObjects[id].addEventListener('error', mediaObjects[id].onErrorCB);
+        mediaObjects[id].addEventListener('stalled', mediaObjects[id].onStalledCB);
         currentMediaState = Media.STATE_IDLE;
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
     },
@@ -158,14 +167,6 @@ module.exports = {
     play:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::play() - id =' + id);
-        
-        mediaObjects[id].addEventListener('canplay', mediaObjects[id].onCanPlayCB);
-        mediaObjects[id].addEventListener('ended', mediaObjects[id].onEndedCB);
-        mediaObjects[id].addEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
-        mediaObjects[id].addEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
-        mediaObjects[id].addEventListener('playing', mediaObjects[id].onPlayingCB);
-        mediaObjects[id].addEventListener('error', mediaObjects[id].onErrorCB);
-        mediaObjects[id].addEventListener('stalled', mediaObjects[id].onStalledCB);
         mediaObjects[id].play();
     },
 
@@ -173,40 +174,41 @@ module.exports = {
     stop:function(successCallback, errorCallback, args) {
         var id = args[0];
         
-        mediaObjects[id].pause();
-        if (mediaObjects[id].currentTime !== 0) {
-            mediaObjects[id].currentTime = 0;
-        }
-        console.log('media::stop() - MEDIA_STATE -> IDLE');
+            mediaObjects[id].pause();
+            if (mediaObjects[id].currentTime !== 0) {
+                mediaObjects[id].currentTime = 0;
+            }
+            console.log('media::stop() - MEDIA_STATE -> IDLE');
 
-        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
 
-        mediaObjects[id].removeEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
-        mediaObjects[id].removeEventListener('ended', mediaObjects[id].onEndedCB);
-        mediaObjects[id].removeEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
-        mediaObjects[id].removeEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
-        mediaObjects[id].removeEventListener('playing', mediaObjects[id].onPlayingCB);
-        mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
-        mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
-
-        successCallback(mediaObjects[id].currentTime);
+            mediaObjects[id].removeEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
+            mediaObjects[id].removeEventListener('ended', mediaObjects[id].onEndedCB);
+            mediaObjects[id].removeEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
+            mediaObjects[id].removeEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
+            mediaObjects[id].removeEventListener('playing', mediaObjects[id].onPlayingCB);
+            mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
+            mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
+        setTimeout(function(){
+            successCallback(mediaObjects[id].currentTime);
+        },0);
     },
 
     // Seeks to the position in the media
     seekTo:function(successCallback, errorCallback, args) {
         var id = args[0], 
             milliseconds = args[1];
-
-        console.log('media::seekTo()');
-        
-        mediaObjects[id].currentTime = milliseconds / 1000;
-        successCallback(mediaObjects[id].currentTime);
+            
+            console.log('media::seekTo() : ' + milliseconds);
+            
+            mediaObjects[id].currentTime = milliseconds / 1000;
+            
     },
 
     // Pauses the playing media
     pause:function(successCallback, errorCallback, args) {
         var id = args[0];
-
+        
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
         
         mediaObjects[id].pause();
