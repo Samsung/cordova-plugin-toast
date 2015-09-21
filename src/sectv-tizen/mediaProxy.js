@@ -1,9 +1,16 @@
 'use strict';
 
-var Media = require('cordova-plugin-toast.media');
+var Media = require('cordova-plugin-toast.Media');
 var Util = require('cordova-plugin-toast.util');
 var TizenUtil = require('cordova-plugin-toast.tizenutil');
 
+var avplayState = {
+    NONE : 'NONE',
+    IDLE : 'IDLE',
+    READY : 'READY',
+    PLAYING : 'PLAYING',
+    PAUSED : 'PAUSED'
+};
 var containerElem = null;
 
 function createVideContainer(id){
@@ -101,7 +108,7 @@ function setAvplayVideoRect(element){
 
     try{
         var state = webapis.avplay.getState();
-        if(state == 'IDLE' || state == 'PAUSED' || state == 'PLAYING' || state =='READY'){
+        if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY){
             webapis.avplay.setDisplayRect(Number(boundingRect.left),Number(boundingRect.top),Number(boundingRect.width),Number(boundingRect.height));
         }
     } catch (e){
@@ -109,15 +116,8 @@ function setAvplayVideoRect(element){
     }
 }
 
-var currentVideoinfo = null;
-function setInitVideoInfo(){
-    currentVideoinfo = null;
-    currentVideoinfo = {
-        id : null,
-        src : null
-    };
-}
-var currentVideoState = null;
+
+var currentMediaState = null;
 function getMediaEventVaule (type,data) {
     var reval = {};
     switch(type){
@@ -126,10 +126,10 @@ function getMediaEventVaule (type,data) {
             'type' : type,
             'data' : {
                 'state' : data,
-                'oldState' : currentVideoState
+                'oldState' : currentMediaState
             }
         };
-        currentVideoState = data;
+        currentMediaState = data;
         break;
     case Media.EVENT_DURATION :
         reval = {
@@ -177,7 +177,6 @@ module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::create() - id =' + id);
-        setInitVideoInfo();
         createVideContainer(id);
     },
 
@@ -187,133 +186,114 @@ module.exports = {
         console.log('media::open() - id =' + id);
         setTimeout(function(){
             if(window.webapis){
-                currentVideoinfo.id = id;
-                currentVideoinfo.src = src;
-                try {
-                    webapis.avplay.open(src);
-                    webapis.avplay.setListener({
-                        onbufferingstart: function() {
-                            console.log('media::onStalled()');
-                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
-                        },
-                        onbufferingprogress: function(percent) {
-                            console.log('Buffering progress data : ' + percent);
-                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
-                        },
-                        onbufferingcomplete: function() {
-                            console.log('Buffering complete.');
-                            var state = webapis.avplay.getState();
-                            if(state == 'READY') {
-                                Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_IDLE));
-                            } else {
-                                Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,state));
-                            }
-                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
-                        },
-                        onstreamcompleted: function(currentTime) {
-                            console.log('media::streamcompleted()');
-                            webapis.avplay.stop();
-                            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-                        },
-                        oncurrentplaytime: function(currentTime) {
-                            console.log('Current playtime: ' + currentTime);
-                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,currentTime));
-                        },
-                        onevent: function(eventType, eventData) {
-                            console.log('Event type error : ' + eventType + ', eventData: ' + eventData);
-                        },
-                        onerror: function(errorData) {
-                            console.log('Event type error : ' + errorData);
-                            Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
-                        },
-                        onsubtitlechange: function(duration, text, data1, data2) {
-                            console.log('Subtitle Changed.');
-                        },
-                        ondrmevent: function(drmEvent, drmData) {
-                            console.log('DRM callback: ' + drmEvent + ', data: ' + drmData);
+                webapis.avplay.open(src);
+                webapis.avplay.setListener({
+                    onbufferingstart: function() {
+                        console.log('media::onStalled()');
+                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
+                    },
+                    onbufferingprogress: function(percent) {
+                        console.log('Buffering progress data : ' + percent);
+                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
+                    },
+                    onbufferingcomplete: function() {
+                        console.log('Buffering complete.');
+                        var state = webapis.avplay.getState();
+                        if(state == 'READY') {
+                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_IDLE));
+                        } else {
+                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,state));
                         }
-                    });
-                    currentVideoState = Media.STATE_IDLE;
-                    Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-                } catch (e){
-                    throw TizenUtil.fromWebAPIException(e);
-                }
+                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
+                    },
+                    onstreamcompleted: function(currentTime) {
+                        console.log('media::streamcompleted()');
+                        webapis.avplay.stop();
+                        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+                    },
+                    oncurrentplaytime: function(currentTime) {
+                        console.log('Current playtime: ' + currentTime);
+                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,currentTime));
+                    },
+                    onevent: function(eventType, eventData) {
+                        console.log('Event type error : ' + eventType + ', eventData: ' + eventData);
+                    },
+                    onerror: function(errorData) {
+                        console.log('Event type error : ' + errorData);
+                        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
+                    },
+                    onsubtitlechange: function(duration, text, data1, data2) {
+                        console.log('Subtitle Changed.');
+                    },
+                    ondrmevent: function(drmEvent, drmData) {
+                        console.log('DRM callback: ' + drmEvent + ', data: ' + drmData);
+                    }
+                });
+                currentMediaState = Media.STATE_IDLE;
+                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
             }
         },0);
     },
 
-    // Start playing the video
+    // Start playing the media
     play:function(successCallback, errorCallback, args) {
         var id = args[0];
 
         console.log('media::play() - id =' + id);
 
         setTimeout(function(){
-            try {
-                if(webapis.avplay.getState() == 'IDLE'){
-                    webapis.avplay.prepareAsync(function(){
-                        webapis.avplay.play();
-                        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
-                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,webapis.avplay.getDuration()));
-                    },function(e){
-                        throw TizenUtil.fromWebAPIException(e);
-                    });
-                } 
-                else {
+            if(webapis.avplay.getState() == avplayState.IDLE){
+                webapis.avplay.prepareAsync(function(){
                     webapis.avplay.play();
                     Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
-                }
-            } catch (e){
-                throw TizenUtil.fromWebAPIException(e);
+                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,webapis.avplay.getDuration()));
+                },function(e){
+                    throw TizenUtil.fromWebAPIException(e);
+                });
+            } 
+            else {
+                webapis.avplay.play();
+                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
             }
         },0);
     },
 
-    // Stops the playing video
+    // Stops the playing media
     stop:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::stop() - EVENT_STATE -> IDLE');
-        try {
+        setTimeout(function(){
             webapis.avplay.stop();
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
             successCallback();
-        } catch (e){
-            throw TizenUtil.fromWebAPIException(e);
-        }
-        
+        },0);
     },
 
-    // Seeks to the position in the video
+    // Seeks to the position in the media
     seekTo:function(successCallback, errorCallback, args) {
         //var id = args[0];
         var milliseconds = args[1];
 
         console.log('media::seekTo()');
-        try {
+        
+        setTimeout(function(){
             webapis.avplay.seekTo(milliseconds,function(time){
-                setTimeout(function(){
-                    successCallback(webapis.avplay.getCurrentTime());
-                },0);
-                
+                successCallback(webapis.avplay.getCurrentTime());
             },function(e){
-                throw TizenUtil.fromWebAPIException(e);
+                throw Error('Failed to seekTo');
             });
-        } catch(e) {
-            throw TizenUtil.fromWebAPIException(e);
-        }
+        },0);
     },
 
-    // Pauses the playing video
+    // Pauses the playing media
     pause:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::pause() - EVENT_STATE -> PAUSED');
-        try {
+        setTimeout(function(){
             webapis.avplay.pause();
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
-        } catch(e){
-            throw TizenUtil.fromWebAPIException(e);
-        }
+        },0);
     }
 };
 
-require('cordova/exec/proxy').add('toast.media',module.exports);
+require('cordova/exec/proxy').add('toast.Media',module.exports);
