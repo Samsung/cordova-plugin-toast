@@ -237,6 +237,8 @@ describe('toast.tvaudiocontrol', function() {
                 }, function(){
                     done.fail();
                 });
+            }, function(){
+                done.fail();
             });
         },3000);
     });
@@ -298,6 +300,8 @@ describe('toast.tvaudiocontrol', function() {
                         }
                         done();
                     });
+                }, function(){
+                    done.fail();
                 });
             });
         },3000);
@@ -360,6 +364,8 @@ describe('toast.tvaudiocontrol', function() {
                         }
                         done();
                     });
+                }, function(){
+                    done.fail();
                 });
             });
         },3000);
