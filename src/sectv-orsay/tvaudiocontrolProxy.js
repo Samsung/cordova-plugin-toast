@@ -1,6 +1,23 @@
 'use strict';
 
-var volumeChangeCallback = '';
+var volumeChangeCallback = null;
+
+function volumeTrigger(volume){
+	if(!volume){
+		volume = webapis.audiocontrol.getVolume();
+	}
+
+	if(volumeChangeCallback){
+		if((typeof volume == 'number') && (volume != -1)){
+			volumeChangeCallback(volume);
+		}
+	}
+
+	var isMute = webapis.audiocontrol.getMute();
+	if(isMute){
+		webapis.audiocontrol.setMute(false);
+	}
+}
 
 module.exports = {
 	setMute: function (success, fail, args) {
@@ -14,7 +31,9 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail(e);
+			setTimeout(function () {
+				fail(e);
+			}, 0);
 		}
 	},
 	isMute: function (success, fail, args) {
@@ -28,67 +47,54 @@ module.exports = {
 			}
 		}
 		catch (e) {
-			fail(e);
+			setTimeout(function () {
+				fail(e);
+			}, 0);
 		}
 	},
 	setVolume: function (success, fail, args) {
 		try {
-			var isMute = webapis.audiocontrol.getMute();
-			if(isMute){
-				webapis.audiocontrol.setMute(false);
-			}
-
 			webapis.audiocontrol.setVolume(args[0]);
 
-			if((volumeChangeCallback) && (typeof args[0] == 'number')){
-				volumeChangeCallback(args[0]);
-			}
-			success();
+			setTimeout(function () {
+				volumeTrigger(args[0]);
+				success();
+			}, 0);
 		}
 		catch (e) {
-			fail(e);
+			setTimeout(function () {
+				fail(e);
+			}, 0);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
 		try {
-			var isMute = webapis.audiocontrol.getMute();
-			if(isMute){
-				webapis.audiocontrol.setMute(false);
-			}
-
 			webapis.audiocontrol.setVolumeUp();
 
-			if(volumeChangeCallback){
-				var volume = webapis.audiocontrol.getVolume();
-				if((typeof volume == 'number') && (volume != -1)){
-					volumeChangeCallback(volume);
-				}
-			}
-			success();
+			setTimeout(function () {
+				volumeTrigger();
+				success();
+			}, 0);
 		}
 		catch (e) {
-			fail(e);
+			setTimeout(function () {
+				fail(e);
+			}, 0);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
 		try {
-			var isMute = webapis.audiocontrol.getMute();
-			if(isMute){
-				webapis.audiocontrol.setMute(false);
-			}
-
 			webapis.audiocontrol.setVolumeDown();
 
-			if(volumeChangeCallback){
-				var volume = webapis.audiocontrol.getVolume();
-				if((typeof volume == 'number') && (volume != -1)){
-					volumeChangeCallback(volume);
-				}
-			}
-			success();
+			setTimeout(function () {
+				volumeTrigger();
+				success();
+			}, 0);
 		}
 		catch (e) {
-			fail(e);
+			setTimeout(function () {
+				fail(e);
+			}, 0);
 		}
 	},
 	getVolume: function (success, fail, args) {
@@ -109,22 +115,30 @@ module.exports = {
 	setVolumeChangeListener: function (success, fail, args) {
 		volumeChangeCallback = args[0];
 		if(volumeChangeCallback){
-			success();
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		else{
-			var e = new Error('failed to setVolumeChangeListener');
-			fail(e);
+			setTimeout(function () {
+				var e = new Error('failed to setVolumeChangeListener');
+				fail(e);
+			}, 0);
 		}
 	},
 	unsetVolumeChangeListener: function (success, fail, args) {
 		volumeChangeCallback = '';
 
 		if(!volumeChangeCallback){
-			success();
+			setTimeout(function () {
+				success();
+			}, 0);
 		}
 		else{
-			var e = new Error('failed to unsetVolumeChangeListener');
-			fail(e);
+			setTimeout(function () {
+				var e = new Error('failed to unsetVolumeChangeListener');
+				fail(e);
+			}, 0);
 		}
 	}
 };
