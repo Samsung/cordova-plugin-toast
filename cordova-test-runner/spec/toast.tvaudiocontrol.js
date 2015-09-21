@@ -111,6 +111,28 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setMute(true, function(){}, false);
             }).toThrowError(TypeError);
         });
+
+        it('is the state of mute changed, as you expected?', function (done) {
+            var mute = '';
+            toast.tvaudiocontrol.isMute(function(value){
+                mute = value;
+                console.log('mute state before setMute : ' + value);
+            }, function(){
+                done.fail();
+            });
+
+            toast.tvaudiocontrol.setMute(!mute, function(){
+                toast.tvaudiocontrol.isMute(function(value){
+                    expect(value).toBe(!mute);
+                    console.log('mute state after setMute : ' + value);
+                    done();
+                }, function(){
+                    done.fail();
+                });
+            }, function(){
+                done.fail();
+            })
+        }, 3000);
     });
     describe('toast.tvaudiocontrol.isMute', function() {
         it('returns mute value as boolean', function (done) {
