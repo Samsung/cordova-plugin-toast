@@ -1,12 +1,12 @@
 'use strict';
 
-var Media = require('cordova-plugin-toast.media');
+var Media = require('cordova-plugin-toast.Media');
 
-var currentVideoState = null;
+var currentMediaState = null;
 
 var containerElem = null;
 
-var videoObjects = {};
+var mediaObjects = {};
 
 var containerStylecallbackFnTimer = null;
 
@@ -32,7 +32,7 @@ function createVideContainer(id){
         containerElem.style.top = '0px';
         containerElem.style.width = '0px';
         containerElem.style.height = '0px';
-        containerElem.appendChild(videoObjects[id]);
+        containerElem.appendChild(mediaObjects[id]);
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
     } 
     else {
@@ -60,10 +60,10 @@ function getMediaEventVaule (type,data) {
             'type' : type,
             'data' : {
                 'state' : data,
-                'oldState' : currentVideoState
+                'oldState' : currentMediaState
             }
         };
-        currentVideoState = data;
+        currentMediaState = data;
         break;
     case Media.EVENT_DURATION :
         reval = {
@@ -111,127 +111,107 @@ module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::create() - id =' + id);
-        try {
-            videoObjects[id] = document.createElement('video');
-            videoObjects[id].onStalledCB = function () {
-                console.log('media::onStalled()');
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_STALLED));
-            };
-            videoObjects[id].onEndedCB = function () {
-                console.log('media::onEndedCB() - MEDIA_STATE -> IDLE');
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-            };
-            videoObjects[id].onErrorCB = function () {
-                console.log('media::onErrorCB() - MEDIA_ERROR -> ' + event.srcElement.error);
-                Media.mediaEvent(id, getMediaEventVaule(Media._MEDIA_ERROR, event.srcElement.error));
-            };
-            videoObjects[id].onLoadedMetaDataCB = function () {
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_DURATION, videoObjects[id].duration * 1000));
-            };
-            videoObjects[id].onPlayingCB = function () {
-                console.log('media::onPlayingCB() - MEDIA_STATE -> PLAYING');
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
-            };
-            videoObjects[id].onDurationChangeCB = function () {
-                console.log('media::onDurationChangeCB() - EVENT_DURATION -> ' + videoObjects[id].duration * 1000);
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_DURATION, videoObjects[id].duration * 1000));
-            };
-            videoObjects[id].onTimeUpdateCB = function () {
-                console.log('media::onTimeUpdateCB() - EVENT_POSITION -> ' + videoObjects[id].currentTime * 1000);
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_POSITION, videoObjects[id].currentTime * 1000));
-            };
-        } catch(e) {
-            throw e;
-        }
-
+        
+        mediaObjects[id] = document.createElement('video');
+        mediaObjects[id].onStalledCB = function () {
+            console.log('media::onStalled()');
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_STALLED));
+        };
+        mediaObjects[id].onEndedCB = function () {
+            console.log('media::onEndedCB() - MEDIA_STATE -> IDLE');
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        };
+        mediaObjects[id].onErrorCB = function () {
+            console.log('media::onErrorCB() - MEDIA_ERROR -> ' + event.srcElement.error);
+            Media.mediaEvent(id, getMediaEventVaule(Media._MEDIA_ERROR, event.srcElement.error));
+        };
+        mediaObjects[id].onLoadedMetaDataCB = function () {
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_DURATION, mediaObjects[id].duration * 1000));
+        };
+        mediaObjects[id].onPlayingCB = function () {
+            console.log('media::onPlayingCB() - MEDIA_STATE -> PLAYING');
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+        };
+        mediaObjects[id].onDurationChangeCB = function () {
+            console.log('media::onDurationChangeCB() - EVENT_DURATION -> ' + mediaObjects[id].duration * 1000);
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_DURATION, mediaObjects[id].duration * 1000));
+        };
+        mediaObjects[id].onTimeUpdateCB = function () {
+            console.log('media::onTimeUpdateCB() - EVENT_POSITION -> ' + mediaObjects[id].currentTime * 1000);
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_POSITION, mediaObjects[id].currentTime * 1000));
+        };
         createVideContainer(id);
     },
 
     open:function(successCallback, errorCallback, args){
         var id = args[0], 
             src = args[1];
-        try {
-            videoObjects[id].src = src;
-            videoObjects[id].addEventListener('loadedmetadata', videoObjects[id].onLoadedMetaDataCB);
-            videoObjects[id].load();
-            currentVideoState = Media.STATE_IDLE;
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-        } catch(e){
-            throw e;
-        }
+        
+        mediaObjects[id].src = src;
+        mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
+        mediaObjects[id].load();
+        currentMediaState = Media.STATE_IDLE;
+        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
     },
 
     // play
     play:function(successCallback, errorCallback, args) {
         var id = args[0];
-        console.log('media::startPlayingVideo() - id =' + id);
-        try {
-            videoObjects[id].addEventListener('canplay', videoObjects[id].onCanPlayCB);
-            videoObjects[id].addEventListener('ended', videoObjects[id].onEndedCB);
-            videoObjects[id].addEventListener('timeupdate', videoObjects[id].onTimeUpdateCB);
-            videoObjects[id].addEventListener('durationchange', videoObjects[id].onDurationChangeCB);
-            videoObjects[id].addEventListener('playing', videoObjects[id].onPlayingCB);
-            videoObjects[id].addEventListener('error', videoObjects[id].onErrorCB);
-            videoObjects[id].addEventListener('stalled', videoObjects[id].onStalledCB);
-            videoObjects[id].play();
-        } catch(e){
-            throw e;
-        }
+        console.log('media::play() - id =' + id);
+        
+        mediaObjects[id].addEventListener('canplay', mediaObjects[id].onCanPlayCB);
+        mediaObjects[id].addEventListener('ended', mediaObjects[id].onEndedCB);
+        mediaObjects[id].addEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
+        mediaObjects[id].addEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
+        mediaObjects[id].addEventListener('playing', mediaObjects[id].onPlayingCB);
+        mediaObjects[id].addEventListener('error', mediaObjects[id].onErrorCB);
+        mediaObjects[id].addEventListener('stalled', mediaObjects[id].onStalledCB);
+        mediaObjects[id].play();
     },
 
-    // Stops the playing video
+    // Stops the playing media
     stop:function(successCallback, errorCallback, args) {
         var id = args[0];
-        try {
-            videoObjects[id].pause();
-            if (videoObjects[id].currentTime !== 0) {
-                videoObjects[id].currentTime = 0;
-            }
-            console.log('media::stop() - MEDIA_STATE -> IDLE');
-
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-
-            videoObjects[id].removeEventListener('loadedmetadata', videoObjects[id].onLoadedMetaDataCB);
-            videoObjects[id].removeEventListener('ended', videoObjects[id].onEndedCB);
-            videoObjects[id].removeEventListener('timeupdate', videoObjects[id].onTimeUpdateCB);
-            videoObjects[id].removeEventListener('durationchange', videoObjects[id].onDurationChangeCB);
-            videoObjects[id].removeEventListener('playing', videoObjects[id].onPlayingCB);
-            videoObjects[id].removeEventListener('error', videoObjects[id].onErrorCB);
-            videoObjects[id].removeEventListener('stalled', videoObjects[id].onStalledCB);
-
-            successCallback(videoObjects[id].currentTime);
-        } catch(e) {
-            throw e;
+        
+        mediaObjects[id].pause();
+        if (mediaObjects[id].currentTime !== 0) {
+            mediaObjects[id].currentTime = 0;
         }
+        console.log('media::stop() - MEDIA_STATE -> IDLE');
+
+        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+
+        mediaObjects[id].removeEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
+        mediaObjects[id].removeEventListener('ended', mediaObjects[id].onEndedCB);
+        mediaObjects[id].removeEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
+        mediaObjects[id].removeEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
+        mediaObjects[id].removeEventListener('playing', mediaObjects[id].onPlayingCB);
+        mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
+        mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
+
+        successCallback(mediaObjects[id].currentTime);
     },
 
-    // Seeks to the position in the video
+    // Seeks to the position in the media
     seekTo:function(successCallback, errorCallback, args) {
         var id = args[0], 
             milliseconds = args[1];
 
         console.log('media::seekTo()');
-        try {
-            videoObjects[id].currentTime = milliseconds / 1000;
-            successCallback(videoObjects[id].currentTime);
-        }
-        catch(e){
-            throw e;
-        }
+        
+        mediaObjects[id].currentTime = milliseconds / 1000;
+        successCallback(mediaObjects[id].currentTime);
     },
 
-    // Pauses the playing video
+    // Pauses the playing media
     pause:function(successCallback, errorCallback, args) {
         var id = args[0];
 
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
-        try {
-            videoObjects[id].pause();
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
-        } catch(e){
-            throw e;
-        }
+        
+        mediaObjects[id].pause();
+        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     }
 };
 
-require('cordova/exec/proxy').add('toast.media',module.exports);
+require('cordova/exec/proxy').add('toast.Media',module.exports);
