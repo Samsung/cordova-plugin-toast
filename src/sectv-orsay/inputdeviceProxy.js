@@ -69,9 +69,6 @@ var supportedKeys = [
 
 ];
 
-var SEF = require('cordova/plugin/SEF');
-var AppCommonPlugin = SEF.get('AppCommon');
-
 module.exports = {
 
 	getSupportedKeys: function (success, fail, args) {
@@ -117,6 +114,8 @@ module.exports = {
 	registerKey: function(success, fail, args){
 		try {
 			var error;
+			var SEF = require('cordova/plugin/SEF');
+			var AppCommonPlugin = SEF.get('AppCommon');
 			for(var i = 0; i < supportedKeys.length; i++) {
 				if(supportedKeys[i].name === args[0]){
 					break;
@@ -155,6 +154,8 @@ module.exports = {
 	unregisterKey: function(success, fail, args){
 		try {
 			var error;
+			var SEF = require('cordova/plugin/SEF');
+			var AppCommonPlugin = SEF.get('AppCommon');
 			for(var i = 0; i < supportedKeys.length; i++) {
 				if(supportedKeys[i].name === args[0]){
 					break;
