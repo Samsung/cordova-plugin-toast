@@ -72,6 +72,8 @@
 					}
 				},
 				done: function () {
+					itvClose && clearInterval(itvClose);
+					itvClose = null;
 					pop.style.display = 'none';
 					callback.apply(null, arguments);
 				}
