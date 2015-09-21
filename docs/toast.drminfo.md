@@ -1,10 +1,11 @@
 # toast.drminfo
-toast.drminfo privides something
+toast.drminfo provides DRM information.
 
 ## Supported platforms
 * browser
 * sectv-orsay
 * sectv-tizen
+    - Privilege `<tizen:privilege name="http://developer.samsung.com/privilege/drminfo"/>` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```widl
@@ -24,31 +25,51 @@ module DRMInfo {
 ```
 
 ## APIs
-* {{Property Signature}}
-{{Description}}
-	* Examples
-		1. {{Example_Desc_1}}
-			```javascript
-			{{Example_Code_1}}
-			```
-
-* {{Method Signature}}
-provides global namespace named "toast" to provide APIs for TV application.
-Every toast APIs will be appended to this namespace.
+* void getEsn(DOMString component, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+This method gets the ESN data of given component name.
 	* Parameters
+        - component : Name of component (ex. WIDEVINE)
+        - successCallback : The method to call when a value of ESN got successfully.
+        - errorCallback : The method to invoke when an error occurs.
 	* Return value
+	    - N/A
 	* Exceptions
-		* {{Exception}}
-			* if {{something wrong...}}
+		* throws TypeError
+		    * if type of any parameters is not matched to specification.
+		* throws Error
+		    * if unknown error occured.
 	* Examples
-		1. {{description}}
+		1. Getting ESN of 'WIDEVINE'.
 			```javascript
-			{{example_code}}
+			toast.drminfo.getEsn('WIDEVINE', function(value) {
+	            console.log('Success: ' + value);
+            }, function(err) {
+	            console.log('Error: ' + JSON.stringify(err));
+            });
+			```
+			
+* void getSdi(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to distinguish devices instead of DUID.
+	* Parameters
+        - successCallback : The method to call when a value of SDI got successfully.
+        - errorCallback : The method to invoke when an error occurs.
+	* Exceptions
+		* throws TypeError
+		    * if type of any parameters is not matched to specification.
+		* throws Error
+		    * if unknown error occured.
+	* Examples
+		1. Getting value of SDI.
+			```javascript
+            toast.drminfo.getSdi(function(value) {
+                console.log('Success: ' + value);
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
 			```
 
 ## See others
 toast.application
-toast.drminfo
 toast.inputdevice
 toast.media
 toast.tvaudiocontrol
