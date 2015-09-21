@@ -60,7 +60,6 @@
                 var testerId = parseInt(e.target.getAttribute('testerId'));
                 if(typeof tester[testerId] === 'function') {
                     var testfn = tester[testerId];
-                    //var reporter = document.querySelector('.reporter'+testerId);
                     var report = function (msg) {
                         tmrTest && clearTimeout(tmrTest);
                         setReportHTML(msg);
