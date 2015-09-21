@@ -53,6 +53,8 @@ This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to
 	* Parameters
         - successCallback : The method to call when a value of SDI got successfully.
         - errorCallback : The method to invoke when an error occurs.
+	* Return value
+	    - N/A
 	* Exceptions
 		* throws TypeError
 		    * if type of any parameters is not matched to specification.
