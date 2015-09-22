@@ -1,10 +1,20 @@
 'use strict';
 
+var SEF = require('cordova/plugin/SEF');
+
 var volumeChangeCallback = null;
 
+var PL_AUDIO_VOLUME_KEY_UP = 0;
+var PL_AUDIO_VOLUME_KEY_DOWN = 1;
+
+var PLR_TRUE = 1;
+var PLR_FALSE = 0;
+
 function volumeTrigger(volume){
+	var sef = SEF.get('Audio');
+
 	if(!volume){
-		volume = webapis.audiocontrol.getVolume();
+		volume = sef.Execute('GetVolume');
 	}
 
 	if(volumeChangeCallback){
@@ -13,99 +23,106 @@ function volumeTrigger(volume){
 		}
 	}
 
-	var isMute = webapis.audiocontrol.getMute();
-	if(isMute){
-		webapis.audiocontrol.setMute(false);
-	}
+	sef.Execute('SetUserMute', PLR_FALSE);
 }
 
 module.exports = {
 	setMute: function (success, fail, args) {
-		try {
-			var result = webapis.audiocontrol.setMute(args[0]);
+		var userMute = args[0] ? PLR_TRUE : PLR_FALSE;
+		
+		var sef = SEF.get('Audio');
+		var result = sef.Execute('SetUserMute', userMute);
 
-			if (result) {
-				setTimeout(function () {
-					success();
-				}, 0);
-			}
-		}
-		catch (e) {
+		if (result != -1) {
 			setTimeout(function () {
+				success();
+			}, 0);
+		}
+		else{
+			setTimeout(function () {
+				var e = new Error('failed to setMute');
 				fail(e);
 			}, 0);
 		}
 	},
 	isMute: function (success, fail, args) {
-		try {
-			var result = webapis.audiocontrol.getMute();
+		var sef = SEF.get('Audio');
+		var result = sef.Execute('GetUserMute');
 
-			if (typeof result == 'boolean') {
-				setTimeout(function () {
-					success(result);
-				}, 0);
-			}
-		}
-		catch (e) {
+		if (result != -1){
+			result = (result == PLR_TRUE) ? true : false;
 			setTimeout(function () {
+				success(result);
+			}, 0);
+		}
+		else{
+			setTimeout(function () {
+				var e = new Error('failed to execute isMute');
 				fail(e);
 			}, 0);
 		}
 	},
 	setVolume: function (success, fail, args) {
-		try {
-			webapis.audiocontrol.setVolume(args[0]);
+		var sef = SEF.get('Audio');
+		var result = sef.Execute('SetVolume', args[0]);
 
+		if (result != -1){
 			setTimeout(function () {
 				volumeTrigger(args[0]);
 				success();
 			}, 0);
 		}
-		catch (e) {
+		else{
 			setTimeout(function () {
+				var e = new Error('failed to setVolume');
 				fail(e);
 			}, 0);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
-		try {
-			webapis.audiocontrol.setVolumeUp();
+		var sef = SEF.get('Audio');
+		var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_UP);
 
+		if (result != -1){
 			setTimeout(function () {
 				volumeTrigger();
 				success();
 			}, 0);
 		}
-		catch (e) {
+		else{
 			setTimeout(function () {
+				var e = new Error('failed to setVolumeUp');
 				fail(e);
 			}, 0);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
-		try {
-			webapis.audiocontrol.setVolumeDown();
+		var sef = SEF.get('Audio');
+		var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_DOWN);
 
+		if (result != -1){
 			setTimeout(function () {
 				volumeTrigger();
 				success();
 			}, 0);
 		}
-		catch (e) {
+		else{
 			setTimeout(function () {
+				var e = new Error('failed to setVolumeDown');
 				fail(e);
 			}, 0);
 		}
 	},
 	getVolume: function (success, fail, args) {
-		var result = webapis.audiocontrol.getVolume();
+		var sef = SEF.get('Audio');
+		var result = sef.Execute('GetVolume');
 
-		if (result != -1) {
+		if (result != -1){
 			setTimeout(function () {
 				success(result);
 			}, 0);
 		}
-		else {
+		else{
 			setTimeout(function () {
 				var e = new Error('failed to getVolume');
 				fail(e);
