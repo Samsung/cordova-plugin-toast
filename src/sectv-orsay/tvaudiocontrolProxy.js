@@ -22,8 +22,6 @@ function volumeTrigger(volume){
 			volumeChangeCallback(volume);
 		}
 	}
-
-	sef.Execute('SetUserMute', PLR_FALSE);
 }
 
 module.exports = {
@@ -64,47 +62,77 @@ module.exports = {
 	},
 	setVolume: function (success, fail, args) {
 		var sef = SEF.get('Audio');
-		var result = sef.Execute('SetVolume', args[0]);
+		var muteResult = sef.Execute('SetUserMute', PLR_FALSE);
 
-		if (result != -1){
-			setTimeout(function () {
-				volumeTrigger(args[0]);
-				success();
-			}, 0);
+		if (muteResult != -1){
+			var result = sef.Execute('SetVolume', args[0]);
+
+			if(result != -1){
+				setTimeout(function () {
+					volumeTrigger(args[0]);
+					success();
+				}, 0);
+			}
+			else{
+				setTimeout(function () {
+					var e = new Error('failed to setVolume');
+					fail(e);
+				}, 0);
+			}
 		}
 		else{
 			setTimeout(function () {
-				var e = new Error('failed to setVolume');
+				var e = new Error('failed to setVolumeDown');
 				fail(e);
 			}, 0);
 		}
 	},
 	setVolumeUp: function (success, fail, args) {
 		var sef = SEF.get('Audio');
-		var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_UP);
+		var muteResult = sef.Execute('SetUserMute', PLR_FALSE);
 
-		if (result != -1){
-			setTimeout(function () {
-				volumeTrigger();
-				success();
-			}, 0);
+		if (muteResult != -1){
+			var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_UP);
+
+			if(result != -1){
+				setTimeout(function () {
+					volumeTrigger();
+					success();
+				}, 0);
+			}
+			else{
+				setTimeout(function () {
+					var e = new Error('failed to setVolumeUp');
+					fail(e);
+				}, 0);
+			}
 		}
 		else{
 			setTimeout(function () {
-				var e = new Error('failed to setVolumeUp');
+				var e = new Error('failed to setVolumeDown');
 				fail(e);
 			}, 0);
 		}
 	},
 	setVolumeDown: function (success, fail, args) {
 		var sef = SEF.get('Audio');
-		var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_DOWN);
+		var muteResult = sef.Execute('SetUserMute', PLR_FALSE);
 
-		if (result != -1){
-			setTimeout(function () {
-				volumeTrigger();
-				success();
-			}, 0);
+		if (muteResult != -1){
+			var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_DOWN);
+
+			if(result != -1){
+				setTimeout(function () {
+					volumeTrigger();
+					success();
+				}, 0);
+			}
+			else{
+				setTimeout(function () {
+					var e = new Error('failed to setVolumeDown');
+					fail(e);
+				}, 0);
+			}
 		}
 		else{
 			setTimeout(function () {
