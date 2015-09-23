@@ -44,17 +44,17 @@ function createVideContainer(id){
     if(window.MutationObserver) {
         containerElem = document.createElement('div');
         containerElem.style.left = '0px';
-        containerElem.style.top =  '0px';
-        containerElem.style.width =  '0px';
-        containerElem.style.height =  '0px';
-        containerElem.innerHTML = '<OBJECT type="application/avplayer"></OBJECT>';
-        setContainerStyleEventListener (containerElem,containerStyleEventCallback);
-        setContainerAppendEventListener (containerAppendEventCallback);
-    } 
+        containerElem.style.top = '0px';
+        containerElem.style.width = '0px';
+        containerElem.style.height = '0px';
+        containerElem.innerHTML = '<OBJECT type="application/avplayer" style="width:0px; height:0px;"></OBJECT>';
+        setContainerStyleEventListener(containerElem,containerStyleEventCallback);
+        setContainerAppendEventListener(containerAppendEventCallback);
+    }
     else {
         throw TizenUtil.fromWebAPIException({
             'message':'The platform does not support toast.media',
-            'name':'NotSupportedError',
+            'name':'NotSupportedError'
         });
     }
 }
@@ -78,7 +78,7 @@ function containerAppendEventCallback(MutationRecordProperty){
     if(containerAppendcallbackFnTimer){
         clearTimeout(containerAppendcallbackFnTimer);
     }
-    
+
     containerAppendcallbackFnTimer = setTimeout(function(){
         if (MutationRecordProperty.addedNodes.length > 0) {
             console.log('addedNodes.............');
@@ -90,7 +90,7 @@ function containerAppendEventCallback(MutationRecordProperty){
     },0);
 
     function hasContainerElem(nodes){
-        for(var i = 0 ; i < nodes.length ; i++){
+        for(var i = 0; i < nodes.length; i++){
             if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])){
                 return true;
             }
@@ -111,11 +111,11 @@ function setAvplayVideoRect(element){
         if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY){
             webapis.avplay.setDisplayRect(Number(boundingRect.left),Number(boundingRect.top),Number(boundingRect.width),Number(boundingRect.height));
         }
-    } catch (e){
+    }
+    catch (e){
         console.log('[Warning]Fail to setDisplayRect' + e);
     }
 }
-
 
 var currentMediaState = null;
 function getMediaEventVaule (type,data) {
@@ -162,13 +162,13 @@ function getMediaEventVaule (type,data) {
                 'containerElem' : data
             }
         };
-        break;        
+        break;
     case Media._MEDIA_ERROR :
         reval = {
             'type' : type,
             'data' : data
         };
-        break;    
+        break;
     }
     return reval;
 }
@@ -183,11 +183,12 @@ module.exports = {
     },
 
     open:function(successCallback, errorCallback, args) {
-        var id = args[0], src = args[1];
-        var state = null;
+        var id = args[0],
+            src = args[1],
+            state = null;
 
         console.log('media::open() - id =' + id + ' src = ' + src);
-        
+
         if(window.webapis){
             webapis.avplay.open(src);
             webapis.avplay.setListener({
@@ -251,7 +252,7 @@ module.exports = {
             var duration = webapis.avplay.getDuration();
             console.log('duration.....................'+duration);
             Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,duration));
-        } 
+        }
         else {
             webapis.avplay.play();
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
@@ -288,7 +289,7 @@ module.exports = {
     pause:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::pause() - EVENT_STATE -> PAUSED');
-        
+
         webapis.avplay.pause();
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     }

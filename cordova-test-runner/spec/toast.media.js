@@ -1,4 +1,3 @@
-
 describe('Constructor toast.Media', function() {
     it('should be defined as "toast.Media" namespace.', function() {
         expect(window.toast).toBeDefined();
@@ -64,7 +63,7 @@ describe('Instance of toast.Media', function() {
 describe('Video playback feature of toast.Media', function() {
     var media = null;
     var SAMPLE_VIDEO_URL = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
-    var SAMPLE_AUDIO_URL = 'http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.oga';
+    var SAMPLE_AUDIO_URL = 'http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3';
     var MediaEventType = ['STATE', 'DURATION', 'POSITION', 'BUFFERINGPROGRESS'];
     var MediaState = ['IDLE', 'PLAYING', 'PAUSED', 'STALLED', 'SEEK'];
 
@@ -94,14 +93,17 @@ describe('Video playback feature of toast.Media', function() {
                 switch(evt.type) {
                     case 'STATE':
                         expect(evt.data).toBeDefined();
-                        expect(MediaState).toContain(evt.data.oldState);
+                        if(evt.data.oldState){
+                            expect(MediaState).toContain(evt.data.oldState);
+                            expect(evt.data.oldState === evt.data.state).toBeFalsy();
+                        }
                         expect(MediaState).toContain(evt.data.state);
-                        expect(evt.data.oldState === evt.data.state).toBeFalsy();
                         state = evt.data.state;
                         if(evt.data.state === 'STALLED') {
                             break;
                         }
-                        if(waitForPlay) {
+                        
+                        if(waitForPlay && evt.data.state == 'PLAYING') {
                             expect(state).toBe('PLAYING');
                             waitForPlay = false;
                             setTimeout(function () {
@@ -195,21 +197,23 @@ describe('Video playback feature of toast.Media', function() {
         var waitForSeekForward = false;
         var waitForSeekBackward = false;
         var waitForStop = false;
-         media.setListener({
+        media.setListener({
             onevent: function (evt) {
                 expect(evt.type).toBeDefined();
                 expect(MediaEventType).toContain(evt.type);
                 switch(evt.type) {
                     case 'STATE':
                         expect(evt.data).toBeDefined();
-                        expect(MediaState).toContain(evt.data.oldState);
+                        if(evt.data.oldState){
+                            expect(MediaState).toContain(evt.data.oldState);
+                            expect(evt.data.oldState === evt.data.state).toBeFalsy();
+                        }
                         expect(MediaState).toContain(evt.data.state);
-                        expect(evt.data.oldState === evt.data.state).toBeFalsy();
                         state = evt.data.state;
                         if(evt.data.state === 'STALLED') {
                             break;
                         }
-                        if(waitForPlay) {
+                        if(waitForPlay && evt.data.state == 'PLAYING') {
                             expect(state).toBe('PLAYING');
                             waitForPlay = false;
                             setTimeout(function () {
@@ -291,7 +295,6 @@ describe('Video playback feature of toast.Media', function() {
         waitForPlay = true;
         media.play();
     }, 100000);
-    
     
     it('does NOT throws Error when "play" is called before "open"', function () {
         expect(function () {

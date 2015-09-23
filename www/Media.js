@@ -46,7 +46,10 @@ Media.mediaEvent = function(id, value) {
         setTimeout(function(){
             switch(value.type) {
             case Media.EVENT_STATE :
-                if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state){
+                if(media._mediaEventCallBack.onevent && value.data.oldState === null){
+                    media._mediaEventCallBack.onevent(value);
+                }
+                else if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state){
                     media._mediaEventCallBack.onevent(value);
                 }
                 break;

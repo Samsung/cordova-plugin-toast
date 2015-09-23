@@ -43,8 +43,8 @@ function createVideContainer(id){
         containerElem.style.height = '0px';
         containerElem.innerHTML = '<OBJECT classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
-        setContainerAppendEventListener (containerAppendEventCallback);
-    } 
+        setContainerAppendEventListener(containerAppendEventCallback);
+    }
     else {
         throw new Error('The platform does not support toast.media');
     }
@@ -80,7 +80,7 @@ function containerAppendEventCallback(MutationRecordProperty){
     if(containerStylecallbackFnTimer){
         clearTimeout(containerStylecallbackFnTimer);
     }
-    
+
     containerAppendcallbackFnTimer = setTimeout(function(){
         if (MutationRecordProperty.addedNodes.length > 0) {
             console.log('addedNodes.............');
@@ -95,7 +95,7 @@ function containerAppendEventCallback(MutationRecordProperty){
     },0);
 
     function hasContainerElem(nodes){
-        for(var i = 0 ; i < nodes.length ; i++){
+        for(var i = 0; i < nodes.length; i++){
             if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])){
                 return true;
             }
@@ -110,9 +110,9 @@ function getFitDisplayRect(element,videoResolution){
         FRAME_TOP = boundingRect.top,
         FRAME_WIDTH = boundingRect.width,
         FRAME_HEIGHT = boundingRect.height,
-        nLeft, 
-        nTop, 
-        nWidth, 
+        nLeft,
+        nTop,
+        nWidth,
         nHeight,
         fnRound = Math.round;
 
@@ -127,13 +127,14 @@ function getFitDisplayRect(element,videoResolution){
             nWidth = FRAME_WIDTH;
         }
         else {
-             nWidth = fnRound ((FRAME_HEIGHT * videoResolution.width) / videoResolution.height);
+             nWidth = fnRound((FRAME_HEIGHT * videoResolution.width) / videoResolution.height);
              nHeight = FRAME_HEIGHT;
         }
 
         nLeft = FRAME_LEFT + fnRound((FRAME_WIDTH - nWidth) / 2);
         nTop = FRAME_TOP + fnRound((FRAME_HEIGHT - nHeight) / 2);
-    } else {
+    }
+    else {
         nLeft = FRAME_LEFT;
         nTop = FRAME_TOP;
         nWidth = videoResolution.width;
@@ -146,7 +147,7 @@ function getFitDisplayRect(element,videoResolution){
     console.log('fitDisplayRect.height.............'+nHeight);
 
     return {
-        'left' : nLeft, 
+        'left' : nLeft,
         'top' : nTop,
         'width' : nWidth,
         'height' : nHeight
@@ -154,7 +155,7 @@ function getFitDisplayRect(element,videoResolution){
 }
 
 function getVideoResolution() {
-    var reval = mediaObjects[currentMediaiInfo.id].Execute('GetVideoResolution');
+    var reval = mediaObjects[currentMediaInfo.id].Execute('GetVideoResolution');
     var videoWidth = 0;
     var videoHeight = 0;
     console.log('videoResolution.............'+reval);
@@ -174,10 +175,11 @@ function setAvplayVideoRect(element){
     var FitRect = getFitDisplayRect(element,videoResolution);
 
     try{
-        if(mediaObjects[currentMediaiInfo.id]){
-            mediaObjects[currentMediaiInfo.id].Execute('SetDisplayArea',Number(FitRect.left),Number(FitRect.top),Number(FitRect.width),Number(FitRect.height),curWidget.height);
+        if(mediaObjects[currentMediaInfo.id]){
+            mediaObjects[currentMediaInfo.id].Execute('SetDisplayArea',Number(FitRect.left),Number(FitRect.top),Number(FitRect.width),Number(FitRect.height),curWidget.height);
         }
-    } catch (e){
+    }
+    catch (e){
         console.log('[Warning]Fail to setDisplayRect' + e);
     }
 }
@@ -190,10 +192,10 @@ function getMediaEventVaule (type,data) {
             'type' : type,
             'data' : {
                 'state' : data,
-                'oldState' : currentMediaState
+                'oldState' : currentMediaInfo.state
             }
         };
-        currentMediaState = data;
+        currentMediaInfo.state = data;
         break;
     case Media.EVENT_DURATION :
         reval = {
@@ -253,80 +255,87 @@ var mediaObjects = {
     BUFFERING_COMPLETE: 12,
     BUFFERING_PROGRESS: 13,
     CURRENT_PLAYTIME: 14,
-    SUBTITLE: 19,
+    SUBTITLE: 19
 };
 
 function mediaEventListener(type,data1,data2){
     console.log('mediaEventListener : ('+type+','+data1+','+data2+')');
     switch(type){
     case mediaObjects.LOADED_METADATA :
-        var duration = mediaObjects[currentMediaiInfo.id].Execute('GetDuration'); 
-        currentMediaiInfo.duration = duration;
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media.EVENT_DURATION,duration));
+        var duration = mediaObjects[currentMediaInfo.id].Execute('GetDuration');
+        currentMediaInfo.duration = duration;
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_DURATION,Number(duration)));
         setAvplayVideoRect(containerElem);
         break;
     case mediaObjects.BUFFERING_START :
         console.log('media::onStalled()');
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
+        currentMediaInfo.oldState = currentMediaInfo.state;
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
         break;
     case mediaObjects.BUFFERING_PROGRESS :
         console.log('Buffering progress data : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,Number(data1)));
         break;
     case mediaObjects.BUFFERING_COMPLETE :
+        if(currentMediaInfo.oldState == Media.STATE_PLAYING){
+            Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_PLAYING));
+        }
+        else if(currentMediaInfo.oldState == Media.STATE_PAUSED){
+            Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_PAUSED));
+        }
+        currentMediaInfo.oldState = currentMediaInfo.state;
         console.log('Buffering complete.');
         break;
     case mediaObjects.RENDERING_START :
         console.log('Rendering start');
-        Media.mediaEvent(currentMediaiInfo.id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+        Media.mediaEvent(currentMediaInfo.id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
         break;
     case mediaObjects.STREAM_COMPLETED :
         console.log('media::streamcompleted()');
-        currentMediaiInfo.position = 0;
-        mediaObjects[currentMediaiInfo.id].Execute('Stop');
-        Media.mediaEvent(currentMediaiInfo.id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        currentMediaInfo.position = 0;
+        mediaObjects[currentMediaInfo.id].Execute('Stop');
+        currentMediaInfo.oldState = currentMediaInfo.state;
+        Media.mediaEvent(currentMediaInfo.id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
         break;
     case mediaObjects.CURRENT_PLAYTIME :
         console.log('Current playtime: ' + data1);
-        currentMediaiInfo.position = data1;
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media.EVENT_POSITION,data1));
+        currentMediaInfo.position = data1;
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_POSITION,Number(data1)));
         break;
     case mediaObjects.SUBTITLE :
 
         break;
     case mediaObjects.CONNECTION_FAILED :
         console.log('Event type error : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.AUTHENTICATION_FAILED :
         console.log('Event type error : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.STREAM_NOT_FOUND :
         console.log('Event type error : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.NETWORK_DISCONNECTED :
         console.log('Event type error : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.NETWORK_SLOW :
         console.log('Event type error : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.RENDER_ERROR :
         console.log('Event type error : ' + data1);
-        Media.mediaEvent(currentMediaiInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     }
 }
 
-var currentMediaState = null;
-var currentMediaiInfo = {};
+var currentMediaInfo = {};
 
 function createSEFPlayer(id){
     mediaObjects[id] = SEFPlayer.get('Player');
-    console.log(' mediaObjects[id]...............'+ mediaObjects[id]);
     mediaObjects[id].OnEvent = function (type,data1,data2) {
         mediaEventListener(type,data1,data2);
     };
@@ -337,21 +346,27 @@ module.exports = {
         var id = args[0];
         console.log('media::create() - id =' + id);
         createSEFPlayer(id);
-        currentMediaiInfo = {};
+        currentMediaInfo = {};
         createVideContainer(id);
     },
 
     open:function(successCallback, errorCallback, args){
-        var id = args[0], 
+        var id = args[0],
             src = args[1];
+
+        console.log('media::open() - id =' + id + ' src = '+src);
+
         if(mediaObjects[id]){
-            currentMediaiInfo.id = id;
-            currentMediaiInfo.src = src;
-            currentMediaiInfo.position = 0;
-            currentMediaiInfo.duration = -1;
-            currentMediaState = Media.STATE_IDLE;
+            currentMediaInfo.id = id;
+            currentMediaInfo.src = src;
+            currentMediaInfo.position = 0;
+            currentMediaInfo.duration = -1;
+            currentMediaInfo.state = null;
+            currentMediaInfo.oldState = null;
+            console.log('currentMediaInfo.oldState '+currentMediaInfo.oldState);
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-        } else {
+        }
+        else {
             throw new Error('Fail to Media open');
         }
     },
@@ -361,15 +376,17 @@ module.exports = {
         var id = args[0];
         var reval = 0;
         console.log('media::play() - id =' + id);
-        if(currentMediaState == Media.STATE_IDLE){
-            reval = mediaObjects[id].Execute('InitPlayer',currentMediaiInfo.src);
-            reval += mediaObjects[id].Execute('StartPlayback',currentMediaiInfo.position);
-        } else {
+        if(currentMediaInfo.state == Media.STATE_IDLE){
+            reval = mediaObjects[id].Execute('InitPlayer',currentMediaInfo.src);
+            reval += mediaObjects[id].Execute('StartPlayback',currentMediaInfo.position);
+        }
+        else {
             reval = mediaObjects[id].Execute('Resume');
         }
         if(reval > 0){
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
-        } else {
+            console.log('Success to Media play');
+        }
+        else {
             throw new Error('Fail to Media play');
         }
     },
@@ -380,43 +397,48 @@ module.exports = {
         var reval = 0;
         console.log('media::stop() - MEDIA_STATE -> IDLE');
 
-        currentMediaiInfo.position = 0;
+        currentMediaInfo.position = 0;
         reval = mediaObjects[id].Execute('Stop');
 
         if(reval > 0){
+            currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-        } else {
+        }
+        else {
             throw new Error('Fail to Media stop');
         }
     },
 
     // Seeks to the position in the media
     seekTo:function(successCallback, errorCallback, args) {
-        var id = args[0], 
+        var id = args[0],
             milliseconds = args[1],
-            reval = 0;
+            reval = 0,
+            offset;
         console.log('media::seekTo()');
 
-        if(currentMediaState == Media.STATE_IDLE) {
-            currentMediaiInfo.position = milliseconds;
-        } else if(currentMediaState == Media.STATE_PLAYING || currentMediaState == Media.STATE_PAUSED){
-            if(milliseconds > (currentMediaiInfo.duration-2000)) {
+        if(currentMediaInfo.state == Media.STATE_IDLE) {
+            currentMediaInfo.position = milliseconds;
+        }
+        else if(currentMediaInfo.state == Media.STATE_PLAYING || currentMediaInfo.state == Media.STATE_PAUSED){
+            if(milliseconds > (currentMediaInfo.duration-2000)) {
                 throw new Error('The seekTo time is too close duration');
-            } else {
-                var offset = milliseconds - currentMediaiInfo.position;
-
+            }
+            else {
+                offset = milliseconds - currentMediaInfo.position;
                 if(offset > 0 ) {
                     offset = parseInt(offset / 1000);
                     reval = mediaObjects[id].Execute('JumpForward',offset);
-                } else {
+                }
+                else {
                     offset = parseInt((offset * -1) / 1000);
-
                     reval = mediaObjects[id].Execute('JumpBackward',offset);
                 }
 
                 if(reval > 0){
-                    console.log('Sucess to Media SeekTo' + milliseconds);
-                } else {
+                    console.log('Sucess to Media SeekTo ' + milliseconds);
+                }
+                else {
                     throw new Error('Fail to Media seekTo');
                 }
             }
@@ -431,8 +453,10 @@ module.exports = {
         reval = mediaObjects[id].Execute('Pause');
 
         if(reval > 0){
+            currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
-        } else {
+        }
+        else {
             throw new Error('Fail to Media pause');
         }
     }
