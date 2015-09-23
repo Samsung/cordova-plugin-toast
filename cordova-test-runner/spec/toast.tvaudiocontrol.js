@@ -113,7 +113,7 @@ describe('toast.tvaudiocontrol', function() {
         });
 
         it('is the state of mute changed, as you expected?', function (done) {
-            var mute = '';
+            var mute = null;
             toast.tvaudiocontrol.isMute(function(value){
                 mute = value;
                 console.log('mute state before setMute : ' + value);
@@ -131,7 +131,7 @@ describe('toast.tvaudiocontrol', function() {
                 });
             }, function(){
                 done.fail();
-            })
+            });
         }, 3000);
     });
     describe('toast.tvaudiocontrol.isMute', function() {
