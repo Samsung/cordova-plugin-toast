@@ -173,6 +173,8 @@ function getMediaEventVaule (type,data) {
     return reval;
 }
 
+var bBlockTimeUpdate = false;
+
 module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
@@ -182,57 +184,60 @@ module.exports = {
 
     open:function(successCallback, errorCallback, args) {
         var id = args[0], src = args[1];
+        var state = null;
 
-        console.log('media::open() - id =' + id);
-        setTimeout(function(){
-            if(window.webapis){
-                webapis.avplay.open(src);
-                webapis.avplay.setListener({
-                    onbufferingstart: function() {
-                        console.log('media::onStalled()');
-                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
-                    },
-                    onbufferingprogress: function(percent) {
-                        console.log('Buffering progress data : ' + percent);
-                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
-                    },
-                    onbufferingcomplete: function() {
-                        console.log('Buffering complete.');
-                        var state = webapis.avplay.getState();
-                        if(state == 'READY') {
-                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_IDLE));
-                        } else {
-                            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,state));
-                        }
-                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
-                    },
-                    onstreamcompleted: function(currentTime) {
-                        console.log('media::streamcompleted()');
-                        webapis.avplay.stop();
-                        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-                    },
-                    oncurrentplaytime: function(currentTime) {
+        console.log('media::open() - id =' + id + ' src = ' + src);
+        
+        if(window.webapis){
+            webapis.avplay.open(src);
+            webapis.avplay.setListener({
+                onbufferingstart: function() {
+                    console.log('media::onStalled()');
+                    bBlockTimeUpdate = true;
+                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
+                },
+                onbufferingprogress: function(percent) {
+                    console.log('Buffering progress data : ' + percent);
+                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
+                },
+                onbufferingcomplete: function() {
+                    console.log('Buffering complete.');
+                    bBlockTimeUpdate = false;
+                    state = webapis.avplay.getState();
+                    if(state !== 'READY') {
+                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,state));
+                    }
+                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
+                },
+                onstreamcompleted: function(currentTime) {
+                    console.log('media::streamcompleted()');
+                    webapis.avplay.stop();
+                    Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+                },
+                oncurrentplaytime: function(currentTime) {
+                    state = webapis.avplay.getState();
+                    if(!bBlockTimeUpdate && (state == avplayState.PLAYING || state == avplayState.PAUSED)){
                         console.log('Current playtime: ' + currentTime);
                         Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,currentTime));
-                    },
-                    onevent: function(eventType, eventData) {
-                        console.log('Event type error : ' + eventType + ', eventData: ' + eventData);
-                    },
-                    onerror: function(errorData) {
-                        console.log('Event type error : ' + errorData);
-                        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
-                    },
-                    onsubtitlechange: function(duration, text, data1, data2) {
-                        console.log('Subtitle Changed.');
-                    },
-                    ondrmevent: function(drmEvent, drmData) {
-                        console.log('DRM callback: ' + drmEvent + ', data: ' + drmData);
                     }
-                });
-                currentMediaState = Media.STATE_IDLE;
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-            }
-        },0);
+                },
+                onevent: function(eventType, eventData) {
+                    console.log('Event type error : ' + eventType + ', eventData: ' + eventData);
+                },
+                onerror: function(errorData) {
+                    console.log('Event type error : ' + errorData);
+                    Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
+                },
+                onsubtitlechange: function(duration, text, data1, data2) {
+                    console.log('Subtitle Changed.');
+                },
+                ondrmevent: function(drmEvent, drmData) {
+                    console.log('DRM callback: ' + drmEvent + ', data: ' + drmData);
+                }
+            });
+            currentMediaState = Media.STATE_IDLE;
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        }
     },
 
     // Start playing the media
@@ -240,31 +245,27 @@ module.exports = {
         var id = args[0];
 
         console.log('media::play() - id =' + id);
-
-        setTimeout(function(){
-            if(webapis.avplay.getState() == avplayState.IDLE){
-                webapis.avplay.prepareAsync(function(){
-                    webapis.avplay.play();
-                    Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
-                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,webapis.avplay.getDuration()));
-                },function(e){
-                    throw TizenUtil.fromWebAPIException(e);
-                });
-            } 
-            else {
-                webapis.avplay.play();
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
-            }
-        },0);
+        if(webapis.avplay.getState() == avplayState.IDLE){
+            webapis.avplay.prepare();
+            webapis.avplay.play();
+            var duration = webapis.avplay.getDuration();
+            console.log('duration.....................'+duration);
+            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,duration));
+        } 
+        else {
+            webapis.avplay.play();
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+        }
     },
 
     // Stops the playing media
     stop:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::stop() - EVENT_STATE -> IDLE');
+        webapis.avplay.stop();
+        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        bBlockTimeUpdate = false;
         setTimeout(function(){
-            webapis.avplay.stop();
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
             successCallback();
         },0);
     },
@@ -275,24 +276,21 @@ module.exports = {
         var milliseconds = args[1];
 
         console.log('media::seekTo()');
-        
-        setTimeout(function(){
-            webapis.avplay.seekTo(milliseconds,function(time){
-                successCallback(webapis.avplay.getCurrentTime());
-            },function(e){
-                throw Error('Failed to seekTo');
-            });
-        },0);
+        webapis.avplay.seekTo(milliseconds,function(){
+            successCallback(webapis.avplay.getCurrentTime());
+        },function(e){
+            throw Error('Failed to seekTo');
+        });
+        bBlockTimeUpdate = true;
     },
 
     // Pauses the playing media
     pause:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::pause() - EVENT_STATE -> PAUSED');
-        setTimeout(function(){
-            webapis.avplay.pause();
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
-        },0);
+        
+        webapis.avplay.pause();
+        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     }
 };
 

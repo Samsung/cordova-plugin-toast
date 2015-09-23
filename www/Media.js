@@ -16,7 +16,7 @@ var Media = function (){
         this._position = -1;
         this.hooks = {};
         exec(null, null, 'toast.Media', 'create',[this.id]);
-    } 
+    }
     else {
         throw new RangeError('Media instance exists already. toast Media supported single instance');
     }
@@ -47,9 +47,7 @@ Media.mediaEvent = function(id, value) {
             switch(value.type) {
             case Media.EVENT_STATE :
                 if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state){
-                    
                     media._mediaEventCallBack.onevent(value);
-
                 }
                 break;
             case Media.EVENT_DURATION :
@@ -182,7 +180,5 @@ Media.prototype.setListener = function(listener) {
 Media.prototype.unsetListener = function() {
      mediaObjects[this.id]._mediaEventCallBack = {};
 };
-
-
 
 module.exports = Media;

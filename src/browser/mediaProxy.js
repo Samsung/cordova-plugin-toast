@@ -34,7 +34,7 @@ function createVideContainer(id){
         containerElem.style.height = '0px';
         containerElem.appendChild(mediaObjects[id]);
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
-    } 
+    }
     else {
         throw new Error('The platform does not support toast.media');
     }
@@ -110,9 +110,9 @@ function getMediaEventVaule (type,data) {
 module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
-        
+
         console.log('media::create() - id =' + id);
-        
+
         mediaObjects[id] = document.createElement('video');
         mediaObjects[id].onStalledCB = function () {
             console.log('media::onStalled()');
@@ -145,11 +145,11 @@ module.exports = {
     },
 
     open:function(successCallback, errorCallback, args){
-        var id = args[0], 
+        var id = args[0],
             src = args[1];
-        
+
         console.log('media::open() - id =' + id + ' src =' + src);
-        
+
         mediaObjects[id].src = src;
         mediaObjects[id].load();
         mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
@@ -173,22 +173,23 @@ module.exports = {
     // Stops the playing media
     stop:function(successCallback, errorCallback, args) {
         var id = args[0];
-        
-            mediaObjects[id].pause();
-            if (mediaObjects[id].currentTime !== 0) {
-                mediaObjects[id].currentTime = 0;
-            }
-            console.log('media::stop() - MEDIA_STATE -> IDLE');
 
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        mediaObjects[id].pause();
+        if (mediaObjects[id].currentTime !== 0) {
+            mediaObjects[id].currentTime = 0;
+        }
+        console.log('media::stop() - MEDIA_STATE -> IDLE');
 
-            mediaObjects[id].removeEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
-            mediaObjects[id].removeEventListener('ended', mediaObjects[id].onEndedCB);
-            mediaObjects[id].removeEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
-            mediaObjects[id].removeEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
-            mediaObjects[id].removeEventListener('playing', mediaObjects[id].onPlayingCB);
-            mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
-            mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
+        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+
+        mediaObjects[id].removeEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
+        mediaObjects[id].removeEventListener('ended', mediaObjects[id].onEndedCB);
+        mediaObjects[id].removeEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
+        mediaObjects[id].removeEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
+        mediaObjects[id].removeEventListener('playing', mediaObjects[id].onPlayingCB);
+        mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
+        mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
+
         setTimeout(function(){
             successCallback(mediaObjects[id].currentTime);
         },0);
@@ -196,21 +197,18 @@ module.exports = {
 
     // Seeks to the position in the media
     seekTo:function(successCallback, errorCallback, args) {
-        var id = args[0], 
+        var id = args[0],
             milliseconds = args[1];
-            
             console.log('media::seekTo() : ' + milliseconds);
-            
+
             mediaObjects[id].currentTime = milliseconds / 1000;
-            
     },
 
     // Pauses the playing media
     pause:function(successCallback, errorCallback, args) {
         var id = args[0];
-        
+
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
-        
         mediaObjects[id].pause();
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     }

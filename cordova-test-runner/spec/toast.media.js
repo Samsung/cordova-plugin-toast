@@ -1,3 +1,4 @@
+
 describe('Constructor toast.Media', function() {
     it('should be defined as "toast.Media" namespace.', function() {
         expect(window.toast).toBeDefined();
@@ -75,7 +76,7 @@ describe('Video playback feature of toast.Media', function() {
         media.stop();
         media = null;
     });
-   
+    
     it('plays video well...', function (done) {
         media.open(SAMPLE_VIDEO_URL);
         var state = null;
@@ -96,10 +97,10 @@ describe('Video playback feature of toast.Media', function() {
                         expect(MediaState).toContain(evt.data.oldState);
                         expect(MediaState).toContain(evt.data.state);
                         expect(evt.data.oldState === evt.data.state).toBeFalsy();
+                        state = evt.data.state;
                         if(evt.data.state === 'STALLED') {
                             break;
                         }
-                        state = evt.data.state;
                         if(waitForPlay) {
                             expect(state).toBe('PLAYING');
                             waitForPlay = false;
@@ -111,6 +112,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.pause();
                             }, 3000);
                         }
+                        
                         if(waitForPause) {
                             expect(state).toBe('PAUSED');
                             waitForPause = false;
@@ -119,6 +121,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.play();
                             }, 3000);
                         }
+                        
                         if(waitForResume && state !== 'STALLED') {
                             expect(state).toBe('PLAYING');
                             waitForResume = false;
@@ -128,6 +131,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekForward = curPos;
                             }, 3000);
                         }
+                        
                         if(waitForStop) {
                             expect(state).toBe('IDLE');
                             done();
@@ -148,7 +152,7 @@ describe('Video playback feature of toast.Media', function() {
                             expect(evt.data.position > 1000).toBeTruthy();
                             waitForCurrentTime = false;
                         }
-                        if(waitForSeekForward && evt.data.position > waitForSeekForward) {
+                        if(state !== 'STALLED' && waitForSeekForward && evt.data.position > waitForSeekForward) {
                             waitForSeekForward = false;
                             setTimeout(function () {
                                 var curPos = media.getCurrentPosition();
@@ -156,7 +160,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekBackward = curPos;
                             }, 3000);
                         }
-                        if(waitForSeekBackward && evt.data.position < waitForSeekBackward) {
+                        if(state !== 'STALLED' && waitForSeekBackward && evt.data.position < waitForSeekBackward) {
                             waitForSeekBackward = false;
                             setTimeout(function () {
                                 waitForStop = true;
@@ -180,7 +184,7 @@ describe('Video playback feature of toast.Media', function() {
         media.play();
     }, 100000);
 
-
+    
     it('plays audio well...', function (done) {
         media.open(SAMPLE_AUDIO_URL);
         var state = null;
@@ -191,7 +195,7 @@ describe('Video playback feature of toast.Media', function() {
         var waitForSeekForward = false;
         var waitForSeekBackward = false;
         var waitForStop = false;
-        media.setListener({
+         media.setListener({
             onevent: function (evt) {
                 expect(evt.type).toBeDefined();
                 expect(MediaEventType).toContain(evt.type);
@@ -201,10 +205,10 @@ describe('Video playback feature of toast.Media', function() {
                         expect(MediaState).toContain(evt.data.oldState);
                         expect(MediaState).toContain(evt.data.state);
                         expect(evt.data.oldState === evt.data.state).toBeFalsy();
+                        state = evt.data.state;
                         if(evt.data.state === 'STALLED') {
                             break;
                         }
-                        state = evt.data.state;
                         if(waitForPlay) {
                             expect(state).toBe('PLAYING');
                             waitForPlay = false;
@@ -216,6 +220,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.pause();
                             }, 3000);
                         }
+                        
                         if(waitForPause) {
                             expect(state).toBe('PAUSED');
                             waitForPause = false;
@@ -224,6 +229,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.play();
                             }, 3000);
                         }
+                        
                         if(waitForResume && state !== 'STALLED') {
                             expect(state).toBe('PLAYING');
                             waitForResume = false;
@@ -233,6 +239,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekForward = curPos;
                             }, 3000);
                         }
+                        
                         if(waitForStop) {
                             expect(state).toBe('IDLE');
                             done();
@@ -253,7 +260,7 @@ describe('Video playback feature of toast.Media', function() {
                             expect(evt.data.position > 1000).toBeTruthy();
                             waitForCurrentTime = false;
                         }
-                        if(waitForSeekForward && evt.data.position > waitForSeekForward) {
+                        if(state !== 'STALLED' && waitForSeekForward && evt.data.position > waitForSeekForward) {
                             waitForSeekForward = false;
                             setTimeout(function () {
                                 var curPos = media.getCurrentPosition();
@@ -261,7 +268,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekBackward = curPos;
                             }, 3000);
                         }
-                        if(waitForSeekBackward && evt.data.position < waitForSeekBackward) {
+                        if(state !== 'STALLED' && waitForSeekBackward && evt.data.position < waitForSeekBackward) {
                             waitForSeekBackward = false;
                             setTimeout(function () {
                                 waitForStop = true;
@@ -284,7 +291,8 @@ describe('Video playback feature of toast.Media', function() {
         waitForPlay = true;
         media.play();
     }, 100000);
-
+    
+    
     it('does NOT throws Error when "play" is called before "open"', function () {
         expect(function () {
             media.play();
@@ -305,4 +313,5 @@ describe('Video playback feature of toast.Media', function() {
             media.stop();
         }).not.toThrow();
     });
+    
 });
