@@ -189,6 +189,14 @@ module.exports = {
 
         console.log('media::open() - id =' + id + ' src = ' + src);
 
+        state = webapis.avplay.getState();
+
+        if(state !== avplayState.NONE && state !== avplayState.IDLE) {
+            webapis.avplay.stop();
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+            bBlockTimeUpdate = false;
+        }
+
         if(window.webapis){
             webapis.avplay.open(src);
             webapis.avplay.setListener({

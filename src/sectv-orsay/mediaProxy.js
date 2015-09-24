@@ -354,6 +354,10 @@ module.exports = {
         var id = args[0],
             src = args[1];
 
+        if(currentMediaInfo.state && currentMediaInfo.state !== Media.STATE_IDLE){
+            mediaObjects[id].Execute('Stop');
+        }
+
         console.log('media::open() - id =' + id + ' src = '+src);
 
         if(mediaObjects[id]){
