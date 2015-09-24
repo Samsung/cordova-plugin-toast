@@ -9,10 +9,18 @@
             report('Error: ' + JSON.stringify(err));
         }
     });
-    testsuite('toast.Media', 'open()', function(report) {
+    testsuite('toast.Media', 'open() -> \'SampleVideo\' ', function(report) {
         try {
             mediaIns.open('http://media.w3.org/2010/05/sintel/trailer.mp4');
             report('Success: toast.Media.open(\'http://media.w3.org/2010/05/sintel/trailer.mp4\')');
+        } catch(err){
+            report('Error: ' + JSON.stringify(err));
+        }
+    });
+    testsuite('toast.Media', 'open() -> \'SampleAudio\' ', function(report) {
+        try {
+            mediaIns.open('http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3');
+            report('Success: toast.Media.open(\'http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3\')');
         } catch(err){
             report('Error: ' + JSON.stringify(err));
         }
