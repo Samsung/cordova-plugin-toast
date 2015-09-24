@@ -8,7 +8,25 @@ var channelChangeCallback = [];
 module.exports = {
     tune: function (success, fail, args) {
         try {
-            tizen.tvchannel.tune(args[0], success, fail, windowType);
+            var match = -1;
+
+            tizen.tvchannel.getChannelList(function (channelList) {
+                for (var i = 0; i < channelList.length; i++) {
+                    if (args[0].major == channelList[i].major && args[0].minor == channelList[i].minor) {
+                        match = i;
+                        break;
+                    }
+                }
+
+                if (match != -1) {
+                    tizen.tvchannel.tune(channelList[match], success, fail, windowType);
+                }
+                else {
+                    setTimeout(function () {
+                        fail(new Error('Fail to find source.'));
+                    }, 0);
+                }
+            });
         }
         catch (e) {
             fail(e);
@@ -71,7 +89,26 @@ module.exports = {
     },
     getProgramList: function (success, fail, args) {
         try {
-            tizen.tvchannel.getProgramList(args[0], args[1], success, fail, args[2]);
+            var match = -1;
+
+            tizen.tvchannel.getChannelList(function (channelList) {
+                for (var i = 0; i < channelList.length; i++) {
+                    if (args[0].major == channelList[i].major && args[0].minor == channelList[i].minor) {
+                        match = i;
+                        break;
+                    }
+                }
+
+                if (match != -1) {
+                    var TZDate = new tizen.TZDate(args[1]);
+                    tizen.tvchannel.getProgramList(channelList[match], TZDate, success, fail, args[2]);
+                }
+                else {
+                    setTimeout(function () {
+                        fail(new Error('Fail to find source.'));
+                    }, 0);
+                }
+            });
         }
         catch (e) {
             fail(e);
@@ -102,7 +139,7 @@ module.exports = {
     addChannelChangeListener: function (success, fail, args) {
         channelChangeCallback.push({
             callback: success,
-            id : tizen.tvchannel.addChannelChangeListener(success, args[0])
+            id : tizen.tvchannel.addChannelChangeListener(success, windowType)
         });
     },
     removeChannelChangeListener: function (success, fail, args) {

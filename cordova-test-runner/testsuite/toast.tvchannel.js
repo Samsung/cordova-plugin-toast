@@ -1,21 +1,27 @@
 /* globals testsuite */
-
-
 (function() {
+    var globalReport1 = null;
+    var globalReport2 = null;
+
     var testFunc1 = function (channelInfo) {
-        console.log('Call the testFunc1 function.');
+        globalReport1('testFunc1 is called: ' + JSON.stringify(channelInfo));
     };
     var testFunc2 = function (channelInfo) {
-        console.log('Call the testFunc2 function.');
+        globalReport2('testFunc2 is called: ' + JSON.stringify(channelInfo));
     };
+    
     testsuite('toast.tvchannel', 'tune() to \'7-1\'', function(report) {
         toast.tvchannel.tune({
             major: 7,
             minor: 1,
+            channelName: 'KBS2',
             programNumber: 2,
             ptc: 17,
+            lcn: 0,
             sourceID: 2,
-            originalNetworkID: 0
+            transportStreamID: 2065,
+            originalNetworkID: 0,
+            serviceName: 'KBS2'
         },{
             onsuccess: function (channelInfo) {
                 report('OnSuccess: ' + JSON.stringify(channelInfo));
@@ -85,10 +91,14 @@
         toast.tvchannel.getProgramList({
             major: 7,
             minor: 1,
+            channelName: 'KBS2',
             programNumber: 2,
             ptc: 17,
+            lcn: 0,
             sourceID: 2,
-            originalNetworkID: 0
+            transportStreamID: 2065,
+            originalNetworkID: 0,
+            serviceName: 'KBS2'
         }, new Date(), function (programInfo) {
             report('Success: ' + JSON.stringify(programInfo));
         }, function(err) {
@@ -103,9 +113,11 @@
         });
     });
     testsuite('toast.tvchannel', 'addChannelChangeListener() \'testFunc1\'', function(report) {
-        toast.tvchannel.addChannelChangeListener(testFunc1);
+        globalReport1 = report;
+        toast.tvchannel.addChannelChangeListener(testFunc1)
     });
     testsuite('toast.tvchannel', 'addChannelChangeListener() \'testFunc2\'', function(report) {
+        globalReport2 = report;
         toast.tvchannel.addChannelChangeListener(testFunc2);
     });
     testsuite('toast.tvchannel', 'removeChannelChangeListener() \'testFunc1\'', function(report) {

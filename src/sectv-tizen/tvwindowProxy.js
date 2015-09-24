@@ -5,7 +5,7 @@ var windowType = 'MAIN';
 module.exports = {
     setSource: function (success, fail, args){
         try {
-            var match = '';
+            var match = -1;
 
             tizen.systeminfo.getPropertyValue('VIDEOSOURCE', function (videoSource) {
                 var connectedVideoSources = videoSource.connected;
@@ -16,10 +16,8 @@ module.exports = {
                     }
                 }
 
-                if (match) {
-                    tizen.tvwindow.setSource(connectedVideoSources[match], function (source) {
-                        success(source);
-                    }, fail, windowType);
+                if (match != -1) {
+                    tizen.tvwindow.setSource(connectedVideoSources[match], success, fail, windowType);
                 }
                 else {
                     setTimeout(function () {
