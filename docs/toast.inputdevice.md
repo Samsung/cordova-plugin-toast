@@ -44,10 +44,10 @@ Supported Keys are different by each platforms.
 
 | keyName            | browser (keyboard) | sectv-orsay | sectv-tizen |
 |--------------------|--------------------|-------------|-------------|
-| UpArrow            | Yes                | Yes         | Yes         |
-| DownArrow          | Yes                | Yes         | Yes         |
-| LeftArrow          | Yes                | Yes         | Yes         |
-| RightArrow         | Yes                | Yes         | Yes         |
+| ArrowUp            | Yes                | Yes         | Yes         |
+| ArrowDown          | Yes                | Yes         | Yes         |
+| ArrowLeft          | Yes                | Yes         | Yes         |
+| ArrowRight         | Yes                | Yes         | Yes         |
 | Enter              | Yes                | Yes         | Yes         |
 | Return             | Yes (ESC)          | Yes         | Yes         |
 | ColorF0Red         | Yes (F1)           | Yes*        | Yes*        |
@@ -62,6 +62,16 @@ Supported Keys are different by each platforms.
 | MediaPause         | Yes (F10)          | Yes*        | Yes*        |
 | MediaRewind        | Yes (F11)          | Yes*        | Yes*        |
 | Tools              | Yes (Context)      | Yes*        | Yes*        |
+| 0					 | Yes (0)			  | Yes*		| Yes*		  |
+| 1					 | Yes (1)			  | Yes*		| Yes*		  |
+| 2					 | Yes (2)			  | Yes*		| Yes*		  |
+| 3					 | Yes (3)			  | Yes*		| Yes*		  |
+| 4					 | Yes (4)			  | Yes*		| Yes*		  |
+| 5					 | Yes (5)			  | Yes*		| Yes*		  |
+| 6					 | Yes (6)			  | Yes*		| Yes*		  |
+| 7					 | Yes (7)			  | Yes*		| Yes*		  |
+| 8					 | Yes (8)			  | Yes*		| Yes*		  |
+| 9					 | Yes (9)			  | Yes*		| Yes*		  |
 (Yes*: supported, but callling `registerKey` with the `keyName` is needed.)
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:

@@ -1,6 +1,12 @@
 'use strict';
 
 var supportedKeys = [
+	{name : 'ArrowUp', code: 38},
+	{name : 'ArrowDown', code: 40},
+	{name : 'ArrowLeft', code: 37},
+	{name : 'ArrowRight', code: 39},
+	{name : 'Enter', code: 13},
+	{name : 'Return', code: 27},
 	{name : 'ColorF0Red', code: 112},
 	{name : 'ColorF1Green', code: 113},
 	{name : 'ColorF2Yellow', code: 114}, 
@@ -12,13 +18,17 @@ var supportedKeys = [
 	{name : 'MediaPlay', code: 120},
 	{name : 'MediaPause', code: 121},
 	{name : 'MediaRewind', code: 122},
-	{name : 'ArrowUp', code: 38},
-	{name : 'ArrowRight', code: 39},
-	{name : 'ArrowLeft', code: 37},
-	{name : 'ArrowDown', code: 40},
-	{name : 'Enter', code: 13},
 	{name : 'Tools', code: 93},
-	{name : 'Return', code: 27}
+	{name : '0', code : 48},
+	{name : '1', code : 49},
+	{name : '2', code : 50},
+	{name : '3', code : 51},
+	{name : '4', code : 52},
+	{name : '5', code : 53},
+	{name : '6', code : 54},
+	{name : '7', code : 55},
+	{name : '8', code : 56},
+	{name : '9', code : 57},
 ];
 
 module.exports = {
@@ -94,7 +104,7 @@ module.exports = {
 		else {
 			setTimeout(function(){
 				success();
-			}, 0);			
+			}, 0);
 		}
 
 	}
