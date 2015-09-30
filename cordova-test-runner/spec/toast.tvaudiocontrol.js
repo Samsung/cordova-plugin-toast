@@ -112,19 +112,25 @@ describe('toast.tvaudiocontrol', function() {
             }).toThrowError(TypeError);
         });
 
-        it('is the state of mute changed, as you expected?', function (done) {
-            var mute = null;
-            toast.tvaudiocontrol.isMute(function(value){
-                mute = value;
-                console.log('mute state before setMute : ' + value);
+        it('sets mute state to \'true\'', function (done) {
+            var mutestate = true;
+            toast.tvaudiocontrol.setMute(mutestate, function(){
+                toast.tvaudiocontrol.isMute(function(value){
+                    expect(value).toBe(mutestate);
+                    done();
+                }, function(){
+                    done.fail();
+                });
             }, function(){
                 done.fail();
             });
+        }, 3000);
 
-            toast.tvaudiocontrol.setMute(!mute, function(){
+        it('sets mute state to \'false\'', function (done) {
+            var mutestate = false;
+            toast.tvaudiocontrol.setMute(mutestate, function(){
                 toast.tvaudiocontrol.isMute(function(value){
-                    expect(value).toBe(!mute);
-                    console.log('mute state after setMute : ' + value);
+                    expect(value).toBe(mutestate);
                     done();
                 }, function(){
                     done.fail();
