@@ -114,7 +114,7 @@
     });
     testsuite('toast.tvchannel', 'addChannelChangeListener() \'testFunc1\'', function(report) {
         globalReport1 = report;
-        toast.tvchannel.addChannelChangeListener(testFunc1)
+        toast.tvchannel.addChannelChangeListener(testFunc1);
     });
     testsuite('toast.tvchannel', 'addChannelChangeListener() \'testFunc2\'', function(report) {
         globalReport2 = report;
