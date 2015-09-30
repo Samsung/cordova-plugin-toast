@@ -14,7 +14,7 @@ var Media = function (){
         this._containerElem = -1;
         this._duration = -1;
         this._position = -1;
-        this.hooks = {};
+        this._hooks = {};
         exec(null, null, 'toast.Media', 'create',[this.id]);
     }
     else {
@@ -94,36 +94,6 @@ Media.getInstance = function() {
     }
 };
 
-Media.prototype.registerHook = function (hook, fn) {
-    this.hooks[hook] = this.hooks[hook] || [];
-    this.hooks[hook].push(fn);
-};
-Media.prototype.unregisterHook = function (hook, fn) {
-    if(!this.hooks[hook]) {
-        return;
-    }
-    for(var i=this.hooks[hook].length-1; i>=0; i--) {
-        if(this.hooks[hook][i] === fn) {
-            this.hooks[hook].splice(i, 1);
-        }
-    }
-};
-Media.prototype.attachPlugin = function (plugin) {
-    if(plugin.onAttachToMedia) {
-        plugin.onAttachToMedia(this);
-    }
-};
-function invokeHooks (hook, args) {
-    var media = args[0];
-    args = args.slice(1);
-    if(!media.hooks[hook]) {
-        return;
-    }
-    for(var i=0; i<media.hooks[hook].length; i++) {
-        media.hooks[hook][i](media, args);
-    }
-}
-
 Media.prototype.open = function(mediaUrl) {
     argscheck.checkArgs('s', 'Media.open', arguments);
     this.src = mediaUrl;
@@ -183,5 +153,49 @@ Media.prototype.setListener = function(listener) {
 Media.prototype.unsetListener = function() {
      mediaObjects[this.id]._mediaEventCallBack = {};
 };
+
+Media.prototype.resetHook = function () {
+    for(var hook in this._hooks) {
+        if(this._hooks.hasOwnProperty(hook)) {
+            for(var i=this._hooks[hook].length-1; i>=0; i--) {
+                delete this._hooks[hook][i];
+            }
+            delete this._hooks[hook];
+        }
+    }
+    this._hooks = {};
+};
+Media.prototype.registerHook = function (hook, fn) {
+    this._hooks[hook] = this._hooks[hook] || [];
+    this._hooks[hook].push(fn);
+};
+Media.prototype.unregisterHook = function (hook, fn) {
+    if(!this._hooks[hook]) {
+        return;
+    }
+    for(var i=this._hooks[hook].length-1; i>=0; i--) {
+        if(this._hooks[hook][i] === fn) {
+            this._hooks[hook].splice(i, 1);
+        }
+    }
+};
+Media.prototype.resetPlugin = function () {
+    this.resetHook();
+};
+Media.prototype.attachPlugin = function (plugin) {
+    if(plugin.onAttachToMedia) {
+        plugin.onAttachToMedia(this);
+    }
+};
+function invokeHooks (hook, args) {
+    var media = args[0];
+    args = args.slice(1);
+    if(!media._hooks[hook]) {
+        return;
+    }
+    for(var i=0; i<media._hooks[hook].length; i++) {
+        media._hooks[hook][i](media, args);
+    }
+}
 
 module.exports = Media;

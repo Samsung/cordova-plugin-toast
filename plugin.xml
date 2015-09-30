@@ -27,6 +27,9 @@
 	<js-module src='www/Media.js' name='Media'>
 		<clobbers target='toast.Media' />
 	</js-module>
+	<js-module src='www/MediaPlugin.js' name='MediaPlugin'>
+		<clobbers target='toast.MediaPlugin' />
+	</js-module>
 	<js-module src='www/util.js' name='util'>
 	</js-module>
 
