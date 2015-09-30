@@ -121,7 +121,7 @@ module.exports = {
             if (typeof programInfo == 'object') {
                 setTimeout(function () {
                     success(programInfo);
-                }, 0);    
+                }, 0);
             }
             else {
                 setTimeout(function () {
@@ -132,7 +132,8 @@ module.exports = {
                         });
                 }, 0);
             }
-        } catch (e) {
+        }
+        catch (e) {
             fail(e);
         }
     },
