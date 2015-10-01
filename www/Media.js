@@ -56,15 +56,11 @@ Media.mediaEvent = function(id, value) {
             break;
         case Media.EVENT_DURATION :
             media._duration = value.data.duration;
-            setTimeout(function(){
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-            },0);
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media.EVENT_POSITION :
             media._position = Number(value.data.position);
-            setTimeout(function(){
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-            },0);
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media.EVENT_BUFFERINGPROGRESS :
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
