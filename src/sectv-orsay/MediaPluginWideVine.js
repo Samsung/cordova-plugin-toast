@@ -16,7 +16,7 @@ MediaPluginWideVine.prototype.onAttachToMedia = function (media) {
 	media.registerHook('beforeopen', function (media, args) {
 		media.src = media.src + '|COMPONENT=WV|' + optionStr;
 	});
-	media.registerHook('afteropen', function (media, args) {
+	media.registerHook('afterplay', function (media, args) {
 		media.src = tempSrc;
 	});
 };
