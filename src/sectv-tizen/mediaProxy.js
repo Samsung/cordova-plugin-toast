@@ -2,7 +2,6 @@
 
 var Media = require('cordova-plugin-toast.Media');
 var Util = require('cordova-plugin-toast.util');
-var TizenUtil = require('cordova-plugin-toast.tizenutil');
 
 var avplayState = {
     NONE : 'NONE',
@@ -25,7 +24,6 @@ function createVideContainer(id){
             subtree: false,
             attributes: true
         });
-        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,elem));
     }
 
     function setContainerAppendEventListener(callback) {
@@ -50,12 +48,10 @@ function createVideContainer(id){
         containerElem.innerHTML = '<OBJECT type="application/avplayer" style="width:0px; height:0px;"></OBJECT>';
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
         setContainerAppendEventListener(containerAppendEventCallback);
+        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,containerElem));
     }
     else {
-        throw TizenUtil.fromWebAPIException({
-            'message':'The platform does not support toast.media',
-            'name':'NotSupportedError'
-        });
+        throw Error('The platform does not support toast.media');
     }
 }
 
@@ -109,7 +105,7 @@ function setAvplayVideoRect(element){
     try{
         var state = webapis.avplay.getState();
         if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY){
-            webapis.avplay.setDisplayRect(Number(boundingRect.left),Number(boundingRect.top),Number(boundingRect.width),Number(boundingRect.height));
+            webapis.avplay.setDisplayRect(Math.ceil(Number(boundingRect.left)),Math.ceil(Number(boundingRect.top)),Math.ceil(Number(boundingRect.width)),Math.ceil(Number(boundingRect.height)));
         }
     }
     catch (e){
@@ -300,6 +296,12 @@ module.exports = {
 
         webapis.avplay.pause();
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
+    },
+
+    setStreamingProperty:function(successCallback, errorCallback, args) {
+        console.log('media::setStreamingProperty() - type= '+args[0]+' data= '+args[1]);
+
+        webapis.avplay.setStreamingProperty.apply(webapis.avplay, args);
     }
 };
 

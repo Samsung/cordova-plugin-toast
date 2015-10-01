@@ -43,38 +43,44 @@ Media._MEDIA_ERROR = 'ERROR';
 Media.mediaEvent = function(id, value) {
     var media = mediaObjects[id];
     if(media) {
-        setTimeout(function(){
-            switch(value.type) {
-            case Media.EVENT_STATE :
+        switch(value.type) {
+        case Media.EVENT_STATE :
+            setTimeout(function(){
                 if(media._mediaEventCallBack.onevent && value.data.oldState === null){
                     media._mediaEventCallBack.onevent(value);
                 }
                 else if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state){
                     media._mediaEventCallBack.onevent(value);
                 }
-                break;
-            case Media.EVENT_DURATION :
-                media._duration = value.data.duration;
+            },0);
+            break;
+        case Media.EVENT_DURATION :
+            media._duration = value.data.duration;
+            setTimeout(function(){
                 media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media.EVENT_POSITION :
-                media._position = Number(value.data.position);
+            },0);
+            break;
+        case Media.EVENT_POSITION :
+            media._position = Number(value.data.position);
+            setTimeout(function(){
                 media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media.EVENT_BUFFERINGPROGRESS :
-                media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
-                break;
-            case Media._MEDIA_CONTAINER :
-                media._containerElem = value.data.containerElem;
-                break;
-            case Media._MEDIA_ERROR :
+            },0);
+            break;
+        case Media.EVENT_BUFFERINGPROGRESS :
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media._MEDIA_CONTAINER :
+            media._containerElem = value.data.containerElem;
+            break;
+        case Media._MEDIA_ERROR :
+            setTimeout(function(){
                 media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
-                break;
-            default :
-                console.log('Unhandled Media.mediaEvent :: ' + value.type);
-                break;
-            }
-        },0);
+            },0);
+            break;
+        default :
+            console.log('Unhandled Media.mediaEvent :: ' + value.type);
+            break;
+        }
     }
     else {
          console.log('Received Media.onStatus callback for unknown media:: ' + id);

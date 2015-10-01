@@ -17,10 +17,11 @@ function getOptionString(options) {
 }
 
 MediaPluginWideVine.prototype.onAttachToMedia = function (media) {
+	var me = this;
 	media.registerHook('afteropen', function (media, args) {
 		exec(null, null, 'toast.Media', 'setStreamingProperty', [
 			'WIDEVINE',
-			getOptionString(this.options)
+			getOptionString(me.options)
 		]);
 	});
 };
