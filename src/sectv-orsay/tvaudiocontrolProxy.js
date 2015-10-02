@@ -27,7 +27,7 @@ function volumeTrigger(volume){
 module.exports = {
 	setMute: function (success, fail, args) {
 		var userMute = args[0] ? PLR_TRUE : PLR_FALSE;
-		
+
 		var sef = SEF.get('Audio');
 		var result = sef.Execute('SetUserMute', userMute);
 
