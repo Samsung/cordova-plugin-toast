@@ -89,6 +89,9 @@
 		<js-module src='src/sectv-orsay/MediaPluginHLS.js' name='MediaPluginHLS'>
 			<clobbers target='toast.MediaPluginHLS' />
 		</js-module>
+		<js-module src='src/sectv-orsay/MediaPluginUHD.js' name='MediaPluginUHD'>
+			<clobbers target='toast.MediaPluginUHD' />
+		</js-module>
 	</platform>
 
 	<!-- sectv-tizen -->
@@ -121,6 +124,9 @@
 		</js-module>
 		<js-module src='src/sectv-tizen/MediaPluginHLS.js' name='MediaPluginHLS'>
 			<clobbers target='toast.MediaPluginHLS' />
+		</js-module>
+		<js-module src='src/sectv-tizen/MediaPluginUHD.js' name='MediaPluginUHD'>
+			<clobbers target='toast.MediaPluginUHD' />
 		</js-module>
 	</platform>
 </plugin>

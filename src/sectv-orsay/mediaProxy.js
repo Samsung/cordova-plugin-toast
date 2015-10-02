@@ -463,6 +463,22 @@ module.exports = {
         else {
             throw new Error('Fail to Media pause');
         }
+    },
+
+    setStreamingProperty:function(successCallback, errorCallback, args) {
+        var id = currentMediaInfo.id,
+            reval = 0;
+
+        console.log('media::setStreamingProperty() - '+args);
+
+        reval = mediaObjects[id].Execute.apply(mediaObjects[id],args);
+
+        if(reval > 0){
+            console.log('Success to Media setStreamingProperty');
+        }
+        else {
+            throw new Error('Fail to Media setStreamingProperty');
+        }
     }
 };
 
