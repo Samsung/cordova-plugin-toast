@@ -1,6 +1,5 @@
 'use strict';
 
-var videoSourceTypeList = ['TV', 'AV', 'SVIDEO', 'COMP', 'PC', 'HDMI', 'SCART', 'DVI', 'MEDIA'];
 var videoSource = {
     type: 'TV',
     number: 1
@@ -37,32 +36,17 @@ function randomColor () {
 
 module.exports = {
     setSource: function (success, fail, args){
-        var match = false;
         var element = getTvwindowElement();
 
-        for (var i = 0; i < videoSourceTypeList.length; i++) {
-            if (args[0].type == videoSourceTypeList[i]) {
-                videoSource.type = videoSourceTypeList[i];
-                videoSource.number = args[0].number;
+        videoSource.type = args[0].type;
+        videoSource.number = args[0].number;
 
-                element.style.backgroundColor = randomColor();
-                element.innerHTML = 'Source : ' + videoSource.type + ' ' + videoSource.number;
+        element.style.backgroundColor = randomColor();
+        element.innerHTML = 'Source : ' + videoSource.type + videoSource.number;
 
-                match = true;
-                break;
-            }
-        }
-
-        if (match) {
-            setTimeout(function () {
-                success(videoSource);
-            }, 0);
-        }
-        else {
-            setTimeout(function () {
-                fail(new Error('Fail to find source.'));
-            }, 0);
-        }
+        setTimeout(function () {
+            success(videoSource);
+        }, 0);
     },
     getSource: function (success, fail, args) {
         setTimeout(function () {

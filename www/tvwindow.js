@@ -31,7 +31,7 @@ var tvwindowExport = {
             }
         }
         if (!match) {
-            throw new RangeError('videoSource is wrong.');
+            throw new TypeError('videoSource is wrong.');
         }
 
         errorCallback = errorCallback || function () {};
@@ -47,19 +47,19 @@ var tvwindowExport = {
         var args = [];
         exec(successCallback, errorCallback, 'toast.tvwindow', 'getSource', args);
     },
-    show: function (successCallback, errorCallback, rectangle) {
-        argscheck.checkArgs('fFa', 'tvwindow.show', arguments);
-        if(!rectangle[0] || typeof rectangle[0] != 'number') {
-            throw new TypeError('rectangle[0] is not a number.');
+    show: function (rectangle, successCallback, errorCallback) {
+        argscheck.checkArgs('afF', 'tvwindow.show', arguments);
+        if(!rectangle[0] || typeof rectangle[0] != 'number' || rectangle[0] < 0) {
+            throw new TypeError('rectangle[0] is not a positive number.');
         }
-        if(!rectangle[1] || typeof rectangle[1] != 'number') {
-            throw new TypeError('rectangle[1] is not a number.');
+        if(!rectangle[1] || typeof rectangle[1] != 'number' || rectangle[1] < 0) {
+            throw new TypeError('rectangle[1] is not a positive number.');
         }
-        if(!rectangle[2] || typeof rectangle[2] != 'number') {
-            throw new TypeError('rectangle[2] is not a number.');
+        if(!rectangle[2] || typeof rectangle[2] != 'number' || rectangle[2] < 0) {
+            throw new TypeError('rectangle[2] is not a positive number.');
         }
-        if(!rectangle[3] || typeof rectangle[3] != 'number') {
-            throw new TypeError('rectangle[3] is not a number.');
+        if(!rectangle[3] || typeof rectangle[3] != 'number' || rectangle[3] < 0) {
+            throw new TypeError('rectangle[3] is not a positive number.');
         }
 
         errorCallback = errorCallback || function () {};

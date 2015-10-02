@@ -179,9 +179,6 @@ describe('toast.tvwindow', function() {
 
             // invalid type for 1st argument
             expect(function() {
-                toast.tvwindow.show([]);
-            }).toThrowError(TypeError);
-            expect(function() {
                 toast.tvwindow.show(new Date());
             }).toThrowError(TypeError);
             expect(function() {
@@ -191,41 +188,44 @@ describe('toast.tvwindow', function() {
                 toast.tvwindow.show('DUMMY');
             }).toThrowError(TypeError);
             expect(function() {
+                toast.tvwindow.show(function() {});
+            }).toThrowError(TypeError);
+            expect(function() {
                 toast.tvwindow.show({});
             }).toThrowError(TypeError);
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvwindow.show(function() {}, []);
+                toast.tvwindow.show([], []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, new Date());
+                toast.tvwindow.show([], new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, 0);
+                toast.tvwindow.show([], 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, 'DUMMY');
+                toast.tvwindow.show([], 'DUMMY');
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, {});
+                toast.tvwindow.show([], {});
             }).toThrowError(TypeError);
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, new Date());
+                toast.tvwindow.show([], function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, 0);
+                toast.tvwindow.show([], function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, 'DUMMY');
+                toast.tvwindow.show([], function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, function() {});
+                toast.tvwindow.show([], function() {}, 'DUMMY');
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvwindow.show(function() {}, function() {}, {});
+                toast.tvwindow.show([], function() {}, {});
             }).toThrowError(TypeError);
         });
     });
@@ -332,7 +332,7 @@ describe('toast.tvwindow', function() {
 
             function testShow(callback) {
                 var flag = true;
-                toast.tvwindow.show(function(windowRect) {
+                toast.tvwindow.show([100, 100, 320, 180], function(windowRect) {
                     flag = false;
                     expect(windowRect).toBeDefined();
                     expect(windowRect.length).toBe(4);
@@ -342,7 +342,7 @@ describe('toast.tvwindow', function() {
                     });
                 }, function() {
                     done.fail();
-                }, [100, 100, 320, 180]);
+                });
                 // the flag must be true if the successCallback is invoked asynchronously as expected.
                 expect(flag).toBeTruthy();
             }

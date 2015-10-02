@@ -67,15 +67,15 @@
         }, 'ALL');
     });
     testsuite('toast.tvchannel', 'findChannel() \'7-1\'', function(report) {
-        toast.tvchannel.findChannel(7, 1, function (channelInfo) {
-            report('Success: ' + JSON.stringify(channelInfo));
+        toast.tvchannel.findChannel(7, 1, function (channelInfoList) {
+            report('Success: ' + JSON.stringify(channelInfoList));
         }, function(err) {
             report('Error: ' + JSON.stringify(err));
         });
     });
     testsuite('toast.tvchannel', 'getChannelList()', function(report) {
-        toast.tvchannel.getChannelList(function (channelInfo) {
-            report('Success: ' + JSON.stringify(channelInfo));
+        toast.tvchannel.getChannelList(function (channelInfoList) {
+            report('Success: ' + JSON.stringify(channelInfoList));
         }, function(err) {
             report('Error: ' + JSON.stringify(err));
         }, 'ALL', 0, 10);
@@ -99,8 +99,8 @@
             transportStreamID: 2065,
             originalNetworkID: 0,
             serviceName: 'KBS2'
-        }, new Date(), function (programInfo) {
-            report('Success: ' + JSON.stringify(programInfo));
+        }, new Date(), function (programInfoList) {
+            report('Success: ' + JSON.stringify(programInfoList));
         }, function(err) {
             report('Error: ' + JSON.stringify(err));
         }, 3);

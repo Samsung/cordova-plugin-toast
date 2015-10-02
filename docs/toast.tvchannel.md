@@ -5,102 +5,40 @@ toast.tvchannel privides something
 * browser
 * sectv-orsay
 * sectv-tizen
+    * Privilege `http://tizen.org/privilege/tv.channel` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```widl
 module TVChannel {
-
     enum TuneMode {
-        "ALL",
-        "DIGITAL",
-        "ANALOG",
-        "FAVORITE"
+        'ALL',
+        'DIGITAL',
+        'ANALOG',
+        'FAVORITE'
     };
 
     [NoInterfaceObject] interface TVChannelManager {
-        readonly attribute ChannelManager tvchannel;
+        readonly attribute TVChannelManager tvchannel;
     };
     Toast implements TVChannelManager;
 
-    [NoInterfaceObject] interface ChannelManager {
+    [NoInterfaceObject] interface TVChannelManager {
 
-        void tune(TuneOption tuneOption,
-                  TuneCallback successCallback,
-                  optional ErrorCallback? errorCallback,
-                  optional WindowType? type) raises(Error);
-
-        void tuneUp(TuneCallback successCallback,
-                    optional ErrorCallback? errorCallback,
-                    optional TuneMode? tuneMode,
-                    optional WindowType? type) raises(Error);
-
-        void tuneDown(TuneCallback successCallback,
-                      optional ErrorCallback? errorCallback,
-                      optional TuneMode? tuneMode,
-                      optional WindowType? type) raises(Error);
-
-        void findChannel(long major,
-                         long minor,
-                         FindChannelSuccessCallback successCallback,
-                         optional ErrorCallback? errorCallback) raises(Error);
-
-        void getChannelList(FindChannelSuccessCallback successCallback,
-                            optional ErrorCallback? errorCallback,
-                            optional TuneMode? mode,
-                            optional long? nStart,
-                            optional long? number) raises(Error);
-
-        void getCurrentChannel(ChannelInfo successCallback, optional ErrorCallback? errorCallback, optional WindowType? type) raises(Error);
-
-        void getProgramList(ChannelInfo channelInfo,
-                            TZDate startTime,
-                            ProgramListSuccessCallback successCallback,
-                            optional ErrorCallback? errorCallback,
-                            optional unsigned long? duration) raises(Error);
-
-        void getCurrentProgram(ProgramInfoCallback successCallback, optional ErrorCallback? errorCallback, optional WindowType? type) raises(Error);
-
-        long addChannelChangeListener(ChannelChangeCallback callback,
-                                       optional WindowType? type) raises(Error);
-
-        void removeChannelChangeListener(long channelListenerId) raises(Error);
-
-        long addProgramChangeListener(ProgramChangeCallback callback,
-                                       optional ChannelInfo? channel) raises(Error);
-
-        void removeProgramChangeListener(long programListenerId) raises(Error);
-
-        unsigned long getNumOfAvailableTuner() raises(Error);
-
-        long getNumOfAvailableSources(optional sourceType) raises(Error);
-
-    };
-
-    callback ProgramInfoArrayCallback = void (ProgramInfo[] programInfos);
-
-    callback ChannelInfoArrayCallback = void (ChannelInfo[] channelInfos);
-
-    callback ChannelInfoCallback = void (ChannelInfo channelInfo);
-
-    callback ChannelChangeCallback = void (ChannelInfo channelInfo, WindowType type);
-
-    callback ProgramChangeCallback = void (ProgramInfo programInfo, ChannelInfo channelInfo);
-
-    callback NoSignalCallback = void ();
-
-    callback ProgramInfoChangeCallback = void (ProgramInfo program, WindowType type);
-
-    callback ProgramInfoCallback = void (ProgramInfo program);
-
-    [NoInterfaceObject] interface TuneCallback {
-        ChannelChangeCallback onsuccess;
-        NoSignalCallback onnosignal;
-        ProgramInfoChangeCallback onprograminforeceived;
+        void tune(TuneOption tuneOption, TuneCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+        void tuneUp(TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode) raises(Error);
+        void tuneDown(TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode) raises(Error);
+        void findChannel(long major, long minor, ChannelInfoListCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+        void getChannelList(ChannelInfoListCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional unsigned long? nStart, optional unsigned long? number) raises(Error);
+        void getCurrentChannel(ChannelInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+        void getProgramList(ChannelInfo channelInfo, Date startTime, ProgramInfoListCallback successCallback, optional ErrorCallback? errorCallback, optional unsigned long? duration) raises(Error);
+        void getCurrentProgram(ProgramInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+        void addChannelChangeListener(ChannelInfoCallback callback) raises(Error);
+        void removeChannelChangeListener(ChannelInfoCallback callback) raises(Error);
     };
 
     dictionary TuneOption {
-        long? major;
-        long? minor;
+        long major;
+        long minor;
         long? sourceID;
         long? programNumber;
         long? transportStreamID;
@@ -110,65 +48,319 @@ module TVChannel {
 
     [NoInterfaceObject] interface ChannelInfo {
         readonly attribute long major;
-
         readonly attribute long minor;
-
         readonly attribute DOMString channelName;
-
         readonly attribute long programNumber;
-
         readonly attribute long ptc;
-
         readonly attribute long lcn;
-
         readonly attribute long sourceID;
-
         readonly attribute long transportStreamID;
-
         readonly attribute long originalNetworkID;
-
         readonly attribute DOMString serviceName;
     };
 
     [NoInterfaceObject] interface ProgramInfo {
         readonly attribute DOMString title;
-
         readonly attribute Date startTime;
-
         readonly attribute long duration;
-
         readonly attribute DOMString? detailedDescription;
-
         readonly attribute DOMString? language;
-
         readonly attribute DOMString? rating;
     };
+
+    [NoInterfaceObject] interface TuneCallback {
+        void onsuccess(ChannelInfo channel);
+        void onnosignal();
+        void onprograminforeceived(ProgramInfo program);
+    };
+
+    [Callback = FunctionOnly, NoInterfaceObject] interface ChannelInfoCallback {
+        void onsuccess(ChannelInfo channelInfo);
+    };
+
+    [Callback = FunctionOnly, NoInterfaceObject] interface ChannelInfoListCallback {
+        void onsuccess(ChannelInfo[] channelInfo);
+    };
+
+    [Callback = FunctionOnly, NoInterfaceObject] interface ProgramInfoCallback {
+        void onsuccess(ProgramInfo programInfo);
+    };
+
+    [Callback = FunctionOnly, NoInterfaceObject] interface ProgramInfoListCallback {
+        void onsuccess(ProgramInfo[] programInfo);
+    };
+    
 
 };
 ```
 
 ## APIs
-* {{Property Signature}}
-{{Description}}
-	* Examples
-		1. {{Example_Desc_1}}
-			```javascript
-			{{Example_Code_1}}
-			```
+* void tune(TuneOption tuneOption, TuneCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+This method tunes the channel of TV.
+    * Parameters
+        * tuneOption: The tune option to set.
+        * successCallback: The method to call when the channel are changed successfully.
+        * errorCallback: The method to invoke when an error occurs.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Tuning a channel.
+            ```javascript
+            toast.tvwindow.tune({
+                major: 7,
+                minor: 1
+            },{
+                onsuccess: function (channelInfo) {
+                    console.log('OnSuccess: ' + JSON.stringify(channelInfo));
+                },
+                onnosignal: function () {
+                    console.log('OnNoSignal');
+                },
+                onprograminforeceived: function (channelInfo) {
+                    console.log('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                }
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
+            ```
 
-* {{Method Signature}}
-provides global namespace named "toast" to provide APIs for TV application.
-Every toast APIs will be appended to this namespace.
-	* Parameters
-	* Return value
-	* Exceptions
-		* {{Exception}}
-			* if {{something wrong...}}
-	* Examples
-		1. {{description}}
-			```javascript
-			{{example_code}}
-			```
+* void tuneUp(TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode) raises(Error);
+This method tunes up the channel of TV.
+    * Parameters
+        * successCallback: The method to call when the channel is tuned up successfully.
+        * errorCallback: The method to invoke when an error occurs.
+        * tuneMode: The tuning navigation mode. Default value is 'ALL'.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Tuning up a channel.
+            ```javascript
+            toast.tvwindow.tuneUp({
+                onsuccess: function (channelInfo) {
+                    console.log('OnSuccess: ' + JSON.stringify(channelInfo));
+                },
+                onnosignal: function () {
+                    console.log('OnNoSignal');
+                },
+                onprograminforeceived: function (channelInfo) {
+                    console.log('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                }
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
+            ```
+
+* void tuneDown(TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode) raises(Error);
+This method tunes down the channel of TV.
+    * Parameters
+        * successCallback: The method to call when the channel is tuned down successfully.
+        * errorCallback: The method to invoke when an error occurs.
+        * tuneMode: The tuning navigation mode. Default value is 'ALL'.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Tuning down a channel.
+            ```javascript
+            toast.tvwindow.tuneDown({
+                onsuccess: function (channelInfo) {
+                    console.log('OnSuccess: ' + JSON.stringify(channelInfo));
+                },
+                onnosignal: function () {
+                    console.log('OnNoSignal');
+                },
+                onprograminforeceived: function (channelInfo) {
+                    console.log('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                }
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
+            ```
+
+* void findChannel(long major, long minor, ChannelInfoListCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+This method finds a channel.
+    * Parameters
+        * major: The major of channel to be found.
+        * minor: The minor of channel to be found.
+        * successCallback: The method to call when the channel is retrieved successfully.
+        * errorCallback: The method to invoke when an error occurs.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Finding a channel.
+            ```javascript
+            toast.tvwindow.findChannel(7, 1, function (channelInfoList) {
+                console.log('Success: ' + JSON.stringify(channelInfoList));
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
+            ```
+
+* void getChannelList(ChannelInfoListCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional unsigned long? nStart, optional unsigned long? number) raises(Error);
+This method finds a channel.
+    * Parameters
+        * successCallback: The method to call when the channel is retrieved successfully.
+        * errorCallback: The method to invoke when an error occurs.
+        * tuneMode: The tuning navigation mode. Default value is 'ALL'.
+        * nStart: The start index. Default value is 0.
+        * number: The number of channel information to retrieve. If it is undefind, all channel information is retrieved.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Getting a channel.
+            ```javascript
+            toast.tvwindow.getChannelList(function (channelInfoList) {
+                console.log('Success: ' + JSON.stringify(channelInfoList));
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            }, 'ALL', 0, 10);
+            ```
+
+* void getCurrentChannel(ChannelInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+This method gets a current channel.
+    * Parameters
+        * successCallback: The method to call when a current channel is retrieved successfully.
+        * errorCallback: The method to invoke when an error occurs.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Getting a current channel.
+            ```javascript
+            toast.tvwindow.getCurrentChannel(function (channelInfo) {
+                console.log('Success: ' + JSON.stringify(channelInfo));
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
+            ```
+
+* void getProgramList(ChannelInfo channelInfo, Date startTime, ProgramInfoListCallback successCallback, optional ErrorCallback? errorCallback, optional unsigned long? duration) raises(Error);
+This method gets a program list.
+    * Parameters
+        * channelInfo: The channel to be retrieved.
+        * startTime: The start time.
+        * successCallback: The method to call when a current channel is retrieved successfully.
+        * errorCallback: The method to invoke when an error occurs.
+        * duration: The hour duration to search programs. If it is undefind, all program information are retrieved.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Getting a current channel.
+            ```javascript
+            toast.tvwindow.getProgramList({
+                major: 7,
+                minor: 1,
+                channelName: 'KBS2',
+                programNumber: 2,
+                ptc: 17,
+                lcn: 0,
+                sourceID: 2,
+                transportStreamID: 2065,
+                originalNetworkID: 0,
+                serviceName: 'KBS2'
+            }, new Date(), function (programInfoList) {
+                report('Success: ' + JSON.stringify(programInfoList));
+            }, function(err) {
+                report('Error: ' + JSON.stringify(err));
+            }, 3);
+            ```
+
+* void getCurrentProgram(ProgramInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+This method gets a current program.
+    * Parameters
+        * successCallback: The method to call when a current program is retrieved successfully.
+        * errorCallback: The method to invoke when an error occurs.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Getting a current program.
+            ```javascript
+            toast.tvwindow.getCurrentProgram(function (programInfo) {
+                console.log('Success: ' + JSON.stringify(programInfo));
+            }, function(err) {
+                console.log('Error: ' + JSON.stringify(err));
+            });
+            ```
+
+* void addChannelChangeListener(ChannelInfoCallback callback) raises(Error);
+This method adds listener for changing a channel.
+    * Parameters
+        * callback: The method to call when a channel is changed.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Getting a current program.
+            ```javascript
+            var testFunc = function (channelInfo) {
+                console.log('testFunc is called: ' + JSON.stringify(channelInfo));
+            };
+            toast.tvwindow.addChannelChangeListener(testFunc);
+            ```
+
+* void removeChannelChangeListener(ChannelInfoCallback callback) raises(Error);
+This method removes listener for changing a channel.
+    * Parameters
+        * callback: The method is added by addChannelChangeListener.
+    * Return value
+        N/A
+    * Exceptions
+        * throws TypeError
+            * if type of any parameters is not matched to specification.
+        * throws Error
+            * if unknown error occured.
+    * Examples
+        1. Getting a current program.
+            ```javascript
+            var testFunc = function (channelInfo) {
+                console.log('testFunc is called: ' + JSON.stringify(channelInfo));
+            };
+            toast.tvwindow.addChannelChangeListener(testFunc);
+            ```
+            toast.tvwindow.removeChannelChangeListener(testFunc);
+            ```
 
 ## See others
 toast.application
@@ -176,5 +368,4 @@ toast.drminfo
 toast.inputdevice
 toast.media
 toast.tvaudiocontrol
-toast.tvchannel
 toast.tvwindow

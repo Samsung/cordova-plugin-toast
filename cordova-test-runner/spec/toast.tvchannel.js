@@ -850,7 +850,7 @@ describe('toast.tvchannel', function() {
             });
 
             function testTune(callback) {
-                toast.tvwindow.show(function() {
+                toast.tvwindow.show([100, 100, 320, 180], function() {
                     var flag = true;
                     toast.tvchannel.tune({
                         major: 7,
@@ -873,7 +873,7 @@ describe('toast.tvchannel', function() {
                     });
                     // the flag must be true if the successCallback is invoked asynchronously as expected.
                     expect(flag).toBeTruthy();
-                }, function() {}, [100, 100, 320, 180]);
+                }, function() {});
             }
 
             function testChannelChange(callback) {
