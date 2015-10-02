@@ -23,7 +23,7 @@ function randomColor () {
     var color = 'rgb(';
 
     color = color + Number(128 + Math.floor(Math.random() * 128)) + ', ';
-    color = color + Number(128 + Math.floor(Math.random() * 128)) + ', '
+    color = color + Number(128 + Math.floor(Math.random() * 128)) + ', ';
     color = color + Number(128 + Math.floor(Math.random() * 128));
 
     color = color + ')';
