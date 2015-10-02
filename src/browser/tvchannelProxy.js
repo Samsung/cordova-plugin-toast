@@ -4,7 +4,7 @@ var sampleEPG = require('cordova-plugin-toast.sampleEPG');
 var channelChangeCallback = [];
 var listIndex = 0;
 
-function getTvwindowElement () {
+function getTVWindowElement () {
     var element = '';
 
     if (!document.getElementById('tvwindowshow')) {
@@ -39,7 +39,7 @@ function fireChannelChangeEvent (channelInfo) {
 module.exports = {
     tune: function (success, fail, args) {
         var match = false;
-        var element = getTvwindowElement();
+        var element = getTVWindowElement();
 
         for (var i = 0; i < sampleEPG.channelList.length; i++) {
             if (args[0].major == sampleEPG.channelList[i].major && args[0].minor == sampleEPG.channelList[i].minor) {
@@ -65,7 +65,7 @@ module.exports = {
         }
     },
     tuneUp: function (success, fail, args) {
-        var element = getTvwindowElement();
+        var element = getTVWindowElement();
 
         if (listIndex < sampleEPG.channelList.length - 1) {
             listIndex = listIndex + 1;
@@ -83,7 +83,7 @@ module.exports = {
         }, 0);
     },
     tuneDown: function (success, fail, args) {
-        var element = getTvwindowElement();
+        var element = getTVWindowElement();
 
         if (0 < listIndex) {
             listIndex = listIndex - 1;

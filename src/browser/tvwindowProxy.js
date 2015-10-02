@@ -5,7 +5,7 @@ var videoSource = {
     number: 1
 };
 
-function getTvwindowElement () {
+function getTVWindowElement () {
     var element = '';
 
     if (!document.getElementById('tvwindowshow')) {
@@ -33,7 +33,7 @@ function randomColor () {
 
 module.exports = {
     setSource: function (success, fail, args){
-        var element = getTvwindowElement();
+        var element = getTVWindowElement();
 
         videoSource.type = args[0].type;
         videoSource.number = args[0].number;
@@ -51,7 +51,7 @@ module.exports = {
         }, 0);
     },
     show: function (success, fail, args) {
-        var element = getTvwindowElement();
+        var element = getTVWindowElement();
 
         element.style.position = 'fixed';
         element.style.left = args[0][0] + 'px';
