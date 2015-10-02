@@ -4,49 +4,49 @@
         toast.tvaudiocontrol.setMute(true, function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'setMute() to \'false\'', function(report) {
         toast.tvaudiocontrol.setMute(false, function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'isMute()', function(report) {
         toast.tvaudiocontrol.isMute(function(value) {
             report('Success: ' + value);
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'setVolume() to \'5\'', function(report) {
         toast.tvaudiocontrol.setVolume(5, function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'setVolumeUp()', function(report) {
         toast.tvaudiocontrol.setVolumeUp(function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'setVolumeDown()', function(report) {
         toast.tvaudiocontrol.setVolumeDown(function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'getVolume()', function(report) {
         toast.tvaudiocontrol.getVolume(function(value) {
             report('Success: ' + value);
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'setVolumeChangeListener()', function(report) {
@@ -55,14 +55,14 @@
         }, function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
     testsuite('toast.tvaudiocontrol', 'unsetVolumeChangeListener()', function(report) {
         toast.tvaudiocontrol.unsetVolumeChangeListener(function() {
             report('Success');
         }, function(err) {
-            report('Error: ' + JSON.stringify(err));
+            report('Error: ' + err.message);
         });
     });
 })();
