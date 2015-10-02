@@ -58,7 +58,7 @@ module.exports = {
     },
     tuneDown: function (success, fail, args) {
         var result = sef.Execute('SetChannel_Seek', setChannel.down, tuneModeList[args[0]]);
-        
+
         if (result != -1) {
             setTimeout(function () {
                 var channelInfo = webapis.tv.channel.getCurrentChannel(windowType);

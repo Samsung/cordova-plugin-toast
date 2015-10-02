@@ -17,7 +17,8 @@ function isChildOf(element, parent) {
     }
     if (element.parentElement === parent) {
         return true;
-    } else {
+    }
+    else {
         return isChildOf(element.parentElement, parent);
     }
 }
@@ -187,9 +188,11 @@ function getBoundingRect(el, mode) {
         if (el === el.ownerDocument.body) {
             left = document.body.offsetLeft + parseFloat(getStyle(el, 'marginLeft') || 0);
             top = document.body.offsetTop + parseFloat(getStyle(el, 'marginTop') || 0);
-        } else {
+        }
+        else {
             left += clientRect.left;
             top += clientRect.top;
+
             // left += (window.pageXOffset || el.ownerDocument.documentElement.scrollLeft || document.body.scrollLeft);
             // top += (window.pageYOffset || el.ownerDocument.documentElement.scrollTop || document.body.scrollTop);
             left -= el.ownerDocument.documentElement.clientLeft;
@@ -197,7 +200,8 @@ function getBoundingRect(el, mode) {
         }
         width = clientRect.width;
         height = clientRect.height;
-    } else if (typeof el.offsetWidth !== 'undefined' || typeof el.offsetHeight !== 'undefined') {
+    }
+    else if (typeof el.offsetWidth !== 'undefined' || typeof el.offsetHeight !== 'undefined') {
         left = parseInt(el.offsetLeft, 10);
         top = parseInt(el.offsetTop, 10);
         width = parseInt(el.offsetWidth, 10);
@@ -232,7 +236,8 @@ function getBoundingRect(el, mode) {
                 bottom: marginBottom
             }
         };
-    } else if (mode && mode === 'innerborder') {
+    }
+    else if (mode && mode === 'innerborder') {
         borderLeft = parseInt(getStyle(el, 'borderLeftWidth'), 10) || 0;
         borderRight = parseInt(getStyle(el, 'borderRightWidth'), 10) || 0;
         borderTop = parseInt(getStyle(el, 'borderTopWidth'), 10) || 0;
@@ -256,7 +261,8 @@ function getBoundingRect(el, mode) {
                 bottom: borderBottom
             }
         };
-    } else if (mode && mode === 'innerpadding') {
+    }
+    else if (mode && mode === 'innerpadding') {
         borderLeft = parseInt(getStyle(el, 'borderLeftWidth'), 10) || 0;
         borderRight = parseInt(getStyle(el, 'borderRightWidth'), 10) || 0;
         borderTop = parseInt(getStyle(el, 'borderTopWidth'), 10) || 0;
@@ -290,7 +296,8 @@ function getBoundingRect(el, mode) {
                 bottom: paddingBottom
             }
         };
-    } else {
+    }
+    else {
         return {
             left: left,
             top: top,
@@ -314,7 +321,8 @@ function getPosition(elem) {
         // We assume that getBoundingClientRect is available when computed position is fixed
         offset = elem.getBoundingClientRect();
 
-    } else {
+    }
+    else {
         // Get *real* offsetParent
         offsetParent = getOffsetParent(elem);
 
@@ -417,7 +425,8 @@ function setStyle(element, prop, value) {
             }
         }
         return;
-    } else if (typeof prop === 'string') {
+    }
+    else if (typeof prop === 'string') {
         prop = camelCase(prop);
         element.style[prop] = value;
     }
@@ -435,19 +444,22 @@ function createElement(tagName, attributes, children) {
     for (var attr in attributes) {
         if (attr === 'className') { // 'class' is keyword for JavaScript, so we use 'className' for the name
             elem.setAttribute('class', attributes[attr]);
-        } else {
+        }
+        else {
             elem.setAttribute(attr, attributes[attr]);
         }
     }
     if (typeof children === 'string') {
         elem.appendChild(document.createTextNode(children));
-    } else if (children && children.length) {
+    }
+    else if (children && children.length) {
         for (var i = 0; children && i < children.length; i++) {
             if (isHTMLElement(children[i])) {
                 elem.appendChild(children[i]);
             }
         }
-    } else if (isHTMLElement(children)) {
+    }
+    else if (isHTMLElement(children)) {
         elem.appendChild(children);
     }
     return elem;
