@@ -44,7 +44,7 @@ This method gets the ESN data of given component name.
 			toast.drminfo.getEsn('WIDEVINE', function(value) {
 	            console.log('Success: ' + value);
             }, function(err) {
-	            console.log('Error: ' + JSON.stringify(err));
+	            console.log('Error: ' + err.message);
             });
 			```
 			
@@ -66,7 +66,7 @@ This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to
             toast.drminfo.getSdi(function(value) {
                 console.log('Success: ' + value);
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 

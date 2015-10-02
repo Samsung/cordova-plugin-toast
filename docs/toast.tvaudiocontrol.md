@@ -35,6 +35,7 @@ module TVAudioControl {
 ## APIs
 * void setMute(boolean mute, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
 This method sets to turn on or off mute mode. If changing the volume using setVolumeUp or setVolumeDown then mute is disabled automatically.
+Speaker UI might not be shown according to platform.
 	* Parameters
         - mute : State of mute mode. (true/false)
         - successCallback : The method to call when the mute state is set successfully.
@@ -53,7 +54,7 @@ This method sets to turn on or off mute mode. If changing the volume using setVo
             toast.tvaudiocontrol.setMute(mute, function() {
             	console.log('Success');
             }, function(err) {
-            	console.log('Error: ' + JSON.stringify(err));
+            	console.log('Error: ' + err.message);
             });
 			```
 			
@@ -75,7 +76,7 @@ This method gets mute state.
             toast.tvaudiocontrol.isMute(function(value) {
                 console.log('Success: ' + value);
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 			
@@ -99,7 +100,7 @@ This method changes the volume level. The value of volume is allowed from 0 to 1
             toast.tvaudiocontrol.setVolume(volume, function() {
                 console.log('Success');
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 			
@@ -121,7 +122,7 @@ This method increases the volume 1 level. The maximum volume level is 100. If th
             toast.tvaudiocontrol.setVolumeUp(function() {
                 console.log('Success');
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 
@@ -143,7 +144,7 @@ This method decreases the volume 1 level. The minimum volume level is 0. If the 
             toast.tvaudiocontrol.setVolumeDown(function() {
                 console.log('Success');
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 
@@ -165,7 +166,7 @@ This method gets the value of current volume.
             toast.tvaudiocontrol.getVolume(function(value) {
                 console.log('Success: ' + value);
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 			
@@ -191,7 +192,7 @@ The method registers a volume change callback for getting notified when TV volum
             toast.tvaudiocontrol.setVolumeChangeListener(onVolumeChanged, function() {
                 console.log('Success');
             }, function(err) {
-                console.log('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 
@@ -211,9 +212,9 @@ The method unregisters a volume change callback.
 		1. unregister volume change callback.
 			```javascript
             toast.tvaudiocontrol.unsetVolumeChangeListener(function() {
-                report('Success');
+                console.log('Success');
             }, function(err) {
-                report('Error: ' + JSON.stringify(err));
+                console.log('Error: ' + err.message);
             });
 			```
 
