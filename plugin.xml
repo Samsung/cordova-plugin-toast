@@ -86,6 +86,9 @@
 		<js-module src='src/sectv-orsay/MediaPluginWideVine.js' name='MediaPluginWideVine'>
 			<clobbers target='toast.MediaPluginWideVine' />
 		</js-module>
+		<js-module src='src/sectv-orsay/MediaPluginHLS.js' name='MediaPluginHLS'>
+			<clobbers target='toast.MediaPluginHLS' />
+		</js-module>
 	</platform>
 
 	<!-- sectv-tizen -->
@@ -115,6 +118,9 @@
 		</js-module>
 		<js-module src='src/sectv-tizen/MediaPluginWideVine.js' name='MediaPluginWideVine'>
 			<clobbers target='toast.MediaPluginWideVine' />
+		</js-module>
+		<js-module src='src/sectv-tizen/MediaPluginHLS.js' name='MediaPluginHLS'>
+			<clobbers target='toast.MediaPluginHLS' />
 		</js-module>
 	</platform>
 </plugin>
