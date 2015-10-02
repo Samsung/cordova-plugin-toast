@@ -20,16 +20,13 @@ function getTvwindowElement () {
 }
 
 function randomColor () {
-    var color = '#';
+    var color = 'rgb(';
 
-    for (var i = 0; i < 6; i++) {
-        if(Math.floor(Math.random() * 2) === 0){
-            color = color + '0';
-        }
-        else {
-            color = color + 'f';
-        }
-    }
+    color = color + Number(128 + Math.floor(Math.random() * 128)) + ', ';
+    color = color + Number(128 + Math.floor(Math.random() * 128)) + ', '
+    color = color + Number(128 + Math.floor(Math.random() * 128));
+
+    color = color + ')';
 
     return color;
 }
