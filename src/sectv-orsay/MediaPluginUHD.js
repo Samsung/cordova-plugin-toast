@@ -5,7 +5,7 @@ var exec = require('cordova/exec'),
 function MediaPluginUHD () {
     var TVPlugin = SEF.get('TV');
     var panelResolution = JSON.parse(TVPlugin.Execute('GetPanelResolution'));
-    if(Number(panelResolution.vertical) > 1080){
+    if(Number(panelResolution.vertical) >= 2160){
         MediaPlugin.apply(this, arguments);
         this.name = 'MediaPluginUHD';
     }

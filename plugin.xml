@@ -92,6 +92,9 @@
 		<js-module src='src/sectv-orsay/MediaPluginUHD.js' name='MediaPluginUHD'>
 			<clobbers target='toast.MediaPluginUHD' />
 		</js-module>
+		<js-module src='src/sectv-orsay/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
+			<clobbers target='toast.MediaPluginPlayReady' />
+		</js-module>
 	</platform>
 
 	<!-- sectv-tizen -->
@@ -127,6 +130,9 @@
 		</js-module>
 		<js-module src='src/sectv-tizen/MediaPluginUHD.js' name='MediaPluginUHD'>
 			<clobbers target='toast.MediaPluginUHD' />
+		</js-module>
+		<js-module src='src/sectv-tizen/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
+			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
 	</platform>
 </plugin>
