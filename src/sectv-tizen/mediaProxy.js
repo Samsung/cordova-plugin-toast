@@ -12,7 +12,7 @@ var avplayState = {
 };
 var containerElem = null;
 
-function createVideContainer(id){
+function createVideoContainer(id){
     function setContainerStyleEventListener(elem,callback) {
         var containerObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(e) {
@@ -175,7 +175,7 @@ module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::create() - id =' + id);
-        createVideContainer(id);
+        createVideoContainer(id);
     },
 
     open:function(successCallback, errorCallback, args) {
@@ -299,9 +299,15 @@ module.exports = {
     },
 
     setStreamingProperty:function(successCallback, errorCallback, args) {
-        console.log('media::setStreamingProperty() - type= '+args[0]+' data= '+args[1]);
+        console.log('media::setStreamingProperty() - type= '+args[0]);
 
         webapis.avplay.setStreamingProperty.apply(webapis.avplay, args);
+    },
+
+    setDrm:function(successCallback, errorCallback, args) {
+        console.log('media::setStreamingProperty() - type= '+args[0]);
+
+        webapis.avplay.setDrm.apply(webapis.avplay, args);
     }
 };
 

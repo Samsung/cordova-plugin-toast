@@ -6,7 +6,7 @@ var Util = require('cordova-plugin-toast.util');
 
 var containerElem = null;
 
-function createVideContainer(id){
+function createVideoContainer(id){
     function setContainerStyleEventListener(elem,callback) {
         var containerObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(e) {
@@ -347,7 +347,7 @@ module.exports = {
         console.log('media::create() - id =' + id);
         createSEFPlayer(id);
         currentMediaInfo = {};
-        createVideContainer(id);
+        createVideoContainer(id);
     },
 
     open:function(successCallback, errorCallback, args){
@@ -478,6 +478,22 @@ module.exports = {
         }
         else {
             throw new Error('Fail to Media setStreamingProperty');
+        }
+    },
+
+    setDrm:function(successCallback, errorCallback, args) {
+        var id = currentMediaInfo.id,
+            reval = 0;
+
+        console.log('media::setStreamingProperty() - '+args);
+
+        reval = mediaObjects[id].Execute.apply(mediaObjects[id],args);
+
+        if(reval > 0){
+            console.log('Success to Media setDrm');
+        }
+        else {
+            throw new Error('Fail to Media setDrm');
         }
     }
 };
