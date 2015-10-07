@@ -43,7 +43,12 @@ module.exports = {
         }
     },
     getSource: function (success, fail, args) {
-        if (!videoSource.type) {
+        if (videoSource.type) {
+            setTimeout(function () {
+                success(videoSource);
+            }, 0);
+        }
+        else {
             var source = webapis.tv.window.getSource(windowType);
 
             if (source.type !== undefined && typeof source.type == 'number' && 0 <= source.type && source.type <= 8) {
@@ -59,11 +64,6 @@ module.exports = {
                     fail(new Error('Fail to get source.'));
                 }, 0);
             }
-        }
-        else {
-            setTimeout(function () {
-                success(videoSource);
-            }, 0);
         }
     },
     show: function (success, fail, args) {
@@ -81,7 +81,6 @@ module.exports = {
             windowRect[3] = args[0][3] + 'px';
 
             sef.Execute('SetPreviousSource');
-            
             document.getElementById('_plugin_Window').style.position = 'fixed';
 
             result = webapis.tv.window.show(windowType);
