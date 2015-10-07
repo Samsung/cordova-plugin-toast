@@ -17,8 +17,8 @@ var videoSourceList = {
 };
 var windowType = 0;
 var videoSource = {
-    type: 'TV',
-    number: 1
+    type: '',
+    number: -1
 };
 var windowRect = ['', '', '', ''];
 
@@ -43,19 +43,26 @@ module.exports = {
         }
     },
     getSource: function (success, fail, args) {
-        var source = webapis.tv.window.getSource(windowType);
+        if (!videoSource.type) {
+            var source = webapis.tv.window.getSource(windowType);
 
-        if (source.type !== undefined) {
-            videoSource.type = videoSourceTypeList[source.type];
-            videoSource.number = source.number;
+            if (source.type !== undefined && typeof source.type == 'number' && 0 <= source.type && source.type <= 8) {
+                videoSource.type = videoSourceTypeList[source.type];
+                videoSource.number = source.number;
 
-            setTimeout(function () {
-                success(videoSource);
-            }, 0);
+                setTimeout(function () {
+                    success(videoSource);
+                }, 0);
+            }
+            else {
+                setTimeout(function () {
+                    fail(new Error('Fail to get source.'));
+                }, 0);
+            }
         }
         else {
             setTimeout(function () {
-                fail();
+                success(videoSource);
             }, 0);
         }
     },
@@ -74,6 +81,7 @@ module.exports = {
             windowRect[3] = args[0][3] + 'px';
 
             sef.Execute('SetPreviousSource');
+            
             document.getElementById('_plugin_Window').style.position = 'fixed';
 
             result = webapis.tv.window.show(windowType);
@@ -84,13 +92,13 @@ module.exports = {
             }
             else {
                 setTimeout(function () {
-                    fail();
+                    fail(new Error('Fail to show window.'));
                 }, 0);
             }
         }
         else {
             setTimeout(function () {
-                fail();
+                fail(new Error('Fail to show window.'));
             }, 0);
         }
     },
@@ -110,7 +118,7 @@ module.exports = {
         }
         else {
             setTimeout(function () {
-                fail();
+                fail(new Error('Fail to hide window.'));
             }, 0);
         }
     },
@@ -122,7 +130,7 @@ module.exports = {
         }
         else {
             setTimeout(function () {
-                fail();
+                fail(new Error('Fail to get rectagle.'));
             }, 0);
         }
     }
