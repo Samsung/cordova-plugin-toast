@@ -1,7 +1,7 @@
 'use strict';
 
 var Media = require('cordova-plugin-toast.Media');
-var SEFPlayer = require('cordova/plugin/SEF');
+var SEF = require('cordova/plugin/SEF');
 var Util = require('cordova-plugin-toast.util');
 
 var containerElem = null;
@@ -334,8 +334,13 @@ function mediaEventListener(type,data1,data2){
 
 var currentMediaInfo = {};
 
-function createSEFPlayer(id){
-    mediaObjects[id] = SEFPlayer.get('Player');
+var MediaSource = 8;
+function createSEF(id){
+    var SEFWindow = SEF.get('Window');
+    if(SEFWindow.Execute('GetSource') != MediaSource){
+        SEFWindow.Execute('SetSource',MediaSource);
+    }
+    mediaObjects[id] = SEF.get('Player');
     mediaObjects[id].OnEvent = function (type,data1,data2) {
         mediaEventListener(type,data1,data2);
     };
@@ -345,7 +350,7 @@ module.exports = {
     create:function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::create() - id =' + id);
-        createSEFPlayer(id);
+        createSEF(id);
         currentMediaInfo = {};
         createVideoContainer(id);
     },
