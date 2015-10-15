@@ -28,7 +28,7 @@ function onDeviceReady() {
 
 # How to Build
 * platform `browser`
-	* For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add`. Please see "How to use" section for details.
+	* For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add` command. Please see "How to use" section for details.
 * platform `sectv-orsay` and `sectv-tizen`
 	* Run below command
 	```
