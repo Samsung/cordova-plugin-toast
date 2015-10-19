@@ -68,5 +68,5 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint:src', 'jscs:src', 'compile', 'jshint:build']);
+  grunt.registerTask('default', ['jshint:src', 'compile', 'jshint:build', 'jscs']);
 };
