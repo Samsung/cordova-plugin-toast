@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 'use strict';
 
 window.addEventListener('focus', function (e) {
 	if(e.target && e.target.tagName.toUpperCase() === 'INPUT' && (e.target.type === 'text' || e.target.type === 'password')) {

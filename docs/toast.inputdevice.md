@@ -25,8 +25,8 @@ module InputDevice {
     [NoInterfaceObject] interface InputDeviceManager {
         void getSupportedKeys(InputDeviceKeyArrayCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
         void getKey(InputDeviceKeyName keyName, InputDeviceKeyCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
-        void registerKey(InputDeviceKeyName keyName) raises(Error);
-        void unregisterKey(InputDeviceKeyName keyName) raises(Error);
+        void registerKey(InputDeviceKeyName keyName, DOMStringCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
+        void unregisterKey(InputDeviceKeyName keyName, DOMStringCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
     };
 
     [Callback=FunctionOnly, NoInterfaceObject] interface InputDeviceKeyArrayCallback {
@@ -121,7 +121,7 @@ This function retrieves supported keys list of the running platform.
 				keyCode[supportedKeys[i].name] = supportedKeys[i].code;
 			}
 			if(keyCode.hasOwnProperty("ColorF0Red")) {
-				tizen.inputdevice.registerKey("ColorF0Red");
+				tizen.inputdevice.registerKey("ColorF0Red", function () {});
 			}
 		});
 		window.addEventListener("keydown", function(keyEvent) {
@@ -147,15 +147,21 @@ This function retrieves information of the given keyName.
 	* throws Error
 		* if unknown error occured.
 * Examples
-	1. 
+	1. Getting key code of RED button.
 		```javascript
-		{{example_code}}
+		var keyCode = toast.inputdevice.getKey("ColorF0Red", function (key) {
+			console.log("RED button code: " + key.code);
+		}, function(err){
+			console.log("Error : " + err.message);
+		});
 		```
 
 ### void registerKey(InputDeviceKeyName keyName);
 This function registers given key. After this operation, pressing the key on remote controller will fire key events with correspond keyCode.
 * Parameters
 	* keyName: Name of key to register.
+	* successCallback: The method to call when a list of supported keys are retrieved successfully.
+	* errorCallback: The method to invoke when an error occurs.
 * Return value
 	N/A
 * Exceptions
@@ -166,15 +172,21 @@ This function registers given key. After this operation, pressing the key on rem
 	* throws Error
 		* if unknown error occured.
 * Examples
-	1. 
+	1. Register the RED button.
 		```javascript
-		{{example_code}}
+		toast.inputdevice.registerKey("ColorF0Red", function () {
+			console.log("Success");
+		},function(err){
+			console.log("Error : " + err.message);
+		});
 		```
 
 ### void unregisterKey(InputDeviceKeyName keyName);
 This function unregisters given key. The key can not be handled with key event after this operation.
 * Parameters
 	* keyName: Name of key to unregister.
+	* successCallback: The method to call when a list of supported keys are retrieved successfully.
+	* errorCallback: The method to invoke when an error occurs.	
 * Return value
 	N/A
 * Exceptions
@@ -185,9 +197,13 @@ This function unregisters given key. The key can not be handled with key event a
 	* throws Error
 		* if unknown error occured.
 * Examples
-	1. 
+	1. UnRegister the RED button.
 		```javascript
-		{{example_code}}
+		toast.inputdevice.unregisterKey("ColorF0Red", function () {
+			console.log("Success");
+		},function(err){
+			console.log("Error : " + err.message);
+		});
 		```
 
 ## See others
