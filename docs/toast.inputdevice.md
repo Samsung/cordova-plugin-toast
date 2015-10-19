@@ -149,7 +149,7 @@ This function retrieves information of the given keyName.
 * Examples
 	1. Getting key code of RED button.
 		```javascript
-		var keyCode = toast.inputdevice.getKey("ColorF0Red", function (key) {
+		toast.inputdevice.getKey("ColorF0Red", function (key) {
 			console.log("RED button code: " + key.code);
 		}, function(err){
 			console.log("Error : " + err.message);
