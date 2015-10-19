@@ -1,3 +1,20 @@
+/*
+ * Copyright 2015 Samsung Electronics Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 'use strict';
+
 window.addEventListener('focus', function (e) {
 	if(e.target && e.target.tagName.toUpperCase() === 'INPUT' && (e.target.type === 'text' || e.target.type === 'password')) {
 		onFocus(e.target);
@@ -22,6 +39,7 @@ function onFocus(elInput) {
 	imeInstance.inputboxID = elInput.id;
 	var title = elInput.getAttribute('data-ime-title') || '';
 	imeInstance.inputTitle = title;
+
 	//imeInstance.onCompleteFunc = onCompleteText;
 	//imeInstance.onKeyPressFunc = onKeyCallback;
 	imeInstance.context = this;
@@ -33,6 +51,7 @@ function onFocus(elInput) {
 	}
 	imeInstance.setBlockSpace(true);
 	imeInstance.onShow();
+
 	// document.addEventListener('pause', function () {
 	// 	imeInstance.onClose();
 	// });

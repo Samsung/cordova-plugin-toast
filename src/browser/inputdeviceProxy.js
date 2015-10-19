@@ -1,12 +1,12 @@
 /*
  * Copyright 2015 Samsung Electronics Co., Ltd.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,9 +24,9 @@ var supportedKeys = [
 	{name : 'Return', code: 27},
 	{name : 'ColorF0Red', code: 112},
 	{name : 'ColorF1Green', code: 113},
-	{name : 'ColorF2Yellow', code: 114}, 
+	{name : 'ColorF2Yellow', code: 114},
 	{name : 'ColorF3Blue', code: 115},
-	{name : 'MediaRecord', code: 116}, 
+	{name : 'MediaRecord', code: 116},
 	{name : 'MediaPlayPause', code: 117},
 	{name : 'MediaStop', code: 118},
 	{name : 'MediaFastForward', code: 119},
@@ -52,7 +52,8 @@ module.exports = {
 			setTimeout(function(){
 				success(supportedKeys);
 			}, 0);
-		} catch (e) {
+		}
+		catch (e) {
 			setTimeout(function(){
 				fail(e);
 			}, 0);
@@ -78,11 +79,12 @@ module.exports = {
 					fail(error);
 				}, 0);
 			}
-		} catch(e) {
+		}
+		catch(e) {
 			setTimeout(function(){
 				fail(e);
 			}, 0);
-		}	
+		}
 	},
 	registerKey: function(success, fail, args){
 		for(var i = 0; i < supportedKeys.length; i++) {

@@ -1,12 +1,12 @@
 /*
  * Copyright 2015 Samsung Electronics Co., Ltd.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,7 +17,7 @@
 
 module.exports = {
 	getSupportedKeys: function (success, fail, args) {
-		try {		
+		try {
 			var supportedKeys = [];
 			supportedKeys = tizen.tvinputdevice.getSupportedKeys();
 			supportedKeys.push({name : 'ArrowUp', code : 38});
@@ -29,21 +29,23 @@ module.exports = {
 			setTimeout(function(){
 				success(supportedKeys);
 			}, 0);
-		} catch (e) {
+		}
+		catch (e) {
 			var error = new Error(e.message);
 			error.name = e.name;
 			setTimeout(function(){
 				fail(e);
-			}, 0);			
+			}, 0);
 		}
 	},
 	getKey: function(success, fail, args){
 		try	{
 			var inputDeviceKey = tizen.tvinputdevice.getKey(args[0]);
 			setTimeout(function(){
-				success(inputDeviceKey);	
+				success(inputDeviceKey);
 			}, 0);
-		} catch (e) {
+		}
+		catch (e) {
 			var error;
 			if(e.name === 'InvalidValuesError') {
 				error = new RangeError(e.message);
@@ -55,7 +57,6 @@ module.exports = {
 			setTimeout(function(){
 				fail(error);
 			}, 0);
-			
 		}
 	},
 	registerKey: function(success, fail, args){
@@ -63,8 +64,9 @@ module.exports = {
 			tizen.tvinputdevice.registerKey(args[0]);
 			setTimeout(function(){
 				success();
-			}, 0);			
-		} catch (e) {
+			}, 0);
+		}
+		catch (e) {
 			var error;
 			if(e.name === 'InvalidValuesError') {
 				error = new RangeError(e.message);
@@ -84,7 +86,8 @@ module.exports = {
 			setTimeout(function(){
 				success();
 			}, 0);
-		} catch (e) {
+		}
+		catch (e) {
 			var error;
 			if(e.name === 'InvalidValuesError') {
 				error = new RangeError(e.message);
