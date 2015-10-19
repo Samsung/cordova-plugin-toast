@@ -20,6 +20,12 @@ module.exports = {
 		try {		
 			var supportedKeys = [];
 			supportedKeys = tizen.tvinputdevice.getSupportedKeys();
+			supportedKeys.push({name : 'ArrowUp', code : 38});
+			supportedKeys.push({name : 'ArrowDown', code : 40});
+			supportedKeys.push({name : 'ArrowLeft', code : 37});
+			supportedKeys.push({name : 'ArrowRight', code : 39});
+			supportedKeys.push({name : 'Enter', code : 13});
+			supportedKeys.push({name : 'Return', code : 10009});
 			setTimeout(function(){
 				success(supportedKeys);
 			}, 0);
