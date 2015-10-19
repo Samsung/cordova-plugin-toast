@@ -25,5 +25,11 @@
 	"requireLineFeedAtFileEnd": true,
 	"requireSemicolons": true,
 	"validateQuoteMarks": "'",
-	"requirePaddingNewLinesBeforeLineComments": { "allExcept": "firstAfterCurly" }
+	"requirePaddingNewLinesBeforeLineComments": {
+		"allExcept": "firstAfterCurly"
+	},
+	"excludeFiles": [
+		"cordova-test-runner/lib/**/*.js",
+		"cordova-test-runner/jasmine_boot.js"
+	]
 }

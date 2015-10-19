@@ -79,7 +79,8 @@
                             setReportHTML('TIMEOUT');
                         }, TEST_TIMEOUT);
                         testfn(report);
-                    } catch (e) {
+                    }
+                    catch (e) {
                         setReportHTML('Exception: ' + e);
                     }
                 }

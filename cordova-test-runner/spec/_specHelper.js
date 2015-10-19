@@ -1,5 +1,4 @@
 (function () {
-	
 	var popup = null;
 	function getPopup () {
 		return popup || (popup=createPopup());
@@ -52,9 +51,9 @@
 				}
 			}
 			window.addEventListener('keydown', onKeyDown);
-			var obj = this.ask(msg + '<br>' +
-					'<div style="width: 50%; test-align: center; float:left; clear: left;">PRESS ◀<br><br>'+ab[0]+'</div>' +
-					'<div style="width: 50%; test-align: center; float:left; clear: right;">PRESS ▶<br><br>'+ab[1]+'</div>', function () {
+			var obj = this.ask(msg + '<br>'
+					+ '<div style="width: 50%; test-align: center; float:left; clear: left;">PRESS ◀<br><br>'+ab[0]+'</div>'
+					+ '<div style="width: 50%; test-align: center; float:left; clear: right;">PRESS ▶<br><br>'+ab[1]+'</div>', function () {
 				window.removeEventListener('keydown', onKeyDown);
 				callback.apply(null, arguments);
 			}, timeout);

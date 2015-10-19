@@ -42,7 +42,8 @@
                     cntMatched = 0;
                     resetTestMode();
                 }
-            } else {
+            }
+            else {
                 cntMatched = 0;
             }
         });
