@@ -339,7 +339,8 @@ describe('toast.tvaudiocontrol', function() {
                         console.log('currentVolume after volume up : ' + value);
                         if(currentVolume < 100){
                             expect(value).toBe(currentVolume + 1);
-                        }else{
+                        }
+                        else{
                             expect(value).toBe(currentVolume);
                         }
                         done();
@@ -403,7 +404,8 @@ describe('toast.tvaudiocontrol', function() {
                         console.log('currentVolume after volume down : ' + value);
                         if(currentVolume > 0){
                             expect(value).toBe(currentVolume - 1);
-                        }else{
+                        }
+                        else{
                             expect(value).toBe(currentVolume);
                         }
                         done();
