@@ -59,7 +59,6 @@ describe('Instance of toast.Media', function() {
     });
 });
 
-
 describe('Video playback feature of toast.Media', function() {
     var media = null;
     var SAMPLE_VIDEO_URL = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
@@ -75,7 +74,7 @@ describe('Video playback feature of toast.Media', function() {
         media.stop();
         media = null;
     });
-    
+
     it('plays video well...', function (done) {
         media.open(SAMPLE_VIDEO_URL);
         var state = null;
@@ -102,7 +101,7 @@ describe('Video playback feature of toast.Media', function() {
                         if(evt.data.state === 'STALLED') {
                             break;
                         }
-                        
+
                         if(waitForPlay && evt.data.state == 'PLAYING') {
                             expect(state).toBe('PLAYING');
                             waitForPlay = false;
@@ -114,7 +113,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.pause();
                             }, 3000);
                         }
-                        
+
                         if(waitForPause) {
                             expect(state).toBe('PAUSED');
                             waitForPause = false;
@@ -123,7 +122,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.play();
                             }, 3000);
                         }
-                        
+
                         if(waitForResume && state !== 'STALLED') {
                             expect(state).toBe('PLAYING');
                             waitForResume = false;
@@ -133,7 +132,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekForward = curPos;
                             }, 3000);
                         }
-                        
+
                         if(waitForStop) {
                             expect(state).toBe('IDLE');
                             done();
@@ -186,7 +185,6 @@ describe('Video playback feature of toast.Media', function() {
         media.play();
     }, 100000);
 
-    
     it('plays audio well...', function (done) {
         media.open(SAMPLE_AUDIO_URL);
         var state = null;
@@ -224,7 +222,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.pause();
                             }, 3000);
                         }
-                        
+
                         if(waitForPause) {
                             expect(state).toBe('PAUSED');
                             waitForPause = false;
@@ -233,7 +231,7 @@ describe('Video playback feature of toast.Media', function() {
                                 media.play();
                             }, 3000);
                         }
-                        
+
                         if(waitForResume && state !== 'STALLED') {
                             expect(state).toBe('PLAYING');
                             waitForResume = false;
@@ -243,7 +241,7 @@ describe('Video playback feature of toast.Media', function() {
                                 waitForSeekForward = curPos;
                             }, 3000);
                         }
-                        
+
                         if(waitForStop) {
                             expect(state).toBe('IDLE');
                             done();
@@ -295,7 +293,7 @@ describe('Video playback feature of toast.Media', function() {
         waitForPlay = true;
         media.play();
     }, 100000);
-    
+
     it('does NOT throws Error when "play" is called before "open"', function () {
         expect(function () {
             media.play();
@@ -316,5 +314,4 @@ describe('Video playback feature of toast.Media', function() {
             media.stop();
         }).not.toThrow();
     });
-    
 });

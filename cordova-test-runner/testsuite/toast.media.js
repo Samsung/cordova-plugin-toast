@@ -5,7 +5,8 @@
         try {
             mediaIns = toast.Media.getInstance();
             report('Success: toast.Media.getInstance()');
-        } catch (err){
+        }
+        catch (err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -13,7 +14,8 @@
         try {
             mediaIns.open('http://media.w3.org/2010/05/sintel/trailer.mp4');
             report('Success: toast.Media.open(\'http://media.w3.org/2010/05/sintel/trailer.mp4\')');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -21,7 +23,8 @@
         try {
             mediaIns.open('http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3');
             report('Success: toast.Media.open(\'http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3\')');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -34,10 +37,10 @@
             elContainer.style.height = '180px';
             report('Success: getContainerElement()');
             report.append(elContainer);
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
-        
     });
     testsuite('toast.Media', 'setListener()', function(report) {
         try {
@@ -65,7 +68,8 @@
                      report('Error : MediaError occured: ' + JSON.stringify(err));
                  }
             });
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -73,7 +77,8 @@
         try {
             mediaIns.unsetListener();
             report('Success: toast.Media.unsetListener()');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -81,7 +86,8 @@
         try {
             mediaIns.play();
             report('Success: toast.Media.play()');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -89,7 +95,8 @@
         try {
             mediaIns.pause();
             report('Success: toast.Media.pause()');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -98,7 +105,8 @@
             var curPosition = mediaIns.getCurrentPosition();
             mediaIns.seekTo(curPosition + 3000);
             report('Success: FF 3s');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -106,7 +114,8 @@
         try {
             var duration = mediaIns.getDuration();
             report('Success: ' + duration);
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -114,7 +123,8 @@
         try {
             var position = mediaIns.getCurrentPosition();
             report('Success: ' + position);
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
@@ -122,7 +132,8 @@
         try {
             mediaIns.stop();
             report('Success: toast.Media.stop()');
-        } catch(err){
+        }
+        catch(err){
             report('Error: ' + JSON.stringify(err));
         }
     });
