@@ -6,7 +6,7 @@
 	"disallowMultipleLineStrings": true,
 	"disallowMultipleSpaces": true,
 	"disallowNewlineBeforeBlockStatements": true,
-	"disallowOperatorBeforeLineBreak": ["+", "."],
+	"disallowOperatorBeforeLineBreak": ["."],
 	"disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
 	"disallowSpaceBeforeComma": true,
 	"disallowSpaceBeforeSemicolon": true,
