@@ -31,8 +31,12 @@ function onFocus(elInput) {
 		insertIMEJS(onFocus.bind(null, elInput));
 		return;
 	}
+
+	// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 	/*jshint camelcase: false */
 	imeInstance = new window.IMEShell_Common();
+
+	// jscs:enable requireCamelCaseOrUpperCaseIdentifiers
 	/*jshint camelcase: true */
 	elInput.id = elInput.id || ('ime_'+Date.now());
 	imeInstance.inputboxID = elInput.id;
