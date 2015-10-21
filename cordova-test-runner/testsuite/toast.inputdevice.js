@@ -58,7 +58,8 @@
             window.removeEventListener('keydown', keyDownHandler);
             keyDownHandler = null;
             report('Unregistered');
-        } else {
+        }
+        else {
             report('Not registered yet');
         }
     });

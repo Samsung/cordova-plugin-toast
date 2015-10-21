@@ -52,7 +52,7 @@ describe('toast.inputdevice', function () {
 			expect(function () {
 				toast.inputdevice.getSupportedKeys();
 			}).toThrowError(TypeError);
-			
+
 			// invalid type for 1st argument
 			expect(function () {
 				toast.inputdevice.getSupportedKeys(0);
@@ -240,7 +240,7 @@ describe('toast.inputdevice', function () {
 					window.removeEventListener('keydown', onKeyDown);
 					toast.inputdevice.unregisterKey('ColorF0Red', function () {});
 					done();
-				}, 5000);					
+				}, 5000);
 			});
 		}, 10000);
 	});
