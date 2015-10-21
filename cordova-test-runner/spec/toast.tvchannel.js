@@ -126,7 +126,7 @@ describe('toast.tvchannel', function() {
                 }, {
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, []);
             }).toThrowError(TypeError);
             expect(function() {
@@ -136,7 +136,7 @@ describe('toast.tvchannel', function() {
                 }, {
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, new Date());
             }).toThrowError(TypeError);
             expect(function() {
@@ -146,7 +146,7 @@ describe('toast.tvchannel', function() {
                 }, {
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, 0);
             }).toThrowError(TypeError);
             expect(function() {
@@ -156,7 +156,7 @@ describe('toast.tvchannel', function() {
                 }, {
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, 'DUMMY');
             }).toThrowError(TypeError);
             expect(function() {
@@ -166,7 +166,7 @@ describe('toast.tvchannel', function() {
                 }, {
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, {});
             }).toThrowError(TypeError);
         });
@@ -201,35 +201,35 @@ describe('toast.tvchannel', function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, []);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, new Date());
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, 0);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, 'DUMMY');
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, {});
             }).toThrowError(TypeError);
 
@@ -238,35 +238,35 @@ describe('toast.tvchannel', function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneUp({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, function () {});
             }).toThrowError(TypeError);
         });
@@ -301,35 +301,35 @@ describe('toast.tvchannel', function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, []);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, new Date());
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, 0);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, 'DUMMY');
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, {});
             }).toThrowError(TypeError);
 
@@ -338,35 +338,35 @@ describe('toast.tvchannel', function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
                 toast.tvchannel.tuneDown({
                     onsuccess: function () {},
                     onnosignal: function () {},
-                    onprograminforeceived: function () {},
+                    onprograminforeceived: function () {}
                 }, function() {}, function () {});
             }).toThrowError(TypeError);
         });
@@ -871,6 +871,7 @@ describe('toast.tvchannel', function() {
                     }, function () {
                         done.fail(); // ERROR: tune
                     });
+
                     // the flag must be true if the successCallback is invoked asynchronously as expected.
                     expect(flag).toBeTruthy();
                 }, function() {});
@@ -882,7 +883,7 @@ describe('toast.tvchannel', function() {
                     onsuccess: function (channelInfo) {
                         flag = false;
                         expect(channelInfo).toBeDefined();
-                        
+
                         var flag2 = true;
                         toast.tvchannel.tuneDown({
                             onsuccess: function (channelInfo) {
@@ -900,6 +901,7 @@ describe('toast.tvchannel', function() {
                         }, function () {
                             done.fail(); // ERROR: tuneDown
                         }, 'ALL');
+
                         // the flag must be true if the successCallback is invoked asynchronously as expected.
                         expect(flag2).toBeTruthy();
                     },
@@ -908,6 +910,7 @@ describe('toast.tvchannel', function() {
                 }, function () {
                     done.fail(); // ERROR: tuneUp
                 }, 'ALL');
+
                 // the flag must be true if the successCallback is invoked asynchronously as expected.
                 expect(flag).toBeTruthy();
             }

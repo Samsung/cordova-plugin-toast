@@ -343,6 +343,7 @@ describe('toast.tvwindow', function() {
                 }, function() {
                     done.fail();
                 });
+
                 // the flag must be true if the successCallback is invoked asynchronously as expected.
                 expect(flag).toBeTruthy();
             }
@@ -355,7 +356,7 @@ describe('toast.tvwindow', function() {
                 }, function(source) {
                     flag = false;
                     expect(source).toBeDefined();
-                    
+
                     var flag2 = true;
                     toast.tvwindow.getSource(function(source) {
                         flag2 = false;

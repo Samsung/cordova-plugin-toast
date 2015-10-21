@@ -9,7 +9,7 @@
     var testFunc2 = function (channelInfo) {
         globalReport2('testFunc2 is called: ' + JSON.stringify(channelInfo));
     };
-    
+
     testsuite('toast.tvchannel', 'tune() to \'7-1\'', function(report) {
         toast.tvchannel.tune({
             major: 7,
