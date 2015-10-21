@@ -25,6 +25,8 @@ module Media {
 		long setListener(MediaEventListener listener) raises(Error);
 		long unsetListener();
 		DOMElement getContainerElement();
+		void resetPlugin();
+		void attachPlugin(MediaPlugin plugin);
 	};
 	[Callback, NoInterfaceObject] interface MediaEventListener {
 		void onevent(MediaEvent mediaEvent);
@@ -189,6 +191,41 @@ The media status is not changed. (Remained as paused if this operation is invoke
 					break;
 			}
 		}
+		```
+
+### void resetPlugin();
+Clear attached plugins to the Media instance.
+* Parameters
+	N/A
+* Return value
+	N/A
+* Exceptions
+	* throws TypeError
+		* if type of any parameters is not matched to specification.
+	* throws Error
+		* if unknown error occured.
+
+### void attachPlugin(MediaPlugin plugin);
+Attache the given plugin instance to the Media instance. This will be affect to playback of content invoking some additional API
+* Parameters
+	* plugin: MediaPlugin instance to attach.
+* Return value
+	N/A
+* Exceptions
+	* throws TypeError
+		* if type of any parameters is not matched to specification.
+	* throws Error
+		* if unknown error occured.
+* Examples
+	1. clear the plugins and attach new plugin
+		```javascript
+		var media = toast.Media.getInstance();
+		var plWideVine = toast.MediaPluginWideVine(options);
+		media.resetPlugin();
+		media.attachPlugin(plWideVine);
+		media.open('http://mydomain.com/1.mp3');
+		media.play();
+		...
 		```
 
 ## Examples
