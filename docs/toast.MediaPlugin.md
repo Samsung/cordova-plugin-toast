@@ -10,7 +10,7 @@ This plugin defines a toast.MediaPlugin Constructor.
 * sectv-tizen
 
 ## Full WebIDL
-```widl
+```WebIDL
 module MediaPlugin {
 
 	[Constructor(object option)]
@@ -27,7 +27,8 @@ MediaPlugin constructor bind to toast.media with option data to be able to playb
 
 * Examples
 	1. Creates MediaPlugin instance.
-		```javascript
+
+		```js
 		var mediaPlugin = new toast.MediaPlugin();
 		```
 
@@ -40,7 +41,8 @@ Set the option in Media plugin.
 	N/A
 * Examples
 	1. Open an media file
-		```javascript
+
+		```js
 		var mediaPlugin = new toast.MediaPlugin()
 		mediaPlugin.setOption('myKey','mydata')
 		```
@@ -53,14 +55,16 @@ Unset the option in Media plugin.
 	N/A
 * Examples
 	1. Open an media file
-		```javascript
+
+		```js
 		var mediaPlugin = new toast.MediaPlugin()
 		mediaPlugin.unsetOption('myKey')
 		```
 
 ## Examples
 1. Basic usage of MediaPluginWideVine which is inherited from MediaPlugin
-```javascript
+
+```js
 		var mediaIns = toast.Media.getInstance();
 		var wideVineData = {
 			DEVICE_ID : 'myDeviceId', 
@@ -81,7 +85,8 @@ Unset the option in Media plugin.
 ```
 
 2. Basic usage of MediaPluginPlayReady which is inherited from MediaPlugin
-```javascript
+
+```js
 		var mediaIns = toast.Media.getInstance();
 		var playReadyData = {
 			LicenseServer  : 'myLicenseServer',
@@ -96,7 +101,8 @@ Unset the option in Media plugin.
 ```
 
 3. Basic usage of MediaPluginHLS which is inherited from MediaPlugin
-```javascript
+
+```js
 		var mediaIns = toast.Media.getInstance();
 		var HLSData = {
 			BITRATES : 'yourBitRates',
@@ -112,7 +118,8 @@ Unset the option in Media plugin.
 ```
 
 4. Basic usage of MediaPluginUHD which is inherited from MediaPlugin
-```javascript
+
+```js
 		var mediaIns = toast.Media.getInstance();
 
 		var mediaPlugin = new toast.MediaPluginUHD();
