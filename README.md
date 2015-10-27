@@ -28,13 +28,13 @@ function onDeviceReady() {
 
 # How to Build
 * platform `browser`
-	* For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add` command. Please see "How to use" section for details.
+    * For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add` command. Please see "How to use" section for details.
 * platform `sectv-orsay` and `sectv-tizen`
-	* Run below command
-	```
-	$ grunt compile
-	```
-	It will creates the `toast.js` for each platforms in the `platform_www/<platform>` directories of project's root.
+    * Run below command
+    ```
+    $ grunt compile
+    ```
+    It will creates the `toast.js` for each platforms in the `platform_www/<platform>` directories of project's root.
 
 # How to use
 ## Platform "browser"
@@ -47,50 +47,56 @@ $ cordova emulate browser
 ```
 
 ## Platform "sectv-tizen": Samsung Tizen TV
-In the 2015's TV
+For the 2015's TV:
+
 1. Copy the `platform_www/sectv-tizen/toast.js` to your cordova `www` directory root.
 2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
-```HTML
-<script src="cordova.js"></script>	<!-- existing -->
-<script src="toast.js"></script>
-```
+
+    ```HTML
+    <script src="cordova.js"></script>  <!-- existing -->
+    <script src="toast.js"></script>
+    ```
+
 3. Package your `www` directory using Samsung Tizen TV SDK
 
 ## Platform "sectv-orsay": Legacy Samsung Smart TV (A.K.A Orsay)
-In the 2014's TV
+For the 2014's TV:
+
 1. Copy the `platform_www/sectv-orsay/toast.js` to your cordova `www` directory root.
 2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
-```HTML
-<script src="cordova.js"></script>	<!-- existing -->
-<script src="toast.js"></script>
-```
-3. Zip your `www` directory
+
+    ```HTML
+    <script src="cordova.js"></script>  <!-- existing -->
+    <script src="toast.js"></script>
+    ```
+
+3. Zip your `www` directory to create package.
 
 # How to Test with TestRunner
-* You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory.
-* Please refer to below for running the tests:
+* You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory of this project.
+* Please refer to below for running the tests: (Assuming that the [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) project is cloned at the same level with this project)
 
-```shell
-$ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
-$ cd TestRunner
-$ npm install ../grunt-cordova-sectv
-$ cp -rf ../grunt-cordova-sectv/sample/* ./
-$ npm install
-$ cordova platform add browser
-$ cordova plugin add ../cordova-plugin-toast
-
-# Test on browser platform
-$ cordova build browser
-$ cordova emulate browser
-
-# Test on sectv-orsay platform
-$ grunt sectv-build:sectv-orsay sectv-package:sectv-orsay
-# Run the application on target
-
-# Test on sectv-tizen platform
-$ grunt sectv-build:sectv-tizen sectv-package:sectv-tizen
-# Run the application on target
-```
+    ```sh
+    $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
+    $ cd TestRunner
+    $ npm install grunt-cordova-sectv
+    $ cp -rf ../grunt-cordova-sectv/sample/* ./
+    $ npm install
+    $ cordova platform add browser
+    $ cordova plugin add ../cordova-plugin-toast
+    
+    # Test on browser platform
+    $ cordova build browser
+    $ cordova emulate browser
+    
+    # Test on sectv-orsay platform
+    $ grunt sectv-build:sectv-orsay sectv-package:sectv-orsay
+    # Run the application on target by using SDK
+    
+    # Test on sectv-tizen platform
+    $ grunt sectv-build:sectv-tizen sectv-package:sectv-tizen
+    # Run the application on target by using SDK
+    ```
 
 # Known Issues
 Not yet
