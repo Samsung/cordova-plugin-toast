@@ -7,7 +7,7 @@ toast.Media play back video or audio files.
 * sectv-tizen
 
 ## Full WebIDL
-```widl
+```WebIDL
 module Media {
 	enum MediaEventType {"STATE", "DURATION", "POSITION", "BUFFERINGPROGRESS"};
 	enum MediaState {"IDLE", "PLAYING", "PAUSED", "STALLED", "SEEK"};
@@ -65,7 +65,8 @@ The Media's instance can be created with `getInstance` method which creates sing
 		* if unknown error occured.
 * Examples
 	1. Creates media instance to play back.
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		```
 
@@ -84,7 +85,8 @@ Load the media at given url and prepare the playback. Media state is remained to
 		* if unknown error occured.
 * Examples
 	1. Open an media file
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		media.open('http://mydomain.com/1.mp3');
 		```
@@ -102,7 +104,8 @@ Start playback of currently loaded media. If the playback is succeded, Media sta
 		* if unknown error occured.
 * Examples
 	1. Open an media file and start playback
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		media.open('http://mydomain.com/1.mp3');
 		media.play();
@@ -121,7 +124,8 @@ Stop playback and back to `IDLE` status.
 		* if unknown error occured.
 * Examples
 	1. Stop the playback when user press STOP key
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		media.open('http://mydomain.com/1.mp3');
 		media.play();
@@ -146,7 +150,8 @@ Pause the playback and back to `PAUSED` status.
 		* if unknown error occured.
 * Examples
 	1. Pause the playback when user press PAUSE key
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		media.open('http://mydomain.com/1.mp3');
 		media.play();
@@ -174,7 +179,8 @@ The media status is not changed. (Remained as paused if this operation is invoke
 		* if unknown error occured.
 * Examples
 	1. Move 10 seconds forward or backward when user press Foward and Backward key
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		media.open('http://mydomain.com/1.mp3');
 		media.play();
@@ -218,7 +224,8 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 		* if unknown error occured.
 * Examples
 	1. clear the plugins and attach new plugin
-		```javascript
+
+		```js
 		var media = toast.Media.getInstance();
 		var plWideVine = toast.MediaPluginWideVine(options);
 		media.resetPlugin();
@@ -226,11 +233,13 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 		media.open('http://mydomain.com/1.mp3');
 		media.play();
 		...
+
 		```
 
 ## Examples
 1. Basic usage to play back an Audio file
-```javascript
+
+```js
 device.addEventListener('deviceready', function () {
 	var media, tvKeyCode;
 	function onKeyDown(e) {
@@ -298,7 +307,8 @@ device.addEventListener('deviceready', function () {
 ```
 
 2. Basic usage to play back a Video file
-```javascript
+
+```js
 device.addEventListener('deviceready', function () {
 	// ... Please refer to "Basic usage to play back an Audio" for basic media key handling.
 
