@@ -7,7 +7,7 @@ toast provides global namespace named "toast" to provide APIs for TV application
 * sectv-tizen
 
 ## Full WebIDL
-```widl
+```WebIDL
 module Toast {
 	[NoInterfaceObject] interface ToastObject {
 		readonly attribute Toast toast;
@@ -20,22 +20,23 @@ module Toast {
 ```
 
 ## APIs
-* Toast toast
+* Toast `toast`
 provides global namespace named "toast" to provide APIs for TV application.
 Every toast APIs will be appended to this namespace.
 	* Examples
 		1. accessing "toast" namespace
-			```javascript
+
+			```js
 			document.addEventListener('deviceready', function () {
 				console.log(toast);	// [object Object] will be printed.
 			});
 			```
 
 ## See others
-toast.application
-toast.drminfo
-toast.inputdevice
-toast.media
-toast.tvaudiocontrol
-toast.tvchannel
-toast.tvwindow
+* [toast.application](toast.application.md)
+* [toast.drminfo](toast.drminfo.md)
+* [toast.inputdevice](toast.inputdevice.md)
+* [toast.Media](toast.Media.md)
+* [toast.tvaudiocontrol](toast.tvaudiocontrol.md)
+* [toast.tvchannel](toast.tvchannel.md)
+* [toast.tvwindow](toast.tvwindow.md)

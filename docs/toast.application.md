@@ -7,12 +7,12 @@ toast.application privides APIs related with the application.
 * sectv-tizen
 
 ## Full WebIDL
-```widl
+```WebIDL
 module Application {
-    [NoInterfaceObject] interface ApplicationManager {
+    [NoInterfaceObject] interface ApplicationManagerObject {
         readonly attribute ApplicationManager application;
     };
-    Toast implements ApplicationManager;
+    Toast implements ApplicationManagerObject;
 
     [NoInterfaceObject] interface ApplicationManager {
         void exit();
@@ -24,9 +24,13 @@ module Application {
 ### void exit();
 This function terminates current application.
 * Parameters
+
 	N/A
+
 * Return value
+
 	N/A
+
 * Exceptions
 	* throws TypeError
 		* If given arguments are not matched with API specification.
@@ -34,7 +38,8 @@ This function terminates current application.
 		* if any error occured during the operation.
 * Examples
 	1. Terminate current application when Return key pressed.
-		```javascript
+
+		```js
 		window.addEventListener('keydown', function (e) {
 			if(e.keyCode === tvKeyCode.Return) {
 				toast.application.exit();
@@ -43,4 +48,4 @@ This function terminates current application.
 		```
 
 ## See others
-toast.inputdevice
+[toast.inputdevice](toast.inputdevice.md)
