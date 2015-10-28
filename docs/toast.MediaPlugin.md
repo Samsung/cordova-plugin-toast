@@ -130,4 +130,4 @@ Unset the option in Media plugin.
 ```
 
 ## See others
-toast.Media
+[toast.Media](toast.Media.md)
