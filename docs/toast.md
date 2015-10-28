@@ -21,8 +21,10 @@ module Toast {
 
 ## APIs
 * Toast `toast`
-provides global namespace named "toast" to provide APIs for TV application.
-Every toast APIs will be appended to this namespace.
+
+	provides global namespace named `toast` to provide APIs for TV application.
+	Every toast APIs will be appended to this namespace.
+
 	* Examples
 		1. accessing "toast" namespace
 
