@@ -1,5 +1,5 @@
-# toast
-toast provides global namespace named "toast" to provide APIs for TV application.
+# Toast
+Module Toast provides global namespace named "toast" to provide APIs for TV application.
 
 ## Supported platforms
 * browser
@@ -22,7 +22,7 @@ module Toast {
 ## APIs
 * Toast `toast`
 
-	provides global namespace named `toast` to provide APIs for TV application.
+	Toast provides global namespace named `toast` to provide APIs for TV application.
 	Every toast APIs will be appended to this namespace.
 
 	* Examples
