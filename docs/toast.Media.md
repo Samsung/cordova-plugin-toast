@@ -343,5 +343,5 @@ device.addEventListener('deviceready', function () {
 ```
 
 ## See others
-toast.drminfo
-toast.application
+[toast.drminfo](toast.drminfo.md)
+[toast.application](toast.application.md)
