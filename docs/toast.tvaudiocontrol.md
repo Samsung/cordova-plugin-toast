@@ -8,12 +8,12 @@ toast.tvaudiocontrol provides audio control such as volume or mute.
     - Privilege `<tizen:privilege name="http://tizen.org/privilege/tv.audio"/>` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
-```widl
+```WebIDL
 module TVAudioControl {
-    [NoInterfaceObject] interface TVAudioControlManager {
-        readonly attribute TVAudioControlManager tvaudiocontrol;
+    [NoInterfaceObject] interface TVAudioControlManagerObject {
+        readonly attribute TVAudioControlManagerObject tvaudiocontrol;
     };
-    Toast implements TVAudioControlManager;
+    Toast implements TVAudioControlManagerObject;
 
     [NoInterfaceObject] interface TVAudioControlManager {
         void setMute(boolean mute, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
@@ -49,7 +49,8 @@ Speaker UI might not be shown according to platform.
 		    * if unknown error occured.
 	* Examples
 		1. Setting mute state to true.
-			```javascript
+
+			```js
 			var mute = true;
             toast.tvaudiocontrol.setMute(mute, function() {
             	console.log('Success');
@@ -72,7 +73,8 @@ This method gets mute state.
 		    * if unknown error occured.
 	* Examples
 		1. Getting mute state.
-			```javascript
+
+			```js
             toast.tvaudiocontrol.isMute(function(value) {
                 console.log('Success: ' + value);
             }, function(err) {
@@ -95,7 +97,8 @@ This method changes the volume level. The value of volume is allowed from 0 to 1
 		    * if unknown error occured.
 	* Examples
 		1. Changing the volume level to 5.
-			```javascript
+
+			```js
 			var volume = 5;
             toast.tvaudiocontrol.setVolume(volume, function() {
                 console.log('Success');
@@ -118,7 +121,8 @@ This method increases the volume 1 level. The maximum volume level is 100. If th
 		    * if unknown error occured.
 	* Examples
 		1. Increasing the volume 1 level.
-			```javascript
+
+			```js
             toast.tvaudiocontrol.setVolumeUp(function() {
                 console.log('Success');
             }, function(err) {
@@ -140,7 +144,8 @@ This method decreases the volume 1 level. The minimum volume level is 0. If the 
 		    * if unknown error occured.
 	* Examples
 		1. Decreasing the volume 1 level.
-			```javascript
+
+			```js
             toast.tvaudiocontrol.setVolumeDown(function() {
                 console.log('Success');
             }, function(err) {
@@ -162,7 +167,8 @@ This method gets the value of current volume.
 		    * if unknown error occured.
 	* Examples
 		1. Getting the value of current volume.
-			```javascript
+
+			```js
             toast.tvaudiocontrol.getVolume(function(value) {
                 console.log('Success: ' + value);
             }, function(err) {
@@ -185,7 +191,8 @@ The method registers a volume change callback for getting notified when TV volum
 		    * if unknown error occured.
 	* Examples
 		1. When the volume has been changed, onVolumeChanged would be invoked.
-			```javascript
+
+			```js
 			function onVolumeChanged(volume){
 			    console.log('volume changes to ' + value);
 			}
@@ -210,7 +217,8 @@ The method unregisters a volume change callback.
 		    * if unknown error occured.
 	* Examples
 		1. unregister volume change callback.
-			```javascript
+
+			```js
             toast.tvaudiocontrol.unsetVolumeChangeListener(function() {
                 console.log('Success');
             }, function(err) {
@@ -219,9 +227,4 @@ The method unregisters a volume change callback.
 			```
 
 ## See others
-toast.application
-toast.drminfo
-toast.inputdevice
-toast.media
-toast.tvchannel
-toast.tvwindow
+None

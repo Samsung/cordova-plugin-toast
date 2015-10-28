@@ -8,12 +8,12 @@ toast.drminfo provides DRM information.
     - Privilege `<tizen:privilege name="http://developer.samsung.com/privilege/drminfo"/>` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
-```widl
+```WebIDL
 module DRMInfo {
-    [NoInterfaceObject] interface DRMInfoManager {
-        readonly attribute DRMInfoManager drminfo;
+    [NoInterfaceObject] interface DRMInfoManagerObject {
+        readonly attribute DRMInfoManagerObject drminfo;
     };
-    Toast implements DRMInfoManager;
+    Toast implements DRMInfoManagerObject;
 
     [NoInterfaceObject] interface DRMInfoManager {
         void getEsn(DOMString component, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
@@ -40,7 +40,8 @@ This method gets the ESN data of given component name.
 		    * if unknown error occured.
 	* Examples
 		1. Getting ESN of 'WIDEVINE'.
-			```javascript
+
+			```js
 			toast.drminfo.getEsn('WIDEVINE', function(value) {
 	            console.log('Success: ' + value);
             }, function(err) {
@@ -62,7 +63,8 @@ This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to
 		    * if unknown error occured.
 	* Examples
 		1. Getting value of SDI.
-			```javascript
+
+			```js
             toast.drminfo.getSdi(function(value) {
                 console.log('Success: ' + value);
             }, function(err) {
@@ -71,9 +73,4 @@ This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to
 			```
 
 ## See others
-toast.application
-toast.inputdevice
-toast.media
-toast.tvaudiocontrol
-toast.tvchannel
-toast.tvwindow
+None
