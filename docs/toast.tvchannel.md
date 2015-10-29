@@ -110,7 +110,8 @@ This method tunes the channel of TV.
             * if unknown error occured.
     * Examples
         1. Tuning a channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.tune({
                 major: 7,
                 minor: 1
@@ -144,7 +145,8 @@ This method tunes up the channel of TV.
             * if unknown error occured.
     * Examples
         1. Tuning up a channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.tuneUp({
                 onsuccess: function (channelInfo) {
                     console.log('OnSuccess: ' + JSON.stringify(channelInfo));
@@ -175,7 +177,8 @@ This method tunes down the channel of TV.
             * if unknown error occured.
     * Examples
         1. Tuning down a channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.tuneDown({
                 onsuccess: function (channelInfo) {
                     console.log('OnSuccess: ' + JSON.stringify(channelInfo));
@@ -207,7 +210,8 @@ This method finds a channel.
             * if unknown error occured.
     * Examples
         1. Finding a channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.findChannel(7, 1, function (channelInfoList) {
                 console.log('Success: ' + JSON.stringify(channelInfoList));
             }, function(err) {
@@ -232,7 +236,8 @@ This method finds a channel.
             * if unknown error occured.
     * Examples
         1. Getting a channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.getChannelList(function (channelInfoList) {
                 console.log('Success: ' + JSON.stringify(channelInfoList));
             }, function(err) {
@@ -254,7 +259,8 @@ This method gets a current channel.
             * if unknown error occured.
     * Examples
         1. Getting a current channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.getCurrentChannel(function (channelInfo) {
                 console.log('Success: ' + JSON.stringify(channelInfo));
             }, function(err) {
@@ -279,7 +285,8 @@ This method gets a program list.
             * if unknown error occured.
     * Examples
         1. Getting a current channel.
-            ```javascript
+
+            ```js
             toast.tvwindow.getProgramList({
                 major: 7,
                 minor: 1,
@@ -312,7 +319,8 @@ This method gets a current program.
             * if unknown error occured.
     * Examples
         1. Getting a current program.
-            ```javascript
+
+            ```js
             toast.tvwindow.getCurrentProgram(function (programInfo) {
                 console.log('Success: ' + JSON.stringify(programInfo));
             }, function(err) {
@@ -333,7 +341,8 @@ This method adds listener for changing a channel.
             * if unknown error occured.
     * Examples
         1. Getting a current program.
-            ```javascript
+
+            ```js
             var testFunc = function (channelInfo) {
                 console.log('testFunc is called: ' + JSON.stringify(channelInfo));
             };
@@ -353,7 +362,8 @@ This method removes listener for changing a channel.
             * if unknown error occured.
     * Examples
         1. Getting a current program.
-            ```javascript
+
+            ```js
             var testFunc = function (channelInfo) {
                 console.log('testFunc is called: ' + JSON.stringify(channelInfo));
             };

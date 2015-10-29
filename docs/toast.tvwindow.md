@@ -65,7 +65,8 @@ This method sets the source of TV hole window.
             * if unknown error occured.
     * Examples
         1. Setting to a source.
-            ```javascript
+
+            ```js
             toast.tvwindow.setSource({
                 type: 'TV',
                 number: 1
@@ -90,7 +91,8 @@ This function gets information about the current source of TV hole window.
             * if unknown error occured.
     * Examples
         1. Getting the source.
-            ```javascript
+
+            ```js
             toast.tvwindow.getSource(function(sourceInfo) {
                 console.log('Success: ' + JSON.stringify(sourceInfo));
             }, function(err) {
@@ -117,7 +119,8 @@ This function shows TV hole window on display screen.
             * if unknown error occured.
     * Examples
         1. Showing TV window hole.
-            ```javascript
+
+            ```js
             toast.tvwindow.show([100, 100, 320, 180], function(rectInfo) {
                 console.log('Success: ' + JSON.stringify(rectInfo));
             }, function(err) {
@@ -139,7 +142,8 @@ This function hides TV hole window on display screen.
             * if unknown error occured.
     * Examples
         1. Hiding TV window hole.
-            ```javascript
+
+            ```js
             toast.tvwindow.hide(function() {
                 console.log('Success');
             }, function(err) {
@@ -161,7 +165,8 @@ This function gets the location and size of TV window hole.
             * if unknown error occured.
     * Examples
         1. Getting the location and size of TV window hole.
-            ```javascript
+        
+            ```js
             toast.tvwindow.getRect(function(rectInfo) {
                 console.log('Success: ' + JSON.stringify(rectInfo));
             }, function(err) {
