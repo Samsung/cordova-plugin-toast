@@ -1,14 +1,14 @@
 # toast.tvwindow
-toast.tvwindow privides something
+toast.tvwindow privides picture in graphic on application.
 
 ## Supported platforms
 * browser
 * sectv-orsay
 * sectv-tizen
-    * Privilege `http://tizen.org/privilege/tv.window"/>` must be declared in the config.xml of tizen package.
+    - Privilege `http://tizen.org/privilege/tv.window"/>` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
-```widl
+```WebIDL
 module TVWindow {
     enum VideoSourceType {
         "TV",
@@ -21,10 +21,10 @@ module TVWindow {
         "DVI"
     };
 
-    [NoInterfaceObject] interface TVWindowManager {
+    [NoInterfaceObject] interface TVWindowManagerObject {
         readonly attribute TVWindowManager tvwindow;
     };
-    Toast implements TVWindowManager;
+    Toast implements TVWindowManagerObject;
 
     [NoInterfaceObject] interface TVWindowManager {
         void setSource(VideoSourceInfo videoSource, VideoSourceInfoCallback successCallback, optional ErrorCallback? errorCallback) raises (Error);
@@ -53,9 +53,9 @@ module TVWindow {
 * void setSource(VideoSourceInfo videoSource, VideoSourceInfoCallback successCallback, optional ErrorCallback? errorCallback);
 This method sets the source of TV hole window.
     * Parameters
-        * videoSource: The video source to set.
-        * successCallback: The method to call when the source is changed successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - videoSource: The video source to set.
+        - successCallback: The method to call when the source is changed successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -79,8 +79,8 @@ This method sets the source of TV hole window.
 * void getSource(VideoSourceInfoCallback successCallback, optional ErrorCallback? errorCallback);
 This function gets information about the current source of TV hole window.
     * Parameters
-        * successCallback: The method to call when the source is retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - successCallback: The method to call when the source is retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -101,13 +101,13 @@ This function gets information about the current source of TV hole window.
 * void show(unsigned long[] rectangle, RectangleInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This function shows TV hole window on display screen.
     * Parameters
-        * rectangle: The location and size of TV window hole.
-            * First Element: The x coordinate of TV hole window on display screen.
-            * Second Element: The y coordinate of TV hole window on display screen.
-            * Third Element: The width of TV hole window.
-            * Fourth Element: The width of TV hole window.
-        * successCallback: The method to call when TV window hole is shown successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - rectangle: The location and size of TV window hole.
+            - First Element: The x coordinate of TV hole window on display screen.
+            - Second Element: The y coordinate of TV hole window on display screen.
+            - Third Element: The width of TV hole window.
+            - Fourth Element: The width of TV hole window.
+        - successCallback: The method to call when TV window hole is shown successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -128,8 +128,8 @@ This function shows TV hole window on display screen.
 * void hide(SuccessCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This function hides TV hole window on display screen.
     * Parameters
-        * successCallback: The method to call when TV window hole is hidden successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - successCallback: The method to call when TV window hole is hidden successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -150,8 +150,8 @@ This function hides TV hole window on display screen.
 * void getRect(RectangleInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This function gets the location and size of TV window hole.
     * Parameters
-        * successCallback: The method to call when the location and size of TV window hole are retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - successCallback: The method to call when the location and size of TV window hole are retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions

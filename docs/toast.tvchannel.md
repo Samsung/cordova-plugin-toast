@@ -1,14 +1,14 @@
 # toast.tvchannel
-toast.tvchannel privides something
+toast.tvchannel privides to control tv channel.
 
 ## Supported platforms
 * browser
 * sectv-orsay
 * sectv-tizen
-    * Privilege `http://tizen.org/privilege/tv.channel` must be declared in the config.xml of tizen package.
+    - Privilege `http://tizen.org/privilege/tv.channel` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
-```widl
+```WebIDL
 module TVChannel {
     enum TuneMode {
         'ALL',
@@ -98,9 +98,9 @@ module TVChannel {
 * void tune(TuneOption tuneOption, TuneCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This method tunes the channel of TV.
     * Parameters
-        * tuneOption: The tune option to set.
-        * successCallback: The method to call when the channel are changed successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - tuneOption: The tune option to set.
+        - successCallback: The method to call when the channel are changed successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -132,9 +132,9 @@ This method tunes the channel of TV.
 * void tuneUp(TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode) raises(Error);
 This method tunes up the channel of TV.
     * Parameters
-        * successCallback: The method to call when the channel is tuned up successfully.
-        * errorCallback: The method to invoke when an error occurs.
-        * tuneMode: The tuning navigation mode. Default value is 'ALL'.
+        - successCallback: The method to call when the channel is tuned up successfully.
+        - errorCallback: The method to invoke when an error occurs.
+        - tuneMode: The tuning navigation mode. Default value is 'ALL'.
     * Return value
         N/A
     * Exceptions
@@ -163,9 +163,9 @@ This method tunes up the channel of TV.
 * void tuneDown(TuneCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode) raises(Error);
 This method tunes down the channel of TV.
     * Parameters
-        * successCallback: The method to call when the channel is tuned down successfully.
-        * errorCallback: The method to invoke when an error occurs.
-        * tuneMode: The tuning navigation mode. Default value is 'ALL'.
+        - successCallback: The method to call when the channel is tuned down successfully.
+        - errorCallback: The method to invoke when an error occurs.
+        - tuneMode: The tuning navigation mode. Default value is 'ALL'.
     * Return value
         N/A
     * Exceptions
@@ -194,10 +194,10 @@ This method tunes down the channel of TV.
 * void findChannel(long major, long minor, ChannelInfoListCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This method finds a channel.
     * Parameters
-        * major: The major of channel to be found.
-        * minor: The minor of channel to be found.
-        * successCallback: The method to call when the channel is retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - major: The major of channel to be found.
+        - minor: The minor of channel to be found.
+        - successCallback: The method to call when the channel is retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -218,11 +218,11 @@ This method finds a channel.
 * void getChannelList(ChannelInfoListCallback successCallback, optional ErrorCallback? errorCallback, optional TuneMode? tuneMode, optional unsigned long? nStart, optional unsigned long? number) raises(Error);
 This method finds a channel.
     * Parameters
-        * successCallback: The method to call when the channel is retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
-        * tuneMode: The tuning navigation mode. Default value is 'ALL'.
-        * nStart: The start index. Default value is 0.
-        * number: The number of channel information to retrieve. If it is undefind, all channel information is retrieved.
+        - successCallback: The method to call when the channel is retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
+        - tuneMode: The tuning navigation mode. Default value is 'ALL'.
+        - nStart: The start index. Default value is 0.
+        - number: The number of channel information to retrieve. If it is undefind, all channel information is retrieved.
     * Return value
         N/A
     * Exceptions
@@ -243,8 +243,8 @@ This method finds a channel.
 * void getCurrentChannel(ChannelInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This method gets a current channel.
     * Parameters
-        * successCallback: The method to call when a current channel is retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - successCallback: The method to call when a current channel is retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -265,11 +265,11 @@ This method gets a current channel.
 * void getProgramList(ChannelInfo channelInfo, Date startTime, ProgramInfoListCallback successCallback, optional ErrorCallback? errorCallback, optional unsigned long? duration) raises(Error);
 This method gets a program list.
     * Parameters
-        * channelInfo: The channel to be retrieved.
-        * startTime: The start time.
-        * successCallback: The method to call when a current channel is retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
-        * duration: The hour duration to search programs. If it is undefind, all program information are retrieved.
+        - channelInfo: The channel to be retrieved.
+        - startTime: The start time.
+        - successCallback: The method to call when a current channel is retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
+        - duration: The hour duration to search programs. If it is undefind, all program information are retrieved.
     * Return value
         N/A
     * Exceptions
@@ -301,8 +301,8 @@ This method gets a program list.
 * void getCurrentProgram(ProgramInfoCallback successCallback, optional ErrorCallback? errorCallback) raises(Error);
 This method gets a current program.
     * Parameters
-        * successCallback: The method to call when a current program is retrieved successfully.
-        * errorCallback: The method to invoke when an error occurs.
+        - successCallback: The method to call when a current program is retrieved successfully.
+        - errorCallback: The method to invoke when an error occurs.
     * Return value
         N/A
     * Exceptions
@@ -323,7 +323,7 @@ This method gets a current program.
 * void addChannelChangeListener(ChannelInfoCallback callback) raises(Error);
 This method adds listener for changing a channel.
     * Parameters
-        * callback: The method to call when a channel is changed.
+        - callback: The method to call when a channel is changed.
     * Return value
         N/A
     * Exceptions
@@ -343,7 +343,7 @@ This method adds listener for changing a channel.
 * void removeChannelChangeListener(ChannelInfoCallback callback) raises(Error);
 This method removes listener for changing a channel.
     * Parameters
-        * callback: The method is added by addChannelChangeListener.
+        - callback: The method is added by addChannelChangeListener.
     * Return value
         N/A
     * Exceptions
