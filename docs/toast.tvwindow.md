@@ -165,7 +165,7 @@ This function gets the location and size of TV window hole.
             * if unknown error occured.
     * Examples
         1. Getting the location and size of TV window hole.
-        
+
             ```js
             toast.tvwindow.getRect(function(rectInfo) {
                 console.log('Success: ' + JSON.stringify(rectInfo));
@@ -175,9 +175,4 @@ This function gets the location and size of TV window hole.
             ```
 
 ## See others
-toast.application
-toast.drminfo
-toast.inputdevice
-toast.media
-toast.tvaudiocontrol
-toast.tvchannel
+[toast.tvchannel](toast.tvchannel.md)

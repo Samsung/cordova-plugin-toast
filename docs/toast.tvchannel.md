@@ -373,9 +373,4 @@ This method removes listener for changing a channel.
             ```
 
 ## See others
-toast.application
-toast.drminfo
-toast.inputdevice
-toast.media
-toast.tvaudiocontrol
-toast.tvwindow
+[toast.tvwindow](toast.tvwindow.md)
