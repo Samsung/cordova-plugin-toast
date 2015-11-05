@@ -5,12 +5,13 @@ Cordova plugin that provides TV Specific functionalities.
 This plugin defines a global `toast` object, which provides an API for TV specific functionalities that is based on [Cordova](https://cordova.apache.org/) project.
 
 Although the object provides the global scoped `toast` object, it is not available until after the `deviceready` event which is provided by Cordova.
-```javascript
+```js
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     console.log(toast);
 }
 ```
+
 # Project Structure
 ```
     ./
@@ -25,6 +26,11 @@ function onDeviceReady() {
      |-Gruntfile.js ........... Gruntfile to build the toast.js
      '-plugin.xml ............. Cordova Plugin configuration for TOAST
 ```
+
+# Associated Projects
+* [cordova-sectv-orsay](http://github.com/Samsung/cordova-sectv-orsay) is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV (A.K.A Orsay) Platform.
+* [cordova-sectv-tizen](http://github.com/Samsung/cordova-sectv-tizen) is an application library that allows for Cordova-based projects to be built for the 2015's Samsung Tizen TV Platform.
+* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [Grunt](http://gruntjs.com/) task to build and create package from a cordova project for `sectv-orsay` and `sectv-tizen` platforms.
 
 # How to Build
 * platform `browser`
