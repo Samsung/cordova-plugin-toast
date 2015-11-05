@@ -28,18 +28,32 @@ function onDeviceReady() {
 
 # How to Build
 * platform `browser`
-    * For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add` command. Please see "How to use" section for details.
+
+    For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add` command. Please see [How to use](#how-to-use) section for details.
+
 * platform `sectv-orsay` and `sectv-tizen`
-    * Run below command
+
+    Make sure you have all of the node dependencies installed by running the following command from the repository root
+    ```sh
+    $ npm install
     ```
+
+    All of the build tasks can be run via the grunt node module. Install it globally first by running:
+    ```sh
+    $ sudo npm install -g grunt-cli
+    ```
+
+    Then from the repository root run:
+    ```sh
     $ grunt compile
     ```
-    It will creates the `toast.js` for each platforms in the `platform_www/<platform>` directories of project's root.
+
+    It will creates the `toast.js` for each platforms in the `platform_www/<platform>` directories of the repository root.
 
 # How to use
 ## Platform "browser"
 You can develop your cordova TV application by using chrome browser with simulated Toast API.
-```shell
+```sh
 $ cordova platform add browser
 $ cordova plugin add {{Local or git path to this project}}
 $ cordova build browser
