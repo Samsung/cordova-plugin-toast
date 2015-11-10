@@ -20,7 +20,7 @@ function onDeviceReady() {
      |-src/ ................... Platform dependent modules for the plugin TOAST
      |  |-browser/ ............ Plugin implementation for the platform `browser`
      |  |-sectv-orsay/ ........ Plugin implementation for the platform `sectv-orsay`
-     |  '-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
+     |  |-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
      |-tasks/ ................. custom grunt tasks to build the toast.js
      |-www/ ................... Platform independent modules for the plugin TOAST
      |-Gruntfile.js ........... Gruntfile to build the toast.js
