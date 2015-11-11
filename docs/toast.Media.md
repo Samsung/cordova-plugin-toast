@@ -289,7 +289,7 @@ device.addEventListener('deviceready', function () {
 				case "POSITION":
 					console.log("Media position updated: " + evt.data.position + "ms");
 					break;
-				case "BUFFERINGPROGRESS"
+				case "BUFFERINGPROGRESS":
 					console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
 					if(evt.data.bufferingPercentage >= 100) {
 						console.log("Buffering completed");
