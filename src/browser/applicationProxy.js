@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    exit: function(success, fail, args){
+    exit: function(success, fail, args) {
         window.close();
     }
 };

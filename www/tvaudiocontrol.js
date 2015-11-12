@@ -24,7 +24,7 @@ var tvaudiocontrolExport = {
         argscheck.checkArgs('*fF', 'tvaudiocontrol.setMute', arguments);
         errorCallback = errorCallback || function () {};
 
-        if(typeof mute != 'boolean'){
+        if(typeof mute != 'boolean') {
             var error = new TypeError('First parameter needs to be boolean type.');
             throw error;
         }

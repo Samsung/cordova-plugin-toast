@@ -49,77 +49,77 @@ var supportedKeys = [
 module.exports = {
     getSupportedKeys: function (success, fail, args) {
         try {
-            setTimeout(function(){
+            setTimeout(function() {
                 success(supportedKeys);
             }, 0);
         }
         catch (e) {
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(e);
             }, 0);
         }
     },
-    getKey: function(success, fail, args){
+    getKey: function(success, fail, args) {
         try {
             console.log(args[0]);
             for(var i = 0; i < supportedKeys.length; i++) {
-                if(supportedKeys[i].name === args[0]){
+                if(supportedKeys[i].name === args[0]) {
                     break;
                 }
             }
             if(i != supportedKeys.length) {
-                setTimeout(function(){
+                setTimeout(function() {
                     success(supportedKeys[i]);
                 }, 0);
             }
             else {
                 var error = new RangeError('keyName is not in the supported keys set.');
                 error.name = 'RangeError';
-                setTimeout(function(){
+                setTimeout(function() {
                     fail(error);
                 }, 0);
             }
         }
         catch(e) {
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(e);
             }, 0);
         }
     },
-    registerKey: function(success, fail, args){
+    registerKey: function(success, fail, args) {
         for(var i = 0; i < supportedKeys.length; i++) {
-            if(supportedKeys[i].name === args[0]){
+            if(supportedKeys[i].name === args[0]) {
                 break;
             }
         }
         if(i == supportedKeys.length) {
             var error = new RangeError('keyName is not in the supported keys set.');
             error.name = 'RangeError';
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(error);
             }, 0);
         }
         else {
-            setTimeout(function(){
+            setTimeout(function() {
                 success();
             }, 0);
         }
     },
-    unregisterKey: function(success, fail, args){
+    unregisterKey: function(success, fail, args) {
         for(var i = 0; i < supportedKeys.length; i++) {
-            if(supportedKeys[i].name === args[0]){
+            if(supportedKeys[i].name === args[0]) {
                 break;
             }
         }
         if(i == supportedKeys.length) {
             var error = new RangeError('keyName is not in the supported keys set.');
             error.name = 'RangeError';
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(error);
             }, 0);
         }
         else {
-            setTimeout(function(){
+            setTimeout(function() {
                 success();
             }, 0);
         }

@@ -20,7 +20,7 @@ var exec = require('cordova/exec'),
     MediaPlugin = require('cordova-plugin-toast.MediaPlugin');
 
 function MediaPluginUHD () {
-    if(webapis.productinfo.isUdPanelSupported()){
+    if(webapis.productinfo.isUdPanelSupported()) {
         MediaPlugin.apply(this, arguments);
         this.name = 'MediaPluginUHD';
     }

@@ -22,8 +22,8 @@ var argscheck = require('cordova/argscheck'),
 
 var mediaObjects = null;
 
-var Media = function (){
-    if(!mediaObjects){
+var Media = function () {
+    if(!mediaObjects) {
         this.id = utils.createUUID();
         mediaObjects = {};
         mediaObjects[this.id] = this;
@@ -62,11 +62,11 @@ Media.mediaEvent = function(id, value) {
     if(media) {
         switch(value.type) {
         case Media.EVENT_STATE :
-            setTimeout(function(){
-                if(media._mediaEventCallBack.onevent && value.data.oldState === null){
+            setTimeout(function() {
+                if(media._mediaEventCallBack.onevent && value.data.oldState === null) {
                     media._mediaEventCallBack.onevent(value);
                 }
-                else if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state){
+                else if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state) {
                     media._mediaEventCallBack.onevent(value);
                 }
             },0);
@@ -86,7 +86,7 @@ Media.mediaEvent = function(id, value) {
             media._containerElem = value.data.containerElem;
             break;
         case Media._MEDIA_ERROR :
-            setTimeout(function(){
+            setTimeout(function() {
                 media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
             },0);
             break;
@@ -101,9 +101,9 @@ Media.mediaEvent = function(id, value) {
 };
 
 Media.getInstance = function() {
-    if(mediaObjects && typeof mediaObjects == 'object'){
-        for(var key in mediaObjects){
-            if (mediaObjects.hasOwnProperty(key)){
+    if(mediaObjects && typeof mediaObjects == 'object') {
+        for(var key in mediaObjects) {
+            if (mediaObjects.hasOwnProperty(key)) {
                 return mediaObjects[key];
             }
         }
@@ -125,7 +125,7 @@ Media.prototype.getContainerElement = function() {
     return this._containerElem;
 };
 
-Media.prototype.play = function(){
+Media.prototype.play = function() {
     invokeHooks('beforeplay', [this].concat(arguments));
     exec(null, null, 'toast.Media', 'play', [this.id]);
     invokeHooks('afterplay', [this].concat(arguments));

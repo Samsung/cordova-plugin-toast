@@ -90,7 +90,7 @@ describe('toast.tvaudiocontrol', function() {
                 toast.tvaudiocontrol.setMute({});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setMute(function(){});
+                toast.tvaudiocontrol.setMute(function() {});
             }).toThrowError(TypeError);
 
             // invalid type for 2nd argument
@@ -112,46 +112,46 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.tvaudiocontrol.setMute(true, function(){}, []);
+                toast.tvaudiocontrol.setMute(true, function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setMute(true, function(){}, new Date());
+                toast.tvaudiocontrol.setMute(true, function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setMute(true, function(){}, 0);
+                toast.tvaudiocontrol.setMute(true, function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setMute(true, function(){}, {});
+                toast.tvaudiocontrol.setMute(true, function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setMute(true, function(){}, false);
+                toast.tvaudiocontrol.setMute(true, function() {}, false);
             }).toThrowError(TypeError);
         });
 
         it('sets mute state to \'true\'', function (done) {
             var mutestate = true;
-            toast.tvaudiocontrol.setMute(mutestate, function(){
-                toast.tvaudiocontrol.isMute(function(value){
+            toast.tvaudiocontrol.setMute(mutestate, function() {
+                toast.tvaudiocontrol.isMute(function(value) {
                     expect(value).toBe(mutestate);
                     done();
-                }, function(){
+                }, function() {
                     done.fail();
                 });
-            }, function(){
+            }, function() {
                 done.fail();
             });
         }, 3000);
 
         it('sets mute state to \'false\'', function (done) {
             var mutestate = false;
-            toast.tvaudiocontrol.setMute(mutestate, function(){
-                toast.tvaudiocontrol.isMute(function(value){
+            toast.tvaudiocontrol.setMute(mutestate, function() {
+                toast.tvaudiocontrol.isMute(function(value) {
                     expect(value).toBe(mutestate);
                     done();
-                }, function(){
+                }, function() {
                     done.fail();
                 });
-            }, function(){
+            }, function() {
                 done.fail();
             });
         }, 3000);
@@ -159,12 +159,12 @@ describe('toast.tvaudiocontrol', function() {
     describe('toast.tvaudiocontrol.isMute', function() {
         it('returns mute value as boolean', function (done) {
             var mute = '';
-            toast.tvaudiocontrol.isMute(function(value){
+            toast.tvaudiocontrol.isMute(function(value) {
                 mute = value;
                 expect(mute).toBeDefined();
                 expect(typeof mute).toBe('boolean');
                 done();
-            }, function(){
+            }, function() {
                 done.fail();
             });
         }, 3000);
@@ -193,19 +193,19 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvaudiocontrol.isMute(function(){}, []);
+                toast.tvaudiocontrol.isMute(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.isMute(function(){}, new Date());
+                toast.tvaudiocontrol.isMute(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.isMute(function(){}, 0);
+                toast.tvaudiocontrol.isMute(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.isMute(function(){}, {});
+                toast.tvaudiocontrol.isMute(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.isMute(function(){}, false);
+                toast.tvaudiocontrol.isMute(function() {}, false);
             }).toThrowError(TypeError);
         });
     });
@@ -252,36 +252,36 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.tvaudiocontrol.setVolume(5, function(){}, []);
+                toast.tvaudiocontrol.setVolume(5, function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolume(5, function(){}, new Date());
+                toast.tvaudiocontrol.setVolume(5, function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolume(5, function(){}, 0);
+                toast.tvaudiocontrol.setVolume(5, function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolume(5, function(){}, {});
+                toast.tvaudiocontrol.setVolume(5, function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolume(5, function(){}, false);
+                toast.tvaudiocontrol.setVolume(5, function() {}, false);
             }).toThrowError(TypeError);
         });
 
         it('is the volume set to 5, as you expected?', function (done) {
             var expectValue = 5;
 
-            toast.tvaudiocontrol.setVolume(expectValue, function(){
+            toast.tvaudiocontrol.setVolume(expectValue, function() {
                 var volume = '';
-                toast.tvaudiocontrol.getVolume(function(value){
+                toast.tvaudiocontrol.getVolume(function(value) {
                     volume = value;
                     expect(volume).toBeDefined();
                     expect(volume).toBe(expectValue);
                     done();
-                }, function(){
+                }, function() {
                     done.fail();
                 });
-            }, function(){
+            }, function() {
                 done.fail();
             });
         },3000);
@@ -312,40 +312,40 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvaudiocontrol.setVolumeUp(function(){}, []);
+                toast.tvaudiocontrol.setVolumeUp(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeUp(function(){}, new Date());
+                toast.tvaudiocontrol.setVolumeUp(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeUp(function(){}, 0);
+                toast.tvaudiocontrol.setVolumeUp(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeUp(function(){}, {});
+                toast.tvaudiocontrol.setVolumeUp(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeUp(function(){}, false);
+                toast.tvaudiocontrol.setVolumeUp(function() {}, false);
             }).toThrowError(TypeError);
         });
 
         it('is the volume increased 1 level, as you expected?', function (done) {
             var currentVolume = null;
-            toast.tvaudiocontrol.getVolume(function(value){
+            toast.tvaudiocontrol.getVolume(function(value) {
                 currentVolume = value;
                 console.log('currentVolume before volume up: ' + currentVolume);
 
-                toast.tvaudiocontrol.setVolumeUp(function(){
-                    toast.tvaudiocontrol.getVolume(function(value){
+                toast.tvaudiocontrol.setVolumeUp(function() {
+                    toast.tvaudiocontrol.getVolume(function(value) {
                         console.log('currentVolume after volume up : ' + value);
-                        if(currentVolume < 100){
+                        if(currentVolume < 100) {
                             expect(value).toBe(currentVolume + 1);
                         }
-                        else{
+                        else {
                             expect(value).toBe(currentVolume);
                         }
                         done();
                     });
-                }, function(){
+                }, function() {
                     done.fail();
                 });
             });
@@ -377,40 +377,40 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvaudiocontrol.setVolumeDown(function(){}, []);
+                toast.tvaudiocontrol.setVolumeDown(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeDown(function(){}, new Date());
+                toast.tvaudiocontrol.setVolumeDown(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeDown(function(){}, 0);
+                toast.tvaudiocontrol.setVolumeDown(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeDown(function(){}, {});
+                toast.tvaudiocontrol.setVolumeDown(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeDown(function(){}, false);
+                toast.tvaudiocontrol.setVolumeDown(function() {}, false);
             }).toThrowError(TypeError);
         });
 
         it('is the volume decreased 1 level, as you expected?', function (done) {
             var currentVolume = null;
-            toast.tvaudiocontrol.getVolume(function(value){
+            toast.tvaudiocontrol.getVolume(function(value) {
                 currentVolume = value;
                 console.log('currentVolume before volume down: ' + currentVolume);
 
-                toast.tvaudiocontrol.setVolumeDown(function(){
-                    toast.tvaudiocontrol.getVolume(function(value){
+                toast.tvaudiocontrol.setVolumeDown(function() {
+                    toast.tvaudiocontrol.getVolume(function(value) {
                         console.log('currentVolume after volume down : ' + value);
-                        if(currentVolume > 0){
+                        if(currentVolume > 0) {
                             expect(value).toBe(currentVolume - 1);
                         }
-                        else{
+                        else {
                             expect(value).toBe(currentVolume);
                         }
                         done();
                     });
-                }, function(){
+                }, function() {
                     done.fail();
                 });
             });
@@ -419,12 +419,12 @@ describe('toast.tvaudiocontrol', function() {
     describe('toast.tvaudiocontrol.getVolume', function() {
         it('returns volume value as number', function (done) {
             var volume = '';
-            toast.tvaudiocontrol.getVolume(function(value){
+            toast.tvaudiocontrol.getVolume(function(value) {
                 volume = value;
                 expect(volume).toBeDefined();
                 expect(typeof volume).toBe('number');
                 done();
-            }, function(){
+            }, function() {
                 done.fail();
             });
         }, 3000);
@@ -453,19 +453,19 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvaudiocontrol.getVolume(function(){}, []);
+                toast.tvaudiocontrol.getVolume(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.getVolume(function(){}, new Date());
+                toast.tvaudiocontrol.getVolume(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.getVolume(function(){}, 0);
+                toast.tvaudiocontrol.getVolume(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.getVolume(function(){}, {});
+                toast.tvaudiocontrol.getVolume(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.getVolume(function(){}, false);
+                toast.tvaudiocontrol.getVolume(function() {}, false);
             }).toThrowError(TypeError);
         });
     });
@@ -495,36 +495,36 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, []);
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, new Date());
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, 0);
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, {});
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, false);
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, false);
             }).toThrowError(TypeError);
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, []);
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, new Date());
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, 0);
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, {});
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.setVolumeChangeListener(function(){}, function(){}, false);
+                toast.tvaudiocontrol.setVolumeChangeListener(function() {}, function() {}, false);
             }).toThrowError(TypeError);
         });
     });
@@ -554,19 +554,19 @@ describe('toast.tvaudiocontrol', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, []);
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, new Date());
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, 0);
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, {});
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.tvaudiocontrol.unsetVolumeChangeListener(function(){}, false);
+                toast.tvaudiocontrol.unsetVolumeChangeListener(function() {}, false);
             }).toThrowError(TypeError);
         });
     });

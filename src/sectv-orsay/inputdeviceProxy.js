@@ -49,34 +49,34 @@ module.exports = {
 
     getSupportedKeys: function (success, fail, args) {
         try {
-            setTimeout(function(){
+            setTimeout(function() {
                 success(supportedKeys);
             }, 0);
         }
         catch (e) {
             var error = new Error(e.message);
             error.name = e.name;
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(error);
             }, 0);
         }
     },
-    getKey: function(success, fail, args){
+    getKey: function(success, fail, args) {
         try {
             for(var i = 0; i < supportedKeys.length; i++) {
-                if(supportedKeys[i].name === args[0]){
+                if(supportedKeys[i].name === args[0]) {
                     break;
                 }
             }
             if(i != supportedKeys.length) {
-                setTimeout(function(){
+                setTimeout(function() {
                     success(supportedKeys[i]);
                 }, 0);
             }
             else {
                 var error = new RangeError('keyName is not in the supported keys set.');
                 error.name = 'RangeError';
-                setTimeout(function(){
+                setTimeout(function() {
                     fail(error);
                 }, 0);
             }
@@ -84,32 +84,32 @@ module.exports = {
         catch (e) {
             var error = new Error(e.message);
             error.name = e.name;
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(e);
             }, 0);
         }
     },
-    registerKey: function(success, fail, args){
+    registerKey: function(success, fail, args) {
         try {
             var error;
             var SEF = require('cordova/plugin/SEF');
             var AppCommonPlugin = SEF.get('AppCommon');
             for(var i = 0; i < supportedKeys.length; i++) {
-                if(supportedKeys[i].name === args[0]){
+                if(supportedKeys[i].name === args[0]) {
                     break;
                 }
             }
             if(i != supportedKeys.length) {
                 var result = AppCommonPlugin.Execute('RegisterKey',supportedKeys[i].code);
                 if(result > 0) {
-                    setTimeout(function(){
+                    setTimeout(function() {
                         success();
                     }, 0);
                 }
                 else {
                     error = new Error('registerKey error');
                     error.name = 'registerKey error';
-                    setTimeout(function(){
+                    setTimeout(function() {
                         fail(error);
                     }, 0);
                 }
@@ -117,7 +117,7 @@ module.exports = {
             else {
                 error = new RangeError('keyName is not in the supported keys set.');
                 error.name = 'RangeError';
-                setTimeout(function(){
+                setTimeout(function() {
                     fail(error);
                 }, 0);
             }
@@ -125,18 +125,18 @@ module.exports = {
         catch (e) {
             error = new Error(e.message);
             error.name = e.name;
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(error);
             }, 0);
         }
     },
-    unregisterKey: function(success, fail, args){
+    unregisterKey: function(success, fail, args) {
         try {
             var error;
             var SEF = require('cordova/plugin/SEF');
             var AppCommonPlugin = SEF.get('AppCommon');
             for(var i = 0; i < supportedKeys.length; i++) {
-                if(supportedKeys[i].name === args[0]){
+                if(supportedKeys[i].name === args[0]) {
                     break;
                 }
             }
@@ -148,7 +148,7 @@ module.exports = {
                 else {
                     error = new Error('UnregisterKey error');
                     error.name = 'UnregisterKey error';
-                    setTimeout(function(){
+                    setTimeout(function() {
                         fail(error);
                     }, 0);
                 }
@@ -156,7 +156,7 @@ module.exports = {
             else {
                 error = new RangeError('keyName is not in the supported keys set.');
                 error.name = 'RangeError';
-                setTimeout(function(){
+                setTimeout(function() {
                     fail(error);
                 }, 0);
             }
@@ -164,7 +164,7 @@ module.exports = {
         catch (e) {
             error = new Error(e.message);
             error.name = e.name;
-            setTimeout(function(){
+            setTimeout(function() {
                 fail(error);
             }, 0);
         }

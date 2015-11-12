@@ -92,7 +92,7 @@ describe('Video playback feature of toast.Media', function() {
                 switch(evt.type) {
                     case 'STATE':
                         expect(evt.data).toBeDefined();
-                        if(evt.data.oldState){
+                        if(evt.data.oldState) {
                             expect(MediaState).toContain(evt.data.oldState);
                             expect(evt.data.oldState === evt.data.state).toBeFalsy();
                         }
@@ -202,7 +202,7 @@ describe('Video playback feature of toast.Media', function() {
                 switch(evt.type) {
                     case 'STATE':
                         expect(evt.data).toBeDefined();
-                        if(evt.data.oldState){
+                        if(evt.data.oldState) {
                             expect(MediaState).toContain(evt.data.oldState);
                             expect(evt.data.oldState === evt.data.state).toBeFalsy();
                         }

@@ -17,7 +17,7 @@
 'use strict';
 
 module.exports = {
-    getEsn: function(success, fail, args){
+    getEsn: function(success, fail, args) {
         try {
             var result = webapis.drminfo.getEsn(args[0]);
 
@@ -29,7 +29,7 @@ module.exports = {
             fail(e);
         }
     },
-    getSdi: function(success, fail, args){
+    getSdi: function(success, fail, args) {
         try {
             var result = webapis.drminfo.getSdiId();
 

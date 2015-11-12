@@ -35,7 +35,7 @@ function getOptionString(options) {
 }
 
 MediaPluginHLS.prototype.onAttachToMedia = function (media) {
-    if(this.options){
+    if(this.options) {
         var me = this;
         media.registerHook('afteropen', function (media, args) {
             exec(null, null, 'toast.Media', 'setStreamingProperty', [

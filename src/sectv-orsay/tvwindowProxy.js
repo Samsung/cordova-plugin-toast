@@ -38,7 +38,7 @@ var videoSource = {
 var windowRect = ['', '', '', ''];
 
 module.exports = {
-    setSource: function (success, fail, args){
+    setSource: function (success, fail, args) {
         var videoSourceStr = args[0].type + args[0].number;
 
         var result = sef.Execute('SetSource', videoSourceList[videoSourceStr]);

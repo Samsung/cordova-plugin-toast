@@ -38,12 +38,12 @@ describe('toast.drminfo', function() {
     describe('toast.drminfo.getEsn', function() {
         it('returns Esn value as string', function (done) {
             var esn = null;
-            toast.drminfo.getEsn('WIDEVINE', function(value){
+            toast.drminfo.getEsn('WIDEVINE', function(value) {
                 esn = value;
                 expect(esn).toBeDefined();
                 expect(typeof esn).toBe('string');
                 done();
-            }, function(){
+            }, function() {
                 done.fail();
             });
         }, 3000);
@@ -92,31 +92,31 @@ describe('toast.drminfo', function() {
 
             // invalid type for 3rd argument
             expect(function() {
-                toast.drminfo.getEsn('WIDEVINE', function(){}, []);
+                toast.drminfo.getEsn('WIDEVINE', function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getEsn('WIDEVINE', function(){}, new Date());
+                toast.drminfo.getEsn('WIDEVINE', function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getEsn('WIDEVINE', function(){}, 0);
+                toast.drminfo.getEsn('WIDEVINE', function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getEsn('WIDEVINE', function(){}, {});
+                toast.drminfo.getEsn('WIDEVINE', function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getEsn('WIDEVINE', function(){}, false);
+                toast.drminfo.getEsn('WIDEVINE', function() {}, false);
             }).toThrowError(TypeError);
         });
     });
     describe('toast.drminfo.getSdi', function() {
         it('returns SDI(Samsung Device Identifier) as string', function (done) {
             var sdi = null;
-            toast.drminfo.getSdi(function(value){
+            toast.drminfo.getSdi(function(value) {
                 sdi = value;
                 expect(sdi).toBeDefined();
                 expect(typeof sdi).toBe('string');
                 done();
-            }, function(){
+            }, function() {
                 done.fail();
             });
         }, 3000);
@@ -145,19 +145,19 @@ describe('toast.drminfo', function() {
 
             // invalid type for 2nd argument
             expect(function() {
-                toast.drminfo.getSdi(function(){}, []);
+                toast.drminfo.getSdi(function() {}, []);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdi(function(){}, new Date());
+                toast.drminfo.getSdi(function() {}, new Date());
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdi(function(){}, 0);
+                toast.drminfo.getSdi(function() {}, 0);
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdi(function(){}, {});
+                toast.drminfo.getSdi(function() {}, {});
             }).toThrowError(TypeError);
             expect(function() {
-                toast.drminfo.getSdi(function(){}, false);
+                toast.drminfo.getSdi(function() {}, false);
             }).toThrowError(TypeError);
         });
     });

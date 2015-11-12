@@ -20,8 +20,8 @@ var isMute = false;
 var volume = 0;
 var volumeChangeCallback = null;
 
-function volumeTrigger(volume){
-    if(volumeChangeCallback){
+function volumeTrigger(volume) {
+    if(volumeChangeCallback) {
         volumeChangeCallback(volume);
     }
     isMute = false;
@@ -29,8 +29,8 @@ function volumeTrigger(volume){
 
 module.exports = {
     setMute: function (success, fail, args) {
-        try{
-            setTimeout(function(){
+        try {
+            setTimeout(function() {
                 isMute = args[0];
                 success();
             }, 0);
@@ -40,8 +40,8 @@ module.exports = {
         }
     },
     isMute: function (success, fail, args) {
-        try{
-            setTimeout(function(){
+        try {
+            setTimeout(function() {
                 var result = isMute;
                 success(result);
             }, 0);
@@ -51,8 +51,8 @@ module.exports = {
         }
     },
     setVolume: function (success, fail, args) {
-        try{
-            setTimeout(function(){
+        try {
+            setTimeout(function() {
                 volume = args[0];
                 volumeTrigger(volume);
                 success();
@@ -63,9 +63,9 @@ module.exports = {
         }
     },
     setVolumeUp: function (success, fail, args) {
-        try{
-            setTimeout(function(){
-                if(volume < 100){
+        try {
+            setTimeout(function() {
+                if(volume < 100) {
                     volume++;
                 }
                 volumeTrigger(volume);
@@ -77,9 +77,9 @@ module.exports = {
         }
     },
     setVolumeDown: function (success, fail, args) {
-        try{
-            setTimeout(function(){
-                if(volume > 0){
+        try {
+            setTimeout(function() {
+                if(volume > 0) {
                     volume--;
                 }
                 volumeTrigger(volume);
@@ -91,8 +91,8 @@ module.exports = {
         }
     },
     getVolume: function (success, fail, args) {
-        try{
-            setTimeout(function(){
+        try {
+            setTimeout(function() {
                 var result = volume;
                 success(result);
             }, 0);
@@ -102,8 +102,8 @@ module.exports = {
         }
     },
     setVolumeChangeListener: function (success, fail, args) {
-        try{
-            setTimeout(function(){
+        try {
+            setTimeout(function() {
                 volumeChangeCallback = args[0];
                 success();
             }, 0);
@@ -113,8 +113,8 @@ module.exports = {
         }
     },
     unsetVolumeChangeListener: function (success, fail, args) {
-        try{
-            setTimeout(function(){
+        try {
+            setTimeout(function() {
                 volumeChangeCallback = '';
                 success();
             }, 0);

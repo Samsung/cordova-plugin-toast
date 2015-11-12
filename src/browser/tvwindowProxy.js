@@ -47,7 +47,7 @@ function randomColor () {
 }
 
 module.exports = {
-    setSource: function (success, fail, args){
+    setSource: function (success, fail, args) {
         var element = getTVWindowElement();
 
         videoSource.type = args[0].type;

@@ -19,7 +19,7 @@
 var SEF = require('cordova/plugin/SEF');
 
 module.exports = {
-    getEsn: function(success, fail, args){
+    getEsn: function(success, fail, args) {
         var sef = SEF.get('ExternalWidgetInterface');
         var result = sef.Execute('GetESN', args[0]);
 
@@ -35,7 +35,7 @@ module.exports = {
             }, 0);
         }
     },
-    getSdi: function(success, fail, args){
+    getSdi: function(success, fail, args) {
         var sef = SEF.get('ExternalWidgetInterface');
         var result = sef.Execute('GetSDI_ID');
 

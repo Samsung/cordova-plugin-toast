@@ -26,7 +26,7 @@ var mediaObjects = {};
 
 var containerStylecallbackFnTimer = null;
 
-function createVideContainer(id){
+function createVideContainer(id) {
     function setContainerStyleEventListener(elem,callback) {
         var containerObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(e) {
@@ -57,11 +57,11 @@ function createVideContainer(id){
 }
 
 function containerStyleEventCallback(MutationRecordProperty) {
-    if(containerStylecallbackFnTimer){
+    if(containerStylecallbackFnTimer) {
         clearTimeout(containerStylecallbackFnTimer);
     }
-    containerStylecallbackFnTimer = setTimeout(function(){
-        if (MutationRecordProperty == 'style'){
+    containerStylecallbackFnTimer = setTimeout(function() {
+        if (MutationRecordProperty == 'style') {
             containerElem.childNodes[0].style.width = containerElem.style.width;
             containerElem.childNodes[0].style.height = containerElem.style.height;
         }
@@ -70,7 +70,7 @@ function containerStyleEventCallback(MutationRecordProperty) {
 
 function getMediaEventVaule (type,data) {
     var reval = {};
-    switch(type){
+    switch(type) {
     case Media.EVENT_STATE :
         reval = {
             'type' : type,
@@ -160,7 +160,7 @@ module.exports = {
         createVideContainer(id);
     },
 
-    open: function(successCallback, errorCallback, args){
+    open: function(successCallback, errorCallback, args) {
         var id = args[0],
             src = args[1];
 
@@ -206,7 +206,7 @@ module.exports = {
         mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
         mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
 
-        setTimeout(function(){
+        setTimeout(function() {
             successCallback(mediaObjects[id].currentTime);
         },0);
     },

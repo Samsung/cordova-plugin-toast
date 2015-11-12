@@ -31,7 +31,7 @@ MediaPluginPlayReady.prototype = new MediaPlugin();
 
 MediaPluginPlayReady.prototype.onAttachToMedia = function (media) {
     var me = this;
-    if(this.options.CustomData){
+    if(this.options.CustomData) {
         media.registerHook('afterplay', function (media, args) {
             exec(null, null, 'toast.Media', 'setDrm', [
                 'SetPlayerProperty',
@@ -42,7 +42,7 @@ MediaPluginPlayReady.prototype.onAttachToMedia = function (media) {
         });
     }
 
-    if(this.options.LicenseServer){
+    if(this.options.LicenseServer) {
         media.registerHook('afterplay', function (media, args) {
             exec(null, null, 'toast.Media', 'setDrm', [
                 'SetPlayerProperty',

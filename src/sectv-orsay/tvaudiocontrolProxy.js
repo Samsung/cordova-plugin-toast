@@ -26,15 +26,15 @@ var PL_AUDIO_VOLUME_KEY_DOWN = 1;
 var PLR_TRUE = 1;
 var PLR_FALSE = 0;
 
-function volumeTrigger(volume){
+function volumeTrigger(volume) {
     var sef = SEF.get('Audio');
 
-    if(!volume){
+    if(!volume) {
         volume = sef.Execute('GetVolume');
     }
 
-    if(volumeChangeCallback){
-        if((typeof volume == 'number') && (volume != -1)){
+    if(volumeChangeCallback) {
+        if((typeof volume == 'number') && (volume != -1)) {
             volumeChangeCallback(volume);
         }
     }
@@ -52,7 +52,7 @@ module.exports = {
                 success();
             }, 0);
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to setMute');
                 fail(e);
@@ -63,13 +63,13 @@ module.exports = {
         var sef = SEF.get('Audio');
         var result = sef.Execute('GetUserMute');
 
-        if (result != -1){
+        if (result != -1) {
             result = (result == PLR_TRUE) ? true : false;
             setTimeout(function () {
                 success(result);
             }, 0);
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to execute isMute');
                 fail(e);
@@ -80,23 +80,23 @@ module.exports = {
         var sef = SEF.get('Audio');
         var muteResult = sef.Execute('SetUserMute', PLR_FALSE);
 
-        if (muteResult != -1){
+        if (muteResult != -1) {
             var result = sef.Execute('SetVolume', args[0]);
 
-            if(result != -1){
+            if(result != -1) {
                 setTimeout(function () {
                     volumeTrigger(args[0]);
                     success();
                 }, 0);
             }
-            else{
+            else {
                 setTimeout(function () {
                     var e = new Error('failed to setVolume');
                     fail(e);
                 }, 0);
             }
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to setVolumeDown');
                 fail(e);
@@ -107,23 +107,23 @@ module.exports = {
         var sef = SEF.get('Audio');
         var muteResult = sef.Execute('SetUserMute', PLR_FALSE);
 
-        if (muteResult != -1){
+        if (muteResult != -1) {
             var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_UP);
 
-            if(result != -1){
+            if(result != -1) {
                 setTimeout(function () {
                     volumeTrigger();
                     success();
                 }, 0);
             }
-            else{
+            else {
                 setTimeout(function () {
                     var e = new Error('failed to setVolumeUp');
                     fail(e);
                 }, 0);
             }
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to setVolumeDown');
                 fail(e);
@@ -134,23 +134,23 @@ module.exports = {
         var sef = SEF.get('Audio');
         var muteResult = sef.Execute('SetUserMute', PLR_FALSE);
 
-        if (muteResult != -1){
+        if (muteResult != -1) {
             var result = sef.Execute('SetVolumeWithKey', PL_AUDIO_VOLUME_KEY_DOWN);
 
-            if(result != -1){
+            if(result != -1) {
                 setTimeout(function () {
                     volumeTrigger();
                     success();
                 }, 0);
             }
-            else{
+            else {
                 setTimeout(function () {
                     var e = new Error('failed to setVolumeDown');
                     fail(e);
                 }, 0);
             }
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to setVolumeDown');
                 fail(e);
@@ -161,12 +161,12 @@ module.exports = {
         var sef = SEF.get('Audio');
         var result = sef.Execute('GetVolume');
 
-        if (result != -1){
+        if (result != -1) {
             setTimeout(function () {
                 success(result);
             }, 0);
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to getVolume');
                 fail(e);
@@ -175,12 +175,12 @@ module.exports = {
     },
     setVolumeChangeListener: function (success, fail, args) {
         volumeChangeCallback = args[0];
-        if(volumeChangeCallback){
+        if(volumeChangeCallback) {
             setTimeout(function () {
                 success();
             }, 0);
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to setVolumeChangeListener');
                 fail(e);
@@ -190,12 +190,12 @@ module.exports = {
     unsetVolumeChangeListener: function (success, fail, args) {
         volumeChangeCallback = '';
 
-        if(!volumeChangeCallback){
+        if(!volumeChangeCallback) {
             setTimeout(function () {
                 success();
             }, 0);
         }
-        else{
+        else {
             setTimeout(function () {
                 var e = new Error('failed to unsetVolumeChangeListener');
                 fail(e);

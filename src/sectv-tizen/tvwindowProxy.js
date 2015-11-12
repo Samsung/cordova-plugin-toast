@@ -18,7 +18,7 @@
 var windowType = 'MAIN';
 
 module.exports = {
-    setSource: function (success, fail, args){
+    setSource: function (success, fail, args) {
         try {
             var match = -1;
 

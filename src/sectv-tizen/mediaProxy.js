@@ -28,7 +28,7 @@ var avplayState = {
 };
 var containerElem = null;
 
-function createVideoContainer(id){
+function createVideoContainer(id) {
     function setContainerStyleEventListener(elem,callback) {
         var containerObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(e) {
@@ -73,11 +73,11 @@ function createVideoContainer(id){
 
 var containerStylecallbackFnTimer = null;
 function containerStyleEventCallback(MutationRecordProperty) {
-    if(containerStylecallbackFnTimer){
+    if(containerStylecallbackFnTimer) {
         clearTimeout(containerStylecallbackFnTimer);
     }
-    containerStylecallbackFnTimer = setTimeout(function(){
-        if (MutationRecordProperty == 'style'){
+    containerStylecallbackFnTimer = setTimeout(function() {
+        if (MutationRecordProperty == 'style') {
             containerElem.childNodes[0].style.width = containerElem.style.width;
             containerElem.childNodes[0].style.height = containerElem.style.height;
             setAvplayVideoRect(containerElem);
@@ -86,24 +86,24 @@ function containerStyleEventCallback(MutationRecordProperty) {
 }
 
 var containerAppendcallbackFnTimer = null;
-function containerAppendEventCallback(MutationRecordProperty){
-    if(containerAppendcallbackFnTimer){
+function containerAppendEventCallback(MutationRecordProperty) {
+    if(containerAppendcallbackFnTimer) {
         clearTimeout(containerAppendcallbackFnTimer);
     }
 
-    containerAppendcallbackFnTimer = setTimeout(function(){
+    containerAppendcallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty.addedNodes.length > 0) {
             console.log('addedNodes.............');
-            if(hasContainerElem(MutationRecordProperty.addedNodes)){
+            if(hasContainerElem(MutationRecordProperty.addedNodes)) {
                 console.log('append containerElem.............');
                 setAvplayVideoRect(containerElem);
             }
         }
     },0);
 
-    function hasContainerElem(nodes){
-        for(var i = 0; i < nodes.length; i++){
-            if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])){
+    function hasContainerElem(nodes) {
+        for(var i = 0; i < nodes.length; i++) {
+            if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])) {
                 return true;
             }
         }
@@ -111,20 +111,20 @@ function containerAppendEventCallback(MutationRecordProperty){
     }
 }
 
-function setAvplayVideoRect(element){
+function setAvplayVideoRect(element) {
     var boundingRect = Util.getBoundingRect(element);
     console.log('boundingRect.left.............'+boundingRect.left);
     console.log('boundingRect.top.............'+boundingRect.top);
     console.log('boundingRect.width.............'+boundingRect.width);
     console.log('boundingRect.height.............'+boundingRect.height);
 
-    try{
+    try {
         var state = webapis.avplay.getState();
-        if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY){
+        if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY) {
             webapis.avplay.setDisplayRect(Math.ceil(Number(boundingRect.left)),Math.ceil(Number(boundingRect.top)),Math.ceil(Number(boundingRect.width)),Math.ceil(Number(boundingRect.height)));
         }
     }
-    catch (e){
+    catch (e) {
         console.log('[Warning]Fail to setDisplayRect' + e);
     }
 }
@@ -132,7 +132,7 @@ function setAvplayVideoRect(element){
 var currentMediaState = null;
 function getMediaEventVaule (type,data) {
     var reval = {};
-    switch(type){
+    switch(type) {
     case Media.EVENT_STATE :
         reval = {
             'type' : type,
@@ -209,7 +209,7 @@ module.exports = {
             bBlockTimeUpdate = false;
         }
 
-        if(window.webapis){
+        if(window.webapis) {
             webapis.avplay.open(src);
             webapis.avplay.setListener({
                 onbufferingstart: function() {
@@ -237,7 +237,7 @@ module.exports = {
                 },
                 oncurrentplaytime: function(currentTime) {
                     state = webapis.avplay.getState();
-                    if(!bBlockTimeUpdate && (state == avplayState.PLAYING || state == avplayState.PAUSED)){
+                    if(!bBlockTimeUpdate && (state == avplayState.PLAYING || state == avplayState.PAUSED)) {
                         console.log('Current playtime: ' + currentTime);
                         Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,currentTime));
                     }
@@ -266,7 +266,7 @@ module.exports = {
         var id = args[0];
 
         console.log('media::play() - id =' + id);
-        if(webapis.avplay.getState() == avplayState.IDLE){
+        if(webapis.avplay.getState() == avplayState.IDLE) {
             webapis.avplay.prepare();
             webapis.avplay.play();
             var duration = webapis.avplay.getDuration();
@@ -286,7 +286,7 @@ module.exports = {
         webapis.avplay.stop();
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
         bBlockTimeUpdate = false;
-        setTimeout(function(){
+        setTimeout(function() {
             successCallback();
         },0);
     },
@@ -297,9 +297,9 @@ module.exports = {
         var milliseconds = args[1];
 
         console.log('media::seekTo()');
-        webapis.avplay.seekTo(milliseconds,function(){
+        webapis.avplay.seekTo(milliseconds,function() {
             successCallback(webapis.avplay.getCurrentTime());
-        },function(e){
+        },function(e) {
             throw Error('Failed to seekTo');
         });
         bBlockTimeUpdate = true;

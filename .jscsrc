@@ -24,6 +24,7 @@
 	"requireLineBreakAfterVariableAssignment": true,
 	"requireLineFeedAtFileEnd": true,
 	"requireSemicolons": true,
+	"requireSpaceBeforeBlockStatements": 1,
 	"validateQuoteMarks": "'",
 	"validateIndentation": 4,
 	"requirePaddingNewLinesBeforeLineComments": {

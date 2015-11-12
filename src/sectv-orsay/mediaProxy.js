@@ -22,7 +22,7 @@ var Util = require('cordova-plugin-toast.util');
 
 var containerElem = null;
 
-function createVideoContainer(id){
+function createVideoContainer(id) {
     function setContainerStyleEventListener(elem,callback) {
         var containerObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(e) {
@@ -68,17 +68,17 @@ function createVideoContainer(id){
 
 var containerStylecallbackFnTimer = null;
 function containerStyleEventCallback(MutationRecordProperty) {
-    if(containerStylecallbackFnTimer){
+    if(containerStylecallbackFnTimer) {
         clearTimeout(containerStylecallbackFnTimer);
     }
 
-    if(containerAppendcallbackFnTimer){
+    if(containerAppendcallbackFnTimer) {
         clearTimeout(containerAppendcallbackFnTimer);
     }
 
-    containerStylecallbackFnTimer = setTimeout(function(){
-        if (MutationRecordProperty == 'style'){
-            if(containerElem.childNodes[0]){
+    containerStylecallbackFnTimer = setTimeout(function() {
+        if (MutationRecordProperty == 'style') {
+            if(containerElem.childNodes[0]) {
                 containerElem.childNodes[0].style.width = containerElem.style.width;
                 containerElem.childNodes[0].style.height = containerElem.style.height;
                 setAvplayVideoRect(containerElem);
@@ -88,20 +88,20 @@ function containerStyleEventCallback(MutationRecordProperty) {
 }
 
 var containerAppendcallbackFnTimer = null;
-function containerAppendEventCallback(MutationRecordProperty){
-    if(containerAppendcallbackFnTimer){
+function containerAppendEventCallback(MutationRecordProperty) {
+    if(containerAppendcallbackFnTimer) {
         clearTimeout(containerAppendcallbackFnTimer);
     }
 
-    if(containerStylecallbackFnTimer){
+    if(containerStylecallbackFnTimer) {
         clearTimeout(containerStylecallbackFnTimer);
     }
 
-    containerAppendcallbackFnTimer = setTimeout(function(){
+    containerAppendcallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty.addedNodes.length > 0) {
             console.log('addedNodes.............');
-            if(hasContainerElem(MutationRecordProperty.addedNodes)){
-                if(containerElem.childNodes[0]){
+            if(hasContainerElem(MutationRecordProperty.addedNodes)) {
+                if(containerElem.childNodes[0]) {
                     containerElem.childNodes[0].style.width = containerElem.style.width;
                     containerElem.childNodes[0].style.height = containerElem.style.height;
                     setAvplayVideoRect(containerElem);
@@ -110,9 +110,9 @@ function containerAppendEventCallback(MutationRecordProperty){
         }
     },0);
 
-    function hasContainerElem(nodes){
-        for(var i = 0; i < nodes.length; i++){
-            if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])){
+    function hasContainerElem(nodes) {
+        for(var i = 0; i < nodes.length; i++) {
+            if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])) {
                 return true;
             }
         }
@@ -120,7 +120,7 @@ function containerAppendEventCallback(MutationRecordProperty){
     }
 }
 
-function getFitDisplayRect(element,videoResolution){
+function getFitDisplayRect(element,videoResolution) {
     var boundingRect = Util.getBoundingRect(element);
     var FRAME_LEFT = boundingRect.left,
         FRAME_TOP = boundingRect.top,
@@ -137,7 +137,7 @@ function getFitDisplayRect(element,videoResolution){
     console.log('boundingRect.width.............'+boundingRect.width);
     console.log('boundingRect.height.............'+boundingRect.height);
 
-    if(videoResolution.width && videoResolution.width > 0 && videoResolution.height && videoResolution.height > 0){
+    if(videoResolution.width && videoResolution.width > 0 && videoResolution.height && videoResolution.height > 0) {
         if (videoResolution.width / videoResolution.height > FRAME_WIDTH / FRAME_HEIGHT) {
             nHeight = fnRound((FRAME_WIDTH * videoResolution.height) / videoResolution.width);
             nWidth = FRAME_WIDTH;
@@ -186,23 +186,23 @@ function getVideoResolution() {
     };
 }
 
-function setAvplayVideoRect(element){
+function setAvplayVideoRect(element) {
     var videoResolution = getVideoResolution();
     var FitRect = getFitDisplayRect(element,videoResolution);
 
-    try{
-        if(mediaObjects[currentMediaInfo.id]){
+    try {
+        if(mediaObjects[currentMediaInfo.id]) {
             mediaObjects[currentMediaInfo.id].Execute('SetDisplayArea',Number(FitRect.left),Number(FitRect.top),Number(FitRect.width),Number(FitRect.height),curWidget.height);
         }
     }
-    catch (e){
+    catch (e) {
         console.log('[Warning]Fail to setDisplayRect' + e);
     }
 }
 
 function getMediaEventVaule (type,data) {
     var reval = {};
-    switch(type){
+    switch(type) {
     case Media.EVENT_STATE :
         reval = {
             'type' : type,
@@ -274,9 +274,9 @@ var mediaObjects = {
     SUBTITLE: 19
 };
 
-function mediaEventListener(type,data1,data2){
+function mediaEventListener(type,data1,data2) {
     console.log('mediaEventListener : ('+type+','+data1+','+data2+')');
-    switch(type){
+    switch(type) {
     case mediaObjects.LOADED_METADATA :
         var duration = mediaObjects[currentMediaInfo.id].Execute('GetDuration');
         currentMediaInfo.duration = duration;
@@ -293,10 +293,10 @@ function mediaEventListener(type,data1,data2){
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,Number(data1)));
         break;
     case mediaObjects.BUFFERING_COMPLETE :
-        if(currentMediaInfo.oldState == Media.STATE_PLAYING){
+        if(currentMediaInfo.oldState == Media.STATE_PLAYING) {
             Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_PLAYING));
         }
-        else if(currentMediaInfo.oldState == Media.STATE_PAUSED){
+        else if(currentMediaInfo.oldState == Media.STATE_PAUSED) {
             Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_PAUSED));
         }
         currentMediaInfo.oldState = currentMediaInfo.state;
@@ -351,9 +351,9 @@ function mediaEventListener(type,data1,data2){
 var currentMediaInfo = {};
 
 var MediaSource = 43;
-function createSEF(id){
+function createSEF(id) {
     var SEFWindow = SEF.get('Window');
-    if(SEFWindow.Execute('GetSource') != MediaSource){
+    if(SEFWindow.Execute('GetSource') != MediaSource) {
         SEFWindow.Execute('SetSource',MediaSource);
     }
     mediaObjects[id] = SEF.get('Player');
@@ -371,17 +371,17 @@ module.exports = {
         createVideoContainer(id);
     },
 
-    open:function(successCallback, errorCallback, args){
+    open:function(successCallback, errorCallback, args) {
         var id = args[0],
             src = args[1];
 
-        if(currentMediaInfo.state && currentMediaInfo.state !== Media.STATE_IDLE){
+        if(currentMediaInfo.state && currentMediaInfo.state !== Media.STATE_IDLE) {
             mediaObjects[id].Execute('Stop');
         }
 
         console.log('media::open() - id =' + id + ' src = '+src);
 
-        if(mediaObjects[id]){
+        if(mediaObjects[id]) {
             currentMediaInfo.id = id;
             currentMediaInfo.src = src;
             currentMediaInfo.position = 0;
@@ -401,14 +401,14 @@ module.exports = {
         var id = args[0];
         var reval = 0;
         console.log('media::play() - id =' + id);
-        if(currentMediaInfo.state == Media.STATE_IDLE){
+        if(currentMediaInfo.state == Media.STATE_IDLE) {
             reval = mediaObjects[id].Execute('InitPlayer',currentMediaInfo.src);
             reval += mediaObjects[id].Execute('StartPlayback',currentMediaInfo.position);
         }
         else {
             reval = mediaObjects[id].Execute('Resume');
         }
-        if(reval > 0){
+        if(reval > 0) {
             console.log('Success to Media play');
         }
         else {
@@ -425,7 +425,7 @@ module.exports = {
         currentMediaInfo.position = 0;
         reval = mediaObjects[id].Execute('Stop');
 
-        if(reval > 0){
+        if(reval > 0) {
             currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
         }
@@ -445,7 +445,7 @@ module.exports = {
         if(currentMediaInfo.state == Media.STATE_IDLE) {
             currentMediaInfo.position = milliseconds;
         }
-        else if(currentMediaInfo.state == Media.STATE_PLAYING || currentMediaInfo.state == Media.STATE_PAUSED){
+        else if(currentMediaInfo.state == Media.STATE_PLAYING || currentMediaInfo.state == Media.STATE_PAUSED) {
             if(milliseconds > (currentMediaInfo.duration-2000)) {
                 throw new Error('The seekTo time is too close duration');
             }
@@ -460,7 +460,7 @@ module.exports = {
                     reval = mediaObjects[id].Execute('JumpBackward',offset);
                 }
 
-                if(reval > 0){
+                if(reval > 0) {
                     console.log('Sucess to Media SeekTo ' + milliseconds);
                 }
                 else {
@@ -477,7 +477,7 @@ module.exports = {
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
         reval = mediaObjects[id].Execute('Pause');
 
-        if(reval > 0){
+        if(reval > 0) {
             currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
         }
@@ -494,7 +494,7 @@ module.exports = {
 
         reval = mediaObjects[id].Execute.apply(mediaObjects[id],args);
 
-        if(reval > 0){
+        if(reval > 0) {
             console.log('Success to Media setStreamingProperty');
         }
         else {
@@ -510,7 +510,7 @@ module.exports = {
 
         reval = mediaObjects[id].Execute.apply(mediaObjects[id],args);
 
-        if(reval > 0){
+        if(reval > 0) {
             console.log('Success to Media setDrm');
         }
         else {
