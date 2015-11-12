@@ -175,10 +175,10 @@ describe('Video playback feature of toast.Media', function() {
                         expect(typeof evt.data.bufferingPercentage).toBe('number');
                         break;
                 }
-             },
-             onerror: function (err) {
-                 fail('onerror occured: ' + err);
-             }
+            },
+            onerror: function (err) {
+                fail('onerror occured: ' + err);
+            }
         });
 
         waitForPlay = true;
@@ -284,10 +284,10 @@ describe('Video playback feature of toast.Media', function() {
                         expect(typeof evt.data.bufferingPercentage).toBe('number');
                         break;
                 }
-             },
-             onerror: function (err) {
-                 fail('onerror occured: ' + err);
-             }
+            },
+            onerror: function (err) {
+                fail('onerror occured: ' + err);
+            }
         });
 
         waitForPlay = true;

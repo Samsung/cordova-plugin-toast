@@ -917,7 +917,7 @@ describe('toast.tvchannel', function() {
 
             function testHide(callback) {
                 toast.tvwindow.hide(function() {
-                        callback();
+                    callback();
                 });
             }
         }, 60000);

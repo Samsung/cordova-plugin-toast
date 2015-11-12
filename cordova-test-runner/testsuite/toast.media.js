@@ -46,27 +46,27 @@
         try {
             mediaIns.setListener({
                 onevent: function (evt) {
-                     switch(evt.type) {
-                         case 'STATE':
-                             report('Success: Media State changed: ' + evt.data.oldState + ' -> ' + evt.data.state);
-                             break;
-                         case 'DURATION':
-                             report('Success: Media duration updated: ' + evt.data.duration + 'ms');
-                             break;
-                         case 'POSITION':
-                             report('Success: Media position updated: ' + evt.data.position + 'ms');
-                             break;
-                         case 'BUFFERINGPROGRESS' :
-                             report('Success: Media buffering in progress: ' + evt.data.bufferingPercentage + '%');
-                             if(evt.data.bufferingPercentage >= 100) {
-                                 report('Success: Buffering completed');
-                             }
-                             break;
-                     }
-                 },
-                 onerror: function (err) {
-                     report('Error : MediaError occured: ' + JSON.stringify(err));
-                 }
+                    switch(evt.type) {
+                        case 'STATE':
+                            report('Success: Media State changed: ' + evt.data.oldState + ' -> ' + evt.data.state);
+                            break;
+                        case 'DURATION':
+                            report('Success: Media duration updated: ' + evt.data.duration + 'ms');
+                            break;
+                        case 'POSITION':
+                            report('Success: Media position updated: ' + evt.data.position + 'ms');
+                            break;
+                        case 'BUFFERINGPROGRESS' :
+                            report('Success: Media buffering in progress: ' + evt.data.bufferingPercentage + '%');
+                            if(evt.data.bufferingPercentage >= 100) {
+                                report('Success: Buffering completed');
+                            }
+                            break;
+                    }
+                },
+                onerror: function (err) {
+                    report('Error : MediaError occured: ' + JSON.stringify(err));
+                }
             });
         }
         catch(err){
