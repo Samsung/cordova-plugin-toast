@@ -96,7 +96,7 @@ Media.mediaEvent = function(id, value) {
         }
     }
     else {
-         console.log('Received Media.onStatus callback for unknown media:: ' + id);
+        console.log('Received Media.onStatus callback for unknown media:: ' + id);
     }
 };
 
@@ -170,7 +170,7 @@ Media.prototype.setListener = function(listener) {
 };
 
 Media.prototype.unsetListener = function() {
-     mediaObjects[this.id]._mediaEventCallBack = {};
+    mediaObjects[this.id]._mediaEventCallBack = {};
 };
 
 Media.prototype.resetHook = function () {

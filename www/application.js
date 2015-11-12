@@ -3,7 +3,7 @@
 var exec = require('cordova/exec');
 
 module.exports = {
-	exit: function () {
-		exec(null, null, 'toast.application', 'exit', null);
-	}
+    exit: function () {
+        exec(null, null, 'toast.application', 'exit', null);
+    }
 };

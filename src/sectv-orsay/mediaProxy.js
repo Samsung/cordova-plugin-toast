@@ -143,8 +143,8 @@ function getFitDisplayRect(element,videoResolution){
             nWidth = FRAME_WIDTH;
         }
         else {
-             nWidth = fnRound((FRAME_HEIGHT * videoResolution.width) / videoResolution.height);
-             nHeight = FRAME_HEIGHT;
+            nWidth = fnRound((FRAME_HEIGHT * videoResolution.width) / videoResolution.height);
+            nHeight = FRAME_HEIGHT;
         }
 
         nLeft = FRAME_LEFT + fnRound((FRAME_WIDTH - nWidth) / 2);
@@ -230,7 +230,7 @@ function getMediaEventVaule (type,data) {
         };
         break;
     case Media.EVENT_BUFFERINGPROGRESS :
-         reval = {
+        reval = {
             'type' : type,
             'data' : {
                 'bufferingPercentage' : data

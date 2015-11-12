@@ -35,11 +35,11 @@ function MediaPluginUHD () {
 MediaPluginUHD.prototype = new MediaPlugin();
 
 MediaPluginUHD.prototype.onAttachToMedia = function (media) {
-	media.registerHook('afterplay', function (media, args) {
-		exec(null, null, 'toast.Media', 'setStreamingProperty', [
-			'SetUHDResolution',true
-		]);
-	});
+    media.registerHook('afterplay', function (media, args) {
+        exec(null, null, 'toast.Media', 'setStreamingProperty', [
+            'SetUHDResolution',true
+        ]);
+    });
 };
 
 module.exports = MediaPluginUHD;

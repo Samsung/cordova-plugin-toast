@@ -160,7 +160,7 @@ function getMediaEventVaule (type,data) {
         };
         break;
     case Media.EVENT_BUFFERINGPROGRESS :
-         reval = {
+        reval = {
             'type' : type,
             'data' : {
                 'bufferingPercentage' : data

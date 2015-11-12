@@ -32,12 +32,12 @@ function MediaPluginUHD () {
 MediaPluginUHD.prototype = new MediaPlugin();
 
 MediaPluginUHD.prototype.onAttachToMedia = function (media) {
-	media.registerHook('afteropen', function (media, args) {
-		exec(null, null, 'toast.Media', 'setStreamingProperty', [
-			'SET_MODE_4K',
-			'TRUE'
-		]);
-	});
+    media.registerHook('afteropen', function (media, args) {
+        exec(null, null, 'toast.Media', 'setStreamingProperty', [
+            'SET_MODE_4K',
+            'TRUE'
+        ]);
+    });
 };
 
 module.exports = MediaPluginUHD;

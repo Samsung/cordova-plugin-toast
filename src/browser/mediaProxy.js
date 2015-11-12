@@ -98,7 +98,7 @@ function getMediaEventVaule (type,data) {
         };
         break;
     case Media.EVENT_BUFFERINGPROGRESS :
-         reval = {
+        reval = {
             'type' : type,
             'data' : {
                 'bufferingPercentage' : data
@@ -124,7 +124,7 @@ function getMediaEventVaule (type,data) {
 }
 
 module.exports = {
-    create:function(successCallback, errorCallback, args) {
+    create: function(successCallback, errorCallback, args) {
         var id = args[0];
 
         console.log('media::create() - id =' + id);
@@ -160,7 +160,7 @@ module.exports = {
         createVideContainer(id);
     },
 
-    open:function(successCallback, errorCallback, args){
+    open: function(successCallback, errorCallback, args){
         var id = args[0],
             src = args[1];
 
@@ -180,14 +180,14 @@ module.exports = {
     },
 
     // play
-    play:function(successCallback, errorCallback, args) {
+    play: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::play() - id =' + id);
         mediaObjects[id].play();
     },
 
     // Stops the playing media
-    stop:function(successCallback, errorCallback, args) {
+    stop: function(successCallback, errorCallback, args) {
         var id = args[0];
 
         mediaObjects[id].pause();
@@ -212,16 +212,16 @@ module.exports = {
     },
 
     // Seeks to the position in the media
-    seekTo:function(successCallback, errorCallback, args) {
+    seekTo: function(successCallback, errorCallback, args) {
         var id = args[0],
             milliseconds = args[1];
-            console.log('media::seekTo() : ' + milliseconds);
+        console.log('media::seekTo() : ' + milliseconds);
 
-            mediaObjects[id].currentTime = milliseconds / 1000;
+        mediaObjects[id].currentTime = milliseconds / 1000;
     },
 
     // Pauses the playing media
-    pause:function(successCallback, errorCallback, args) {
+    pause: function(successCallback, errorCallback, args) {
         var id = args[0];
 
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
