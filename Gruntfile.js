@@ -25,19 +25,13 @@ module.exports = function(grunt) {
     jscs: {
       src: {
         options: {
-            config: '.jscsrc',
+            config: '.jscsrc'
         },
         src: ['www/**/*.js', 'src/**/*.js']
       },
-      build: {
-        options: {
-            config: '.jscsrc',
-        },
-        src: ['platform_www/**/*.js']
-      },
       testrunner: {
         options: {
-            config: '.jscsrc',
+            config: '.jscsrc'
         },
         src: ['cordova-test-runner/**/*.js']
       }
@@ -68,5 +62,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint:src', 'compile', 'jshint:build', 'jshint:testrunner', 'jscs']);
+  grunt.registerTask('default', ['jshint:src', 'jscs:src', 'jshint:testrunner', 'jscs:testrunner', 'compile', 'jshint:build']);
+  grunt.registerTask('precommit', ['jshint:src', 'jscs:src', 'jshint:testrunner', 'jscs:testrunner', 'compile', 'jshint:build']);
 };
