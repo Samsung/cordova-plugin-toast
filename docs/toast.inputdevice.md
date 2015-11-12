@@ -77,7 +77,8 @@ Supported Keys are different by each platforms.
 * We recommend to use below d-pad keys for better user experience for TV device:
 	`UpArrow`, `DownArrow`, `LeftArrow`, `RightArrow`, `Enter` and `Return`
 * keyCode of each keys could be different by platforms. So, we recommend to generate `tvKeyCode` collection like below:
-```javascript
+
+```js
 var tvKeyCode = {};
 device.addEventListener('deviceready', function () {
 	toast.inputdevice.getSupportedKeys(function (keys) {
@@ -114,7 +115,8 @@ This function retrieves supported keys list of the running platform.
 		* if unknown error occured.
 * Examples
 	1. Getting supported keys and register RED button if it is supported.
-		```javascript
+
+		```js
 		var i, keyCode = {};
 		toast.inputdevice.getSupportedKeys(function (supportedKeys) {
 			for (i = 0; i < supportedKeys.length; i++) {
@@ -148,7 +150,8 @@ This function retrieves information of the given keyName.
 		* if unknown error occured.
 * Examples
 	1. Getting key code of RED button.
-		```javascript
+
+		```js
 		toast.inputdevice.getKey("ColorF0Red", function (key) {
 			console.log("RED button code: " + key.code);
 		}, function(err){
@@ -173,7 +176,8 @@ This function registers given key. After this operation, pressing the key on rem
 		* if unknown error occured.
 * Examples
 	1. Register the RED button.
-		```javascript
+		
+		```js
 		toast.inputdevice.registerKey("ColorF0Red", function () {
 			console.log("Success");
 		},function(err){
@@ -198,7 +202,8 @@ This function unregisters given key. The key can not be handled with key event a
 		* if unknown error occured.
 * Examples
 	1. UnRegister the RED button.
-		```javascript
+		
+		```js
 		toast.inputdevice.unregisterKey("ColorF0Red", function () {
 			console.log("Success");
 		},function(err){
