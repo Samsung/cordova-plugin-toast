@@ -25,6 +25,7 @@
 	"requireLineFeedAtFileEnd": true,
 	"requireSemicolons": true,
 	"validateQuoteMarks": "'",
+	"validateIndentation": 4,
 	"requirePaddingNewLinesBeforeLineComments": {
 		"allExcept": "firstAfterCurly"
 	},
