@@ -107,7 +107,7 @@ This function shows TV hole window on display screen.
             - First Element: The x coordinate of TV hole window on display screen.
             - Second Element: The y coordinate of TV hole window on display screen.
             - Third Element: The width of TV hole window.
-            - Fourth Element: The width of TV hole window.
+            - Fourth Element: The height of TV hole window.
         - successCallback: The method to call when TV window hole is shown successfully.
         - errorCallback: The method to invoke when an error occurs.
     * Return value
