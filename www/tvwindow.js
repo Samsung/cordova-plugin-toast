@@ -64,16 +64,19 @@ var tvwindowExport = {
     },
     show: function (rectangle, successCallback, errorCallback) {
         argscheck.checkArgs('afF', 'tvwindow.show', arguments);
-        if(!rectangle[0] || typeof rectangle[0] != 'number' || rectangle[0] < 0) {
+        if(rectangle.length != 4) {
+            throw new TypeError('rectangle.length is wrong.');
+        }
+        if(typeof rectangle[0] != 'number' || rectangle[0] < 0) {
             throw new TypeError('rectangle[0] is not a positive number.');
         }
-        if(!rectangle[1] || typeof rectangle[1] != 'number' || rectangle[1] < 0) {
+        if(typeof rectangle[1] != 'number' || rectangle[1] < 0) {
             throw new TypeError('rectangle[1] is not a positive number.');
         }
-        if(!rectangle[2] || typeof rectangle[2] != 'number' || rectangle[2] < 0) {
+        if(typeof rectangle[2] != 'number' || rectangle[2] < 0) {
             throw new TypeError('rectangle[2] is not a positive number.');
         }
-        if(!rectangle[3] || typeof rectangle[3] != 'number' || rectangle[3] < 0) {
+        if(typeof rectangle[3] != 'number' || rectangle[3] < 0) {
             throw new TypeError('rectangle[3] is not a positive number.');
         }
 
