@@ -19,6 +19,7 @@
 var Media = require('cordova-plugin-toast.Media');
 var SEF = require('cordova/plugin/SEF');
 var Util = require('cordova-plugin-toast.util');
+var Urlutil = require('cordova/urlutil');
 
 var containerElem = null;
 
@@ -373,7 +374,12 @@ module.exports = {
 
     open:function(successCallback, errorCallback, args) {
         var id = args[0],
-            src = args[1];
+            src = args[1],
+            absoluteUrl = Urlutil.makeAbsolute(args[1]);
+
+        if(!Util.isRemoteUrl(absoluteUrl)) {
+            src = absoluteUrl.replace(/^file:\/\//,'');
+        }
 
         if(currentMediaInfo.state && currentMediaInfo.state !== Media.STATE_IDLE) {
             mediaObjects[id].Execute('Stop');
