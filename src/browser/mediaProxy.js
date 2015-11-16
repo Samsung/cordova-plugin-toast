@@ -35,7 +35,7 @@ function createVideContainer(id) {
         });
 
         containerObserver.observe(elem, {
-            childList : false,
+            childList: false,
             subtree: false,
             attributes: true
         });
@@ -73,50 +73,50 @@ function getMediaEventVaule (type,data) {
     switch(type) {
     case Media.EVENT_STATE :
         reval = {
-            'type' : type,
-            'data' : {
-                'state' : data,
-                'oldState' : currentMediaState
+            'type': type,
+            'data': {
+                'state': data,
+                'oldState': currentMediaState
             }
         };
         currentMediaState = data;
         break;
     case Media.EVENT_DURATION :
         reval = {
-            'type' : type,
-            'data' : {
-                'duration' : data
+            'type': type,
+            'data': {
+                'duration': data
             }
         };
         break;
     case Media.EVENT_POSITION :
         reval = {
-            'type' : type,
-            'data' : {
-                'position' : data
+            'type': type,
+            'data': {
+                'position': data
             }
         };
         break;
     case Media.EVENT_BUFFERINGPROGRESS :
         reval = {
-            'type' : type,
-            'data' : {
-                'bufferingPercentage' : data
+            'type': type,
+            'data': {
+                'bufferingPercentage': data
             }
         };
         break;
     case Media._MEDIA_CONTAINER :
         reval = {
-            'type' : type,
-            'data' : {
-                'containerElem' : data
+            'type': type,
+            'data': {
+                'containerElem': data
             }
         };
         break;
     case Media._MEDIA_ERROR :
         reval = {
-            'type' : type,
-            'data' : data
+            'type': type,
+            'data': data
         };
         break;
     }
@@ -215,7 +215,7 @@ module.exports = {
     seekTo: function(successCallback, errorCallback, args) {
         var id = args[0],
             milliseconds = args[1];
-        console.log('media::seekTo() : ' + milliseconds);
+        console.log('media::seekTo(): ' + milliseconds);
 
         mediaObjects[id].currentTime = milliseconds / 1000;
     },

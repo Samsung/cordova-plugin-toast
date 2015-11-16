@@ -32,7 +32,7 @@ function createVideoContainer(id) {
         });
 
         containerObserver.observe(elem, {
-            childList : false,
+            childList: false,
             subtree: false,
             attributes: true
         });
@@ -46,8 +46,8 @@ function createVideoContainer(id) {
             });
         });
         bodyObserver.observe(document.body, {
-            childList : true,
-            subtree : true,
+            childList: true,
+            subtree: true,
             attributes: false
         });
     }
@@ -164,10 +164,10 @@ function getFitDisplayRect(element,videoResolution) {
     console.log('fitDisplayRect.height.............'+nHeight);
 
     return {
-        'left' : nLeft,
-        'top' : nTop,
-        'width' : nWidth,
-        'height' : nHeight
+        'left': nLeft,
+        'top': nTop,
+        'width': nWidth,
+        'height': nHeight
     };
 }
 
@@ -182,8 +182,8 @@ function getVideoResolution() {
         videoHeight = reval[1];
     }
     return {
-        'width' : Number(videoWidth),
-        'height' : Number(videoHeight)
+        'width': Number(videoWidth),
+        'height': Number(videoHeight)
     };
 }
 
@@ -206,50 +206,50 @@ function getMediaEventVaule (type,data) {
     switch(type) {
     case Media.EVENT_STATE :
         reval = {
-            'type' : type,
-            'data' : {
-                'state' : data,
-                'oldState' : currentMediaInfo.state
+            'type': type,
+            'data': {
+                'state': data,
+                'oldState': currentMediaInfo.state
             }
         };
         currentMediaInfo.state = data;
         break;
     case Media.EVENT_DURATION :
         reval = {
-            'type' : type,
-            'data' : {
-                'duration' : data
+            'type': type,
+            'data': {
+                'duration': data
             }
         };
         break;
     case Media.EVENT_POSITION :
         reval = {
-            'type' : type,
-            'data' : {
-                'position' : data
+            'type': type,
+            'data': {
+                'position': data
             }
         };
         break;
     case Media.EVENT_BUFFERINGPROGRESS :
         reval = {
-            'type' : type,
-            'data' : {
-                'bufferingPercentage' : data
+            'type': type,
+            'data': {
+                'bufferingPercentage': data
             }
         };
         break;
     case Media._MEDIA_CONTAINER :
         reval = {
-            'type' : type,
-            'data' : {
-                'containerElem' : data
+            'type': type,
+            'data': {
+                'containerElem': data
             }
         };
         break;
     case Media._MEDIA_ERROR :
         reval = {
-            'type' : type,
-            'data' : data
+            'type': type,
+            'data': data
         };
         break;
     }
@@ -276,7 +276,7 @@ var mediaObjects = {
 };
 
 function mediaEventListener(type,data1,data2) {
-    console.log('mediaEventListener : ('+type+','+data1+','+data2+')');
+    console.log('mediaEventListener: ('+type+','+data1+','+data2+')');
     switch(type) {
     case mediaObjects.LOADED_METADATA :
         var duration = mediaObjects[currentMediaInfo.id].Execute('GetDuration');
@@ -290,7 +290,7 @@ function mediaEventListener(type,data1,data2) {
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
         break;
     case mediaObjects.BUFFERING_PROGRESS :
-        console.log('Buffering progress data : ' + data1);
+        console.log('Buffering progress data: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,Number(data1)));
         break;
     case mediaObjects.BUFFERING_COMPLETE :
@@ -323,27 +323,27 @@ function mediaEventListener(type,data1,data2) {
 
         break;
     case mediaObjects.CONNECTION_FAILED :
-        console.log('Event type error : ' + data1);
+        console.log('Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.AUTHENTICATION_FAILED :
-        console.log('Event type error : ' + data1);
+        console.log('Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.STREAM_NOT_FOUND :
-        console.log('Event type error : ' + data1);
+        console.log('Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.NETWORK_DISCONNECTED :
-        console.log('Event type error : ' + data1);
+        console.log('Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.NETWORK_SLOW :
-        console.log('Event type error : ' + data1);
+        console.log('Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.RENDER_ERROR :
-        console.log('Event type error : ' + data1);
+        console.log('Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     }
@@ -364,7 +364,7 @@ function createSEF(id) {
 }
 
 module.exports = {
-    create:function(successCallback, errorCallback, args) {
+    create: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::create() - id =' + id);
         createSEF(id);
@@ -372,7 +372,7 @@ module.exports = {
         createVideoContainer(id);
     },
 
-    open:function(successCallback, errorCallback, args) {
+    open: function(successCallback, errorCallback, args) {
         var id = args[0],
             src = args[1],
             absoluteUrl = Urlutil.makeAbsolute(args[1]);
@@ -403,7 +403,7 @@ module.exports = {
     },
 
     // play
-    play:function(successCallback, errorCallback, args) {
+    play: function(successCallback, errorCallback, args) {
         var id = args[0];
         var reval = 0;
         console.log('media::play() - id =' + id);
@@ -423,7 +423,7 @@ module.exports = {
     },
 
     // Stops the playing media
-    stop:function(successCallback, errorCallback, args) {
+    stop: function(successCallback, errorCallback, args) {
         var id = args[0];
         var reval = 0;
         console.log('media::stop() - MEDIA_STATE -> IDLE');
@@ -441,7 +441,7 @@ module.exports = {
     },
 
     // Seeks to the position in the media
-    seekTo:function(successCallback, errorCallback, args) {
+    seekTo: function(successCallback, errorCallback, args) {
         var id = args[0],
             milliseconds = args[1],
             reval = 0,
@@ -477,7 +477,7 @@ module.exports = {
     },
 
     // Pauses the playing media
-    pause:function(successCallback, errorCallback, args) {
+    pause: function(successCallback, errorCallback, args) {
         var id = args[0];
         var reval = 0;
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
@@ -492,7 +492,7 @@ module.exports = {
         }
     },
 
-    setStreamingProperty:function(successCallback, errorCallback, args) {
+    setStreamingProperty: function(successCallback, errorCallback, args) {
         var id = currentMediaInfo.id,
             reval = 0;
 
@@ -508,7 +508,7 @@ module.exports = {
         }
     },
 
-    setDrm:function(successCallback, errorCallback, args) {
+    setDrm: function(successCallback, errorCallback, args) {
         var id = currentMediaInfo.id,
             reval = 0;
 

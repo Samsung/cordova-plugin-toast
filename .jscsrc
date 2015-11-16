@@ -25,6 +25,8 @@
 	"requireLineFeedAtFileEnd": true,
 	"requireSemicolons": true,
 	"requireSpaceBeforeBlockStatements": 1,
+	"requireSpaceBeforeObjectValues": true,
+	"disallowSpaceAfterObjectKeys": true,
 	"validateQuoteMarks": "'",
 	"validateIndentation": 4,
 	"requirePaddingNewLinesBeforeLineComments": {

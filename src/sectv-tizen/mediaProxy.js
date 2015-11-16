@@ -21,11 +21,11 @@ var Util = require('cordova-plugin-toast.util');
 var Urlutil = require('cordova/urlutil');
 
 var avplayState = {
-    NONE : 'NONE',
-    IDLE : 'IDLE',
-    READY : 'READY',
-    PLAYING : 'PLAYING',
-    PAUSED : 'PAUSED'
+    NONE: 'NONE',
+    IDLE: 'IDLE',
+    READY: 'READY',
+    PLAYING: 'PLAYING',
+    PAUSED: 'PAUSED'
 };
 var containerElem = null;
 
@@ -37,7 +37,7 @@ function createVideoContainer(id) {
             });
         });
         containerObserver.observe(elem, {
-            childList : false,
+            childList: false,
             subtree: false,
             attributes: true
         });
@@ -50,8 +50,8 @@ function createVideoContainer(id) {
             });
         });
         bodyObserver.observe(document.body, {
-            childList : true,
-            subtree : true,
+            childList: true,
+            subtree: true,
             attributes: false
         });
     }
@@ -136,50 +136,50 @@ function getMediaEventVaule (type,data) {
     switch(type) {
     case Media.EVENT_STATE :
         reval = {
-            'type' : type,
-            'data' : {
-                'state' : data,
-                'oldState' : currentMediaState
+            'type': type,
+            'data': {
+                'state': data,
+                'oldState': currentMediaState
             }
         };
         currentMediaState = data;
         break;
     case Media.EVENT_DURATION :
         reval = {
-            'type' : type,
-            'data' : {
-                'duration' : data
+            'type': type,
+            'data': {
+                'duration': data
             }
         };
         break;
     case Media.EVENT_POSITION :
         reval = {
-            'type' : type,
-            'data' : {
-                'position' : data
+            'type': type,
+            'data': {
+                'position': data
             }
         };
         break;
     case Media.EVENT_BUFFERINGPROGRESS :
         reval = {
-            'type' : type,
-            'data' : {
-                'bufferingPercentage' : data
+            'type': type,
+            'data': {
+                'bufferingPercentage': data
             }
         };
         break;
     case Media._MEDIA_CONTAINER :
         reval = {
-            'type' : type,
-            'data' : {
-                'containerElem' : data
+            'type': type,
+            'data': {
+                'containerElem': data
             }
         };
         break;
     case Media._MEDIA_ERROR :
         reval = {
-            'type' : type,
-            'data' : data
+            'type': type,
+            'data': data
         };
         break;
     }
@@ -189,13 +189,13 @@ function getMediaEventVaule (type,data) {
 var bBlockTimeUpdate = false;
 
 module.exports = {
-    create:function(successCallback, errorCallback, args) {
+    create: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::create() - id =' + id);
         createVideoContainer(id);
     },
 
-    open:function(successCallback, errorCallback, args) {
+    open: function(successCallback, errorCallback, args) {
         var id = args[0],
             src = args[1],
             absoluteUrl = Urlutil.makeAbsolute(args[1]),
@@ -224,7 +224,7 @@ module.exports = {
                     Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
                 },
                 onbufferingprogress: function(percent) {
-                    console.log('Buffering progress data : ' + percent);
+                    console.log('Buffering progress data: ' + percent);
                     Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
                 },
                 onbufferingcomplete: function() {
@@ -249,10 +249,10 @@ module.exports = {
                     }
                 },
                 onevent: function(eventType, eventData) {
-                    console.log('Event type error : ' + eventType + ', eventData: ' + eventData);
+                    console.log('Event type error: ' + eventType + ', eventData: ' + eventData);
                 },
                 onerror: function(errorData) {
-                    console.log('Event type error : ' + errorData);
+                    console.log('Event type error: ' + errorData);
                     Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
                 },
                 onsubtitlechange: function(duration, text, data1, data2) {
@@ -268,7 +268,7 @@ module.exports = {
     },
 
     // Start playing the media
-    play:function(successCallback, errorCallback, args) {
+    play: function(successCallback, errorCallback, args) {
         var id = args[0];
 
         console.log('media::play() - id =' + id);
@@ -286,7 +286,7 @@ module.exports = {
     },
 
     // Stops the playing media
-    stop:function(successCallback, errorCallback, args) {
+    stop: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::stop() - EVENT_STATE -> IDLE');
         webapis.avplay.stop();
@@ -298,7 +298,7 @@ module.exports = {
     },
 
     // Seeks to the position in the media
-    seekTo:function(successCallback, errorCallback, args) {
+    seekTo: function(successCallback, errorCallback, args) {
         //var id = args[0];
         var milliseconds = args[1];
 
@@ -312,7 +312,7 @@ module.exports = {
     },
 
     // Pauses the playing media
-    pause:function(successCallback, errorCallback, args) {
+    pause: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::pause() - EVENT_STATE -> PAUSED');
 
@@ -320,13 +320,13 @@ module.exports = {
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     },
 
-    setStreamingProperty:function(successCallback, errorCallback, args) {
+    setStreamingProperty: function(successCallback, errorCallback, args) {
         console.log('media::setStreamingProperty() - type= '+args[0]);
 
         webapis.avplay.setStreamingProperty.apply(webapis.avplay, args);
     },
 
-    setDrm:function(successCallback, errorCallback, args) {
+    setDrm: function(successCallback, errorCallback, args) {
         console.log('media::setStreamingProperty() - type= '+args[0]);
 
         webapis.avplay.setDrm.apply(webapis.avplay, args);

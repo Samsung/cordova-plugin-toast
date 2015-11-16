@@ -155,7 +155,7 @@ module.exports = {
     addChannelChangeListener: function (success, fail, args) {
         channelChangeCallback.push({
             callback: success,
-            id : tizen.tvchannel.addChannelChangeListener(success, windowType)
+            id: tizen.tvchannel.addChannelChangeListener(success, windowType)
         });
     },
     removeChannelChangeListener: function (success, fail, args) {
