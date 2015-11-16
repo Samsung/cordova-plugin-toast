@@ -18,6 +18,7 @@
 
 var Media = require('cordova-plugin-toast.Media');
 var Util = require('cordova-plugin-toast.util');
+var Urlutil = require('cordova/urlutil');
 
 var avplayState = {
     NONE : 'NONE',
@@ -197,9 +198,14 @@ module.exports = {
     open:function(successCallback, errorCallback, args) {
         var id = args[0],
             src = args[1],
+            absoluteUrl = Urlutil.makeAbsolute(args[1]),
             state = null;
 
         console.log('media::open() - id =' + id + ' src = ' + src);
+
+        if(!Util.isRemoteUrl(absoluteUrl)) {
+            src = absoluteUrl.replace(/^file:\/\//,'');
+        }
 
         state = webapis.avplay.getState();
 
