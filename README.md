@@ -1,8 +1,6 @@
 # cordova-plugin-toast
 Cordova plugin that provides TV Specific functionalities.
 
-[![Analytics](https://ga-beacon.appspot.com/UA-70262254-1/cordova-plugin-toast/README)](https://github.com/igrigorik/ga-beacon)
-
 # About this project
 This plugin defines a global `toast` object, which provides an API for TV specific functionalities that is based on [Cordova](https://cordova.apache.org/) project.
 
@@ -122,3 +120,5 @@ For the 2014's TV:
 
 # Known Issues
 Not yet
+
+[![Analytics](https://ga-beacon.appspot.com/UA-70262254-1/cordova-plugin-toast/README)](https://github.com/igrigorik/ga-beacon)
