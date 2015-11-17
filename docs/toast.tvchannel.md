@@ -122,8 +122,8 @@ This method tunes the channel of TV.
                 onnosignal: function () {
                     console.log('OnNoSignal');
                 },
-                onprograminforeceived: function (channelInfo) {
-                    console.log('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                onprograminforeceived: function (programInfo) {
+                    console.log('OnProgramInfoReceived: ' + JSON.stringify(programInfo));
                 }
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
@@ -154,8 +154,8 @@ This method tunes up the channel of TV.
                 onnosignal: function () {
                     console.log('OnNoSignal');
                 },
-                onprograminforeceived: function (channelInfo) {
-                    console.log('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                onprograminforeceived: function (programInfo) {
+                    console.log('OnProgramInfoReceived: ' + JSON.stringify(programInfo));
                 }
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
@@ -186,8 +186,8 @@ This method tunes down the channel of TV.
                 onnosignal: function () {
                     console.log('OnNoSignal');
                 },
-                onprograminforeceived: function (channelInfo) {
-                    console.log('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                onprograminforeceived: function (programInfo) {
+                    console.log('OnProgramInfoReceived: ' + JSON.stringify(programInfo));
                 }
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
