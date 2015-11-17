@@ -63,7 +63,7 @@ describe('Video playback feature of toast.Media', function() {
     var media = null;
     var SAMPLE_VIDEO_URL = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
     var SAMPLE_AUDIO_URL = 'http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3';
-    var MediaEventType = ['STATE', 'DURATION', 'POSITION', 'BUFFERINGPROGRESS'];
+    var MediaEventType = ['STATE', 'DURATION', 'POSITION', 'BUFFERINGPROGRESS','ENDED'];
     var MediaState = ['IDLE', 'PLAYING', 'PAUSED', 'STALLED', 'SEEK'];
 
     beforeEach(function() {
@@ -173,6 +173,9 @@ describe('Video playback feature of toast.Media', function() {
                         expect(evt.data).toBeDefined();
                         expect(evt.data.bufferingPercentage).toBeDefined();
                         expect(typeof evt.data.bufferingPercentage).toBe('number');
+                        break;
+                    case 'ENDED' :
+                        expect(evt.data).toBeDefined();
                         break;
                 }
             },

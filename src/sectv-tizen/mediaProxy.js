@@ -79,6 +79,7 @@ function containerStyleEventCallback(MutationRecordProperty) {
     }
     containerStylecallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty == 'style') {
+            console.log('media::container style changed');
             containerElem.childNodes[0].style.width = containerElem.style.width;
             containerElem.childNodes[0].style.height = containerElem.style.height;
             setAvplayVideoRect(containerElem);
@@ -94,9 +95,8 @@ function containerAppendEventCallback(MutationRecordProperty) {
 
     containerAppendcallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty.addedNodes.length > 0) {
-            console.log('addedNodes.............');
             if(hasContainerElem(MutationRecordProperty.addedNodes)) {
-                console.log('append containerElem.............');
+                console.log('media::container append');
                 setAvplayVideoRect(containerElem);
             }
         }
@@ -114,10 +114,7 @@ function containerAppendEventCallback(MutationRecordProperty) {
 
 function setAvplayVideoRect(element) {
     var boundingRect = Util.getBoundingRect(element);
-    console.log('boundingRect.left.............'+boundingRect.left);
-    console.log('boundingRect.top.............'+boundingRect.top);
-    console.log('boundingRect.width.............'+boundingRect.width);
-    console.log('boundingRect.height.............'+boundingRect.height);
+    console.log('media:: DisplayRect left = '+boundingRect.left + '/ top = ' + boundingRect.top + '/ width = ' + boundingRect.width + '/ height = ' + boundingRect.height);
 
     try {
         var state = webapis.avplay.getState();
@@ -166,6 +163,12 @@ function getMediaEventVaule (type,data) {
             'data': {
                 'bufferingPercentage': data
             }
+        };
+        break;
+    case Media.EVENT_ENDED :
+        reval = {
+            'type': type,
+            'data': {}
         };
         break;
     case Media._MEDIA_CONTAINER :
@@ -224,11 +227,11 @@ module.exports = {
                     Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
                 },
                 onbufferingprogress: function(percent) {
-                    console.log('Buffering progress data: ' + percent);
+                    console.log('media::Buffering progress data: ' + percent);
                     Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
                 },
                 onbufferingcomplete: function() {
-                    console.log('Buffering complete.');
+                    console.log('media::Buffering complete.');
                     bBlockTimeUpdate = false;
                     state = webapis.avplay.getState();
                     if(state !== 'READY') {
@@ -237,29 +240,29 @@ module.exports = {
                     Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
                 },
                 onstreamcompleted: function(currentTime) {
-                    console.log('media::streamcompleted()');
+                    console.log('media::ended()');
+                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_ENDED));
                     webapis.avplay.stop();
-                    Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
                 },
                 oncurrentplaytime: function(currentTime) {
                     state = webapis.avplay.getState();
                     if(!bBlockTimeUpdate && (state == avplayState.PLAYING || state == avplayState.PAUSED)) {
-                        console.log('Current playtime: ' + currentTime);
+                        console.log('media::Current playtime: ' + currentTime);
                         Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,currentTime));
                     }
                 },
                 onevent: function(eventType, eventData) {
-                    console.log('Event type error: ' + eventType + ', eventData: ' + eventData);
+                    console.log('media::Event type error: ' + eventType + ', eventData: ' + eventData);
                 },
                 onerror: function(errorData) {
-                    console.log('Event type error: ' + errorData);
+                    console.log('media::Event type error: ' + errorData);
                     Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
                 },
                 onsubtitlechange: function(duration, text, data1, data2) {
-                    console.log('Subtitle Changed.');
+                    console.log('media::Subtitle Changed.');
                 },
                 ondrmevent: function(drmEvent, drmData) {
-                    console.log('DRM callback: ' + drmEvent + ', data: ' + drmData);
+                    console.log('media::DRM callback: ' + drmEvent + ', data: ' + drmData);
                 }
             });
             currentMediaState = Media.STATE_IDLE;
@@ -276,7 +279,7 @@ module.exports = {
             webapis.avplay.prepare();
             webapis.avplay.play();
             var duration = webapis.avplay.getDuration();
-            console.log('duration.....................'+duration);
+            console.log('media:: duration = '+duration);
             Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,duration));
         }
         else {
@@ -291,10 +294,8 @@ module.exports = {
         console.log('media::stop() - EVENT_STATE -> IDLE');
         webapis.avplay.stop();
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        successCallback();
         bBlockTimeUpdate = false;
-        setTimeout(function() {
-            successCallback();
-        },0);
     },
 
     // Seeks to the position in the media

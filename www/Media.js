@@ -44,6 +44,7 @@ Media.EVENT_STATE = 'STATE';
 Media.EVENT_DURATION = 'DURATION';
 Media.EVENT_POSITION = 'POSITION';
 Media.EVENT_BUFFERINGPROGRESS = 'BUFFERINGPROGRESS';
+Media.EVENT_ENDED = 'ENDED';
 
 //Media.MEDIA_SUBTITLE = 5;
 
@@ -80,6 +81,9 @@ Media.mediaEvent = function(id, value) {
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media.EVENT_BUFFERINGPROGRESS :
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media.EVENT_ENDED :
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media._MEDIA_CONTAINER :
