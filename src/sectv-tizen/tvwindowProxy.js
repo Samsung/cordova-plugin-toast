@@ -59,13 +59,15 @@ module.exports = {
         }
     },
     show: function (success, fail, args) {
-        args[0][0] = args[0][0] + 'px';
-        args[0][1] = args[0][1] + 'px';
-        args[0][2] = args[0][2] + 'px';
-        args[0][3] = args[0][3] + 'px';
+        var rect = [];
+
+        rect[0] = args[0][0] + 'px';
+        rect[1] = args[0][1] + 'px';
+        rect[2] = args[0][2] + 'px';
+        rect[3] = args[0][3] + 'px';
 
         try {
-            tizen.tvwindow.show(success, fail, args[0], windowType);
+            tizen.tvwindow.show(success, fail, rect, windowType);
         }
         catch (e) {
             fail(e);
