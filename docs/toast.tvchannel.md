@@ -112,7 +112,7 @@ This method tunes the channel of TV.
         1. Tuning a channel.
 
             ```js
-            toast.tvwindow.tune({
+            toast.tvchannel.tune({
                 major: 7,
                 minor: 1
             },{
@@ -147,7 +147,7 @@ This method tunes up the channel of TV.
         1. Tuning up a channel.
 
             ```js
-            toast.tvwindow.tuneUp({
+            toast.tvchannel.tuneUp({
                 onsuccess: function (channelInfo) {
                     console.log('OnSuccess: ' + JSON.stringify(channelInfo));
                 },
@@ -179,7 +179,7 @@ This method tunes down the channel of TV.
         1. Tuning down a channel.
 
             ```js
-            toast.tvwindow.tuneDown({
+            toast.tvchannel.tuneDown({
                 onsuccess: function (channelInfo) {
                     console.log('OnSuccess: ' + JSON.stringify(channelInfo));
                 },
@@ -212,7 +212,7 @@ This method finds a channel.
         1. Finding a channel.
 
             ```js
-            toast.tvwindow.findChannel(7, 1, function (channelInfoList) {
+            toast.tvchannel.findChannel(7, 1, function (channelInfoList) {
                 console.log('Success: ' + JSON.stringify(channelInfoList));
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
@@ -238,7 +238,7 @@ This method finds a channel.
         1. Getting a channel.
 
             ```js
-            toast.tvwindow.getChannelList(function (channelInfoList) {
+            toast.tvchannel.getChannelList(function (channelInfoList) {
                 console.log('Success: ' + JSON.stringify(channelInfoList));
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
@@ -261,7 +261,7 @@ This method gets a current channel.
         1. Getting a current channel.
 
             ```js
-            toast.tvwindow.getCurrentChannel(function (channelInfo) {
+            toast.tvchannel.getCurrentChannel(function (channelInfo) {
                 console.log('Success: ' + JSON.stringify(channelInfo));
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
@@ -287,7 +287,7 @@ This method gets a program list.
         1. Getting a current channel.
 
             ```js
-            toast.tvwindow.getProgramList({
+            toast.tvchannel.getProgramList({
                 major: 7,
                 minor: 1,
                 channelName: 'KBS2',
@@ -321,7 +321,7 @@ This method gets a current program.
         1. Getting a current program.
 
             ```js
-            toast.tvwindow.getCurrentProgram(function (programInfo) {
+            toast.tvchannel.getCurrentProgram(function (programInfo) {
                 console.log('Success: ' + JSON.stringify(programInfo));
             }, function(err) {
                 console.log('Error: ' + JSON.stringify(err));
@@ -346,7 +346,7 @@ This method adds listener for changing a channel.
             var testFunc = function (channelInfo) {
                 console.log('testFunc is called: ' + JSON.stringify(channelInfo));
             };
-            toast.tvwindow.addChannelChangeListener(testFunc);
+            toast.tvchannel.addChannelChangeListener(testFunc);
             ```
 
 * void removeChannelChangeListener(ChannelInfoCallback callback) raises(Error);
@@ -367,9 +367,9 @@ This method removes listener for changing a channel.
             var testFunc = function (channelInfo) {
                 console.log('testFunc is called: ' + JSON.stringify(channelInfo));
             };
-            toast.tvwindow.addChannelChangeListener(testFunc);
+            toast.tvchannel.addChannelChangeListener(testFunc);
             ```
-            toast.tvwindow.removeChannelChangeListener(testFunc);
+            toast.tvchannel.removeChannelChangeListener(testFunc);
             ```
 
 ## See others
