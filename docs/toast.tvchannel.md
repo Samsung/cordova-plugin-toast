@@ -368,7 +368,6 @@ This method removes listener for changing a channel.
                 console.log('testFunc is called: ' + JSON.stringify(channelInfo));
             };
             toast.tvchannel.addChannelChangeListener(testFunc);
-            ```
             toast.tvchannel.removeChannelChangeListener(testFunc);
             ```
 
