@@ -30,7 +30,7 @@ var Media = function () {
         this._mediaEventCallBack = {};
         this._containerElem = -1;
         this._duration = -1;
-        this._position = -1;
+        this._position = 0;
         this._hooks = {};
         exec(null, null, 'toast.Media', 'create',[this.id]);
     }
@@ -85,6 +85,7 @@ Media.mediaEvent = function(id, value) {
             break;
         case Media.EVENT_ENDED :
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            media.stop();
             break;
         case Media._MEDIA_CONTAINER :
             media._containerElem = value.data.containerElem;
@@ -138,7 +139,7 @@ Media.prototype.play = function() {
 Media.prototype.stop = function() {
     var me = this;
     exec(function() {
-        me._position = -1;
+        me._position = 0;
         me._duration = -1;
     }, null, 'toast.Media', 'stop', [this.id]);
 };

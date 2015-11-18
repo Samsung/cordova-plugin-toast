@@ -73,17 +73,12 @@ function containerStyleEventCallback(MutationRecordProperty) {
         clearTimeout(containerStylecallbackFnTimer);
     }
 
-    if(containerAppendcallbackFnTimer) {
-        clearTimeout(containerAppendcallbackFnTimer);
-    }
-
     containerStylecallbackFnTimer = setTimeout(function() {
-        if (MutationRecordProperty == 'style') {
-            if(containerElem.childNodes[0]) {
-                containerElem.childNodes[0].style.width = containerElem.style.width;
-                containerElem.childNodes[0].style.height = containerElem.style.height;
-                setAvplayVideoRect(containerElem);
-            }
+        if (MutationRecordProperty == 'style' && containerElem.childNodes[0]) {
+            console.log('media::container style changed');
+            containerElem.childNodes[0].style.width = containerElem.style.width;
+            containerElem.childNodes[0].style.height = containerElem.style.height;
+            setAvplayVideoRect(containerElem);
         }
     },0);
 }
@@ -94,19 +89,15 @@ function containerAppendEventCallback(MutationRecordProperty) {
         clearTimeout(containerAppendcallbackFnTimer);
     }
 
-    if(containerStylecallbackFnTimer) {
-        clearTimeout(containerStylecallbackFnTimer);
-    }
-
     containerAppendcallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty.addedNodes.length > 0) {
-            console.log('addedNodes.............');
-            if(hasContainerElem(MutationRecordProperty.addedNodes)) {
-                if(containerElem.childNodes[0]) {
-                    containerElem.childNodes[0].style.width = containerElem.style.width;
-                    containerElem.childNodes[0].style.height = containerElem.style.height;
-                    setAvplayVideoRect(containerElem);
-                }
+            if(hasContainerElem(MutationRecordProperty.addedNodes) && containerElem.childNodes[0]) {
+                console.log('media::container append');
+
+                //sectv-orsay needs a style update when append to DOM tree.
+                containerElem.childNodes[0].style.width = containerElem.style.width;
+                containerElem.childNodes[0].style.height = containerElem.style.height;
+                setAvplayVideoRect(containerElem);
             }
         }
     },0);
@@ -133,10 +124,7 @@ function getFitDisplayRect(element,videoResolution) {
         nHeight,
         fnRound = Math.round;
 
-    console.log('boundingRect.left.............'+boundingRect.left);
-    console.log('boundingRect.top.............'+boundingRect.top);
-    console.log('boundingRect.width.............'+boundingRect.width);
-    console.log('boundingRect.height.............'+boundingRect.height);
+    console.log('media:: DisplayRect left = '+boundingRect.left + '/ top = ' + boundingRect.top + '/ width = ' + boundingRect.width + '/ height = ' + boundingRect.height);
 
     if(videoResolution.width && videoResolution.width > 0 && videoResolution.height && videoResolution.height > 0) {
         if (videoResolution.width / videoResolution.height > FRAME_WIDTH / FRAME_HEIGHT) {
@@ -158,10 +146,7 @@ function getFitDisplayRect(element,videoResolution) {
         nHeight = videoResolution.height;
     }
 
-    console.log('fitDisplayRect.left.............'+nLeft);
-    console.log('fitDisplayRect.top.............'+nTop);
-    console.log('fitDisplayRect.width.............'+nWidth);
-    console.log('fitDisplayRect.height.............'+nHeight);
+    console.log('media:: fitDisplayRect left = '+nLeft + '/ top = ' + nTop + '/ width = ' + nWidth + '/ height = ' + nHeight);
 
     return {
         'left': nLeft,
@@ -175,7 +160,7 @@ function getVideoResolution() {
     var reval = mediaObjects[currentMediaInfo.id].Execute('GetVideoResolution');
     var videoWidth = 0;
     var videoHeight = 0;
-    console.log('videoResolution.............'+reval);
+    console.log('media:: videoResolution = '+reval);
     if (typeof reval == 'string') {
         reval = reval.split('|');
         videoWidth = reval[0];
@@ -238,6 +223,12 @@ function getMediaEventVaule (type,data) {
             }
         };
         break;
+    case Media.EVENT_ENDED :
+        reval = {
+            'type': type,
+            'data': {}
+        };
+        break;
     case Media._MEDIA_CONTAINER :
         reval = {
             'type': type,
@@ -276,7 +267,7 @@ var mediaObjects = {
 };
 
 function mediaEventListener(type,data1,data2) {
-    console.log('mediaEventListener: ('+type+','+data1+','+data2+')');
+    console.log('media::mediaEventListener: ('+type+','+data1+','+data2+')');
     switch(type) {
     case mediaObjects.LOADED_METADATA :
         var duration = mediaObjects[currentMediaInfo.id].Execute('GetDuration');
@@ -290,7 +281,7 @@ function mediaEventListener(type,data1,data2) {
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
         break;
     case mediaObjects.BUFFERING_PROGRESS :
-        console.log('Buffering progress data: ' + data1);
+        console.log('media::Buffering progress data: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,Number(data1)));
         break;
     case mediaObjects.BUFFERING_COMPLETE :
@@ -301,21 +292,18 @@ function mediaEventListener(type,data1,data2) {
             Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_PAUSED));
         }
         currentMediaInfo.oldState = currentMediaInfo.state;
-        console.log('Buffering complete.');
+        console.log('media::Buffering complete.');
         break;
     case mediaObjects.RENDERING_START :
-        console.log('Rendering start');
+        console.log('media::Rendering start');
         Media.mediaEvent(currentMediaInfo.id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
         break;
     case mediaObjects.STREAM_COMPLETED :
         console.log('media::streamcompleted()');
-        currentMediaInfo.position = 0;
-        mediaObjects[currentMediaInfo.id].Execute('Stop');
-        currentMediaInfo.oldState = currentMediaInfo.state;
-        Media.mediaEvent(currentMediaInfo.id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        Media.mediaEvent(currentMediaInfo.id, getMediaEventVaule(Media.EVENT_ENDED));
         break;
     case mediaObjects.CURRENT_PLAYTIME :
-        console.log('Current playtime: ' + data1);
+        console.log('media::Current playtime: ' + data1);
         currentMediaInfo.position = data1;
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_POSITION,Number(data1)));
         break;
@@ -323,27 +311,27 @@ function mediaEventListener(type,data1,data2) {
 
         break;
     case mediaObjects.CONNECTION_FAILED :
-        console.log('Event type error: ' + data1);
+        console.log('media::Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.AUTHENTICATION_FAILED :
-        console.log('Event type error: ' + data1);
+        console.log('media::Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.STREAM_NOT_FOUND :
-        console.log('Event type error: ' + data1);
+        console.log('media::Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.NETWORK_DISCONNECTED :
-        console.log('Event type error: ' + data1);
+        console.log('media::Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.NETWORK_SLOW :
-        console.log('Event type error: ' + data1);
+        console.log('media::Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     case mediaObjects.RENDER_ERROR :
-        console.log('Event type error: ' + data1);
+        console.log('media::Event type error: ' + data1);
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media._MEDIA_ERROR,data1));
         break;
     }
@@ -434,6 +422,7 @@ module.exports = {
         if(reval > 0) {
             currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+            successCallback();
         }
         else {
             throw new Error('Fail to Media stop');

@@ -78,7 +78,7 @@ function containerStyleEventCallback(MutationRecordProperty) {
         clearTimeout(containerStylecallbackFnTimer);
     }
     containerStylecallbackFnTimer = setTimeout(function() {
-        if (MutationRecordProperty == 'style') {
+        if (MutationRecordProperty == 'style' && containerElem.childNodes[0]) {
             console.log('media::container style changed');
             containerElem.childNodes[0].style.width = containerElem.style.width;
             containerElem.childNodes[0].style.height = containerElem.style.height;
@@ -241,8 +241,7 @@ module.exports = {
                 },
                 onstreamcompleted: function(currentTime) {
                     console.log('media::ended()');
-                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_ENDED));
-                    webapis.avplay.stop();
+                    Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_ENDED));
                 },
                 oncurrentplaytime: function(currentTime) {
                     state = webapis.avplay.getState();

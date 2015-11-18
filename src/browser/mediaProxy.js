@@ -105,6 +105,11 @@ function getMediaEventVaule (type,data) {
             }
         };
         break;
+    case Media.EVENT_ENDED :
+        reval = {
+            'type': type
+        };
+        break;
     case Media._MEDIA_CONTAINER :
         reval = {
             'type': type,
@@ -136,7 +141,7 @@ module.exports = {
         };
         mediaObjects[id].onEndedCB = function () {
             console.log('media::onEndedCB() - MEDIA_STATE -> IDLE');
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_ENDED));
         };
         mediaObjects[id].onErrorCB = function () {
             console.log('media::onErrorCB() - MEDIA_ERROR -> ' + event.srcElement.error);
@@ -157,6 +162,15 @@ module.exports = {
             console.log('media::onTimeUpdateCB() - EVENT_POSITION -> ' + mediaObjects[id].currentTime * 1000);
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_POSITION, mediaObjects[id].currentTime * 1000));
         };
+
+        mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
+        mediaObjects[id].addEventListener('ended', mediaObjects[id].onEndedCB);
+        mediaObjects[id].addEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
+        mediaObjects[id].addEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
+        mediaObjects[id].addEventListener('playing', mediaObjects[id].onPlayingCB);
+        mediaObjects[id].addEventListener('error', mediaObjects[id].onErrorCB);
+        mediaObjects[id].addEventListener('stalled', mediaObjects[id].onStalledCB);
+
         createVideContainer(id);
     },
 
@@ -168,13 +182,6 @@ module.exports = {
 
         mediaObjects[id].src = src;
         mediaObjects[id].load();
-        mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
-        mediaObjects[id].addEventListener('ended', mediaObjects[id].onEndedCB);
-        mediaObjects[id].addEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
-        mediaObjects[id].addEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
-        mediaObjects[id].addEventListener('playing', mediaObjects[id].onPlayingCB);
-        mediaObjects[id].addEventListener('error', mediaObjects[id].onErrorCB);
-        mediaObjects[id].addEventListener('stalled', mediaObjects[id].onStalledCB);
         currentMediaState = Media.STATE_IDLE;
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
     },
@@ -197,18 +204,7 @@ module.exports = {
         console.log('media::stop() - MEDIA_STATE -> IDLE');
 
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
-
-        mediaObjects[id].removeEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
-        mediaObjects[id].removeEventListener('ended', mediaObjects[id].onEndedCB);
-        mediaObjects[id].removeEventListener('timeupdate', mediaObjects[id].onTimeUpdateCB);
-        mediaObjects[id].removeEventListener('durationchange', mediaObjects[id].onDurationChangeCB);
-        mediaObjects[id].removeEventListener('playing', mediaObjects[id].onPlayingCB);
-        mediaObjects[id].removeEventListener('error', mediaObjects[id].onErrorCB);
-        mediaObjects[id].removeEventListener('stalled', mediaObjects[id].onStalledCB);
-
-        setTimeout(function() {
-            successCallback(mediaObjects[id].currentTime);
-        },0);
+        successCallback(mediaObjects[id].currentTime);
     },
 
     // Seeks to the position in the media
