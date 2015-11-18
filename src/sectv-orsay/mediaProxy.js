@@ -304,8 +304,11 @@ function mediaEventListener(type,data1,data2) {
         break;
     case mediaObjects.CURRENT_PLAYTIME :
         console.log('media::Current playtime: ' + data1);
-        currentMediaInfo.position = data1;
-        Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_POSITION,Number(data1)));
+
+        if(currentMediaInfo.state !== Media.STATE_IDLE) {
+            currentMediaInfo.position = data1;
+            Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_POSITION,Number(data1)));
+        }
         break;
     case mediaObjects.SUBTITLE :
 

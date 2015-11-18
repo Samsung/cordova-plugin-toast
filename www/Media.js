@@ -84,8 +84,8 @@ Media.mediaEvent = function(id, value) {
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media.EVENT_ENDED :
-            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             media.stop();
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media._MEDIA_CONTAINER :
             media._containerElem = value.data.containerElem;
