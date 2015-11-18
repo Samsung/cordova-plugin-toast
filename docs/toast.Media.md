@@ -9,7 +9,7 @@ toast.Media play back video or audio files.
 ## Full WebIDL
 ```WebIDL
 module Media {
-	enum MediaEventType {"STATE", "DURATION", "POSITION", "BUFFERINGPROGRESS"};
+	enum MediaEventType {"STATE", "DURATION", "POSITION", "BUFFERINGPROGRESS", "ENDED"};
 	enum MediaState {"IDLE", "PLAYING", "PAUSED", "STALLED", "SEEK"};
 
 	[Constructor()]
@@ -294,6 +294,9 @@ device.addEventListener('deviceready', function () {
 					if(evt.data.bufferingPercentage >= 100) {
 						console.log("Buffering completed");
 					}
+					break;
+				case "ENDED":
+					console.log("Media ended");
 					break;
 			}
 		},
