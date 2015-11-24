@@ -66,8 +66,8 @@ function containerStyleEventCallback(MutationRecordProperty) {
             var boundingRect = Util.getBoundingRect(containerElem);
             console.log('media:: DisplayRect left = '+boundingRect.left + '/ top = ' + boundingRect.top + '/ width = ' + boundingRect.width + '/ height = ' + boundingRect.height);
 
-            containerElem.childNodes[0].width = boundingRect.width + 'px';
-            containerElem.childNodes[0].height = boundingRect.height + 'px';
+            containerElem.childNodes[0].style.width = boundingRect.width + 'px';
+            containerElem.childNodes[0].style.height = boundingRect.height + 'px';
         }
     },0);
 }
