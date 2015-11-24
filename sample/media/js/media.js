@@ -57,10 +57,10 @@ function playMedia() {
                     document.getElementById('log').innerHTML = 'State is ' + evt.data.state;
 
                     if(evt.data.state == 'IDLE' || evt.data.state == 'PAUSED') {
-                        mediastate = false;
+                        mediaState = false;
                         document.getElementById('playOrPauseButton').innerHTML = '▶';
                     } else if(evt.data.state == 'PLAYING') {
-                        mediastate = true;
+                        mediaState = true;
                         document.getElementById('playOrPauseButton').innerHTML = '||';
                     }
 
@@ -94,7 +94,7 @@ function playMedia() {
             }
         },
         onerror: function (err) {
-            console.error("MediaError is occured: " + JSON.stringify(err));
+            console.error('MediaError is occured: ' + JSON.stringify(err));
             document.getElementById('log').innerHTML = 'MediaError is occured';
         }
     });
@@ -152,7 +152,8 @@ function prevOrNext() {
         media.open('http://media.w3.org/2010/05/sintel/trailer.mp4');
         media.play();
         contentState = 2;
-    } else {
+    }
+    else {
         media.open('http://media.w3.org/2010/05/sintel/trailer.mp4');
         media.play();
         contentState = 1;
@@ -165,22 +166,24 @@ function seekTo(param) {
     if(param == 'prev') {
         curPos = media.getCurrentPosition();
         media.seekTo(curPos - jumpNum);
-    } else if(param == 'next'){
+    }
+    else if(param == 'next'){
         curPos = media.getCurrentPosition();
         media.seekTo(curPos + jumpNum);
     } 
 }
 
 function playOrPause() {
-    if(mediastate) {
+    if(mediaState) {
         media.pause();
-    } else {
+    }
+    else {
         media.play();     
     } 
 }
 
 function changeResolution () {
-    switch (resolutionState) {
+    switch(resolutionState) {
         case 'partial': 
             mediaContainer.style.left = fullResolution[0];
             mediaContainer.style.top = fullResolution[1];
