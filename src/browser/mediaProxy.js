@@ -17,6 +17,7 @@
 'use strict';
 
 var Media = require('cordova-plugin-toast.Media');
+var Util = require('cordova-plugin-toast.util');
 
 var currentMediaState = null;
 
@@ -62,8 +63,11 @@ function containerStyleEventCallback(MutationRecordProperty) {
     }
     containerStylecallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty == 'style') {
-            containerElem.childNodes[0].style.width = containerElem.style.width;
-            containerElem.childNodes[0].style.height = containerElem.style.height;
+            var boundingRect = Util.getBoundingRect(containerElem);
+            console.log('media:: DisplayRect left = '+boundingRect.left + '/ top = ' + boundingRect.top + '/ width = ' + boundingRect.width + '/ height = ' + boundingRect.height);
+
+            containerElem.childNodes[0].width = boundingRect.width + 'px';
+            containerElem.childNodes[0].height = boundingRect.height + 'px';
         }
     },0);
 }

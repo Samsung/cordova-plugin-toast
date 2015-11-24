@@ -76,9 +76,13 @@ function containerStyleEventCallback(MutationRecordProperty) {
     containerStylecallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty == 'style' && containerElem.childNodes[0]) {
             console.log('media::container style changed');
-            containerElem.childNodes[0].style.width = containerElem.style.width;
-            containerElem.childNodes[0].style.height = containerElem.style.height;
-            setAvplayVideoRect(containerElem);
+
+            var boundingRect = Util.getBoundingRect(containerElem);
+            console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
+
+            containerElem.childNodes[0].style.width = boundingRect.width + 'px';
+            containerElem.childNodes[0].style.height = boundingRect.height + 'px';
+            setAvplayVideoRect(boundingRect);
         }
     },0);
 }
@@ -94,10 +98,13 @@ function containerAppendEventCallback(MutationRecordProperty) {
             if(hasContainerElem(MutationRecordProperty.addedNodes) && containerElem.childNodes[0]) {
                 console.log('media::container append');
 
+                var boundingRect = Util.getBoundingRect(containerElem);
+                console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
+
                 //sectv-orsay needs a style update when append to DOM tree.
-                containerElem.childNodes[0].style.width = containerElem.style.width;
-                containerElem.childNodes[0].style.height = containerElem.style.height;
-                setAvplayVideoRect(containerElem);
+                containerElem.childNodes[0].style.width = boundingRect.width + 'px';
+                containerElem.childNodes[0].style.height = boundingRect.height + 'px';
+                setAvplayVideoRect(boundingRect);
             }
         }
     },0);
@@ -112,19 +119,16 @@ function containerAppendEventCallback(MutationRecordProperty) {
     }
 }
 
-function getFitDisplayRect(element,videoResolution) {
-    var boundingRect = Util.getBoundingRect(element);
-    var FRAME_LEFT = boundingRect.left,
-        FRAME_TOP = boundingRect.top,
-        FRAME_WIDTH = boundingRect.width,
-        FRAME_HEIGHT = boundingRect.height,
+function getFitDisplayRect(rect,videoResolution) {
+    var FRAME_LEFT = rect.left,
+        FRAME_TOP = rect.top,
+        FRAME_WIDTH = rect.width,
+        FRAME_HEIGHT = rect.height,
         nLeft,
         nTop,
         nWidth,
         nHeight,
         fnRound = Math.round;
-
-    console.log('media:: DisplayRect left = '+boundingRect.left + '/ top = ' + boundingRect.top + '/ width = ' + boundingRect.width + '/ height = ' + boundingRect.height);
 
     if(videoResolution.width && videoResolution.width > 0 && videoResolution.height && videoResolution.height > 0) {
         if (videoResolution.width / videoResolution.height > FRAME_WIDTH / FRAME_HEIGHT) {
@@ -145,8 +149,7 @@ function getFitDisplayRect(element,videoResolution) {
         nWidth = videoResolution.width;
         nHeight = videoResolution.height;
     }
-
-    console.log('media:: fitDisplayRect left = '+nLeft + '/ top = ' + nTop + '/ width = ' + nWidth + '/ height = ' + nHeight);
+    console.log('media:: fitDisplayRect left = '+nLeft + ' | top = ' + nTop + ' | width = ' + nWidth + ' | height = ' + nHeight);
 
     return {
         'left': nLeft,
@@ -172,9 +175,9 @@ function getVideoResolution() {
     };
 }
 
-function setAvplayVideoRect(element) {
+function setAvplayVideoRect(rect) {
     var videoResolution = getVideoResolution();
-    var FitRect = getFitDisplayRect(element,videoResolution);
+    var FitRect = getFitDisplayRect(rect,videoResolution);
 
     try {
         if(mediaObjects[currentMediaInfo.id]) {

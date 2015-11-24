@@ -80,9 +80,13 @@ function containerStyleEventCallback(MutationRecordProperty) {
     containerStylecallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty == 'style' && containerElem.childNodes[0]) {
             console.log('media::container style changed');
-            containerElem.childNodes[0].style.width = containerElem.style.width;
-            containerElem.childNodes[0].style.height = containerElem.style.height;
-            setAvplayVideoRect(containerElem);
+
+            var boundingRect = Util.getBoundingRect(containerElem);
+            console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
+
+            containerElem.childNodes[0].style.width = boundingRect.width + 'px';
+            containerElem.childNodes[0].style.height = boundingRect.height + 'px';
+            setAvplayVideoRect(boundingRect);
         }
     },0);
 }
@@ -97,7 +101,11 @@ function containerAppendEventCallback(MutationRecordProperty) {
         if (MutationRecordProperty.addedNodes.length > 0) {
             if(hasContainerElem(MutationRecordProperty.addedNodes)) {
                 console.log('media::container append');
-                setAvplayVideoRect(containerElem);
+
+                var boundingRect = Util.getBoundingRect(containerElem);
+                console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
+
+                setAvplayVideoRect(boundingRect);
             }
         }
     },0);
@@ -112,18 +120,17 @@ function containerAppendEventCallback(MutationRecordProperty) {
     }
 }
 
-function setAvplayVideoRect(element) {
-    var boundingRect = Util.getBoundingRect(element);
-    console.log('media:: DisplayRect left = '+boundingRect.left + '/ top = ' + boundingRect.top + '/ width = ' + boundingRect.width + '/ height = ' + boundingRect.height);
-
-    try {
-        var state = webapis.avplay.getState();
-        if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY) {
-            webapis.avplay.setDisplayRect(Math.ceil(Number(boundingRect.left)),Math.ceil(Number(boundingRect.top)),Math.ceil(Number(boundingRect.width)),Math.ceil(Number(boundingRect.height)));
+function setAvplayVideoRect(rect) {
+    if(rect) {
+        try {
+            var state = webapis.avplay.getState();
+            if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY) {
+                webapis.avplay.setDisplayRect(Math.ceil(Number(rect.left)),Math.ceil(Number(rect.top)),Math.ceil(Number(rect.width)),Math.ceil(Number(rect.height)));
+            }
         }
-    }
-    catch (e) {
-        console.log('[Warning]Fail to setDisplayRect' + e);
+        catch (e) {
+            console.log('[Warning]Fail to setDisplayRect' + e);
+        }
     }
 }
 
