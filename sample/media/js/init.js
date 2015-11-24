@@ -21,17 +21,17 @@ var tvKeyCode = [];
 function registerKey() {
     console.log('[mediaSample] registerKey');
 
-    toast.inputdevice.getSupportedKeys(function (keys) {
+    toast.inputdevice.getSupportedKeys(function(keys) {
         for(var i = 0, len = keys.length; i < len; i++) {
             tvKeyCode[keys[i].name] = keys[i].code;
         }
     });
 
-    window.addEventListener('keydown', function (e) {
+    window.addEventListener('keydown', function(e) {
         switch(e.keyCode) {
             case tvKeyCode.Return:
                 toast.application.exit();
                 break;
         }
-    });    
+    });
 }

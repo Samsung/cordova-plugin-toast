@@ -59,7 +59,8 @@ function playMedia() {
                     if(evt.data.state == 'IDLE' || evt.data.state == 'PAUSED') {
                         mediaState = false;
                         document.getElementById('playOrPauseButton').innerHTML = '▶';
-                    } else if(evt.data.state == 'PLAYING') {
+                    }
+                    else if(evt.data.state == 'PLAYING') {
                         mediaState = true;
                         document.getElementById('playOrPauseButton').innerHTML = '||';
                     }
@@ -82,14 +83,14 @@ function playMedia() {
                     if(evt.data.bufferingPercentage >= 100) {
                         document.getElementById('log').innerHTML = 'Buffering is completed';
                     }
-                    
+
                     break;
                 case 'ENDED':
                     document.getElementById('log').innerHTML = 'Media is ended';
                     document.getElementById('progressBlue').style.width = '0%';
 
                     prevOrNext();
-                    
+
                     break;
             }
         },
@@ -112,7 +113,7 @@ function addControlBar() {
     var controlBarTemplate = '<div id="progress">' +
                                 '<div id="progressBlack"></div>' +
                                 '<div id="progressBlue"></div>' +
-                             '</div>' +   
+                             '</div>' +
                              '<div id="controller">'+
                                 '<div id="log"></div>' +
                                 '<div id="prevButton">|◀◀</div>' +
@@ -125,22 +126,22 @@ function addControlBar() {
                              '</div>';
     document.getElementById('bar').innerHTML = controlBarTemplate;
 
-    document.getElementById('prevButton').addEventListener('click', function(){
+    document.getElementById('prevButton').addEventListener('click', function() {
         prevOrNext();
     });
-    document.getElementById('prevSeekButton').addEventListener('click', function(){
+    document.getElementById('prevSeekButton').addEventListener('click', function() {
         seekTo('prev');
     });
-    document.getElementById('playOrPauseButton').addEventListener('click', function(){
+    document.getElementById('playOrPauseButton').addEventListener('click', function() {
         playOrPause();
     });
-    document.getElementById('nextSeekButton').addEventListener('click', function(){
+    document.getElementById('nextSeekButton').addEventListener('click', function() {
         seekTo('next');
     });
-    document.getElementById('nextButton').addEventListener('click', function(){
+    document.getElementById('nextButton').addEventListener('click', function() {
         prevOrNext();
     });
-    document.getElementById('resolutionButton').addEventListener('click', function(){
+    document.getElementById('resolutionButton').addEventListener('click', function() {
         changeResolution();
     });
 }
@@ -167,10 +168,10 @@ function seekTo(param) {
         curPos = media.getCurrentPosition();
         media.seekTo(curPos - jumpNum);
     }
-    else if(param == 'next'){
+    else if(param == 'next') {
         curPos = media.getCurrentPosition();
         media.seekTo(curPos + jumpNum);
-    } 
+    }
 }
 
 function playOrPause() {
@@ -178,13 +179,13 @@ function playOrPause() {
         media.pause();
     }
     else {
-        media.play();     
-    } 
+        media.play();
+    }
 }
 
 function changeResolution () {
     switch(resolutionState) {
-        case 'partial': 
+        case 'partial':
             mediaContainer.style.left = fullResolution[0];
             mediaContainer.style.top = fullResolution[1];
             mediaContainer.style.width = fullResolution[2];
