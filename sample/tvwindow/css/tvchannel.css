@@ -1,0 +1,108 @@
+/* layout */
+.channel-scene {
+    position: absolute;
+    width:100%;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    visibility: hidden;
+}
+
+/* layout */
+.info-container {
+    position: relative;
+    float: right;
+    width: 20%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.7);
+}
+
+.tv-container {
+    position: relative;
+    float: left;
+    width: 80%;
+    height: 100%;
+    font-size: 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* font style */
+.font-large {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin: 2%;
+    padding: 2%;
+    text-align: center;
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.font-medium {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin: 2%;
+    padding: 2%;
+    text-align: center;
+    font-size: 25px;
+    color: #FFFFFF;
+}
+
+.font-small {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin: 2%;
+    padding: 2%;
+    text-align: center;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.color-yellow {
+    color: yellow;
+}
+
+/* button style */
+.button {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin:2%;
+    padding:2%;
+    background-color:#4B946A;
+    cursor: pointer;
+    text-align: center;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:20px;
+}
+
+.button:hover {
+    background-color:#cccccc;
+}
+
+.button:active {
+    background-color:#333333;
+}
+
+/* debug style */
+.debug {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 30%;
+    margin: 2%;
+    padding: 2%;
+    background-color: rgba(255,255,255,0.5);
+    font-size: 15px;
+    color: #41FF3A;
+    overflow: scroll;
+}
