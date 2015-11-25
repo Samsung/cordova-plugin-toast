@@ -10,7 +10,7 @@ function showTVChannel() {
 
     appEl.style.visibility = 'hidden';
     sceneEl.style.visibility = 'visible';
-    
+
     screenSize = [0, 0, containerEl.offsetWidth, containerEl.offsetHeight];
 
     // set source
@@ -38,7 +38,8 @@ function showTVChannel() {
     });
 
     // add click event listener
-    document.getElementById('show').addEventListener('click', function(){
+    document.getElementById('show').addEventListener('click', function() {
+
         // show tvwindow with screen size
         toast.tvwindow.show(screenSize, function(rectInfo) {
             appLog('Success: ' + JSON.stringify(rectInfo));
@@ -48,7 +49,8 @@ function showTVChannel() {
     });
 
     // add click event listener
-    document.getElementById('hide').addEventListener('click', function(){
+    document.getElementById('hide').addEventListener('click', function() {
+
         // hide tvwindow
         toast.tvwindow.hide(function() {
             appLog('Success');
@@ -58,7 +60,8 @@ function showTVChannel() {
     });
 
     // add click event listener
-    document.getElementById('tuneUp').addEventListener('click', function(){
+    document.getElementById('tuneUp').addEventListener('click', function() {
+
         // tune up
         toast.tvchannel.tuneUp({
             onsuccess: function (channelInfo) {
@@ -77,7 +80,8 @@ function showTVChannel() {
     });
 
     // add click event listener
-    document.getElementById('tuneDown').addEventListener('click', function(){
+    document.getElementById('tuneDown').addEventListener('click', function() {
+
         // tune down
         toast.tvchannel.tuneDown({
             onsuccess: function (channelInfo) {
@@ -95,21 +99,23 @@ function showTVChannel() {
         });
     });
 
-    var displayChannel  = function(channelInfo) {
+    var displayChannel = function(channelInfo) {
         appLog('OnSuccess: ' + JSON.stringify(channelInfo));
         channelNameEl.innerHTML = channelInfo.channelName;
         channelNumberEl.innerHTML = channelInfo.major + '-' + channelInfo.minor;
     };
 
     // add click event listener
-    document.getElementById('addEvent').addEventListener('click', function(){
+    document.getElementById('addEvent').addEventListener('click', function() {
+
         // add channel change listener
         statusEl.innerHTML = 'Channel Change Event is added';
         toast.tvchannel.addChannelChangeListener(displayChannel);
     });
 
     // add click event listener
-    document.getElementById('rmEvent').addEventListener('click', function(){
+    document.getElementById('rmEvent').addEventListener('click', function() {
+
         // remove channel change listener
         statusEl.innerHTML = 'Channel Change Event is removed';
         channelNameEl.innerHTML = '';
@@ -118,13 +124,14 @@ function showTVChannel() {
     });
 }
 
-function appLog(msg){
+// for debugging
+function appLog(msg) {
     var now = new Date();
     var time = now.toJSON();
-    var debugMsg = "[toast tv tutorial] (" + time + ") : " + msg;
-    
+    var debugMsg = '[toast tv tutorial] (' + time + ') : ' + msg;
+
     console.log(debugMsg);
-    
+
     var prevText = '';
     var debugEl = document.getElementById('debug_log');
     if(debugEl.scrollHeight > 0) {
@@ -132,5 +139,5 @@ function appLog(msg){
     }
 
     prevText = debugEl.innerHTML;
-    debugEl.innerHTML =  prevText + '<p>' + debugMsg + '</p>';
-};
+    debugEl.innerHTML = prevText + '<p>' + debugMsg + '</p>';
+}

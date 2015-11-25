@@ -16,11 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var tvKeyCode = [];
+
 var app = {
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
     },
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -28,17 +32,19 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
+
     // deviceready Event Handler
-    //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        document.getElementById('ready').addEventListener('click', function(){
+        document.getElementById('ready').addEventListener('click', function() {
+            registerKey();
             showTVChannel();
         });
     },
+
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -51,5 +57,24 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+// for registering Key
+function registerKey() {
+    appLog('registerKey');
+
+    toast.inputdevice.getSupportedKeys(function(keys) {
+        for(var i = 0, len = keys.length; i < len; i++) {
+            tvKeyCode[keys[i].name] = keys[i].code;
+        }
+    });
+
+    window.addEventListener('keydown', function(e) {
+        switch(e.keyCode) {
+            case tvKeyCode.Return:
+                toast.application.exit();
+                break;
+        }
+    });
+}
 
 app.initialize();
