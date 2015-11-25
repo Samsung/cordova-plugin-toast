@@ -84,6 +84,7 @@ h1 {
     font-size:12px;
     margin:0px 30px;
     padding:2px 0px;
+    cursor: pointer;
 }
 
 .event.listening {

@@ -19,7 +19,7 @@
 var tvKeyCode = [];
 
 function registerKey() {
-    console.log('[mediaSample] registerKey');
+    console.log('[drmMediaSample] registerKey');
 
     toast.inputdevice.getSupportedKeys(function(keys) {
         for(var i = 0, len = keys.length; i < len; i++) {

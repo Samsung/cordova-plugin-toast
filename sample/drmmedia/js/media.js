@@ -20,6 +20,9 @@
 var media = -1;
 var mediaContainer = -1;
 
+var playReadyData = -1;
+var mediaPlugin = -1;
+
 var mediaState = -1;
 var duration = -1;
 
@@ -30,8 +33,8 @@ var jumpNum = 10000;
 var fullResolution = ['0%', '0%', '100%', '100%'];
 var partialResolution = ['25%', '25%', '50%', '50%'];
 
-function playMedia() {
-    console.log('[mediaSample] playMedia');
+function playDrmMedia() {
+    console.log('[drmMediaSample] playDrmMedia');
 
     var bgContainer = document.createElement('div');
     bgContainer.id = 'playerDiv';
@@ -39,10 +42,10 @@ function playMedia() {
 
     media = toast.Media.getInstance();
 
-    var playReadyData = {
+    playReadyData = {
         LicenseServer  : 'http://playready.directtaps.net/pr/svc/rightsmanager.asmx?'
     };
-    var mediaPlugin = new toast.MediaPluginPlayReady(playReadyData);
+    mediaPlugin = new toast.MediaPluginPlayReady(playReadyData);
 
     media.resetPlugin();
     media.attachPlugin(mediaPlugin);
@@ -97,6 +100,8 @@ function playMedia() {
                     document.getElementById('log').innerHTML = 'Media is ended';
                     document.getElementById('progressBlue').style.width = '0%';
 
+                    prevOrNext();
+
                     break;
             }
         },
@@ -110,7 +115,7 @@ function playMedia() {
 }
 
 function addControlBar() {
-    console.log('[mediaSample] playMedia');
+    console.log('[drmMediaSample] playMedia');
 
     var controlContainer = document.createElement('div');
     controlContainer.id = 'bar';
@@ -122,14 +127,19 @@ function addControlBar() {
                              '</div>' +
                              '<div id="controller">'+
                                 '<div id="log"></div>' +
+                                '<div id="prevButton">|◀◀</div>' +
                                 '<div id="prevSeekButton">◀◀</div>' +
                                 '<div id="playOrPauseButton">||</div>' +
                                 '<div id="nextSeekButton">▶▶</div>' +
+                                '<div id="nextButton">▶▶|</div>' +
                                 '<div id="right"></div>' +
                                 '<div id="resolutionButton">Change resolution</div>' +
                              '</div>';
     document.getElementById('bar').innerHTML = controlBarTemplate;
 
+    document.getElementById('prevButton').addEventListener('click', function() {
+        prevOrNext();
+    });
     document.getElementById('prevSeekButton').addEventListener('click', function() {
         seekTo('prev');
     });
@@ -139,9 +149,33 @@ function addControlBar() {
     document.getElementById('nextSeekButton').addEventListener('click', function() {
         seekTo('next');
     });
+    document.getElementById('nextButton').addEventListener('click', function() {
+        prevOrNext();
+    });
     document.getElementById('resolutionButton').addEventListener('click', function() {
         changeResolution();
     });
+}
+
+function prevOrNext() {
+    media.stop();
+
+    if(contentState == 1) {
+        media.resetPlugin();
+        media.attachPlugin(mediaPlugin);
+        media.open('http://playready.directtaps.net/smoothstreaming/SSWSS720H264PR/SuperSpeedway_720.ism/Manifest');
+
+        media.play();
+        contentState = 2;
+    }
+    else {
+        media.resetPlugin();
+        media.attachPlugin(mediaPlugin);
+        media.open('http://playready.directtaps.net/smoothstreaming/SSWSS720H264PR/SuperSpeedway_720.ism/Manifest');
+
+        media.play();
+        contentState = 1;
+    }
 }
 
 function seekTo(param) {

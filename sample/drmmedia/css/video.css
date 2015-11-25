@@ -75,7 +75,7 @@
 	display: inline-block;
 	float: left;
 
-	width: 42%;
+	width: 38%;
 	height: 100%;
 
 	margin-left: 2%;
@@ -88,7 +88,7 @@
 	white-space:nowrap;
 }
 
-#prevSeekButton, #nextSeekButton {
+#prevButton, #prevSeekButton, #nextSeekButton, #nextButton {
 	display: inline-block;
 	float: left;
 
@@ -102,7 +102,7 @@
 	text-align: center;
 }
 
-#prevSeekButton:hover, #nextSeekButton:hover {
+#prevButton:hover, #prevSeekButton:hover, #nextSeekButton:hover, #nextButton:hover {
 	background-color: #0c84f8;
 	opacity:0.8;
 }
@@ -144,7 +144,7 @@
 	display: inline-block;
 	float: left;
 
-	width: 30%;
+	width: 26%;
 	height: 100%;
 }
 
