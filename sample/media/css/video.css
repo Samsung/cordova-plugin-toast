@@ -102,7 +102,7 @@
 	text-align: center;
 }
 
-#prevButton:hover , #prevSeekButton:hover , #nextSeekButton:hover , #nextButton:hover {
+#prevButton:hover, #prevSeekButton:hover, #nextSeekButton:hover, #nextButton:hover {
 	background-color: #0c84f8;
 	opacity:0.8;
 }
