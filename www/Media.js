@@ -211,6 +211,14 @@ Media.prototype.attachPlugin = function (plugin) {
         plugin.onAttachToMedia(this);
     }
 };
+
+//synchronize VideoRect With Container Element
+Media.prototype.syncVideoRect = function() {
+    var me = this;
+    exec(function(p) {
+        me._position = p;
+    }, null, 'toast.Media', 'syncVideoRect');
+};
 function invokeHooks (hook, args) {
     var media = args[0];
     args = args.slice(1);
