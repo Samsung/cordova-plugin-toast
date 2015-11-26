@@ -56,19 +56,17 @@ function createVideoContainer(id) {
         });
     }
 
+    containerElem = document.createElement('div');
+    containerElem.style.left = '0px';
+    containerElem.style.top = '0px';
+    containerElem.style.width = '0px';
+    containerElem.style.height = '0px';
+    containerElem.innerHTML = '<OBJECT type="application/avplayer" style="width:0px; height:0px;"></OBJECT>';
+    Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,containerElem));
+
     if(window.MutationObserver) {
-        containerElem = document.createElement('div');
-        containerElem.style.left = '0px';
-        containerElem.style.top = '0px';
-        containerElem.style.width = '0px';
-        containerElem.style.height = '0px';
-        containerElem.innerHTML = '<OBJECT type="application/avplayer" style="width:0px; height:0px;"></OBJECT>';
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
         setContainerAppendEventListener(containerAppendEventCallback);
-        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,containerElem));
-    }
-    else {
-        throw Error('The platform does not support toast.media');
     }
 }
 

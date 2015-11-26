@@ -25,6 +25,7 @@ module Media {
 		long setListener(MediaEventListener listener) raises(Error);
 		long unsetListener();
 		DOMElement getContainerElement();
+		void syncVideoRect();
 		void resetPlugin();
 		void attachPlugin(MediaPlugin plugin);
 	};
@@ -198,6 +199,45 @@ The media status is not changed. (Remained as paused if this operation is invoke
 			}
 		}
 		```
+### void syncVideoRect();
+Synchronize videoRect with container element. This function references the style property of container element which is obtained by `getContainerElement` function.
+
+ :red_circle: In 2013's `sectv-orsay` platform, This function MUST be called when you change the container element's position or size.
+
+  Platform      | Product Year  | Calling this API needed 
+ ---------------|---------------|------------------------
+  sectv-orsay   | 2013 or older | Mandatory              
+  sectv-orsay   | 2014          | Optional               
+  sectv-tizen   | 2015 or later | Optional               
+  browser       |               | Optional               
+
+* Parameters
+	N/A
+* Return value
+	N/A
+* Exceptions
+	* throws TypeError
+		* if type of any parameters is not matched to specification.
+	* throws Error
+		* if unknown error occured.
+* Examples
+
+	```js
+	var media = toast.Media.getInstance();
+	var elContainer = media.getContainerElement();
+
+	//Let's set the render area to full screen.
+	elContainer.style.position = 'fixed';
+	elContainer.style.left = 0;
+	elContainer.style.top = 0;
+	elContainer.style.width = window.innerWidth;
+	elContainer.style.height = window.innerHeight;
+	document.body.appendChild(elContainer);
+
+	//synchronize VideoRect With Container Element
+	media.syncVideoRect();
+
+	```
 
 ### void resetPlugin();
 Clear attached plugins to the Media instance.

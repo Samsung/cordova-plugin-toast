@@ -36,7 +36,6 @@ function createVideoContainer(id) {
             subtree: false,
             attributes: true
         });
-        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,elem));
     }
 
     function setContainerAppendEventListener(callback) {
@@ -52,18 +51,17 @@ function createVideoContainer(id) {
         });
     }
 
+    containerElem = document.createElement('div');
+    containerElem.style.left = '0px';
+    containerElem.style.top = '0px';
+    containerElem.style.width = '0px';
+    containerElem.style.height = '0px';
+    containerElem.innerHTML = '<OBJECT classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
+    Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,containerElem));
+
     if(window.MutationObserver) {
-        containerElem = document.createElement('div');
-        containerElem.style.left = '0px';
-        containerElem.style.top = '0px';
-        containerElem.style.width = '0px';
-        containerElem.style.height = '0px';
-        containerElem.innerHTML = '<OBJECT classid="clsid:SAMSUNG-INFOLINK-SEF" style="display:block;position:absolute;width:0px;height:0px;"></OBJECT>';
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
         setContainerAppendEventListener(containerAppendEventCallback);
-    }
-    else {
-        throw new Error('The platform does not support toast.media');
     }
 }
 
@@ -76,13 +74,7 @@ function containerStyleEventCallback(MutationRecordProperty) {
     containerStylecallbackFnTimer = setTimeout(function() {
         if (MutationRecordProperty == 'style' && containerElem.childNodes[0]) {
             console.log('media::container style changed');
-
-            var boundingRect = Util.getBoundingRect(containerElem);
-            console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
-
-            containerElem.childNodes[0].style.width = boundingRect.width + 'px';
-            containerElem.childNodes[0].style.height = boundingRect.height + 'px';
-            setAvplayVideoRect(boundingRect);
+            synchronizeVideoRect();
         }
     },0);
 }
@@ -97,14 +89,7 @@ function containerAppendEventCallback(MutationRecordProperty) {
         if (MutationRecordProperty.addedNodes.length > 0) {
             if(hasContainerElem(MutationRecordProperty.addedNodes) && containerElem.childNodes[0]) {
                 console.log('media::container append');
-
-                var boundingRect = Util.getBoundingRect(containerElem);
-                console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
-
-                //sectv-orsay needs a style update when append to DOM tree.
-                containerElem.childNodes[0].style.width = boundingRect.width + 'px';
-                containerElem.childNodes[0].style.height = boundingRect.height + 'px';
-                setAvplayVideoRect(boundingRect);
+                synchronizeVideoRect();
             }
         }
     },0);
@@ -117,6 +102,16 @@ function containerAppendEventCallback(MutationRecordProperty) {
         }
         return false;
     }
+}
+
+function synchronizeVideoRect () {
+    var boundingRect = Util.getBoundingRect(containerElem);
+    console.log('media:: DisplayRect left = '+boundingRect.left + ' | top = ' + boundingRect.top + ' | width = ' + boundingRect.width + ' | height = ' + boundingRect.height);
+
+    //sectv-orsay needs a style update when append to DOM tree.
+    containerElem.childNodes[0].style.width = boundingRect.width + 'px';
+    containerElem.childNodes[0].style.height = boundingRect.height + 'px';
+    setAvplayVideoRect(boundingRect);
 }
 
 function getFitDisplayRect(rect,videoResolution) {
@@ -276,7 +271,7 @@ function mediaEventListener(type,data1,data2) {
         var duration = mediaObjects[currentMediaInfo.id].Execute('GetDuration');
         currentMediaInfo.duration = duration;
         Media.mediaEvent(currentMediaInfo.id,getMediaEventVaule(Media.EVENT_DURATION,Number(duration)));
-        setAvplayVideoRect(containerElem);
+        synchronizeVideoRect();
         break;
     case mediaObjects.BUFFERING_START :
         console.log('media::onStalled()');
@@ -517,6 +512,11 @@ module.exports = {
         else {
             throw new Error('Fail to Media setDrm');
         }
+    },
+
+    syncVideoRect: function(successCallback, errorCallback, args) {
+        console.log('media::syncVideoRect');
+        synchronizeVideoRect();
     }
 };
 
