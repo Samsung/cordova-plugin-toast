@@ -199,6 +199,7 @@ The media status is not changed. (Remained as paused if this operation is invoke
 			}
 		}
 		```
+		
 ### void syncVideoRect();
 Synchronize videoRect with container element. This function references the style property of container element which is obtained by `getContainerElement` function.
 
