@@ -90,7 +90,7 @@ For the 2014's TV:
     <script src="toast.js"></script>
     ```
 
-3. Zip your `www` directory to create package.
+3. Configure your application by creating `config.xml` file and Zip your `www` directory to create package.
 
 # How to Test with TestRunner
 * You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory of this project.
