@@ -36,7 +36,7 @@ body {
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:medium;
+    font-size:12px;
     height:100%;
     margin:0px;
     padding:0px;
@@ -71,7 +71,6 @@ body {
 }
 
 h1 {
-    font-size:x-large;
     font-weight:normal;
     margin:0px;
     overflow:visible;
@@ -83,7 +82,7 @@ h1 {
     border-radius:4px;
     -webkit-border-radius:4px;
     color:#FFFFFF;
-    font-size:small;
+    font-size:12px;
     margin:0px 30px;
     padding:2px 0px;
     cursor: pointer;

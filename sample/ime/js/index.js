@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var tvKeyCode = [];
 
 var app = {
     // Application Constructor
@@ -51,14 +50,19 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        toastLog('Received Event: ' + id);
     }
 };
 
+// toast tv keycode
+var tvKeyCode = [];
+
 function registerKey() {
-    appLog('registerKey');
+    toastLog('function registerKey');
 
     toast.inputdevice.getSupportedKeys(function(keys) {
+        // get supported keys
+        var len = 0;
         for(var i = 0, len = keys.length; i < len; i++) {
             tvKeyCode[keys[i].name] = keys[i].code;
         }

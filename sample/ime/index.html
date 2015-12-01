@@ -19,22 +19,22 @@
 -->
 <html>
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        
+        <!-- css -->
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/ime.css">
-        <title>Toast TV Tutorial</title>
+
+        <!-- javascript -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="toast.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/ime.js"></script>
+
+        <title>Toast IME Tutorial</title>
     </head>
     <body>
         <!-- deviceready scene -->
@@ -47,25 +47,24 @@
         </div>
 
         <!-- ime scene -->
-        <div id="imeScene" class="ime-scene">
-            <!-- info container -->
-            <div id="infobar" class="info-container">
-                <div class="font-large">Toast IME Tutorial</div>
-                <div id="debug_log" class="debug"></div>
+        <div id="ime_scene" class="ime-scene">
+            <!-- ime container -->
+            <div id="ime_container" class="ime-container">
+                <input id="ime_input" class="input large black">
+                <div id="submit_btn" class="button medium">submit</div>
+                <div id="clear_btn" class="button medium">clear</div>
+                <div id="done_noti" class="noti small">done</div>
+                <div id="cancel_noti" class="noti small">cancel</div>
+                <div id="blur_noti" class="noti small">blur</div>
+                <div id="note_text" class="note large"></div>
             </div>
 
-            <!-- ime container -->
-            <div id="ime" class="ime-container">
-                <input id="imeinput" class="input color-black">
-                <div id="submit" class="button">submit</div>
-                <div id="clear" class="button">clear</div>
-                <div id="note" class="text-place"></div>
+            <!-- info container -->
+            <div id="info_container" class="info-container">
+                <div class="font-style medium">Toast IME Tutorial</div>
+                <div id="debug_container" class="debug-container small"></div>
             </div>
         </div>
-
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="toast.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/ime.js"></script>
     </body>
 </html>
+
