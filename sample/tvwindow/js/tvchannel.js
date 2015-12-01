@@ -1,16 +1,18 @@
 var screenSize = [];
 
-function showTVChannel() {
-    var sceneEl = document.getElementById('channelScene');
+function showTvwindowScene() {
+    // Element
+    var sceneEl = document.getElementById('tvwindow_scene');
     var appEl = document.getElementById('app');
-    var containerEl = document.getElementById('window');
-    var channelNameEl = document.getElementById('channelName');
-    var channelNumberEl = document.getElementById('channelNumber');
-    var statusEl = document.getElementById('status');
+    var containerEl = document.getElementById('tv_container');
+    var channelNameEl = document.getElementById('channel_name_text');
+    var channelNumberEl = document.getElementById('channel_number_text');
+    var statusEl = document.getElementById('status_text');
 
     appEl.style.visibility = 'hidden';
     sceneEl.style.visibility = 'visible';
 
+    // set tvwindow size
     screenSize = [0, 0, containerEl.offsetWidth, containerEl.offsetHeight];
 
     // set source
@@ -18,103 +20,104 @@ function showTVChannel() {
         type: 'TV',
         number: 1
     }, function(sourceInfo) {
-        appLog('Success: ' + JSON.stringify(sourceInfo));
+        toastLog('Success: ' + JSON.stringify(sourceInfo));
     }, function(err) {
-        appLog('Error: ' + JSON.stringify(err));
+        toastLog('Error: ' + JSON.stringify(err));
     });
 
     // get Channel List
     toast.tvchannel.getChannelList(function (channelInfoList) {
-        appLog('Success: ' + JSON.stringify(channelInfoList));
+        toastLog('Success: ' + JSON.stringify(channelInfoList));
     }, function(err) {
-        appLog('Error: ' + JSON.stringify(err));
+        toastLog('Error: ' + JSON.stringify(err));
     }, 'ALL', 0, 10);
 
     // show tvwindow with screen size
     toast.tvwindow.show(screenSize, function(rectInfo) {
-        appLog('Success: ' + JSON.stringify(rectInfo));
+        toastLog('Success: ' + JSON.stringify(rectInfo));
     }, function(err) {
-        appLog('Error: ' + JSON.stringify(err));
+        toastLog('Error: ' + JSON.stringify(err));
     });
 
-    // add click event listener
-    document.getElementById('show').addEventListener('click', function() {
+    // add button event : show
+    document.getElementById('show_btn').addEventListener('click', function() {
 
         // show tvwindow with screen size
         toast.tvwindow.show(screenSize, function(rectInfo) {
-            appLog('Success: ' + JSON.stringify(rectInfo));
+            toastLog('Success: ' + JSON.stringify(rectInfo));
         }, function(err) {
-            appLog('Error: ' + JSON.stringify(err));
+            toastLog('Error: ' + JSON.stringify(err));
         });
     });
 
-    // add click event listener
-    document.getElementById('hide').addEventListener('click', function() {
+    // add button event : hide
+    document.getElementById('hide_btn').addEventListener('click', function() {
 
         // hide tvwindow
         toast.tvwindow.hide(function() {
-            appLog('Success');
+            toastLog('Success');
         }, function(err) {
-            appLog('Error: ' + JSON.stringify(err));
+            toastLog('Error: ' + JSON.stringify(err));
         });
     });
 
-    // add click event listener
-    document.getElementById('tuneUp').addEventListener('click', function() {
+    // add button event : tuneUp
+    document.getElementById('tuneup_btn').addEventListener('click', function() {
 
         // tune up
         toast.tvchannel.tuneUp({
             onsuccess: function (channelInfo) {
-                appLog('OnSuccess: ' + JSON.stringify(channelInfo));
+                toastLog('OnSuccess: ' + JSON.stringify(channelInfo));
             },
             onnosignal: function () {
-                appLog('OnNoSignal');
+                toastLog('OnNoSignal');
                 channelNameEl.innerHTML = 'please check signal';
             },
             onprograminforeceived: function (channelInfo) {
-                appLog('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                toastLog('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
             }
         }, function(err) {
-            appLog('Error: ' + JSON.stringify(err));
+            toastLog('Error: ' + JSON.stringify(err));
         });
     });
 
-    // add click event listener
-    document.getElementById('tuneDown').addEventListener('click', function() {
+    // add button event : tuneDown
+    document.getElementById('tunedown_btn').addEventListener('click', function() {
 
         // tune down
         toast.tvchannel.tuneDown({
             onsuccess: function (channelInfo) {
-                appLog('OnSuccess: ' + JSON.stringify(channelInfo));
+                toastLog('OnSuccess: ' + JSON.stringify(channelInfo));
             },
             onnosignal: function () {
-                appLog('OnNoSignal');
+                toastLog('OnNoSignal');
                 channelNameEl.innerHTML = 'please check signal';
             },
             onprograminforeceived: function (channelInfo) {
-                appLog('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
+                toastLog('OnProgramInfoReceived: ' + JSON.stringify(channelInfo));
             }
         }, function(err) {
-            appLog('Error: ' + JSON.stringify(err));
+            toastLog('Error: ' + JSON.stringify(err));
         });
     });
 
+    // displayChannel callback
     var displayChannel = function(channelInfo) {
-        appLog('OnSuccess: ' + JSON.stringify(channelInfo));
+        toastLog('OnSuccess: ' + JSON.stringify(channelInfo));
         channelNameEl.innerHTML = channelInfo.channelName;
         channelNumberEl.innerHTML = channelInfo.major + '-' + channelInfo.minor;
     };
 
-    // add click event listener
-    document.getElementById('addEvent').addEventListener('click', function() {
+    // add button event : Add Channel Change Listener
+    document.getElementById('addchannelchange_btn').addEventListener('click', function() {
 
         // add channel change listener
         statusEl.innerHTML = 'Channel Change Event is added';
         toast.tvchannel.addChannelChangeListener(displayChannel);
     });
 
-    // add click event listener
-    document.getElementById('rmEvent').addEventListener('click', function() {
+    // add button event : Remove Channel Change Listener
+    document.getElementById('rmchannelchange_btn').addEventListener('click', function() {
 
         // remove channel change listener
         statusEl.innerHTML = 'Channel Change Event is removed';
@@ -125,19 +128,17 @@ function showTVChannel() {
 }
 
 // for debugging
-function appLog(msg) {
+function toastLog(msg) {
     var now = new Date();
     var time = now.toJSON();
     var debugMsg = '[toast tv tutorial] (' + time + ') : ' + msg;
 
     console.log(debugMsg);
 
-    var prevText = '';
-    var debugEl = document.getElementById('debug_log');
+    var debugEl = document.getElementById('debug_container');
     if(debugEl.scrollHeight > 0) {
         debugEl.scrollTop = debugEl.scrollHeight/2;
     }
 
-    prevText = debugEl.innerHTML;
-    debugEl.innerHTML = prevText + '<p>' + debugMsg + '</p>';
+    debugEl.innerHTML += '<p>' + debugMsg + '</p>';
 }
