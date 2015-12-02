@@ -1,0 +1,160 @@
+/* scene */
+.deviceinfo-scene {
+    position: absolute;
+    visibility: hidden;
+    margin:0px;
+    padding:0px;
+    
+    width:100%;
+    height:100%;
+
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+/* container */
+.deviceinfo-container {
+    position: relative;
+    vertical-align: middle;
+    float: left;
+
+    width: 80%;
+    height: 100%;
+
+    text-align: center;
+}
+
+.info-container {
+    position: relative;
+    float: right;
+
+    width: 20%;
+    height: 100%;
+
+    background-color:rgba(0,0,0,0.7);
+}
+
+.wrapper {
+    position: relative;
+    float: left;
+    overflow-y: scroll;
+
+    width: 50%;
+    height: 100%;
+
+    text-align: left;
+}
+
+/* font style */
+.font-style {
+    position: relative;
+    float: left;
+    margin: 2%;
+    padding: 2%;
+
+    width: 100%;
+
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.black {
+    color: black;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.blue {
+    color: blue;
+}
+
+/* button style */
+.button {
+    position: relative;
+    float: left;
+    margin: 2% 10%;
+    padding:2%;
+
+    width: 80%;
+    
+    background-color:#4B946A;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    cursor: pointer;
+
+    text-align: center;
+    color:#FFFFFF;
+}
+
+.button:hover {
+    background-color:#cccccc;
+}
+
+.button:active {
+    background-color:#333333;
+}
+
+/* debugging log style */
+.debug-container {
+    position: relative;
+    margin: 2%;
+    padding: 2%;
+    float: left;
+    overflow: scroll;
+    
+    width: 100%;
+    height: 30%;
+
+    background-color: rgba(255,255,255,0.5);
+    
+    color: #41FF3A;
+}
+
+.debug-container p {
+    margin: 5%;
+}
+
+/* media query */
+@media screen and (max-width: 960px) {
+    .large {
+        font-size: 45px;
+    }
+
+    .medium {
+        font-size: 20px;
+    }
+
+    .small {
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 961px) and (max-width: 1280px) {
+    .large {
+        font-size: 60px;
+    }
+
+    .medium {
+        font-size: 26px;
+    }
+
+    .small {
+        font-size: 15px;
+    }
+}
+@media screen and (min-width: 1281px) and (max-width: 1920px) {
+    .large {
+        font-size: 90px;
+    }
+
+    .medium {
+        font-size: 30px;
+    }
+
+    .small {
+        font-size: 22px;
+    }
+}
