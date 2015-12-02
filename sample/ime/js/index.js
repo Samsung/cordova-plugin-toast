@@ -35,9 +35,9 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        registerKey();
 
         document.getElementById('ready').addEventListener('click', function(){
-            registerKey();
             showIMEScene();
         });
     },
@@ -72,6 +72,9 @@ function registerKey() {
         switch(e.keyCode) {
             case tvKeyCode.Return:
                 toast.application.exit();
+                break;
+            case tvKeyCode.Enter:
+                showIMEScene();
                 break;
         }
     });
