@@ -842,7 +842,38 @@ describe('toast.tvchannel', function() {
             });
 
             testTune(function() {
-                testChannelChange(function() {
+                testChannelChange(function() {function testTune(callback) {
+                toast.tvwindow.setSource({
+                    type: 'TV',
+                    number: 1
+                }, function() {
+                    toast.tvwindow.show([100, 100, 320, 180], function() {
+                        var flag = true;
+                        toast.tvchannel.tune({
+                            major: 7,
+                            minor: 1
+                        }, {
+                            onsuccess: function (channelInfo) {
+                                flag = false;
+                                expect(channelInfo).toBeDefined();
+                                expect(channelInfo.major).toBe(7);
+                                expect(channelInfo.minor).toBe(1);
+                                helper.aOrB('Can you see the \"7-1\" channel in the hole window?', ['YES', 'NO'], function(yes) {
+                                    expect(yes).toBe(true);
+                                    callback();
+                                });
+                            },
+                            onnosignal: function () {},
+                            onprograminforeceived: function () {}
+                        }, function () {
+                            done.fail(); // ERROR: tune
+                        });
+
+                        // the flag must be true if the successCallback is invoked asynchronously as expected.
+                        expect(flag).toBeTruthy();
+                    });
+                });
+            }
                     testHide(function() {
                         done();
                     });
@@ -850,31 +881,36 @@ describe('toast.tvchannel', function() {
             });
 
             function testTune(callback) {
-                toast.tvwindow.show([100, 100, 320, 180], function() {
-                    var flag = true;
-                    toast.tvchannel.tune({
-                        major: 7,
-                        minor: 1
-                    }, {
-                        onsuccess: function (channelInfo) {
-                            flag = false;
-                            expect(channelInfo).toBeDefined();
-                            expect(channelInfo.major).toBe(7);
-                            expect(channelInfo.minor).toBe(1);
-                            helper.aOrB('Can you see the \"7-1\" channel in the hole window?', ['YES', 'NO'], function(yes) {
-                                expect(yes).toBe(true);
-                                callback();
-                            });
-                        },
-                        onnosignal: function () {},
-                        onprograminforeceived: function () {}
-                    }, function () {
-                        done.fail(); // ERROR: tune
-                    });
+                toast.tvwindow.setSource({
+                    type: 'TV',
+                    number: 1
+                }, function() {
+                    toast.tvwindow.show([100, 100, 320, 180], function() {
+                        var flag = true;
+                        toast.tvchannel.tune({
+                            major: 7,
+                            minor: 1
+                        }, {
+                            onsuccess: function (channelInfo) {
+                                flag = false;
+                                expect(channelInfo).toBeDefined();
+                                expect(channelInfo.major).toBe(7);
+                                expect(channelInfo.minor).toBe(1);
+                                helper.aOrB('Can you see the \"7-1\" channel in the hole window?', ['YES', 'NO'], function(yes) {
+                                    expect(yes).toBe(true);
+                                    callback();
+                                });
+                            },
+                            onnosignal: function () {},
+                            onprograminforeceived: function () {}
+                        }, function () {
+                            done.fail(); // ERROR: tune
+                        });
 
-                    // the flag must be true if the successCallback is invoked asynchronously as expected.
-                    expect(flag).toBeTruthy();
-                }, function() {});
+                        // the flag must be true if the successCallback is invoked asynchronously as expected.
+                        expect(flag).toBeTruthy();
+                    });
+                });
             }
 
             function testChannelChange(callback) {
