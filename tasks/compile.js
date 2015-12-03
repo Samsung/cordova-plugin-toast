@@ -76,12 +76,15 @@ module.exports = function(grunt) {
         }
 
         var TOAST_VERSION = 'N/A';
-        var pkgConf = grunt.config.get('pkg');
+        var pkgConfPath  = path.resolve('package.json');
+        var pkgConf = JSON.parse(fs.readFileSync(pkgConfPath));
         if(pkgConf && pkgConf.version) {
             TOAST_VERSION = pkgConf.version;
         }
 
         var content = '';
+        var licensePath  = path.join(__dirname, 'LICENSE-for-js-file.txt');
+        content += '/*\n' + fs.readFileSync(licensePath) + '\n*/\n';
         content += '/* Cordova plugin TOAST version '+TOAST_VERSION+' ('+grunt.template.today("yyyy-mm-dd HH:MM:ss Z")+') */\n';
         content += ';(function() {\n';
 		content += '// jshint strict:false\n';
@@ -99,7 +102,8 @@ module.exports = function(grunt) {
             }
             var modId = pluginId + '.' + name;
             try {
-                var srcContent = fs.readFileSync(src);
+                var srcContent = fs.readFileSync(src, 'utf-8');
+                srcContent = (srcContent+'').replace(/^\s*((\/\*)[\S\s]*?(\*\/))/, '');
             }
             catch(e) {
                 grunt.fail.warn('Fail to read file at ' + path.resolve(src)
@@ -150,6 +154,7 @@ module.exports = function(grunt) {
                 content += 'moduleMapper.runs(\''+lstRuns[i]+'\');\n';
             }
             content += 'moduleMapper.mapModules(window);\n';
+            content += 'window.toast.version = \'' + TOAST_VERSION + '\';\n'
         }
 
         content += '})();\n\n';
