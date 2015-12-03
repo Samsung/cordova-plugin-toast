@@ -62,6 +62,6 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint:src', 'jscs:src', 'jshint:testrunner', 'jscs:testrunner', 'compile', 'jshint:build']);
+  grunt.registerTask('default', ['precommit']);
   grunt.registerTask('precommit', ['jshint:src', 'jscs:src', 'jshint:testrunner', 'jscs:testrunner', 'compile', 'jshint:build']);
 };
