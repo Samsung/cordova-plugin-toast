@@ -1,3 +1,7 @@
+/* jshint undef: true, unused: true */
+/* globals device, Connection */
+/* exported showDeviceInfoScene */
+
 // Element
 var noteEl = null;
 var deviceTextEl = null;
