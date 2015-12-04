@@ -332,20 +332,26 @@ describe('toast.tvwindow', function() {
 
             function testShow(callback) {
                 var flag = true;
-                toast.tvwindow.show([100, 100, 320, 180], function(windowRect) {
-                    flag = false;
-                    expect(windowRect).toBeDefined();
-                    expect(windowRect.length).toBe(4);
-                    helper.aOrB('Can you see the TV hole window on the screen?', ['YES', 'NO'], function(yes) {
-                        expect(yes).toBe(true);
-                        callback();
-                    });
-                }, function() {
-                    done.fail();
-                });
 
-                // the flag must be true if the successCallback is invoked asynchronously as expected.
-                expect(flag).toBeTruthy();
+                toast.tvwindow.setSource({
+                    type: 'TV',
+                    number: 1
+                }, function() {
+                    toast.tvwindow.show([100, 100, 320, 180], function(windowRect) {
+                        flag = false;
+                        expect(windowRect).toBeDefined();
+                        expect(windowRect.length).toBe(4);
+                        helper.aOrB('Can you see the TV hole on the screen?', ['YES', 'NO'], function(yes) {
+                            expect(yes).toBe(true);
+                            callback();
+                        });
+                    }, function() {
+                        done.fail(); // ERROR: show
+                    });
+
+                    // the flag must be true if the successCallback is invoked asynchronously as expected.
+                    expect(flag).toBeTruthy();
+                });
             }
 
             function testSourceChange(callback) {
@@ -367,7 +373,7 @@ describe('toast.tvwindow', function() {
                             callback();
                         });
                     }, function() {
-                        done.fail(); // ERROR: setSource
+                        done.fail(); // ERROR: getSource
                     });
                     expect(flag2).toBeTruthy();
                 }, function() {
@@ -380,7 +386,7 @@ describe('toast.tvwindow', function() {
                 var flag = true;
                 toast.tvwindow.hide(function() {
                     flag = false;
-                    helper.aOrB('Is the TV hole window hidden now?', ['YES', 'NO'], function(yes) {
+                    helper.aOrB('Is the TV hole hidden now?', ['YES', 'NO'], function(yes) {
                         expect(yes).toBe(true);
                         callback();
                     });
