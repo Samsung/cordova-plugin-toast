@@ -41,7 +41,7 @@ function showIMEScene() {
 
         notiCurrentEvent(blurNotiEl);
 
-        if(imeEl.getAttribute('data-toast-ime-shown') == 'false'){
+        if(imeEl.getAttribute('data-ime-show') == 'false'){
             toastLog('[IME Event] closed IME');
         }
     });
