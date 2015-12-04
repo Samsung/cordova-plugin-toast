@@ -1,9 +1,12 @@
+/* jshint undef: true, unused: true */
+/* exported showIMEScene */
+
 // Element
 var imeEl = null;
 var noteEl = null;
 var submitNotiEl = null;
 var cancelNotiEl = null;
-var clearNotiEl = null;
+var blurNotiEl = null;
 
 function showIMEScene() {
     var sceneEl = document.getElementById('ime_scene');
