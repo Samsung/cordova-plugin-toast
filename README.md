@@ -11,6 +11,7 @@ function onDeviceReady() {
     console.log(toast);
 }
 ```
+You can find project details in [wiki](https://github.com/Samsung/cordova-plugin-toast/wiki).
 
 # Project Structure
 ```
