@@ -17,6 +17,9 @@
  * under the License.
  */
 
+/* jshint undef: true, unused: true */
+/* globals showTvwindowScene: true, toastLog: true */
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -61,7 +64,8 @@ function registerKey() {
 
     toast.inputdevice.getSupportedKeys(function(keys) {
         // get supported keys
-        for(var i = 0, len = keys.length; i < len; i++) {
+        var len = keys.length;
+        for(var i = 0; i < len; i++) {
             tvKeyCode[keys[i].name] = keys[i].code;
         }
     });

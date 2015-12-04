@@ -1,3 +1,6 @@
+/* jshint undef: true, unused: true */
+/* exported showTvwindowScene */
+
 var screenSize = [];
 
 function showTvwindowScene() {
