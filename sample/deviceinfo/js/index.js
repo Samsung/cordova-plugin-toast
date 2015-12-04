@@ -65,7 +65,8 @@ function registerKey() {
 
     toast.inputdevice.getSupportedKeys(function(keys) {
         // get supported keys
-        for(var i = 0, len = keys.length; i < len; i++) {
+        var len = keys.length;
+        for(var i = 0; i < len; i++) {
             tvKeyCode[keys[i].name] = keys[i].code;
         }
     });
