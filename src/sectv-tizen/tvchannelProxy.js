@@ -159,11 +159,20 @@ module.exports = {
         });
     },
     removeChannelChangeListener: function (success, fail, args) {
-        for (var i = 0; i < channelChangeCallback.length; i++) {
-            if (success === channelChangeCallback[i].callback) {
-                tizen.tvchannel.removeChannelChangeListener(channelChangeCallback[i].id);
-                channelChangeCallback.splice(i, 1);
+        var i;
+        if(success) {
+            for (i = 0; i < channelChangeCallback.length; i++) {
+                if (success === channelChangeCallback[i].callback) {
+                    tizen.tvchannel.removeChannelChangeListener(channelChangeCallback[i].id);
+                    channelChangeCallback.splice(i, 1);
+                }
             }
+        }
+        else {
+            for (i = 0; i < channelChangeCallback.length; i++) {
+                tizen.tvchannel.removeChannelChangeListener(channelChangeCallback[i].id);
+            }
+            channelChangeCallback = [];
         }
     }
 };

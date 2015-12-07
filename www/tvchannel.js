@@ -180,7 +180,7 @@ var tvchannelExport = {
         exec(callback, null, 'toast.tvchannel', 'addChannelChangeListener', args);
     },
     removeChannelChangeListener: function (callback) {
-        argscheck.checkArgs('f', 'tvchannel.removeChannelChangeListener', arguments);
+        argscheck.checkArgs('F', 'tvchannel.removeChannelChangeListener', arguments);
 
         var args = [];
         exec(callback, null, 'toast.tvchannel', 'removeChannelChangeListener', args);

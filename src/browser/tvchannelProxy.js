@@ -161,10 +161,15 @@ module.exports = {
         channelChangeCallback.push(success);
     },
     removeChannelChangeListener: function (success, fail, args) {
-        for (var i = 0; i < channelChangeCallback.length; i++) {
-            if (success === channelChangeCallback[i]) {
-                channelChangeCallback.splice(i, 1);
+        if(success) {
+            for (var i = 0; i < channelChangeCallback.length; i++) {
+                if (success === channelChangeCallback[i]) {
+                    channelChangeCallback.splice(i, 1);
+                }
             }
+        }
+        else {
+            channelChangeCallback = [];
         }
     }
 };
