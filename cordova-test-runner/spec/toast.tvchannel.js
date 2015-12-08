@@ -811,11 +811,6 @@ describe('toast.tvchannel', function() {
 
     describe('toast.tvchannel.removeChannelChangeListener', function() {
         it('throws TypeError when given arguments is not matched to spec.', function() {
-            // no argument
-            expect(function() {
-                toast.tvchannel.removeChannelChangeListener();
-            }).toThrowError(TypeError);
-
             // invalid type for 1st argument
             expect(function() {
                 toast.tvchannel.removeChannelChangeListener([]);
