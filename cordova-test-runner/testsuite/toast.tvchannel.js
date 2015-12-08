@@ -122,8 +122,14 @@
     });
     testsuite('toast.tvchannel', 'removeChannelChangeListener() \'testFunc1\'', function(report) {
         toast.tvchannel.removeChannelChangeListener(testFunc1);
+        report('Success: toast.tvchannel.removeChannelChangeListener()');
     });
     testsuite('toast.tvchannel', 'removeChannelChangeListener() \'testFunc2\'', function(report) {
         toast.tvchannel.removeChannelChangeListener(testFunc2);
+        report('Success: toast.tvchannel.removeChannelChangeListener()');
+    });
+    testsuite('toast.tvchannel', 'removeChannelChangeListener() \'all\'', function(report) {
+        toast.tvchannel.removeChannelChangeListener();
+        report('Success: toast.tvchannel.removeChannelChangeListener()');
     });
 })();
