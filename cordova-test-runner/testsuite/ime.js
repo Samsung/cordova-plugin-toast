@@ -16,7 +16,7 @@
 
 /* globals testsuite */
 (function() {
-    testsuite('IME', 'submit event', function(report) {
+    testsuite('IME (TV Only)', 'submit event', function(report) {
 
         var elInput = document.createElement('input');
         report.append(elInput);
@@ -32,7 +32,7 @@
         elInput.focus();
     });
 
-    testsuite('IME', 'cancel event', function(report) {
+    testsuite('IME (TV Only)', 'cancel event', function(report) {
 
         var elInput = document.createElement('input');
         report.append(elInput);
@@ -48,7 +48,7 @@
         elInput.focus();
     });
 
-    testsuite('IME', 'blur event', function(report) {
+    testsuite('IME (TV Only)', 'blur event', function(report) {
 
         var elInput = document.createElement('input');
         report.append(elInput);
