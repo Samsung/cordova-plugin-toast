@@ -119,7 +119,7 @@ function containerAppendEventCallback(MutationRecordProperty) {
 }
 
 function setAvplayVideoRect(rect) {
-    if(rect) {
+    if(rect && (rect.left > 0 || rect.top > 0 || rect.width > 0 || rect.height > 0)) {
         try {
             var state = webapis.avplay.getState();
             if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY) {
@@ -129,6 +129,9 @@ function setAvplayVideoRect(rect) {
         catch (e) {
             console.log('[Warning]Fail to setDisplayRect' + e);
         }
+    }
+    else {
+        console.log('[Warning] Rect size value is RangeError');
     }
 }
 
@@ -211,6 +214,8 @@ module.exports = {
 
         console.log('media::open() - id =' + id + ' src = ' + src);
 
+        var boundingRect = Util.getBoundingRect(containerElem);
+
         if(!Util.isRemoteUrl(absoluteUrl)) {
             src = absoluteUrl.replace(/^file:\/\//,'');
         }
@@ -225,6 +230,7 @@ module.exports = {
 
         if(window.webapis) {
             webapis.avplay.open(src);
+            setAvplayVideoRect(boundingRect);
             webapis.avplay.setListener({
                 onbufferingstart: function() {
                     console.log('media::onStalled()');
