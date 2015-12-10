@@ -111,11 +111,11 @@ For the 2014's TV:
     $ cordova emulate browser
     
     # Test on sectv-orsay platform
-    $ grunt sectv-build:sectv-orsay sectv-package:sectv-orsay
+    $ grunt sectv-prepare:sectv-orsay sectv-build:sectv-orsay
     # Run the application on target by using SDK
     
     # Test on sectv-tizen platform
-    $ grunt sectv-build:sectv-tizen sectv-package:sectv-tizen
+    $ grunt sectv-prepare:sectv-tizen sectv-build:sectv-tizen
     # Run the application on target by using SDK
     ```
 
