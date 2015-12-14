@@ -63,6 +63,14 @@ function createVideoContainer(id) {
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
         setContainerAppendEventListener(containerAppendEventCallback);
     }
+    else {
+        document.documentElement.addEventListener('DOMNodeInserted',function(ev) {
+            if(containerElem === ev.target || Util.isChildOf(containerElem,ev.target)) {
+                console.log('media::container append');
+                synchronizeVideoRect();
+            }
+        });
+    }
 }
 
 var containerStylecallbackFnTimer = null;
@@ -93,15 +101,15 @@ function containerAppendEventCallback(MutationRecordProperty) {
             }
         }
     },0);
+}
 
-    function hasContainerElem(nodes) {
-        for(var i = 0; i < nodes.length; i++) {
-            if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])) {
-                return true;
-            }
+function hasContainerElem(nodes) {
+    for(var i = 0; i < nodes.length; i++) {
+        if(containerElem === nodes[i] || Util.isChildOf(containerElem,nodes[i])) {
+            return true;
         }
-        return false;
     }
+    return false;
 }
 
 function synchronizeVideoRect () {
