@@ -25,6 +25,10 @@ module MediaPlugin {
 ### [Constructor(object option)] interface MediaPlugin
 MediaPlugin constructor bind to toast.media with option data to be able to playback special content.
 
+* Throw 
+	* throws Error
+		* if unknown error occured. 	 
+
 * Examples
 	1. Creates MediaPlugin instance.
 
