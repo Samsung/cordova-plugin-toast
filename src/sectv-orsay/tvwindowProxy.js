@@ -64,11 +64,11 @@ module.exports = {
             }, 0);
         }
         else {
-            var source = webapis.tv.window.getSource(windowType);
+            var sourceInfo = webapis.tv.window.getSource(windowType);
 
-            if (source.type !== undefined && typeof source.type == 'number' && 0 <= source.type && source.type <= 8) {
-                videoSource.type = videoSourceTypeList[source.type];
-                videoSource.number = source.number;
+            if (sourceInfo.type !== undefined && typeof sourceInfo.type == 'number' && 0 <= sourceInfo.type && sourceInfo.type <= 8) {
+                videoSource.type = videoSourceTypeList[sourceInfo.type];
+                videoSource.number = sourceInfo.number;
 
                 setTimeout(function () {
                     success(videoSource);
