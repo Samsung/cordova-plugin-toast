@@ -48,10 +48,10 @@ module.exports = {
     },
     getSource: function (success, fail, args) {
         try {
-            var source = tizen.tvwindow.getSource(windowType);
+            var sourceInfo = tizen.tvwindow.getSource(windowType);
 
             setTimeout(function () {
-                success(source);
+                success(sourceInfo);
             }, 0);
         }
         catch (e) {

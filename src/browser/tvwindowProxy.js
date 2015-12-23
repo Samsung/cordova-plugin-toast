@@ -15,7 +15,7 @@
  */
 'use strict';
 
-var videoSource = {
+var sourceInfo = {
     type: 'TV',
     number: 1
 };
@@ -50,19 +50,19 @@ module.exports = {
     setSource: function (success, fail, args) {
         var element = getTVWindowElement();
 
-        videoSource.type = args[0].type;
-        videoSource.number = args[0].number;
+        sourceInfo.type = args[0].type;
+        sourceInfo.number = args[0].number;
 
         element.style.backgroundColor = randomColor();
-        element.innerHTML = 'Source : ' + videoSource.type + videoSource.number;
+        element.innerHTML = 'Source : ' + sourceInfo.type + sourceInfo.number;
 
         setTimeout(function () {
-            success(videoSource);
+            success(sourceInfo);
         }, 0);
     },
     getSource: function (success, fail, args) {
         setTimeout(function () {
-            success(videoSource);
+            success(sourceInfo);
         }, 0);
     },
     show: function (success, fail, args) {
@@ -74,7 +74,7 @@ module.exports = {
         element.style.width = args[0][2] + 'px';
         element.style.height = args[0][3] + 'px';
         element.style.backgroundColor = randomColor();
-        element.innerHTML = 'Source : ' + videoSource.type + videoSource.number;
+        element.innerHTML = 'Source : ' + sourceInfo.type + sourceInfo.number;
         document.getElementsByTagName('body')[0].appendChild(element);
 
         setTimeout(function () {
