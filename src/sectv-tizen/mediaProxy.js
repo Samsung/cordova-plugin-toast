@@ -197,6 +197,35 @@ function getMediaEventVaule (type,data) {
     return reval;
 }
 
+function setScreenSaver(state) {
+    if(state.toLowerCase() === 'on') {
+        try {
+            webapis.appcommon.setScreenSaver(webapis.appcommon.AppCommonScreenSaverState.SCREEN_SAVER_ON, function() {
+                console.log('media:: success to screenSaver ON');
+            },
+            function() {
+                console.log('media:: fail to screenSaver ON');
+            });
+        }
+        catch (e) {
+            console.log('media :: error to screenSaver ON = ' + e.code);
+        }
+    }
+    else if(state.toLowerCase() === 'off') {
+        try {
+            webapis.appcommon.setScreenSaver(webapis.appcommon.AppCommonScreenSaverState.SCREEN_SAVER_OFF, function() {
+                console.log('media:: success to screenSaver OFF');
+            },
+            function() {
+                console.log('media:: fail to screenSaver OFF');
+            });
+        }
+        catch (e) {
+            console.log('media :: error to screenSaver OFF = ' + e.code);
+        }
+    }
+}
+
 var bBlockTimeUpdate = false;
 
 module.exports = {
@@ -296,6 +325,7 @@ module.exports = {
             webapis.avplay.play();
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
         }
+        setScreenSaver('off');
     },
 
     // Stops the playing media
@@ -306,6 +336,7 @@ module.exports = {
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback();
         bBlockTimeUpdate = false;
+        setScreenSaver('on');
     },
 
     // Seeks to the position in the media
@@ -329,6 +360,7 @@ module.exports = {
 
         webapis.avplay.pause();
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
+        setScreenSaver('on');
     },
 
     setStreamingProperty: function(successCallback, errorCallback, args) {

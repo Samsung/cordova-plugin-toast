@@ -360,6 +360,62 @@ function createSEF(id) {
     };
 }
 
+function setScreenSaver (state) {
+    var SEFNNavi = SEF.get('NNavi');
+    var SEFTVMW = SEF.get('TVMW');
+    var PL_PRFID_AUTO_PROTECTION_TIME = 13;
+    var SCREEN_SAVER_ON = 3;
+    var SCREEN_SAVER_OFF = 4;
+    var protectionTime = {
+        0: 300, //PROFILE_DURATION_5MIN
+        1: 600, //PROFILE_DURATION_10MIN
+        2: 1200, //PROFILE_DURATION_20MIN
+        3: 1800, //PROFILE_DURATION_30MIN
+        4: 2400, //PROFILE_DURATION_40MIN
+        5: 3600, //PROFILE_DURATION_1HOUR
+        6: 7200, //PROFILE_DURATION_2HOUR
+        7: 14400, //PROFILE_DURATION_4HOUR
+        8: 28800, //PROFILE_DURATION_8HOUR
+        9: 36000, //PROFILE_DURATION_10HOUR
+        10: -1 //PROFILE_DURATION_ALWAYS
+    };
+    var reval = 0;
+
+    var pf = SEFTVMW.Execute('GetProfile',PL_PRFID_AUTO_PROTECTION_TIME);
+    console.log('media:: AUTO_PROTECTION_TIME : '+ pf);
+    if (state.toLowerCase() === 'on') {
+        if ( protectionTime && protectionTime.hasOwnProperty(parseInt(pf)) ) {
+            if(protectionTime[parseInt(pf)] > 0) {
+                reval = SEFNNavi.Execute('SendEventToDevice',SCREEN_SAVER_ON,protectionTime[parseInt(pf)]);
+                if(reval > 0) {
+                    console.log('media:: success to screenSaver ON');
+                }
+                else {
+                    console.log('media:: fail to screenSaver ON');
+                }
+            }
+        }
+        else {
+            reval = SEFNNavi.Execute('SendEventToDevice',SCREEN_SAVER_ON,7200); // default 2 hour
+            if(reval > 0) {
+                console.log('media:: success to screenSaver ON');
+            }
+            else {
+                console.log('media:: fail to screenSaver ON');
+            }
+        }
+    }
+    else if (state.toLowerCase() === 'off') {
+        reval = SEFNNavi.Execute('SendEventToDevice',SCREEN_SAVER_OFF,0);
+        if(reval > 0) {
+            console.log('media:: success to screenSaver OFF');
+        }
+        else {
+            console.log('media:: fail to screenSaver OFF');
+        }
+    }
+}
+
 module.exports = {
     create: function(successCallback, errorCallback, args) {
         var id = args[0];
@@ -413,6 +469,7 @@ module.exports = {
         }
         if(reval > 0) {
             console.log('Success to Media play');
+            setScreenSaver('off');
         }
         else {
             throw new Error('Fail to Media play');
@@ -432,6 +489,7 @@ module.exports = {
             currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
             successCallback();
+            setScreenSaver('on');
         }
         else {
             throw new Error('Fail to Media stop');
@@ -484,6 +542,7 @@ module.exports = {
         if(reval > 0) {
             currentMediaInfo.oldState = currentMediaInfo.state;
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
+            setScreenSaver('on');
         }
         else {
             throw new Error('Fail to Media pause');
