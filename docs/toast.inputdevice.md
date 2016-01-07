@@ -123,7 +123,7 @@ This function retrieves supported keys list of the running platform.
 				keyCode[supportedKeys[i].name] = supportedKeys[i].code;
 			}
 			if(keyCode.hasOwnProperty("ColorF0Red")) {
-				tizen.inputdevice.registerKey("ColorF0Red", function () {});
+				toast.inputdevice.registerKey("ColorF0Red", function () {});
 			}
 		});
 		window.addEventListener("keydown", function(keyEvent) {
