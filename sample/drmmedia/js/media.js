@@ -59,6 +59,8 @@ function playDrmMedia() {
     mediaContainer.style.height = fullResolution[3];
     document.body.appendChild(mediaContainer);
 
+    media.syncVideoRect(); //for supporting 2013's sectv-orsay
+
     addControlBar();
 
     media.setListener({
