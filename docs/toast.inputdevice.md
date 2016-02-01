@@ -42,6 +42,7 @@ module InputDevice {
 ## Supported Keys by platform
 Supported Keys are different by each platforms.
 
+
 | keyName            | browser (keyboard) | sectv-orsay | sectv-tizen |
 |--------------------|--------------------|-------------|-------------|
 | ArrowUp            | Yes                | Yes         | Yes         |
@@ -72,7 +73,7 @@ Supported Keys are different by each platforms.
 | 7					 | Yes (7)			  | Yes*		| Yes*		  |
 | 8					 | Yes (8)			  | Yes*		| Yes*		  |
 | 9					 | Yes (9)			  | Yes*		| Yes*		  |
-(Yes*: supported, but callling `registerKey` with the `keyName` is needed.)
+:star: Yes*: supported, but callling `registerKey` with the `keyName` is needed.
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:
 	`UpArrow`, `DownArrow`, `LeftArrow`, `RightArrow`, `Enter` and `Return`

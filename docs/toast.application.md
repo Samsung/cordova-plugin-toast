@@ -35,7 +35,7 @@ module Application {
 ```
 
 ## APIs
-* void exit();
+### void exit();
 This function terminates current application.
 	* Parameters
 
@@ -61,7 +61,7 @@ This function terminates current application.
 			});
 			```
 
-* void launchApp(AppInfo appInfo, SuccessCallback successCallback, optional ErrorCallback? errorCallback);
+### void launchApp(AppInfo appInfo, SuccessCallback successCallback, optional ErrorCallback? errorCallback);
 Launches an application with the specified application control.
 	* Parameters
         - appInfo: The data structure describing application details.
@@ -88,7 +88,7 @@ Launches an application with the specified application control.
 
 			```
 
-* void getRequestedAppInfo(ReqAppInfoCallback successCallback, optional ErrorCallback? errorCallback);
+### void getRequestedAppInfo(ReqAppInfoCallback successCallback, optional ErrorCallback? errorCallback);
 This interface has an application information requested and passed from another application and is passed to launch other applications. 
 	* Parameters
 	    - successCallback: The method to call when the source is changed successfully.
