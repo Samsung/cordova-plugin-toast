@@ -41,6 +41,7 @@ module InputDevice {
 
 ## Supported Keys by platform
 Supported Keys are different by each platforms.
+
 :star: Yes*: supported, but callling `registerKey` with the `keyName` is needed.
 
 | keyName            | browser (keyboard) | sectv-orsay | sectv-tizen |
