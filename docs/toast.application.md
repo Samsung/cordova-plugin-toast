@@ -38,13 +38,9 @@ module Application {
 ### void exit();
 This function terminates current application.
 	* Parameters
-
 		N/A
-
 	* Return value
-
 		N/A
-
 	* Exceptions
 		* throws TypeError
 			* If given arguments are not matched with API specification.
@@ -64,13 +60,11 @@ This function terminates current application.
 ### void launchApp(AppInfo appInfo, SuccessCallback successCallback, optional ErrorCallback? errorCallback);
 Launches an application with the specified application control.
 	* Parameters
-        - appInfo: The data structure describing application details.
-        - successCallback: The method to call when the source is changed successfully.
-        - errorCallback: The method to invoke when an error occurs.
+		* appInfo: The data structure describing application details.
+		* successCallback: The method to call when the source is changed successfully.
+		* errorCallback: The method to invoke when an error occurs.
 	* Return value
-
 		N/A
-
 	* Exceptions
 		* throws TypeError
 			* If given arguments are not matched with API specification.
@@ -91,12 +85,10 @@ Launches an application with the specified application control.
 ### void getRequestedAppInfo(ReqAppInfoCallback successCallback, optional ErrorCallback? errorCallback);
 This interface has an application information requested and passed from another application and is passed to launch other applications. 
 	* Parameters
-	    - successCallback: The method to call when the source is changed successfully.
-	    - errorCallback: The method to invoke when an error occurs.
+		* successCallback: The method to call when the source is changed successfully.
+		* errorCallback: The method to invoke when an error occurs.
 	* Return value
-
 		N/A
-
 	* Exceptions
 		* throws TypeError
 			* If given arguments are not matched with API specification.
