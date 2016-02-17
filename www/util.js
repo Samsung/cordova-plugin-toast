@@ -424,7 +424,6 @@ function setStyle(element, prop, value) {
                 setStyle(element, camelCase(p), prop[p]);
             }
         }
-        return;
     }
     else if (typeof prop === 'string') {
         prop = camelCase(prop);

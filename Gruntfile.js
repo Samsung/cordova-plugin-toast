@@ -5,19 +5,19 @@ module.exports = function(grunt) {
     jshint: {
       src: {
         options: {
-            jshintrc: '.jshintrc',
+            jshintrc: '.jshintrc'
         },
         src: ['www/**/*.js', 'src/**/*.js']
       },
       build: {
         options: {
-            jshintrc: '.jshintrc',
+            jshintrc: '.jshintrc'
         },
         src: ['platform_www/**/*.js']
       },
       testrunner: {
         options: {
-            jshintrc: '.jshintrc',
+            jshintrc: '.jshintrc'
         },
         src: ['cordova-test-runner/**/*.js']
       }
