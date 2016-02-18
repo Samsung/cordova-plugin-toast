@@ -64,7 +64,7 @@ module.exports = {
         var result = sef.Execute('GetUserMute');
 
         if (result != -1) {
-            result = (result == PLR_TRUE);
+            result = (result == PLR_TRUE) ? true : false;
             setTimeout(function () {
                 success(result);
             }, 0);
