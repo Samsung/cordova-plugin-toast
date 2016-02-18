@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Samsung/cordova-plugin-toast.svg?branch=master)](https://travis-ci.org/Samsung/cordova-plugin-toast)
+
 # cordova-plugin-toast
 Cordova plugin that provides TV Specific functionalities.
 
