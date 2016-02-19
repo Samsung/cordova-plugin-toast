@@ -14,16 +14,19 @@ module.exports = {
             var widgetType = '02'; // Common.API.EVENT_ENUM.RUN_SEARCH_WIDGET
 
             if(paramAppId == '29_fullbrowser') {
-                var data = window.curWidget.id;
+                var browserData = window.curWidget.id;
                 if(paramData) {
-                    data += '|?|' + paramData[paramDataKeys[0]];
+                    browserData += '|?|' + paramData[paramDataKeys[0]];
                 }
-                var widgetEvent = new WidgetEvent(webbrowserType, data);
-                sendWidgetEvent('', widgetEvent, false);
+
+                /*jshint undef: false */
+                var browserWidgetEvent = new WidgetEvent(webbrowserType, browserData);
+                sendWidgetEvent('', browserWidgetEvent, false);
             }
             else {
                 var data = window.curWidget.id + '?' + encodeURIComponent(paramAppId) + '?' + '&toast_data=' + encodeURIComponent(JSON.stringify(paramData));
 
+                /*jshint undef: false */
                 var widgetEvent = new WidgetEvent(widgetType, data);
                 sendWidgetEvent('', widgetEvent, false);
             }
