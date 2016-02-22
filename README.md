@@ -32,7 +32,7 @@ You can find project details in [wiki](https://github.com/Samsung/cordova-plugin
 
 # Associated Projects
 * [cordova-sectv-orsay](http://github.com/Samsung/cordova-sectv-orsay) is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV (A.K.A Orsay) Platform.
-* [cordova-sectv-tizen](http://github.com/Samsung/cordova-sectv-tizen) is an application library that allows for Cordova-based projects to be built for the 2015's Samsung Tizen TV Platform.
+* [cordova-sectv-tizen](http://github.com/Samsung/cordova-sectv-tizen) is an application library that allows for Cordova-based projects to be built for the Samsung Tizen TV Platform.
 * [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [Grunt](http://gruntjs.com/) task to build and create package from a cordova project for `sectv-orsay` and `sectv-tizen` platforms.
 
 # How to Build
@@ -70,7 +70,6 @@ $ cordova emulate browser
 ```
 
 ## Platform "sectv-tizen": Samsung Tizen TV
-For the 2015's TV:
 
 1. Copy the `platform_www/sectv-tizen/toast.js` to your cordova `www` directory root.
 2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
