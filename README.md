@@ -83,7 +83,7 @@ For the 2015's TV:
 3. Package your `www` directory using Samsung Tizen TV SDK
 
 ## Platform "sectv-orsay": Legacy Samsung Smart TV (A.K.A Orsay)
-For the 2014's TV:
+For the 2013, 2014's TV:
 
 1. Copy the `platform_www/sectv-orsay/toast.js` to your cordova `www` directory root.
 2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
