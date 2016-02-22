@@ -102,7 +102,7 @@ For the 2013, 2014's TV:
     $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
     $ cd TestRunner
     $ npm install ../grunt-cordova-sectv
-    $ cp -rf ../grunt-cordova-sectv/sample/* ./
+    $ cp -rf ../grunt-cordova-sectv/sample/. ./
     $ npm install
     $ cordova platform add browser
     $ cordova plugin add ../cordova-plugin-toast
