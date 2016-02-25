@@ -15,6 +15,10 @@
     "url": "git+https://github.com/samsung/cordova-plugin-toast"
   },
   "keywords": [
+    "ecosystem:cordova",
+    "cordova-sectv-tizen",
+    "cordova-sectv-orsay",
+    "cordova-browser",
     "samsung",
     "cordova",
     "tizen",
