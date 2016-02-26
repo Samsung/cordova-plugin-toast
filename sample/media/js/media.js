@@ -103,6 +103,7 @@ function playMedia() {
     });
 
     media.play();
+    //You don't have to call setScreenSaver Method. It is configurated by toast.avplay.
 }
 
 function addControlBar() {
@@ -150,7 +151,7 @@ function addControlBar() {
 
 function prevOrNext() {
     media.stop();
-
+    
     if(contentState == 1) {
         media.open('http://media.w3.org/2010/05/sintel/trailer.mp4');
         media.play();
@@ -161,6 +162,7 @@ function prevOrNext() {
         media.play();
         contentState = 1;
     }
+    //You don't have to call setScreenSaver Method. It is configurated by toast.avplay.
 }
 
 function seekTo(param) {
@@ -179,9 +181,11 @@ function seekTo(param) {
 function playOrPause() {
     if(mediaState) {
         media.pause();
+        //You don't have to call setScreenSaver Method. It is configurated by toast.avplay.
     }
     else {
         media.play();
+        //You don't have to call setScreenSaver Method. It is configurated by toast.avplay.
     }
 }
 
