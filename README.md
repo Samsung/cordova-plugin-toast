@@ -13,13 +13,14 @@ function onDeviceReady() {
     console.log(toast);
 }
 ```
-You can find project details in [wiki](https://github.com/Samsung/cordova-plugin-toast/wiki).
+If you want more project details, please refer to [wiki](https://github.com/Samsung/cordova-plugin-toast/wiki).
 
 # Project Structure
 ```
     ./
      |-cordova-test-runner/ ... TestRunner/TestSuite Cordova application
-     |-docs/ .................. Documents which is including API Specification.
+     |-docs/ .................. Documents which are including API Specification
+     |-sample/ ................ Sample applications using TOAST API
      |-src/ ................... Platform dependent modules for the plugin TOAST
      |  |-browser/ ............ Plugin implementation for the platform `browser`
      |  |-sectv-orsay/ ........ Plugin implementation for the platform `sectv-orsay`
@@ -31,94 +32,46 @@ You can find project details in [wiki](https://github.com/Samsung/cordova-plugin
 ```
 
 # Associated Projects
-* [cordova-sectv-orsay](http://github.com/Samsung/cordova-sectv-orsay) is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV (A.K.A Orsay) Platform.
+* [cordova-sectv-orsay](http://github.com/Samsung/cordova-sectv-orsay) is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV Platform.(A.K.A Orsay)
 * [cordova-sectv-tizen](http://github.com/Samsung/cordova-sectv-tizen) is an application library that allows for Cordova-based projects to be built for the Samsung Tizen TV Platform.
-* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [Grunt](http://gruntjs.com/) task to build and create package from a cordova project for `sectv-orsay` and `sectv-tizen` platforms.
+* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [grunt](http://gruntjs.com/) task to prepare and build package from a cordova project for `sectv-orsay` and `sectv-tizen` platforms.
 
-# How to Build
-* platform `browser`
+# Prepare to start
+* [Prepare to start](https://github.com/Samsung/cordova-plugin-toast/wiki/Prepare-to-start) contains contents such as precondition, configuration or compile before using TOAST.
 
-    For the `browser` platform, you don't need to build TOAST and just add this plugin by using `cordova plugin add` command. Please see [How to use](#how-to-use) section for details.
+# Create Project
+* [Create Project](https://github.com/Samsung/cordova-plugin-toast/wiki/Create-Project) contains how to create TOAST Project step by step.
 
-* platform `sectv-orsay` and `sectv-tizen`
+# Prepare and Build
+* [Prepare and Build](https://github.com/Samsung/cordova-plugin-toast/wiki/Prepare-and-Build) contains how to prepare and build TOAST project for each platforms.
+"Prepare" task could help to compose necessary components of TOAST project for each platforms.
+"Build" task could help to package TOAST project as format for each platforms.
 
-    Make sure you have all of the node dependencies installed by running the following command from the repository root
-    ```sh
-    $ npm install
-    ```
+# Converting Tizen to Toast
+* [Converting Tizen to Toast](https://github.com/Samsung/cordova-plugin-toast/wiki/Prepare-to-convert-for-Tizen) contains how to convert application which is made with Tizen to TOAST.
 
-    All of the build tasks can be run via the grunt node module. Install it globally first by running:
-    ```sh
-    $ sudo npm install -g grunt-cli
-    ```
+# Converting Orsay to Toast
+* [Converting Orsay to Toast](https://github.com/Samsung/cordova-plugin-toast/wiki/Prepare-to-convert-for-Legacy%20(A.K.A.%20Orsay)) contains how to convert application which is made with Orsay to TOAST.
 
-    Then from the repository root run:
-    ```sh
-    $ grunt compile
-    ```
+# API Reference
+* [toast.Media](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.Media.md)
+* [toast.MediaPlugin](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.MediaPlugin.md)
+* [toast.drminfo](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.drminfo.md)
+* [toast.application](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.application.md)
+* [toast.inputdevice](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.inputdevice.md)
+* [toast.tvaudiocontrol](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.tvaudiocontrol.md)
+* [toast.tvwindow](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.tvwindow.md)
+* [toast.tvchannel](https://github.com/Samsung/cordova-plugin-toast/blob/master/docs/toast.tvchannel.md)
 
-    It will creates the `toast.js` for each platforms in the `platform_www/<platform>` directories of the repository root.
+# Sample App
+* [Media](https://github.com/Samsung/cordova-plugin-toast/tree/master/sample/media)
+* [drmmedia](https://github.com/Samsung/cordova-plugin-toast/tree/master/sample/drmmedia)
+* [ime](https://github.com/Samsung/cordova-plugin-toast/tree/master/sample/ime)
+* [tvwindow](https://github.com/Samsung/cordova-plugin-toast/tree/master/sample/tvwindow)
+* [deviceinfo](https://github.com/Samsung/cordova-plugin-toast/tree/master/sample/deviceinfo)
 
-# How to use
-## Platform "browser"
-You can develop your cordova TV application by using chrome browser with simulated Toast API.
-```sh
-$ cordova platform add browser
-$ cordova plugin add {{Local or git path to this project}}
-$ cordova build browser
-$ cordova emulate browser
-```
-
-## Platform "sectv-tizen": Samsung Tizen TV
-
-1. Copy the `platform_www/sectv-tizen/toast.js` to your cordova `www` directory root.
-2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
-
-    ```HTML
-    <script src="cordova.js"></script>  <!-- existing -->
-    <script src="toast.js"></script>
-    ```
-
-3. Package your `www` directory using Samsung Tizen TV SDK
-
-## Platform "sectv-orsay": Legacy Samsung Smart TV (A.K.A Orsay)
-For the 2013, 2014's TV:
-
-1. Copy the `platform_www/sectv-orsay/toast.js` to your cordova `www` directory root.
-2. Include the `toast.js` right after the including `cordova.js` in your application's `index.html`.
-
-    ```HTML
-    <script src="cordova.js"></script>  <!-- existing -->
-    <script src="toast.js"></script>
-    ```
-
-3. Configure your application by creating `config.xml` file and Zip your `www` directory to create package.
-
-# How to Test with TestRunner
-* You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory of this project.
-* Please refer to below for running the tests: (Assuming that the [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) project is cloned at the same level with this project)
-
-    ```sh
-    $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
-    $ cd TestRunner
-    $ npm install ../grunt-cordova-sectv
-    $ cp -rf ../grunt-cordova-sectv/sample/. ./
-    $ npm install
-    $ cordova platform add browser
-    $ cordova plugin add ../cordova-plugin-toast
-    
-    # Test on browser platform
-    $ cordova build browser
-    $ cordova emulate browser
-    
-    # Test on sectv-orsay platform
-    $ grunt sectv-prepare:sectv-orsay sectv-build:sectv-orsay
-    # Run the application on target by using SDK
-    
-    # Test on sectv-tizen platform
-    $ grunt sectv-prepare:sectv-tizen sectv-build:sectv-tizen
-    # Run the application on target by using SDK
-    ```
+# Contribution Guideline
+* [Contribution Guideline](https://github.com/Samsung/cordova-plugin-toast/wiki/contribution-guideline) contains several tips to participate in contribution.
 
 # Known Issues
 Not yet
