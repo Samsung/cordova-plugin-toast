@@ -17,8 +17,8 @@
 'use strict';
 
 // dummy data from tizen
-var dummyEsn = 'TIZENKEY';
-var dummySdi = 'TIZENKEY';
+var dummyEsn = 'ESN_DUMMYDATA_TVONLY';
+var dummySdi = 'SDI_DUMMYDATA_TVONLY';
 
 module.exports = {
     getEsn: function(success, fail, args) {
