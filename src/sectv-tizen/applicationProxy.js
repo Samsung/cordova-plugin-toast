@@ -15,8 +15,14 @@ module.exports = {
                 appCtrlDataAry.push(temp);
             }
 
-            var appCtrl = new tizen.ApplicationControl(null, null, null, null, appCtrlDataAry);
-            tizen.application.launchAppControl(appCtrl, paramAppId, success, fail, null);
+            if(paramAppId == 'org.tizen.browser') { // Jump to browser
+                var browserAppCtrl = new tizen.ApplicationControl(null, (appCtrlDataAry[0].value)[0], null, null, appCtrlDataAry);
+                tizen.application.launchAppControl(browserAppCtrl, paramAppId, success, fail, null);
+            }
+            else { // Jump to widget
+                var widgetAppCtrl = new tizen.ApplicationControl(null, null, null, null, appCtrlDataAry);
+                tizen.application.launchAppControl(widgetAppCtrl, paramAppId, success, fail, null);
+            }
         }
         catch (e) {
             var error = new Error();
