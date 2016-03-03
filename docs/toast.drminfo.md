@@ -5,7 +5,7 @@ toast.drminfo provides DRM information.
 * browser
 * sectv-orsay
 * sectv-tizen
-    - Privilege `<tizen:privilege name="http://developer.samsung.com/privilege/drminfo"/>` must be declared in the config.xml of tizen package.
+    - Privilege `<tizen:privilege name="http://developer.samsung.com/privilege/drminfo"/>` must be declared in the config.xml of tizen package. Please note that drminfo API is required privilege of partner level.
 
 ## Full WebIDL
 ```WebIDL
