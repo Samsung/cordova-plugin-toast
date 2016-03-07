@@ -101,7 +101,10 @@ module.exports = {
         }, 0);
     },
     getProgramList: function (success, fail, args) {
-        webapis.tv.channel.getProgramList(args[0], args[1], success, fail, args[2]);
+        var startTime = Math.round(args[1].getTime()/1000);
+        var duration = args[2] * 3600;
+        
+        webapis.tv.channel.getProgramList(args[0], startTime, success, fail, duration);
     },
     getCurrentProgram: function (success, fail, args) {
         var programInfo = webapis.tv.channel.getCurrentProgram(windowType);
