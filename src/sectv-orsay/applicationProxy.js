@@ -10,8 +10,13 @@ module.exports = {
             var paramData = args[0].data;
             var paramDataKeys = Object.keys(paramData);
 
-            var webbrowserType = '3010'; // Common.API.EVENT_ENUM.RUN_WEBBROWSER
             var widgetType = '02'; // Common.API.EVENT_ENUM.RUN_SEARCH_WIDGET
+            var webbrowserType = '3010'; // Common.API.EVENT_ENUM.RUN_WEBBROWSER
+
+            /*jshint undef: false */
+            if(device.version < 'T-INFOLINK2013-9999') { // for 2013'
+                webbrowserType = '3008'; // Common.API.EVENT_ENUM.RUN_WEBBROWSER
+            }
 
             if(paramAppId == '29_fullbrowser') {
                 var browserData = window.curWidget.id;
