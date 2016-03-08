@@ -101,8 +101,8 @@ module.exports = {
         }, 0);
     },
     getProgramList: function (success, fail, args) {
-        var startTime = Math.round(args[1].getTime()/1000);
-        var duration = args[2] * 3600;
+        var startTime = Math.round(args[1].getTime()/1000); //convert to epoch time
+        var duration = args[2] * 3600; //convert hour to second
 
         webapis.tv.channel.getProgramList(args[0], startTime, success, fail, duration);
     },
