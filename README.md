@@ -51,7 +51,7 @@ If you want more project details, please refer to [wiki](https://github.com/Sams
   <tr align="center"><td>2013</td><td>2014</td><td>2015</td><td>2016</td></tr>
   <tr align="center"><td>toast.Media</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   <tr align="center"><td>toast.MediaPlugin</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.drminfo</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.drminfo</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   <tr align="center"><td>toast.application</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   <tr align="center"><td>toast.inputdevice</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   <tr align="center"><td>toast.tvaudiocontrol</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
