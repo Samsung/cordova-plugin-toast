@@ -315,17 +315,20 @@ module.exports = {
 
         console.log('media::play() - id =' + id);
         if(webapis.avplay.getState() == avplayState.IDLE) {
-            webapis.avplay.prepare();
-            webapis.avplay.play();
-            var duration = webapis.avplay.getDuration();
-            console.log('media:: duration = '+duration);
-            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,duration));
+            webapis.avplay.prepareAsync(function() {
+                webapis.avplay.play();
+                setScreenSaver('off');
+                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+                var duration = webapis.avplay.getDuration();
+                console.log('media:: duration = '+duration);
+                Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,duration));
+            });
         }
         else {
             webapis.avplay.play();
+            setScreenSaver('off');
             Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
         }
-        setScreenSaver('off');
     },
 
     // Stops the playing media
