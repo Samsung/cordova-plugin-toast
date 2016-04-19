@@ -76,7 +76,7 @@ Supported Keys are different by each platforms.
 | 9					 | Yes (9)			  | Yes*		| Yes*		  |
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:
-	`UpArrow`, `DownArrow`, `LeftArrow`, `RightArrow`, `Enter` and `Return`
+	`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter` and `Return`
 * keyCode of each keys could be different by platforms. So, we recommend to generate `tvKeyCode` collection like below:
 
 ```js
@@ -92,7 +92,7 @@ device.addEventListener('deviceready', function () {
 			case tvKeyCode.Enter:
 				// handle Enter key
 				break;
-			case tvKeyCode.LeftArrow:
+			case tvKeyCode.ArrowLeft:
 				// handle Enter key
 				break;
 		}
