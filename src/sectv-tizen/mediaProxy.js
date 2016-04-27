@@ -119,11 +119,20 @@ function containerAppendEventCallback(MutationRecordProperty) {
 }
 
 function setAvplayVideoRect(rect) {
+    var avplayBaseWidth = 1920; // Base resolution of avplay
+    var ratio = avplayBaseWidth / window.document.documentElement.clientWidth; // Calculate ratio as base resolution
+    var videoRect = {};
+
     if(rect && (rect.left > 0 || rect.top > 0 || rect.width > 0 || rect.height > 0)) {
         try {
+            videoRect.left = rect.left * ratio; // Convert rect as base resolution
+            videoRect.top = rect.top * ratio;
+            videoRect.width = rect.width * ratio;
+            videoRect.height = rect.height * ratio;
+
             var state = webapis.avplay.getState();
             if(state == avplayState.IDLE || state == avplayState.PAUSED || state == avplayState.PLAYING || state ==avplayState.READY) {
-                webapis.avplay.setDisplayRect(Math.ceil(Number(rect.left)),Math.ceil(Number(rect.top)),Math.ceil(Number(rect.width)),Math.ceil(Number(rect.height)));
+                webapis.avplay.setDisplayRect(Math.ceil(Number(videoRect.left)),Math.ceil(Number(videoRect.top)),Math.ceil(Number(videoRect.width)),Math.ceil(Number(videoRect.height)));
             }
         }
         catch (e) {
