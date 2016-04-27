@@ -1,0 +1,34 @@
+/* Fades */
+@-webkit-keyframes fade-in{
+	from { opacity: 0; }
+}
+
+@-webkit-keyframes fade-out{
+	to { opacity: 0; }
+}
+
+/* Fades from*/
+@-webkit-keyframes fade-in-from-bottom{
+	from { opacity: 0; -webkit-transform: translateY(100%);}
+}
+
+@-webkit-keyframes fade-out-to-bottom{
+	to { opacity: 0; -webkit-transform: translateY(100%);}
+}
+
+/*Translation*/
+@-webkit-keyframes to-left{
+	to { -webkit-transform: translateX(-100%); }
+}
+
+@-webkit-keyframes to-right{
+	to { -webkit-transform: translateX(100%); }
+}
+
+@-webkit-keyframes from-left{
+	from { -webkit-transform: translateX(-100%); }
+}
+
+@-webkit-keyframes from-right{
+	from { -webkit-transform: translateX(100%); }
+}

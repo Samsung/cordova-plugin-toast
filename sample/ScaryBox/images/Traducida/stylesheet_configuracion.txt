@@ -1,0 +1,47 @@
+.sprite {
+    background-image: url(spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-SCARY_tv1 {
+    width: 420px;
+    height: 82px;
+    background-position: 0 0;
+}
+
+.sprite-SCARY_tv2 {
+    width: 420px;
+    height: 82px;
+    background-position: -420px 0;
+}
+
+.sprite-SCARY_tv3 {
+    width: 420px;
+    height: 82px;
+    background-position: -840px 0;
+}
+
+.sprite-SCARY_tv4 {
+    width: 420px;
+    height: 82px;
+    background-position: -1260px 0;
+}
+
+.sprite-SCARY_tv5 {
+    width: 420px;
+    height: 82px;
+    background-position: -1680px 0;
+}
+
+.sprite-SCARY_tv6 {
+    width: 420px;
+    height: 82px;
+    background-position: -2100px 0;
+}
+
+.sprite-SCARY_tv7 {
+    width: 420px;
+    height: 82px;
+    background-position: -2520px 0;
+}

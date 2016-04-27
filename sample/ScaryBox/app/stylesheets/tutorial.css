@@ -1,0 +1,520 @@
+#SceneTutorial {
+	/*background: rgba(0, 0, 0, 0.7);*/
+}
+
+#TutorialBegin {
+	background        : rgba(0, 0, 0, 1) url(../../images/tutorial_begin_bg.png);
+	width             : 1280px;
+	height            : 720px;
+	display           : -webkit-box;
+	-webkit-box-pack  : center;
+	-webkit-box-align : center;
+	margin            : 0px;
+	z-index           : 1;
+	/*opacity         : 0;*/
+	visibility        : hidden;
+}
+
+#TutorialBegin .text_scareFriends {
+	font-family: Cirque_Du_Freak;
+	font-size: 86.5px;
+	opacity: 0;
+	background: -webkit-linear-gradient(#ABF1A9,#19B117, #ABF1A9);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	top        : 120px;
+	position   : absolute;
+	width      : 100%;
+	text-align : center;
+	left       : 0px;
+}
+
+/*#TutorialBegin .tutorialLogo { 
+	background : url('../../images/logo.png') no-repeat center;
+	width      : 100%;
+	height     : 256px;
+	margin-top : 53px;
+	visibility : hidden;
+	width: 356px;
+	height: 244px;
+}
+
+#TutorialBegin .tutorialLogo > div { 
+	width: 356px;
+	height: 244px;
+	background: url('../../images/spritesheet_logo.png') center no-repeat;
+	-webkit-animation: logo_animation .4s steps(5) infinite;
+}
+
+#TutorialBegin .tutorialLogo.show {
+	opacity: 1;
+}
+
+#TutorialBegin .tutorialLogo.animate {
+	-webkit-animation: tutorialLogoAnimate .7s linear;
+}
+@-webkit-keyframes tutorialLogoAnimate {
+   from { -webkit-transform: scale(2.5,2.5); opacity: 0}
+   to { -webkit-transform: scale(1,1); opacity: 1}
+}*/
+
+#tutorial-logo{
+	width                    : 356px;
+	height                   : 244px;
+	position                 : absolute;
+	left                     : 462.5px;
+	top                      : 240px;
+	visibility               : hidden;
+	-webkit-transform-origin : 50% 20%;
+}
+
+#tutorial-logo div {
+	width             : 356px;
+	height            : 244px;
+	position          : absolute;
+	-webkit-animation : logo_animation .4s steps(5) infinite;
+}
+
+#tutorial-logo._en div {
+	background : url('../../images/spritesheet_logo.png') center no-repeat;
+}
+
+#tutorial-logo._es div {
+	background : url('../../images/spritesheet_logo_traducido.png') center no-repeat;
+}
+#tutorialTitle {
+	opacity: 0;
+}
+
+#tutorialTitle .tutorialDim {
+	background: rgba(0, 0, 0, 0.9);
+	width: 1280px;
+	height: 720px;
+}
+
+#tutorial_title_options_list li {
+	opacity: 0;
+	/*-webkit-transition: opacity 1s ease;*/
+}
+
+.zombieHand {
+	position: absolute;
+	top: 473px;
+	left: 617px;
+	background: url('../../images/tutorial/hand_01.png') no-repeat center;
+	width: 102.5px;
+	height: 132px;
+	/*z-index: 1;*/
+	opacity: 0;
+	/*-webkit-transition: opacity 1s ease;*/
+}
+
+#tutorialTitle .zombieHand.upDownHand {
+	-webkit-animation: upDownHand .7s ease infinite alternate;
+}
+
+@-webkit-keyframes upDownHand {
+   to  { -webkit-transform:translate(0px,20px); }
+}
+
+#tutorialTitle .text_howToUse {
+	color: #FFF;
+	position: absolute;
+	top: 120px;
+	text-align: center;
+	width: 1280px;
+	font-family: Cirque_Du_Freak;
+	font-size: 106.5px;
+	opacity: 0;
+	text-shadow: 0 0 6.5px rgba(250, 255, 127, 0.7), 0 0 10.5px rgba(255, 255, 255, 0.7);
+}
+
+#SceneTutorial .footer {
+	position: absolute;
+	bottom: 706.5px;
+	opacity: 1;
+	right: 0px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+
+#SceneTutorial .footer.fallingBox {
+	-webkit-animation: fallingBox .35s ease-in;
+}
+@-webkit-keyframes fallingBox {
+   to  { bottom: 93px; }
+}
+
+#SceneTutorial .footer.fallen {
+	-webkit-transform-origin: 50% 100%;
+	bottom: 93px;
+	right: 0px;
+}
+
+#SceneTutorial .footer.compressed {
+	-webkit-animation: compressedBox .2s linear;
+}
+@-webkit-keyframes compressedBox {
+	0%	{ -webkit-transform: scaleY(1); }
+   	50%	{ -webkit-transform: scaleY(.5); }
+   	100%	{ -webkit-transform: scaleY(1); }
+}
+
+#SceneTutorial .message {
+	margin-top: -100px;
+	opacity: 0;
+}
+
+#SceneTutorial .text {
+	background: #000;
+	color: #FFF;
+	font-family: Cirque_Du_Freak;
+	font-size: 48px;
+	padding: 13px 26.5px;
+	line-height: 40px;
+	text-align: center;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+
+#SceneTutorial .text.blackScreen { 
+	width: 854.5px;
+}
+
+#SceneTutorial > .small-textbox {
+	background: url('../../images/big_textbox.png') no-repeat;
+	width: 253px;
+	height: 162.5px;
+	position: absolute;
+	top: 462.5px;
+	left: 824px;
+	background-size: 253px 156px;
+	visibility: hidden;
+}
+#SceneTutorial > .small-textbox > .enter_icon {
+	position: absolute;
+	top: 60px;
+	right: 20px;
+}
+#SceneTutorial > .small-textbox > .text {
+	color: #FFF;
+	font-family: Cirque_Du_Freak;
+	font-size: 48px;
+	margin: 0px;
+	padding: 0px;
+	line-height: 40px;
+	position: absolute;
+	width: 173px;
+	height: 162.5px;
+	background-color: transparent;
+}
+#SceneTutorial .big-textbox {
+	background: url('../../images/big_textbox.png') no-repeat;
+	width: 980px;
+	height: 164px;
+	position: absolute;
+	bottom: 18.5px;
+	left: 62.5px;
+	background-size: 980px 160px;
+	visibility: hidden;
+}
+
+#SceneTutorial .messagePointer {
+	/*background: url('../../images/tutorial/text_box_pointer.png') no-repeat center;*/
+	width: 37px;
+	height: 108px;
+	position: relative;
+	left: -1px;
+	/*border-color: white;
+	border-width: 4px;
+	border-style: solid;
+	border-left-width: 0px;*/
+}
+.messagePointer .enter_button{
+	-webkit-transform: scale(0.7);
+	position: absolute;
+	bottom: 0px;
+	right: 26.5px;
+	box-shadow: none;
+	visibility: hidden;
+	/*display: none;*/
+	-webkit-animation: enter_button_press_animation 2s steps(1) infinite;
+	/*background: url('../../images/enter_btn.png') center 6.5px no-repeat; background-size: cover;*/
+}
+#SceneTutorial .messagePointer .enter_icon {
+	top: 62.5px;
+	left: -34.5px;
+	visibility: hidden;
+}
+.messagePointer .enter_button.visible{
+	display: block;
+}
+@-webkit-keyframes enter_button_press_animation {
+   0% { background: url('../../images/enter_btn.png') center no-repeat; background-size: cover; }
+   50% { background: url('../../images/enter_btn.png') center 2.5px no-repeat; background-size: cover;}
+   100% { background: url('../../images/enter_btn.png') center no-repeat; background-size: cover; }
+}
+#SceneTutorial .box {
+	background: url('../../images/scary_pumpkin.png') no-repeat center;
+	width: 214.5px;
+	height: 204px;
+	opacity: 1;
+	-webkit-transform: scale(.9,.9);
+}
+
+#tutorialBlackScreen .footer{
+	bottom: 0px;
+	opacity: 0;
+}
+
+#SceneTutorial .messageTitle {
+	width: 100%;
+	height: 86.5px;
+	color: #DA8640;
+	margin-bottom: 13px;
+	text-align: center;
+	font-family: Cirque_Du_Freak;
+	font-size: 73px;
+	opacity: 0;
+}
+
+#SceneTutorial .attention-text-english {
+	background: url('../../images/attention_text.png') no-repeat center;
+	top: -20px;
+	position: relative;
+}
+
+#SceneTutorial .attention-text-spanish {
+	background: url('../../images/atencion_texto.png') no-repeat center;
+	top: -20px;
+	position: relative;
+}
+
+#SceneTutorial .messageContent {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+
+#tutorialPad .enter_pad {
+	left: 193px;
+	top: 226.5px;
+	opacity: 0;
+	background: rgba(0, 0, 0, 0);
+	-webkit-transition: background 1s ease;
+}
+
+#tutorialPad .enter_pad > div {
+	opacity: .1;
+}
+
+#tutorialPad .enter_pad .frightality_thumb {
+	bottom: 98.5px;
+	right: -37px;
+	opacity: 0;
+}
+
+#tutorialPad .enter_pad.center {
+	background: url('../../images/enter_btn2.png') no-repeat center;
+}
+
+#tutorialPad .commic {
+	width: 880px;
+	height: 388px;
+	position: absolute;
+	right: 0px;
+	top: 66.5px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	opacity: 0;
+}
+
+#tutorialPad .image { 
+	width: 608px;
+	height: 380px;
+	border: 4px solid;
+	background: url('../../images/tutorial/ARRIBA_01_01.png') no-repeat center;
+	-webkit-transition: background .5s ease;
+}
+
+#tutorialPad .blackBar { 
+	width: 44px;
+	height: 356px;
+	margin-left: 20px;
+	background: url('../../images/tutorial/gris.png') no-repeat center;
+}
+
+#tutorialPad .redCircle { 
+	width: 44px;
+	height: 42.5px;
+	position: absolute;
+	bottom: 17px;
+	background: url('../../images/tutorial/bolita_rojo.png') no-repeat center;
+}
+
+#tutorialPad .topBar { 
+	width: 44px;
+	height: 12px;
+	position: absolute;
+	background: url('../../images/tutorial/punta_rojo.png') no-repeat center;
+	opacity: 0;
+}
+
+#tutorialPad .redBar { 
+	width: 44px;
+	height: 1px;
+	position: absolute;
+	bottom: 60px;
+	background: url('../../images/tutorial/tubo_rojo.png') center;
+	background-repeat:repeat-y;
+}
+
+#tutorialPad .zombieHand {
+	top: 53px;
+	left: 204px;
+	opacity: 0;
+	-webkit-transform: scale(.6,.6);
+}
+
+#tutorialPad .zombieHand.up {
+	top: 53px;
+	left: 204px;
+}
+
+#tutorialPad .zombieHand.right {
+	top: 136px;
+	left: 285px;
+}
+
+#tutorialPad .zombieHand.down {
+	top: 226.5px;
+	left: 204px;
+}
+
+#tutorialPad .zombieHand.left {
+	top: 136px;
+	left: 126.5px;
+}
+
+#tutorialPad .zombieHand.center {
+	top: 136px;
+	left: 204px;
+}
+
+#tutorialPad .zombieHand.upDownHandArrow {
+	-webkit-animation: upDownHandArrow .7s ease-in-out infinite alternate;
+}
+@-webkit-keyframes upDownHandArrow {
+   to  { -webkit-transform: scale(.6,.6) translate(0px,20px); }
+}
+
+#tutorialPad .smileys {
+	width: 49px;
+	height: 318.5px;
+	margin-bottom: 61px;
+}
+
+#tutorialPad .smileys > div {
+	width: 49px;
+	height: 50.5px;
+	margin-bottom: 16px;
+	opacity: .1;
+	-webkit-transition: opacity .3s ease;
+}
+
+#tutorialPad .smileys > div:nth-child(1) {
+	background: url('../../images/tutorial/face01.png') no-repeat center;
+}
+
+#tutorialPad .smileys > div:nth-child(2) {
+	background: url('../../images/tutorial/face02.png') no-repeat center;
+}
+
+#tutorialPad .smileys > div:nth-child(3) {
+	background: url('../../images/tutorial/face03.png') no-repeat center;
+}
+
+#tutorialPad .smileys > div:nth-child(4) {
+	background: url('../../images/tutorial/face04.png') no-repeat center;
+}
+
+#tutorialPad .smileys > div:nth-child(5) {
+	background: url('../../images/tutorial/face05.png') no-repeat center;
+}
+
+#tutorialFinish {
+	opacity: 0;
+	background: rgba(0, 0, 0, 0.9);
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	color: #DA8640;
+	font-family: Cirque_Du_Freak;
+	font-size: 86.5px;
+}
+
+#tutorialFinish .finishTutorial {
+	width: 773px;
+	text-align: center;
+	text-shadow: 0 5px 8px rgba(0, 0, 0, 1);
+}
+.brown_icon{
+	background: url(../../images/enter_ico_brown.png) center no-repeat;
+	width: 73px;
+	height: 49px;
+	display: inline-block;
+	margin-left: 21px;
+}
+.step_1{
+	/*width: 220px;*/
+	width: 240px;
+}
+.step_1 > div{
+	vertical-align: middle;
+}
+.step_1 span{
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.configuration_button{
+	display: inline-block;
+	width: 253px;
+	height: 73px;
+	width: 176px;
+	height: 64PX;
+	vertical-align: middle;
+}
+.configuration_button.english{
+	background: url(../../images/config_button_eng.png) center no-repeat;
+	background-size: contain;
+}
+.configuration_button.spanish{
+	background: url(../../images/config_button_esp.png) center no-repeat;
+	background-size: contain;
+}
+.dialog_animation{
+	-webkit-animation: dialog_animation .3s;
+	-webkit-transform-origin: 100% 50%;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes dialog_animation{
+	from {
+		opacity: 0;
+		-webkit-transform: scale(.1)
+	}
+}
+.talking_animation{
+	-webkit-animation: talking_animation .3s;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes talking_animation{
+	0% { -webkit-transform: scale(.9,.9) rotate(0);}
+	25% { -webkit-transform: scale(.9,.9) rotate(-5deg);}
+	50% { -webkit-transform: scale(.9,.9) rotate(5deg);}
+	75% { -webkit-transform: scale(.9,.9) rotate(-5deg);}
+	100% { -webkit-transform: scale(.9,.9) rotate(0);}
+}

@@ -1,0 +1,39 @@
+#title_options_list li, #tutorial_title_options_list li{
+	width  : 274.5px;
+	margin : 0 76px;
+	height : 108px;
+	float  : left;
+}
+
+#title_options_list .focus, #tutorial_title_options_list .focus {
+	background        : url('../../images/spritesheet selector.png');
+	-webkit-animation : menu-list-focus-animation .3s steps(5) infinite;
+}
+#title_options_list li > div, #tutorial_title_options_list li > div {
+	width  : 426.5px;
+	height : 49px;
+}
+
+#title_options_list._en li:nth-child(1) > div, #tutorial_title_options_list._en li:nth-child(1) > div {
+	background : url('../../images/btn_configuration.png') center no-repeat;
+}
+
+#title_options_list._en li:nth-child(2) > div, #tutorial_title_options_list._en li:nth-child(2) > div {
+	background : url('../../images/btn_start.png') center no-repeat;
+}
+
+#title_options_list._en li:nth-child(3) > div, #tutorial_title_options_list._en li:nth-child(3) > div {
+	background : url('../../images/btn_how to scare.png') center no-repeat;
+}
+
+#title_options_list._es li:nth-child(1) > div, #tutorial_title_options_list._es li:nth-child(1) > div {
+	background : url('../../images/btn_configuracion.png') center no-repeat;
+}
+
+#title_options_list._es li:nth-child(2) > div, #tutorial_title_options_list._es li:nth-child(2) > div {
+	background : url('../../images/btn_inicio.png') center no-repeat;
+}
+
+#title_options_list._es li:nth-child(3) > div, #tutorial_title_options_list._es li:nth-child(3) > div {
+	background : url('../../images/btn_como_asustar.png') center no-repeat;
+}

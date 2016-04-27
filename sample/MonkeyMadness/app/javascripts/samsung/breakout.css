@@ -1,0 +1,32 @@
+
+#canvasdiv.res_720px{width: 1280px !important; height: 720px !important;}
+#canvasdiv.res_540px{width: 960px !important; height: 540px !important;}
+@font-face{font-family: 'Pixelated'; src: url('pixelated.ttf');}
+#canvas.res_540px{
+	width: 960px;
+	height: 540px;
+	left: 10px;
+	margin: 0 auto;
+	display: block;
+}
+#canvas.res_720px{
+	width: 1280px;
+	height: 720px;
+	left: 10px;
+	margin: 0 auto;
+	display: block;
+}
+.e_in{
+	-webkit-animation: e_in .6s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes e_in{
+	from {-webkit-transform: translateY(100%);}
+}
+.e_out{
+	-webkit-animation: e_out .6s ease;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes e_out{
+	to {-webkit-transform: translateY(100%);}
+}

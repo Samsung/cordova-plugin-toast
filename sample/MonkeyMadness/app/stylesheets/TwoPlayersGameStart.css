@@ -1,0 +1,308 @@
+/* Scene TwoPlayersGameStart */
+#canvasdiv.TwoPlayersGame {
+	background: url(../../resources/images/game/envi_normal/bg_main_screen.png) center no-repeat;
+}
+
+.panels  {
+	position: absolute;
+	margin-top: 84px;
+}
+
+.panels > div {
+	height: 565px;
+	width: 531px;
+	float: left;
+	margin: 0 0px 0 57px;
+}
+
+#panel-p1 {
+	background: url(../../resources/images/game/envi_normal/1P_panel.png) center no-repeat;
+}
+
+#panel-p2 {
+	background: url(../../resources/images/game/envi_normal/2P_panel.png) center no-repeat;
+	margin-left: 109px;
+}
+
+#SceneTwoPlayersGameStart .clickable-column{
+	width: 93px;
+	height: 533px;
+	position: absolute;
+	top: 27px;
+	z-index: 5;
+}
+
+#SceneTwoPlayersGameStart #column-c1{
+	left: 692px;
+}
+
+#SceneTwoPlayersGameStart #column-c2{
+	left: 800px;
+}
+
+#SceneTwoPlayersGameStart #column-c3{
+	left: 911px;
+}
+
+#SceneTwoPlayersGameStart #column-c4{
+	left: 1021px;
+}
+
+#SceneTwoPlayersGameStart #column-c5{
+	left: 1129px;
+}
+
+.layer-2 {
+	/*z-index: 3;*/
+	position: relative;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+
+.layer-2 > div {
+	z-index: 3;
+}
+
+#scorebars {
+	position: absolute;
+	top: 160px;
+	left: 592px;
+}
+
+#scorebars > ul {
+	width: 48px;
+	height: 380px;
+	float: left;
+}
+
+#scorebars > ul li {
+	width: 45px;
+	height: 45px;
+	margin: 1px 0 1px 3px;
+	list-style: none;
+	background: url(../../resources/images/game/coin_scoreboard.png);
+	opacity: 0;
+}
+
+#scorebars > ul li.coin-collected {
+	background: url(../../resources/images/game/coin_scoreboard.png) center no-repeat;
+}
+
+#scorebar-1p {
+	background: url(../../resources/images/game/1P_coin_score.png) center no-repeat;
+	margin-right: 7px;
+}
+
+#scorebar-2p {
+	background: url(../../resources/images/game/2P_coin_score.png) center no-repeat;
+}
+
+#front-decoration > div {
+	position: absolute;
+	bottom: 0;
+}
+
+.left-plants {
+	width: 317px;
+	height: 497px; 
+	background: url(../../resources/images/game/envi_normal/palms_arcade_mode_L.png) center no-repeat;
+	left: -169px;
+}
+
+.right-plants {
+	width: 260px;
+	height: 483px; 
+	background: url(../../resources/images/game/envi_normal/palms_arcade_mode_R.png) center no-repeat;
+	right: -127px;
+}
+
+#ready-message {
+	color: #ffdd17;
+	font-family: Grobold;
+	font-size: 99px;
+	text-shadow: 	5px 5px 0px #894120, 
+					-5px 5px 0px #894120, 
+					5px -5px 0px #894120, 
+					-5px -5px 0px #894120, 
+					0px -8px 0px #894120, 
+					0px 8px 0px #894120, 
+					8px 0px 0px #894120, 
+					-8px 0px 0px #894120;
+	position: relative;
+	visibility: hidden;
+}
+
+@-webkit-keyframes ready-popup-in {
+	0% 		{ -webkit-transform: scale(1.7); }
+	80% 	{ -webkit-transform: scale(.8); }
+	100% 	{ -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes ready-popup-change {
+	0% 		{ -webkit-transform: scale(1); }
+	50% 	{ -webkit-transform: scale(1.5); }
+	100% 	{ -webkit-transform: scale(1); }
+}
+
+@-webkit-keyframes ready-popup-out {
+	0% 		{ -webkit-transform: scale(1); }
+	20% 	{ -webkit-transform: scale(1.2); }
+	100% 	{ -webkit-transform: scale(.3); }
+}
+
+@-webkit-keyframes ready-popup-in-2012 {
+	0% 		{ opacity: 0; }
+	100% 	{ opacity: 1; }
+}
+
+@-webkit-keyframes ready-popup-change-2012 {
+	0% 		{  opacity: 1; }
+	100% 	{  opacity: 1; }
+}
+
+@-webkit-keyframes ready-popup-out-2012 {
+	0% 		{  opacity: 1; }
+	100% 	{  opacity: 0; }
+}
+
+#scorebars .showCoinAnimation {
+	-webkit-animation: showCoinAnimation .25s;
+}
+
+@-webkit-keyframes showCoinAnimation {
+	to { opacity: 1 }
+}
+
+#scorebars .show {
+	 opacity: 1
+}
+
+#info-p1, #info-p2 {
+	position: absolute;
+	top: 33px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-transition: left .42s ease;
+	z-index: 0;
+}
+
+#info-p1 .left-corner, #info-p2 .left-corner {
+	width: 17px;
+	height: 71px;
+	background: url(../../resources/images/game/info_corner.png);
+	-webkit-transition: left .42s ease;
+}
+
+#info-p1 .right-corner, #info-p2 .right-corner{
+	width: 17px;
+	height: 71px;
+	background: url(../../resources/images/game/info_corner.png);
+	-webkit-transform: scaleX(-1);
+}
+
+#info-p1 .info-center, #info-p2 .info-center {
+	height: 71px;
+	top: 33px;
+	background: url(../../resources/images/game/info_center.png);
+}
+
+#info-p1.hide, #info-p2.hide {
+	opacity: 0;
+	-webkit-transition: opacity .25s ease;	
+}
+
+#info-p1 .enter-info, #info-p2 .enter-info {
+	font-family: BigNoodle;
+	height: 35px;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	text-align: center;
+	font-size: 21px;
+}
+
+#info-p1 .arrow-info, #info-p2 .arrow-info  {
+	font-family: BigNoodle;
+	height: 41px;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	text-align: center;
+	font-size: 21px;
+}
+
+#info-p1 .enter-info .enter_icon_image {
+	background: url(../../resources/images/game/enter_icon_small.png) center no-repeat;
+	background-size: cover;
+	width: 27px;
+	height: 17px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#info-p2 .enter-info .coconut_icon_image {
+	background: url(../../resources/images/game/coconut_icon.png) center no-repeat;
+	background-size: cover;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#info-p1 .arrow-info .arrows_icon_image, #info-p2 .arrow-info .arrows_icon_image {
+	background: url(../../resources/images/game/arrows_control_small.png) center no-repeat;
+	background-size: cover;
+	width: 33px;
+	height: 15px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#tutorial {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 3;
+	width: 1280px;
+	height: 720px;
+	top: 0;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	opacity: 0;
+	-webkit-transition: opacity .6s ease;
+}
+
+#tutorial .tutorial-size {
+	width: 636px;
+	height: 367px;
+}
+
+#tutorial .title {
+	position: absolute;
+	left: 323px;
+	top: 100px;
+	width: 636px;
+	height: 88px;
+	background: url(../../resources/images/game/tutorial/warning_icon.png) center no-repeat;
+}
+
+#tutorial .message-to-play {
+	color: #FFF;
+	font-family: BigNoodle;
+	font-size: 40px;
+	position: absolute;
+	bottom: 107px;
+	width: 640px;
+	left: 320px;
+	text-align: center;
+}
+
+#tutorial .message-to-play .enter_icon_image {
+	background: url(../../resources/images/game/enter_icon_small_white.png) center no-repeat;
+	background-size: cover;
+	width: 39px;
+	height: 28px;
+	display: inline-block;
+	margin-top: 3px;
+}

@@ -1,0 +1,135 @@
+#SceneGameEnd {
+	background: rgba(0, 0, 0, 0.61);
+	z-index: 10;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	visibility: hidden;
+}
+
+#score-popup {
+	height: 483px;
+	visibility: hidden;
+}
+
+#score-popup header {
+	width: 412px;
+	height: 367px;
+	background: url(../../resources/images/win_level_popup309x275_anim.png) center no-repeat;
+	position: relative;
+	z-index: 1;
+	top: -68px;
+	background-position-x: 100%;
+}
+
+.palm-header-in {
+	-webkit-animation: palm-header-in .5s steps(8);
+	-webkit-animation-delay: 1s;
+}
+
+@-webkit-keyframes palm-header-in {
+	from 	{background-position-x: 0% }
+	to 		{background-position-x: 100% }
+}
+
+#calification{
+	width: 517px;
+	height: 160px;
+	position: absolute;
+	left: -52px;
+	top: 104px;
+	visibility: hidden;
+}
+
+.LANG-ENG #calification.failed {
+	background: url(../../resources/images/game/failed_title.png) center no-repeat;
+	top: 219px;
+}
+
+.LANG-ENG #calification.good {
+	background: url(../../resources/images/game/good_title.png) center no-repeat;
+}
+
+.LANG-ENG #calification.great {
+	background: url(../../resources/images/game/great_title.png) center no-repeat;
+}
+
+.LANG-ENG #calification.perfect {
+	background: url(../../resources/images/game/perfect_title.png) center no-repeat;
+}
+
+.LANG-ESP #calification.failed {
+	background: url(../../resources/images/game/failed_title_ES.png) center no-repeat;
+	top: 219px;
+}
+
+.LANG-ESP #calification.good {
+	background: url(../../resources/images/game/good_title_ES.png) center no-repeat;
+}
+
+.LANG-ESP #calification.great {
+	background: url(../../resources/images/game/great_title_ES.png) center no-repeat;
+}
+
+.LANG-ESP #calification.perfect {
+	background: url(../../resources/images/game/perfect_title_ES.png) center no-repeat;
+}
+
+.star-1,
+.star-2,
+.star-3 {
+	width: 311px;
+	height: 305px;
+	position: absolute;
+	visibility: hidden;
+}
+
+#score-popup header > div > div {
+	width: 311px;
+	height: 305px;
+	background: url(../../resources/images/star_win_anim.png) center no-repeat;
+	background-position-x: 0%;
+}
+
+@-webkit-keyframes star-obtain {
+	from 	{background-position-x: 0%; -webkit-transform: scale(1.5); }
+	to 		{background-position-x: 100%; -webkit-transform: scale(1);}
+}
+
+@-webkit-keyframes star-obtain-2012 {
+	from 	{background-position-x: 0%;}
+	to 		{background-position-x: 100%;}
+}
+
+#score-popup header .star-1 {
+	left: -76px;
+	top: 139px;
+	-webkit-transform: rotate(-15deg);
+}
+
+#score-popup header .star-2 {
+	top: 119px;
+	left: 49px;
+	-webkit-transform: scale(1.15);
+}
+
+#score-popup header .star-3 {
+	top: 139px;
+	left: 180px;
+	-webkit-transform: rotate(15deg);
+}
+	
+#score-menu {
+	width: 319px;
+	height: 173px;
+	background: url(../../resources/images/popup_bg.png) center 100% no-repeat;
+	margin: 0 auto;
+	position: relative;
+	top: -141px;
+	text-align: center;
+	padding-top: 63px;
+}
+
+#score-menu li {
+	padding: 8px 0 !important;
+}

@@ -1,0 +1,86 @@
+/* Scene Title */
+#SceneTitle {
+	background: url(../../resources/images/bg_main_menu.png) center no-repeat;
+	background-size: cover;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+    -webkit-box-align: center;
+	visibility: hidden;
+}
+
+#SceneTitle #logo {
+	height: 391px;
+	width: 456px;
+	background: url(../../resources/images/bamboo_logo.png) center no-repeat;
+	visibility: hidden;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	position: relative;
+}
+
+#logo-log {
+	height: 333px;
+	width: 329px;
+	background: url(../../resources/images/base_logo.png) center no-repeat;
+	-webkit-animation: log-rotate 10s linear infinite;
+}
+
+@-webkit-keyframes log-rotate {
+	to { -webkit-transform: rotate(360deg)}
+}
+
+#monkey-head {
+	height: 228px;
+	width: 320px;
+	position: absolute;
+	top: 76px;
+	left: 68px;
+	background: url(../../resources/images/face_logo.png) center no-repeat;
+	background-position-x: 0%;
+	-webkit-animation: monkey-head-animation .6s steps(6) infinite;
+}
+
+@-webkit-keyframes monkey-head-animation {
+	from { -webkit-transform: 0px}
+	to { background-position: -1914px}
+}
+
+#logo-title {
+	width: 416px;
+	height: 395px;
+	background: url(../../resources/images/name_logo.png) center no-repeat;
+	position: absolute;
+	left: 28px;
+}
+
+
+#logo-coconut {
+	width: 101px;
+	height: 97px;
+	background: url(../../resources/images/coconut_logo.png) center no-repeat;
+	-webkit-animation: coconut-rotate 3s ease-in-out infinite;
+	position: absolute;
+	left: 97px;
+	top: -4px;
+	-webkit-transform-origin: 60% 80%;
+}
+
+@-webkit-keyframes coconut-rotate {
+	0% 		{ -webkit-transform: rotate(-20deg)}
+	50% 	{ -webkit-transform: rotate(20deg)}
+	100% 	{ -webkit-transform: rotate(-20deg)}
+}
+
+#SceneMainMenu #logo {
+	background: url(../../resources/images/logo.png) center no-repeat;
+	height: 391px;
+	width: 456px;
+	visibility: hidden;
+}
+
+@-webkit-keyframes logo-in{
+	0% 		{ -webkit-transform: scale(.1,.1); }
+	60% 	{ -webkit-transform: scale(1.3,1.3); }
+	100% 	{ -webkit-transform: scale(1,1); }
+}

@@ -1,0 +1,395 @@
+/* Scene ArcadeLevels */
+#SceneArcadeLevels {
+	visibility: hidden;
+}
+#SceneArcadeLevels > header {
+	position: absolute;
+	width: 100%;
+	font-size: 41px;
+	top: 51px;
+}
+
+#SceneArcadeLevels ul, #SceneArcadeLevels li {
+	list-style: none;
+}
+
+#stages-list.transition {
+	-webkit-transition: -webkit-transform .4s ease-in-out ;
+}
+
+#stages-list > li {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	float: left;
+	height: 720px;
+	width: 1280px;
+}
+
+.levels-list {
+	background: url(../../resources/images/menu_level_bg.png) center no-repeat;
+	height: 432px;
+	width: 821px;
+	position: relative;
+	top: -27px;
+}
+
+#stages-list > li:nth-child(1) .levels-list{
+	background: url(../../resources/images/menu_level_01.png) center no-repeat;
+}
+
+#stages-list > li:nth-child(3) .levels-list{
+	background: url(../../resources/images/menu_level_02.png) center no-repeat;
+}
+
+#stage-3 header span {
+	color: #A7F1FF;
+	text-shadow: 	3px 3px 0px #197189,
+					-3px 3px 0px #197189, 
+					3px -3px 0px #197189, 
+					-3px -3px 0px #197189, 
+					0px -4px 0px #197189, 
+					0px 4px 0px #197189, 
+					4px 0px 0px #197189, 
+					-4px 0px 0px #197189;
+}
+
+#stages-list > li:nth-child(2) .levels-list{
+	background: url(../../resources/images/menu_level_04.png) center no-repeat;
+}
+
+#stage-2 header span {
+	color: #FCC2DE;
+	text-shadow: 	3px 3px 0px #AD2900, 
+					-3px 3px 0px #AD2900, 
+					3px -3px 0px #AD2900, 
+					-3px -3px 0px #AD2900, 
+					0px -4px 0px #AD2900, 
+					0px 4px 0px #AD2900, 
+					4px 0px 0px #AD2900, 
+					-4px 0px 0px #AD2900;
+}
+
+.levels-list header{
+	font-size: 73px;
+	padding-top: 40px;
+	position: relative;
+}
+
+#new-label {
+	position: relative;
+	top: -99px;
+	left: -25px;
+	-webkit-transform: rotate(-30deg) scale(.8);
+}
+
+.LANG-ENG #new-label {
+	background: url(../../resources/images/new_level.png) center no-repeat;
+}
+
+.LANG-ESP #new-label {
+	background: url(../../resources/images/new_level_ES.png) center no-repeat;
+}
+
+#stage-selector-left-arrow {
+	background: url(../../resources/images/stage_select_arrow_L.png) center no-repeat;
+	left: 67px;
+	-webkit-animation: arrows-left-movement .5s infinite alternate;
+}
+
+#stage-selector-left-arrow.new:after {
+	content: url(../../resources/images/new_level.png);
+	position: absolute;
+	-webkit-transform: rotate(-30deg);
+}
+
+#stage-selector-right-arrow.new:after {
+	content: url(../../resources/images/new_level.png);
+	position: absolute;
+	-webkit-transform: rotate(-30deg);
+	left: -25px;
+}
+
+.LANG-ESP #stage-selector-right-arrow.new:after, 
+.LANG-ESP #stage-selector-left-arrow.new:after {
+	content: url(../../resources/images/new_level_ES.png);
+}
+
+#stage-selector-right-arrow {
+	background: url(../../resources/images/stage_select_arrow_R.png) center no-repeat;
+	right: 67px;
+	-webkit-animation: arrows-right-movement .5s infinite alternate;
+}
+
+.arrows {
+	width: 43px;
+	height: 151px;
+	position: absolute;
+	top: 269px;
+	visibility: hidden;
+}
+
+@-webkit-keyframes arrows-left-movement {
+	to {-webkit-transform: scale(1.2);}
+}
+
+@-webkit-keyframes arrows-right-movement {
+	to {-webkit-transform: scale(1.2);}
+}
+
+#SceneArcadeLevels > header, 
+.levels-list header, 
+.levels-list ul li div, 
+#level-status-popup > div, 
+#current-stars,
+.unavailable-message {
+	text-shadow:	3px 3px 0px #894120,
+					-3px 3px 0px #894120,
+					3px -3px 0px #894120,
+					-3px -3px 0px #894120,
+					0px -4px 0px #894120,
+					0px 4px 0px #894120,
+					4px 0px 0px #894120,
+					-4px 0px 0px #894120;
+	text-align: center;
+	color: #ffdd17;
+	font-family: Grobold;
+}
+
+.levels-list header span {
+	position: relative;
+	top: 8px;
+	z-index: 10;
+}
+
+#stages-list .palm-trees div {
+	height: 103px;
+	position: absolute;
+	width: 217px;
+}
+
+#stages-list .palm-trees:first-child {
+	left: -107px;
+	position: absolute;
+	top: -23px;
+}
+
+#stages-list .palm-trees:last-child {
+	position: absolute;
+	right: 107px;
+	top: -23px;
+}
+
+#stages-list .palm-trees:first-child div {
+	background: url(../../resources/images/level_menu_leaf_left.png) center no-repeat;
+}
+
+#stages-list .palm-trees:last-child div {
+	background: url(../../resources/images/level_menu_leaf_right.png) center no-repeat;
+}
+
+#stages-list .palm-trees:first-child div:last-child {
+	-webkit-transform: rotate(-20deg);
+	-webkit-transform-origin: 100% 0%;
+}
+
+#stages-list .palm-trees:last-child div:last-child {
+	-webkit-transform: rotate(20deg);
+	-webkit-transform-origin: 0% 0%;
+}
+
+.levels-list ul {
+	margin-top: 20px;
+	margin-left: 113px;
+	width: 584px;
+}
+
+.levels-list.unavailable ul{
+	visibility: hidden;
+}
+
+.levels-list ul li {
+	float: left;
+	font-family: Grobold;
+	font-size: 48px;
+	margin: 0 3px 11px 3px;
+	padding: 16px;
+	position: relative;
+}
+
+.levels-list ul li div {
+	background: url(../../resources/images/level_bg_orange.png) center no-repeat;
+	height: 69px;
+	padding-top: 5px;
+	width: 79px;
+}
+
+.levels-list li span {
+	/*position: relative;
+	top: 16px;*/
+}
+
+.focus .levels-list ul li.available.focus div{
+	background: url(../../resources/images/level_bg_green_focus.png) center no-repeat;
+}
+
+.focus .levels-list ul li.focus div{
+	background: url(../../resources/images/level_bg_orange_focus.png) center no-repeat;
+}
+
+#stages-list .focus .available.levels-list ul li.focus:before {
+	background: url(../../resources/images/level_menu_cursor.png) no-repeat;
+	bottom: -13px;
+	content: "";
+	height: 49px;
+	position: absolute;
+	left: -21px;
+	width: 68px;
+}
+
+.levels-list ul li:after {
+	background: url(../../resources/images/stars_level_score.png) no-repeat;
+	background-position-x: -148px;
+	content: "";
+	height: 101px;
+	position: absolute;
+	right: -9px;
+	top: -3px;
+	width: 49px;
+}
+
+.levels-list ul li.one-star:after {
+	background-position-x: -99px;
+}
+
+.levels-list ul li.two-stars:after {
+	background-position-x: -49px;
+}
+
+.levels-list ul li.three-stars:after {
+	background-position-x: 0;
+}
+
+.levels-list ul li.available div,
+.levels-list ul li.new div{
+	background: url(../../resources/images/level_bg_green.png) center no-repeat;
+	color: #ffff00;
+	text-shadow: 	3px 3px 0px #1b792c,
+					-3px 3px 0px #1b792c,
+					3px -3px 0px #1b792c,
+					-3px -3px 0px #1b792c,
+					0px -4px 0px #1b792c,
+					0px 4px 0px #1b792c,
+					4px 0px 0px #1b792c,
+					-4px 0px 0px #1b792c;
+}
+
+.levels-list ul li:nth-child(5n) {
+	margin-right: 0;
+}
+.levels-list ul li:nth-child(n+6) {
+	margin-bottom: 0;
+}
+
+#stars-counter{
+	width: 268px;
+	height: 85px;
+	background: url(../../resources/images/star_total_bg.png) center no-repeat;
+	margin: 0 auto;
+	position: absolute;
+	left: 505px;
+	bottom: 108px;
+	text-align: right;
+} 
+
+#current-stars {
+	font-size: 51px;
+	width: 84px;
+	text-align: center;
+	position: absolute;
+	right: 33px;
+	top: 13px;
+}
+
+#enter-subtitle {
+	font-family: BigNoodle;
+	color: white;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	position: absolute;
+	width: 100%;
+	bottom: 40px;
+	font-size: 43px;
+	-webkit-animation: subtitle-enphasis 1s infinite alternate;
+}
+
+.enter-icon {
+	background: url(../../resources/images/enter_icon_small.png) center no-repeat;
+	display: inline-block;
+	width: 39px;
+	height: 28px;
+	position: relative;
+	top: -3px;
+}
+
+@-webkit-keyframes subtitle-enphasis {
+	to {-webkit-transform: scale(1.1)}
+}
+
+#level-status-popup {
+	bottom: 13px;
+	height: 93px;
+	position: absolute;
+	visibility: hidden;
+	width: 100%;
+	bottom: 27px;
+}
+
+#level-status-popup > div {
+	background: url(../../resources/images/stars_level_message.png) center no-repeat;
+	display: -webkit-box;
+	height: 95px;
+	margin: 0 auto;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	width: 645px;
+	font-size: 29px;
+}
+
+#level-stars-needed {
+	color: #de701a;
+	font-size: 40px;
+	margin: 0 11px;
+	text-shadow: 	3px 3px 0px #e8e1a3, 
+					-3px 3px 0px #E8E1A2, 
+					3px -3px 0px #e8e1a3, 
+					-3px -3px 0px #e8e1a3, 
+					0px -4px 0px #e8e1a3, 
+					0px 4px 0px #e8e1a3, 
+					4px 0px 0px #e8e1a3, 
+					-4px 0px 0px #e8e1a3;
+}
+
+.unavailable-message {
+	height: 223px;
+	position: absolute;
+	text-align: center;
+	width: 223px;
+	background: url(../../resources/images/lock_level_icon.png) center no-repeat;
+	left: 296px;
+	top: 133px;
+}
+
+.unavailable-message p {
+	position: absolute;
+	width: 133px;
+	text-align: center;
+	top: 121px;
+	left: 28px;
+}
+
+.unavailable-message p span {
+	color: #ffd600; 
+	font-size: 51px;
+}

@@ -1,0 +1,189 @@
+{
+    "row0": {
+        "type": "audio",
+        "content": [
+            {
+                "name" : [ "Door knock", "Tocar puerta" ],
+                "img"  : "images/icon_blue/icon_knock.png",
+                "path" : "sounds/audio/door01.mp3"
+            },
+            {
+                "name" : [ "Cat", "Gato" ],
+                "img"  : "images/icon_blue/icon_cat.png",
+                "path" : "sounds/audio/cat.mp3"
+            },
+            {
+                "name" : [ "Play with me", "Juega conmigo" ],
+                "img"  : "images/icon_blue/play_with_me.png",
+                "path" : "sounds/audio/kids_song01.mp3"
+            },
+            {
+                "name" : [ "Door knock", "Tocar puerta" ],
+                "img"  : "images/icon_blue/icon_knock.png",
+                "path" : "sounds/audio/door01.mp3"
+            },
+            {
+                "name" : [ "Cat", "Gato" ],
+                "img"  : "images/icon_blue/icon_cat.png",
+                "path" : "sounds/audio/cat.mp3"
+            },
+            {
+                "name" : [ "Play with me", "Juega conmigo" ],
+                "img"  : "images/icon_blue/play_with_me.png",
+                "path" : "sounds/audio/kids_song01.mp3"
+            }
+        ]
+    },
+    "row1": {
+        "type": "audio",
+        "content": [
+            {
+                "name" : [ "Door opens", "Abrir puerta" ],
+                "img"  : "images/icon_blue/icon_opens.png",
+                "path" : "sounds/audio/door_opens.mp3"
+            },
+            {
+                "name" : [ "Devil", "Demonio" ],
+                "img"  : "images/icon_blue/devil.png",
+                "path" : "sounds/audio/demon.mp3"
+            },
+            {
+                "name" : [ "Horror kids", "Niños terror" ],
+                "img"  : "images/icon_blue/horror_kids.png",
+                "path" : "sounds/audio/horror-kids1.mp3"
+            },
+            {
+                "name" : [ "Door opens", "Abrir puerta" ],
+                "img"  : "images/icon_blue/icon_opens.png",
+                "path" : "sounds/audio/door_opens.mp3"
+            },
+            {
+                "name" : [ "Devil", "Demonio" ],
+                "img"  : "images/icon_blue/devil.png",
+                "path" : "sounds/audio/demon.mp3"
+            },
+            {
+                "name" : [ "Horror kids", "Niños terror" ],
+                "img"  : "images/icon_blue/horror_kids.png",
+                "path" : "sounds/audio/horror-kids1.mp3"
+            }
+        ]
+    },
+    "row2": {
+        "type": "audio",
+        "content": [
+            {
+                "name" : [ "Footsteps", "Footsteps" ],
+                "img"  : "images/icon_blue/icon_footsteps.png",
+                "path" : "sounds/audio/steps_footsteps.mp3"
+            },
+            {
+                "name" : [ "Cat", "Gato" ],
+                "img"  : "images/icon_blue/want_to_kill.png",
+                "path" : "sounds/audio/they_want_to_kill_you.mp3"
+            },
+            {
+                "name" : [ "Falling_dish", "Cae_plato" ],
+                "img"  : "images/icon_blue/falling.png",
+                "path" : "sounds/audio/falling_dish.mp3"
+            },
+            {
+                "name" : [ "Footsteps", "Footsteps" ],
+                "img"  : "images/icon_blue/icon_footsteps.png",
+                "path" : "sounds/audio/steps_footsteps.mp3"
+            },
+            {
+                "name" : [ "Cat", "Gato" ],
+                "img"  : "images/icon_blue/want_to_kill.png",
+                "path" : "sounds/audio/they_want_to_kill_you.mp3"
+            },
+            {
+                "name" : [ "Falling_dish", "Cae_plato" ],
+                "img"  : "images/icon_blue/falling.png",
+                "path" : "sounds/audio/falling_dish.mp3"
+            }
+        ]
+    },
+    "row3": {
+        "type": "video",
+        "content": [
+            {
+                "name" : [ "hand_noise", "hand_noise" ],
+                "img"  : "images/icon_blue/hand_noise.png",
+                "img_gif"  : "images/icon_blue/hand_noise.gif",
+                "path" : "sounds/video/hand_noise.mp4"
+            },
+            {
+                "name" : [ "Noise_face", "Noise_face" ],
+                "img"  : "images/icon_blue/Noise_face.png",
+                "img_gif"  : "images/icon_blue/Noise_face.gif",
+                "path" : "sounds/video/Noise_face.mp4"
+            },
+            {
+                "name" : [ "Noise", "Noise" ],
+                "img"  : "images/icon_blue/icon_noise.png",
+                "img_gif"  : "images/icon_blue/white_noise.gif",
+                "path" : "sounds/video/noise.mp4"
+            },
+            {
+                "name" : [ "hand_noise", "hand_noise" ],
+                "img"  : "images/icon_blue/hand_noise.png",
+                "img_gif"  : "images/icon_blue/hand_noise.gif",
+                "path" : "sounds/video/hand_noise.mp4"
+            },
+            {
+                "name" : [ "Noise_face", "Noise_face" ],
+                "img"  : "images/icon_blue/Noise_face.png",
+                "img_gif"  : "images/icon_blue/Noise_face.gif",
+                "path" : "sounds/video/Noise_face.mp4"
+            },
+            {
+                "name" : [ "Noise", "Noise" ],
+                "img"  : "images/icon_blue/icon_noise.png",
+                "img_gif"  : "images/icon_blue/white_noise.gif",
+                "path" : "sounds/video/noise.mp4"
+            }
+        ]
+    },
+    "row4": {
+        "type": "video",
+        "content": [
+            {
+                "name" : [ "Pumkim", "Calabaza" ],
+                "img"  : "images/icon_blue/pumkim_video.png",
+                "img_gif"  : "images/icon_blue/pumkim_video.gif",
+                "path" : "sounds/video/pumpkim_1.mp4"
+            },
+            {
+                "name" : [ "demon_02", "demon_02" ],
+                "img"  : "images/icon_blue/demon_02.png",
+                "img_gif"  : "images/icon_blue/demon_02.gif",
+                "path" : "sounds/video/demon_02.mp4"
+            },
+            {
+                "name" : [ "Girl", "Chica" ],
+                "img"  : "images/icon_blue/girl_video.png",
+                "img_gif"  : "images/icon_blue/girl_video.gif",
+                "path" : "sounds/video/girl_video.mp4"
+            },
+            {
+                "name" : [ "Pumkim", "Calabaza" ],
+                "img"  : "images/icon_blue/pumkim_video.png",
+                "img_gif"  : "images/icon_blue/pumkim_video.gif",
+                "path" : "sounds/video/pumpkim_1.mp4"
+            },
+            {
+                            "name" : [ "demon_02", "demon_02" ],
+                "img"  : "images/icon_blue/demon_02.png",
+                "img_gif"  : "images/icon_blue/demon_02.gif",
+                "path" : "sounds/video/demon_02.mp4"
+            },
+            {
+                "name" : [ "Girl", "Chica" ],
+                "img"  : "images/icon_blue/girl_video.png",
+                "img_gif"  : "images/icon_blue/girl_video.gif",
+                "path" : "sounds/video/girl_video.mp4"
+            }
+        ]
+    }
+}

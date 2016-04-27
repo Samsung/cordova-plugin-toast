@@ -1,0 +1,120 @@
+#SceneGamePause, 
+#SceneTwoPlayersGamePause {
+	background: rgba(0, 0, 0, 0.61);
+	z-index: 10;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+
+#game-pause-popup,
+#two-game-pause-popup,
+#popup-exit {
+	width: 556px;
+	height: 405px
+}
+
+#game-pause-popup header,
+#two-game-pause-popup header,
+#popup-exit header {
+	background: url(../../resources/images/popup_top_leaf.png) center no-repeat;
+	width: 100%;
+	height: 236px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	position: relative;
+	z-index: 1;
+	background-position-x: -3px;
+	text-align: center;
+	color: #ffdd17 !important;
+}
+
+#game-pause-popup header,
+#two-game-pause-popup header {
+	text-transform: uppercase;
+	font-size: 67px !important;
+}
+
+#popup-exit header {
+	
+}
+#popup-exit-list li {
+	top: 152px !important;
+}
+
+#game-pause-popup header span,
+#two-game-pause-popup header span,
+#popup-exit header span {
+	position: relative;
+	top: -16px;
+}
+
+#game-pause-list,
+#two-game-pause-list,
+#popup-exit-list {
+	background: url(../../resources/images/popup_bg.png) center no-repeat;
+	width: 319px;
+	height: 331px;
+	margin: 0 auto;
+	position: relative;
+	top: -143px;
+}
+
+#game-pause-list li,  
+#game-pause-popup header,
+#two-game-pause-list li,
+#two-game-pause-popup header,
+#popup-exit-list li,
+#popup-exit header {
+	color: #d39811;
+	font-family: Grobold;
+	font-size: 40px;
+	list-style: none;
+	text-shadow: 3px 3px 0px #894120,
+				 -3px 3px 0px #894120,
+				 3px -3px 0px #894120,
+				 -3px -3px 0px #894120,
+				 0px -4px 0px #894120,
+				 0px 4px 0px #894120,
+				 4px 0px 0px #894120,
+				 -4px 0px 0px #894120;
+}
+
+#game-pause-list li,
+#two-game-pause-list li,
+#popup-exit-list li {
+	position: relative;
+	top: 116px;
+	text-align: center;
+	padding: 8px 0px;
+}
+
+#game-pause-list li.focus,
+#two-game-pause-list li.focus,
+#popup-exit-list li.focus {
+	color: #ffdd17;
+}
+
+#game-pause-list > li.focus div:first-child,
+#two-game-pause-list > li.focus div:first-child,
+#popup-exit-list > li.focus div:first-child {
+	left: -56px;
+}
+
+#game-pause-list > li.focus div:last-child,
+#two-game-pause-list > li.focus div:last-child,
+#popup-exit-list > li.focus div:last-child {
+	right: -56px;
+}
+
+#game-pause-list > li.focus div,
+#two-game-pause-list > li.focus div,
+#popup-exit-list > li.focus div {
+	-webkit-animation: options-menu-selected 1s ease-in-out infinite;
+	background: url(../../resources/images/menu_banana.png) center no-repeat;
+	height: 52px;
+	position: absolute;
+	top: 4px;
+	width: 51px;
+}

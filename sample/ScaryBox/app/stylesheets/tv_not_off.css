@@ -1,0 +1,55 @@
+.tvnotoff {
+	width  : 560px;
+	height : 109px;
+	margin : 0px auto;
+}
+
+.tvnotoff._en {
+	background-image  : url(../../images/tvnotoff_en.png);
+	-webkit-animation : play-tvnotoff 0.8s steps(7) infinite;
+}
+
+.tvnotoff._es {
+	background-image  : url(../../images/tvnotoff_es.png);
+	-webkit-animation : play-tvnotoff 0.8s steps(7) infinite;
+}
+
+@-webkit-keyframes play-tvnotoff {
+	100% { background-position: -3920px; }
+}
+
+#chouza-bg{
+	width           : 1280px;
+	height          : 720px;
+	background      : transparent url(../../images/static_2.gif);
+	position        : absolute;
+	top             : 0px;
+	left            : 0px;
+	z-index         : 100
+}
+
+#yo-soy-chouza{
+	background : transparent url(../../EasterEgg/Chouza.png) top center no-repeat;
+	position   : absolute;
+	display    : block;
+	bottom     : -966.5px;
+	right      : 0px;
+	width      : 725px;
+	height     : 966.5px;
+	z-index    : 500;
+}
+
+#yo-soy-chouza.anim{
+	-webkit-animation-name      : chouza-says-whoopsie;
+	-webkit-animation-fill-mode : forwards;
+	-webkit-animation-duration  : 8s;
+}
+
+@-webkit-keyframes chouza-says-whoopsie {
+	0% { -webkit-transform: translate(0, 0);}
+	25% { -webkit-transform: translate(-30%, -100%); }
+	50% { -webkit-transform: translate(-50%, -70%); }
+	75% { -webkit-transform: translate(-80%, 0);}
+	85% { -webkit-transform: translate(-60%, -50%);}
+	100% { -webkit-transform: translate(-50%, 0);}
+}

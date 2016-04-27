@@ -1,0 +1,411 @@
+/* Scene GameStart */
+#SceneGameStart {
+	/*background: #0c0;*/
+	/*visibility: hidden;*/
+}
+
+.game-start-background-normal {
+	background: url(../../resources/images/game/envi_normal/bg_main_screen.png) center no-repeat;
+}
+
+.game-start-background-night {
+	background: url(../../resources/images/game/envi_night/bg_main_screen.png) center no-repeat;
+}
+.game-start-background-beach {
+	background: url(../../resources/images/game/envi_beach/bg_main_screen.png) center no-repeat;
+}
+#SceneGameStart .container {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+}
+
+#SceneGameStart .top {
+	height: 89px;
+}
+
+#SceneGameStart .left {
+	position: absolute;
+	width: 317px;
+	height: 497px;
+	margin-top: 133px;
+	margin-left: -33px;
+	z-index: 2;
+}
+#SceneGameStart .left {
+	background: url(../../resources/images/game/envi_normal/palms_arcade_mode_L.png) center no-repeat;
+}
+#SceneGameStart.night .left {
+	background: url(../../resources/images/game/envi_night/palms_arcade_mode_L.png) center no-repeat;
+}
+#SceneGameStart.beach .left {
+	background: url(../../resources/images/game/envi_beach/palms_arcade_mode_L.png) center no-repeat;
+}
+#SceneGameStart .left #level-leaf {
+	width: 240px;
+	height: 111px;
+	margin-top: -40px;
+	background: url(../../resources/images/game/level_branch_bg.png) center no-repeat;
+}
+
+#SceneGameStart .left #coconut-counter {
+	width: 185px;
+	height: 208px;
+	margin-left: 45px;
+}
+#SceneGameStart .left #coconut-counter .shadow {
+	opacity: .6;
+	position: absolute;
+	width: 185px;
+	height: 208px;
+	background: url(../../resources/images/game/coconut_shadow.png) center no-repeat;
+}
+#SceneGameStart .left #coconut-counter .wood {
+	position: absolute;
+	width: 168px;
+	height: 175px;
+	margin-left: 9px;
+	margin-top: 15px;
+	background: url(../../resources/images/game/coconuts_counter_bg.png) center no-repeat;
+}
+
+#SceneGameStart .center {
+	margin-left: 8px;
+	width: 884px;
+	height: 565px;
+	background: #FFF;
+}
+#SceneGameStart .center {
+	background: url(../../resources/images/game/envi_normal/arcade_mode_panel.png) center no-repeat;
+}
+#SceneGameStart.night .center {
+	background: url(../../resources/images/game/envi_night/arcade_mode_panel.png) center no-repeat;
+}
+#SceneGameStart.beach .center {
+	background: url(../../resources/images/game/envi_beach/arcade_mode_panel.png) center no-repeat;
+}
+#SceneGameStart .right {
+	width: 260px;
+	height: 483px;
+	position: absolute;
+	margin-left: 135px;
+	margin-top: 148px;
+	z-index: 2;
+}
+#SceneGameStart .right {
+	background: url(../../resources/images/game/envi_normal/palms_arcade_mode_R.png) center no-repeat;
+}
+#SceneGameStart.night .right {
+	background: url(../../resources/images/game/envi_night/palms_arcade_mode_R.png) center no-repeat;
+}
+#SceneGameStart.beach .right {
+	background: url(../../resources/images/game/envi_beach/palms_arcade_mode_R.png) center no-repeat;
+}
+
+#SceneGameStart .right #coin-wood {
+	position: absolute;
+	margin-left: 100px;
+	margin-top: -67px;
+	width: 119px;
+	height: 365px;
+}
+#SceneGameStart .right #coin-wood .shadow {
+	position: absolute;
+	opacity: .6;
+	width: 119px;
+	height: 365px;
+	background: url(../../resources/images/game/shadows_coins.png) center no-repeat;
+}
+
+#SceneGameStart .right #coin-wood .wood {
+	position: absolute;
+	width: 80px;
+	height: 327px;
+	margin-left: 20px;
+	margin-top: 16px;
+	background: url(../../resources/images/game/coin_bg.png) center no-repeat;
+}
+
+#SceneGameStart.night .left .fire .left-torch {
+	margin-top: -12px;
+	margin-left: 29px;
+}
+
+#SceneGameStart.night .left .fire .right-torch {
+	margin-top: -29px;
+	margin-left: 117px;
+	-webkit-transform: rotate(15deg);
+}
+
+#SceneGameStart.night .right .fire {
+	margin-top: 288px;
+	margin-left: 81px;
+}
+
+#SceneGameStart.night .right .fire .left-torch {
+	margin-left: 29px;
+	-webkit-transform: rotate(-15deg);
+}
+
+#SceneGameStart.night .right .fire .right-torch {
+	margin-top: -117px;
+	margin-left: 117px;
+}
+
+#SceneGameStart.night .fire-torch{
+	width: 61px;
+	height: 73px;
+	background: url(../../resources/images/game/envi_night/flames_01.png);
+	-webkit-animation: fireAnimation .6s steps(8) infinite;
+}
+
+@-webkit-keyframes fireAnimation {
+   from { background-position: 0px; }
+     to { background-position: 100%; }
+}
+
+#SceneGameStart .stage-number {
+	width: 160px;
+	color: #e5be08;
+	font-family: Grobold;
+	font-size: 25px;
+	text-shadow: 	3px 3px 0px #265100, 
+ 					-3px 3px 0px #265100, 
+ 					3px -3px 0px #265100, 
+ 					-3px -3px 0px #265100, 
+ 					0px -4px 0px #265100, 
+ 					0px 4px 0px #265100, 
+ 					4px 0px 0px #265100, 
+ 					-4px 0px 0px #265100;
+	position: absolute;
+	margin-left: 56px;
+	text-align: center;
+	margin-top: 3px;
+}
+
+#SceneGameStart .level-number {
+	color: #ffdd17;
+	font-family: Grobold;
+	font-size: 39px;
+	text-shadow: 	3px 3px 0px #265100, 
+ 					-3px 3px 0px #265100, 
+ 					3px -3px 0px #265100, 
+ 					-3px -3px 0px #265100, 
+ 					0px -4px 0px #265100, 
+ 					0px 4px 0px #265100, 
+ 					4px 0px 0px #265100, 
+ 					-4px 0px 0px #265100;
+	position: absolute;
+	margin-left: 59px;
+	margin-top: 29px;
+}
+
+#SceneGameStart .txt-coconuts {
+	width: 168px;
+	color: #663B18;
+	font-family: Grobold;
+	font-size: 38px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+#SceneGameStart .coconuts-number {
+	width: 168px;
+	color: #FFF;
+	font-family: Grobold;
+	font-size: 93px;
+	text-shadow: 3px 3px 0px #663B18, 
+				-3px 3px 0px #663B18, 
+				3px -3px 0px #663B18, 
+				-3px -3px 0px #663B18, 
+				0px -4px 0px #663B18, 
+				0px 4px 0px #663B18, 
+				4px 0px 0px #663B18, 
+				-4px 0px 0px #663B18;
+	position: relative;
+	text-align: center;
+	/*margin-top: 20px;*/
+}
+
+#SceneGameStart #coin-wood .coin {
+	position: absolute;
+	width: 103px;
+	height: 103px;
+	left: -12px;
+	background: url(../../resources/images/game/coin.png);
+	opacity: 0;
+}
+
+#SceneGameStart #coin-wood .coin:nth-child(1) {
+	top: 25px;
+}
+#SceneGameStart #coin-wood .coin:nth-child(2) {
+	top: 112px;
+}
+#SceneGameStart #coin-wood .coin:nth-child(3) {
+	top: 195px;
+}
+
+#SceneGameStart #coin-wood .coin.showCoinAnimation {
+	-webkit-animation: showCoinAnimation .25s;
+}
+
+@-webkit-keyframes showCoinAnimation {
+	to { opacity: 1 }
+}
+
+#SceneGameStart #coin-wood .coin.show {
+	 opacity: 1
+}
+
+#SceneGameStart .top .info {
+	position: absolute;
+	top: 33px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-transition: left .42s ease;
+}
+
+#SceneGameStart .top .info .left-corner{
+	width: 16px;
+	height: 71px;
+	background: url(../../resources/images/game/info_corner.png);
+}
+
+#SceneGameStart .top .info .right-corner{
+	width: 16px;
+	height: 71px;
+	background: url(../../resources/images/game/info_corner.png);
+	-webkit-transform: scaleX(-1);
+}
+
+#SceneGameStart .top .info .info-center {
+	height: 71px;
+	top: 33px;
+	background: url(../../resources/images/game/info_center.png);
+	font-size: 21px;
+}
+
+#SceneGameStart .top .info.hide {
+	opacity: 0;
+	-webkit-transition: opacity .25s ease;	
+}
+
+#SceneGameStart .top .info .enter-info {
+	font-family: BigNoodle;
+	text-align: center;
+	height: 36px;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+
+#SceneGameStart .top .info .arrow-info {
+	font-family: BigNoodle;
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+	text-align: center;
+	height: 40px;
+}
+
+#SceneGameStart .top .info .enter-info .enter_icon_image {
+	background: url(../../resources/images/game/enter_icon_small.png) center no-repeat;
+	background-size: cover;
+	width: 27px;
+	height: 17px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#SceneGameStart .top .info .arrow-info .arrows_icon_image {
+	background: url(../../resources/images/game/arrows_control_small.png) center no-repeat;
+	background-size: cover;
+	width: 33px;
+	height: 15px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#tutorial {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 2;
+	width: 1280px;
+	height: 720px;
+	top: 0;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	opacity: 0;
+	-webkit-transition: opacity .6s ease;
+}
+
+#tutorial .tutorial-size {
+	width: 636px;
+	height: 367px;
+}
+
+#tutorial .alert {
+	position: absolute;
+	left: 251px;
+	top: 80px;
+	width: 145px;
+	height: 124px;
+	background: url(../../resources/images/game/tutorial/warning_icon.png) center no-repeat;
+}
+
+#tutorial .message-to-play {
+	color: #FFF;
+	font-family: BigNoodle;
+	font-size: 40px;
+	position: absolute;
+	bottom: 107px;
+	width: 640px;
+	left: 320px;
+	text-align: center;
+}
+
+#tutorial .message-to-play .enter_icon_image {
+	background: url(../../resources/images/game/enter_icon_small_white.png) center no-repeat;
+	background-size: cover;
+	width: 39px;
+	height: 28px;
+	display: inline-block;
+	margin-top: 3px;
+}
+
+#SceneGameStart .clickable-column{
+	width: 107px;
+	height: 488px;
+	position: absolute;
+	top: 133px;
+	z-index: 5;
+}
+
+#SceneGameStart #column-c1{
+	left: 183px;
+}
+
+#SceneGameStart #column-c2{
+	left: 319px;
+}
+
+#SceneGameStart #column-c3{
+	left: 455px;
+}
+
+#SceneGameStart #column-c4{
+	left: 593px;
+}
+
+#SceneGameStart #column-c5{
+	left: 731px;
+}
+
+#SceneGameStart #column-c6{
+	left: 867px;
+}
+
+#SceneGameStart #column-c7{
+	left: 1004px;
+}

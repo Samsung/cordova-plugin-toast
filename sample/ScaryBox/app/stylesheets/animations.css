@@ -1,0 +1,84 @@
+.fade_in{
+	-webkit-animation: fade_in .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_in{
+	from {opacity: 0;}
+}
+.fade_out{
+	-webkit-animation: fade_out .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_out{
+	to {opacity: 0;}
+}
+
+.fade_in_from_bottom{
+	-webkit-animation: fade_in_from_bottom_title .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_in_from_bottom_title{
+	from {-webkit-transform: translateY(100%) scale(1); opacity: 0;}
+}
+.fade_out_to_bottom{
+	-webkit-animation: fade_out_to_bottom .3s ease;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_out_to_bottom{
+	to {-webkit-transform: translateY(100%); opacity: 0;}
+}
+
+.fade_in_from_left{
+	-webkit-animation: fade_in_from_left .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_in_from_left{
+	from {-webkit-transform: translateX(-100%); opacity: 0;}
+}
+.fade_out_to_left{
+	-webkit-animation: fade_out_to_left .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_out_to_left{
+	to {-webkit-transform: translateX(-100%); opacity: 0;}
+}
+
+.fade_in_from_right{
+	-webkit-animation: fade_in_from_right .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_in_from_right{
+	from {-webkit-transform: translateX(100%); opacity: 0;}
+}
+.fade_out_to_right{
+	-webkit-animation: fade_out_to_right .3s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_out_to_right{
+	to {-webkit-transform: translateX(100%); opacity: 0;}
+}
+
+.fade_in_from_top{
+	-webkit-animation: fade_in_from_top .3s ease;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_in_from_top{
+	from {-webkit-transform: translateY(-100%); opacity: 0;}
+}
+.fade_out_to_top{
+	-webkit-animation: fade_out_to_top .3s ease;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes fade_out_to_top{
+	to {-webkit-transform: translateY(-100%); opacity: 0;}
+}
+
+.pulse{
+	-webkit-animation: pulse .3s ease;
+	-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes pulse{
+	0% {-webkit-transform: scale(1);}
+	50% {-webkit-transform: scale(1.3);}
+	100% {-webkit-transform: scale(1);}
+}

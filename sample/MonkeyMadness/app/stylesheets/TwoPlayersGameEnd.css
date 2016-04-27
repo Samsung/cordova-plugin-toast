@@ -1,0 +1,207 @@
+#SceneTwoPlayersGameEnd {
+	background: rgba(0, 0, 0, 0.61);
+	z-index: 3;
+	visibility: hidden;
+}
+
+#player-results {
+	text-align: center;
+	margin-top: 93px;
+	visibility: hidden;
+}
+
+#player-results > div {
+	height: 331px;
+	width: 331px;
+	display: inline-block;
+	position: relative;
+}
+
+#player-results .player-1 {
+	margin-right: 307px;
+}
+
+#player-results .flower-bg {
+	height: 331px;
+	width: 331px;
+}
+
+#player-results .player-1 .flower-bg {
+	-webkit-animation: player-1-rotation 20s linear infinite;
+}
+
+@-webkit-keyframes player-1-rotation {
+	to	{-webkit-transform: rotate(360deg)}
+}
+
+#player-results .player-2 .flower-bg {
+	-webkit-animation: player-2-rotation 20s linear infinite;
+}
+
+@-webkit-keyframes player-2-rotation {
+	to	{-webkit-transform: rotate(-360deg)}
+}
+
+#player-results .winner .flower-bg {
+	background: url(../../resources/images/game/2P_win_bg.png) center no-repeat;
+}
+
+#player-results  .flower-bg {
+	background: url(../../resources/images/game/2P_lose_bg.png) center no-repeat;
+}
+
+#player-results .monkey-head {
+	width: 209px;
+	height: 155px;
+	position: absolute;
+	left: 53px;
+	top: 80px;
+}
+
+#player-results .winner .monkey-head {
+	-webkit-animation: player-winner-rotation ease-in-out 1.5s infinite alternate, monkey-lose 3s steps(1) infinite !important;
+	-webkit-transform-origin: 50% 80%;
+	width: 196px;
+}
+
+@-webkit-keyframes player-winner-rotation {
+	from	{-webkit-transform: rotate(-5deg)}
+	to		{-webkit-transform: rotate(5deg)}
+}
+
+#player-results .winner .monkey-head {
+	background: url(../../resources/images/game/2p_win_face_anim.png) center no-repeat;
+}
+
+#player-results div:not(.winner)  .monkey-head {
+	background: url(../../resources/images/game/2p_lose_face_anim.png) center no-repeat;
+	-webkit-animation: monkey-lose .3s steps(1) infinite;
+}
+
+@-webkit-keyframes monkey-lose {
+	0% 		{background-position-x: 0%}
+	50% 	{background-position-x: 100%}
+	100% 	{background-position-x: 100%}
+}
+
+.winner .winner-banner {
+	width: 393px;
+	height: 87px;
+	position: absolute;
+	left: -32px;
+	bottom: -5px;
+	-webkit-animation: winner-pulse .5s ease-in-out infinite alternate;
+}
+
+.LANG-ENG .winner .winner-banner {
+	background: url(../../resources/images/game/2P_winner_text_EN.png) center no-repeat;
+}
+
+.LANG-ESP .winner .winner-banner {
+	background: url(../../resources/images/game/2P_winner_text_ES.png) center no-repeat;
+}
+
+@-webkit-keyframes winner-pulse {
+	to	{-webkit-transform: scale(1.1)}
+}
+
+@-webkit-keyframes players-in {
+	0%		{-webkit-transform: translateY(-400px)}
+	40%		{-webkit-transform: translateY(0px)}
+	60%		{-webkit-transform: translateY(-40px)}
+	80%		{-webkit-transform: translateY(0px)}
+	90%		{-webkit-transform: translateY(-13px)}
+	100%	{-webkit-transform: translateY(0px)}
+}
+
+
+#two-players-end-menu {
+	background: url(../../resources/images/2P_popup_bg.png) center no-repeat;
+	width: 319px;
+	height: 169px;
+	margin: 27px auto;
+	text-align: center;
+	visibility: hidden;
+	padding-top: 40px;
+}
+
+#two-players-end-menu li,  
+#score-menu li {
+	color: #d39811;
+	font-family: Grobold;
+	font-size: 40px;
+	padding: 8px 0;
+	list-style: none;
+	position: relative;
+	text-shadow: 	3px 3px 0px #894120,
+					-3px 3px 0px #894120,
+					3px -3px 0px #894120,
+					-3px -3px 0px #894120,
+					0px -4px 0px #894120,
+					0px 4px 0px #894120,
+					4px 0px 0px #894120,
+					-4px 0px 0px #894120;
+	top: 3px;
+}
+
+#two-players-end-menu li.focus,  
+#score-menu li.focus {
+	color: #ffdd17;
+}
+
+#two-players-end-menu li span,
+#score-menu li span {
+	position: relative;
+}
+
+/*
+#two-players-end-menu > li.focus:before,
+#score-menu > li.focus:before  {
+	background: rgba(255,255,255,.5);
+	content: '';
+	height: 30px;
+	left: -21px;
+	position: absolute;
+	width: 120%;
+}
+*/
+
+#two-players-end-menu > li.focus div:first-child,
+#score-menu > li.focus div:first-child  {
+	left: -56px;
+}
+#two-players-end-menu > li.focus div:last-child,
+#score-menu > li.focus div:last-child  {
+	right: -56px;
+}
+
+#two-players-end-menu > li.focus div,
+#score-menu > li.focus div  {
+	-webkit-animation: options-menu-selected 1s ease-in-out infinite;
+	background: url(../../resources/images/menu_banana.png) center no-repeat;
+	height: 52px;
+	position: absolute;
+	top: 4px;
+	width: 51px;
+}
+
+#two-players-end-menu li:first-child {
+	padding-bottom: 13px;
+}
+
+#draw-banner {
+	width: 303px;
+	height: 69px;
+	bottom: 305px;
+	left: 489px;
+	visibility: hidden;
+	position: absolute;
+}
+
+.LANG-ENG #draw-banner {
+	background: url(../../resources/images/game/2P_draw_text_EN.png) center no-repeat;
+}
+
+.LANG-ESP #draw-banner {
+	background: url(../../resources/images/game/2P_draw_text_ES.png) center no-repeat;
+}

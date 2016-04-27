@@ -1,0 +1,94 @@
+/* Scene MainMenu */
+#SceneMainMenu {
+	display: -webkit-box;
+	visibility: hidden;
+	-webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+
+#options-container {
+	background: url(../../resources/images/bg_main_menu.png) center no-repeat;
+	background-size: cover;
+	visibility: hidden;
+}
+
+#SceneMainMenu #logo {
+	-webkit-transform: translateY(-156px);
+}
+
+#options-menu {
+	bottom: 61px;
+	position: absolute;
+	text-align: center;
+}
+
+@-webkit-keyframes option-menu-in {
+	0%		{ -webkit-transform: translateY(267px); }
+	70%		{ -webkit-transform: translateY(-27px); }
+	100%	{ -webkit-transform: translateY(0); }
+}
+
+#options-menu > li {
+	background: url(../../resources/images/menu_item01.PNG) center no-repeat;
+	color: #D39811;
+	font-family: Grobold;
+	font-size: 51px;
+	height: 91px;
+	list-style: none;
+	margin-bottom: 13px;
+	position: relative;
+	text-shadow: 	3px 3px 0px #894120,
+					-3px 3px 0px #894120,
+					3px -3px 0px #894120,
+					-3px -3px 0px #894120,
+					0px -4px 0px #894120,
+					0px 4px 0px #894120,
+					4px 0px 0px #894120,
+					-4px 0px 0px #894120;
+	visibility: hidden;
+	width: 347px;
+}
+
+#options-menu > li span {
+	position: relative;
+	top: 13px;
+}
+
+@-webkit-keyframes option-focus {
+	0%		{ -webkit-transform: scale(1); }
+	50%		{ -webkit-transform: scale(1.1); }
+	100%	{ -webkit-transform: scale(1); }
+	
+}
+
+#options-menu > li.focus {
+	color: #ffdd17;
+}
+
+#options-menu.animate-menu > li.focus {
+	-webkit-animation: option-focus .2s;
+}
+
+@-webkit-keyframes options-menu-selected {
+	0% 		{ -webkit-transform: rotate(-12deg); }
+	50%		{ -webkit-transform: rotate(12deg); }
+	100%	{ -webkit-transform: rotate(-12deg); }
+}
+
+#options-menu > li.focus div {
+	-webkit-animation: options-menu-selected 1s ease-in-out infinite;
+	background: url(../../resources/images/menu_banana.png) center no-repeat;
+	height: 52px;
+	position: absolute;
+	top: 17px;
+	width: 49px;
+}
+
+#options-menu > li.focus div:first-child {
+	left: -56px;
+}
+
+#options-menu > li.focus div:last-child {
+	right: -56px;
+}
+ 

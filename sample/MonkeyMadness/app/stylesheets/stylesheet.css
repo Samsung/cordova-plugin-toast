@@ -1,0 +1,65 @@
+/* Layout */
+#canvasdiv {
+	visibility: hidden;
+}
+
+@font-face{
+	font-family: Grobold;
+	src: url('../../resources/fonts/GROBOLD.ttf')
+}
+
+@font-face{
+	font-family: BigNoodle;
+	src: url('../../resources/fonts/big_noodle_titling.ttf')
+}
+
+
+body {
+	background: #000000;
+	height: 720px;
+	overflow: hidden;
+	position: relative;
+	width: 1280px;
+}
+
+body,
+ul,
+ol,
+li {
+	margin: 0;
+	padding: 0
+}
+
+.scene {
+	height: 720px;
+	left: 0;
+	overflow: hidden;
+	position: absolute;	
+	top: 0;
+	width: 1280px;
+}
+
+.visible {
+	visibility: visible !important;
+}
+
+#canvas {
+	position: absolute;
+	z-index: 2;
+}
+
+#dim {
+	background: rgba(0,0,0,.61);
+	display: -webkit-box;
+	-webkit-box-pack: center;
+    -webkit-box-align: center;
+	display: none;
+	z-index: 11;
+}
+#score-menu > li {
+    z-index: 8;
+}
+#score-popup.hide,
+#two-players-end-menu.hide {
+	display: none;
+}

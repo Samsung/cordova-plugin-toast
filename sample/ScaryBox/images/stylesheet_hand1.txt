@@ -1,0 +1,35 @@
+.sprite {
+    background-image: url(spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-2hand_1 {
+    width: 186px;
+    height: 275px;
+    background-position: 0 0;
+}
+
+.sprite-2hand_2 {
+    width: 186px;
+    height: 275px;
+    background-position: -186px 0;
+}
+
+.sprite-2hand_3 {
+    width: 186px;
+    height: 275px;
+    background-position: -372px 0;
+}
+
+.sprite-2hand_4 {
+    width: 186px;
+    height: 275px;
+    background-position: -558px 0;
+}
+
+.sprite-2hand_5 {
+    width: 186px;
+    height: 275px;
+    background-position: -744px 0;
+}
