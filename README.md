@@ -14,6 +14,7 @@ function onDeviceReady() {
 }
 ```
 If you want more project details, please refer to [wiki](https://github.com/Samsung/cordova-plugin-toast/wiki).
+
 Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech session : Write Once and Run Everywhere with TOAST for Smart TV. 
 
 # Project Structure
