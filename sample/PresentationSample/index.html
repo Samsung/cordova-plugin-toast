@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- css -->
+        <meta http-equiv="X-UA-Compatible" content="ID=edge">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Presentation Sample</title>
+    </head>
+    <body>
+        <div id="scene_slide" class="scene-common gradation-blue">
+            <div class="slide-header">
+                <div id="header_title" class="header-title">TOAST</div>
+                <div id="header_subtitle" class="header-subtitle"></div>
+            </div>
+            <div id="slide_body" class="slide-body">
+                <div id="slide_animator" class="slide-body-animation">
+                    <div class="body-left">
+                        <p id="body_title" class="body-left-text font-big"></p>
+                        <p id="body_text" class="body-left-text font-small"></p>
+                    </div>
+                    <div class="body-right">
+                        <div id="body_img" class="body-right-image"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <p class="footer-copyright">All contents copyright &copy; Samsung Electronics Co., Ltd.</p>
+            </div>
+        </div>
+        <video id="scene_video" src="http://media.w3.org/2010/05/sintel/trailer.mp4" controls loop></video>
+
+        <!-- js -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="toast.js"></script>
+        <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="js/data.js"></script>
+        <script type="text/javascript" src="js/slide.js"></script>
+        <script type="text/javascript" src="js/video.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
