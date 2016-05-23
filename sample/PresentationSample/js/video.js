@@ -22,6 +22,5 @@ function stopVideo(){
 	videoEl.pause();
 	videoEl.currentTime = 0;
 	videoEl.setAttribute('style', 'visibility: hidden;');
-
 	slide.resumeSlide();
 }

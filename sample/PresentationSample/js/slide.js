@@ -55,8 +55,8 @@ var slide = {
     showSlide: function(item) {
         //animation
         isAnim = true;
-        slide_animator.addClass('moveFromRightFade').on('webkitAnimationEnd', function(){
-            slide_animator.removeClass('moveFromRightFade');
+        slide_animator.addClass('moveLeft').on('webkitAnimationEnd', function(){
+            slide_animator.removeClass('moveLeft');
         });
 
         var title = item.title;

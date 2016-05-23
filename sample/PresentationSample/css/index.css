@@ -132,30 +132,30 @@
 
 /* color */
 .gradation-blue {
-	background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-gradient(
         linear,
         left top,
         right bottom,
-        from(rgb(0,51,102)),
-        to(rgb(128,179,171))
+        from(rgb(0,50,100)),
+        to(rgb(130,180,170))
     );
 }
 
 /* animation */
-.moveFromRightFade {
-	-webkit-animation: moveFromRightFade .7s ease both;
-	animation: moveFromRightFade .7s ease both;
+.moveLeft {
+	-webkit-animation: moveLeft .7s ease both;
+	animation: moveLeft .7s ease both;
 }
 
-@-webkit-keyframes moveFromRightFade {
-	from { opacity: 0.3; -webkit-transform: translateX(100%);}
-	to { }
+@-webkit-keyframes moveLeft {
+	from {
+		opacity: 0.3;
+		-webkit-transform: translateX(100%);
+	}
 }
 
-@keyframes moveFromRightFade {
-	from { opacity: 0.3; -webkit-transform: translateX(100%); transform: translateX(100%);}
-	to { }
+@keyframes moveLeft {
+	from {
+		opacity: 0.3;
+		-webkit-transform: translateX(100%);
 }
