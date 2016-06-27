@@ -1,5 +1,5 @@
 # toast.tvwindow
-toast.tvwindow privides picture in graphic on application.
+toast.tvwindow provides picture in graphic on application.
 
 ## Supported platforms
 * browser

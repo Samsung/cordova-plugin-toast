@@ -1,5 +1,5 @@
 # toast.tvchannel
-toast.tvchannel privides to control tv channel.
+toast.tvchannel provides to control tv channel.
 
 ## Supported platforms
 * browser
