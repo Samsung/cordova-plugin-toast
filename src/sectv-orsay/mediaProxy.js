@@ -569,7 +569,7 @@ module.exports = {
         var id = currentMediaInfo.id,
             reval = 0;
 
-        console.log('media::setStreamingProperty() - '+args);
+        console.log('media::setDrm() - '+args);
 
         reval = mediaObjects[id].Execute.apply(mediaObjects[id],args);
 
