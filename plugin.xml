@@ -133,4 +133,41 @@
 			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
 	</platform>
+
+	<!-- tv-webos -->
+	<platform name='tv-webos'>		
+		<js-module src='src/tv-webos/inputdeviceProxy.js' name='inputdeviceProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webosn/tvwindowProxy.js' name='tvwindowProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webos/tvchannelProxy.js' name='tvchannelProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webos/tvaudiocontrolProxy.js' name='tvaudiocontrolProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webos/drminfoProxy.js' name='drminfoProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webos/applicationProxy.js' name='applicationProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webos/mediaProxy.js' name='mediaProxy'>
+			<runs />
+		</js-module>
+		<js-module src='src/tv-webos/MediaPluginWideVine.js' name='MediaPluginWideVine'>
+			<clobbers target='toast.MediaPluginWideVine' />
+		</js-module>
+		<js-module src='src/tv-webos/MediaPluginHLS.js' name='MediaPluginHLS'>
+			<clobbers target='toast.MediaPluginHLS' />
+		</js-module>
+		<js-module src='src/tv-webos/MediaPluginUHD.js' name='MediaPluginUHD'>
+			<clobbers target='toast.MediaPluginUHD' />
+		</js-module>
+		<js-module src='src/tv-webos/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
+			<clobbers target='toast.MediaPluginPlayReady' />
+		</js-module>
+	</platform>	
 </plugin>

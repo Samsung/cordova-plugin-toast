@@ -42,7 +42,10 @@ module.exports = function(grunt) {
       },
       "sectv-tizen": {
           //dest: "platform_www/sectv-tizen/toast.js" // default
-      }
+      },
+      "tv-webos": {
+          //dest: "platform_www/sectv-tizen/toast.js" // default
+      }      
     },
     watch: {
       'sectv-orsay': {
@@ -52,7 +55,11 @@ module.exports = function(grunt) {
       'sectv-tizen': {
         files: ['www/**/*.js', 'src/sectv-tizen/*.js'],
         tasks: ['jshint:src', 'compile:sectv-tizen']
-      }
+      },
+      'tv-webos': {
+        files: ['www/**/*.js', 'src/tv-webos/*.js'],
+        tasks: ['jshint:src', 'compile:tv-webos']
+      }      
     }
   });
 
