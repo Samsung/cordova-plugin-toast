@@ -44,7 +44,7 @@ module.exports = function(grunt) {
           //dest: "platform_www/sectv-tizen/toast.js" // default
       },
       "tv-webos": {
-          //dest: "platform_www/sectv-tizen/toast.js" // default
+          //dest: "platform_www/tv-webos/toast.js" // default
       }      
     },
     watch: {
