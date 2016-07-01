@@ -1,11 +1,11 @@
 # toast.tvwindow
-toast.tvwindow privides picture in graphic on application.
+toast.tvwindow provides picture in graphic on application.
 
 ## Supported platforms
 * browser
 * sectv-orsay
 * sectv-tizen
-    - Privilege `http://tizen.org/privilege/tv.window"/>` must be declared in the config.xml of tizen package.
+    - Privilege `<tizen:privilege name="http://tizen.org/privilege/tv.window"/>` must be declared in the config.xml of tizen package.
 
 ## Full WebIDL
 ```WebIDL

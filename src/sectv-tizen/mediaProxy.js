@@ -382,7 +382,7 @@ module.exports = {
     },
 
     setDrm: function(successCallback, errorCallback, args) {
-        console.log('media::setStreamingProperty() - type= '+args[0]);
+        console.log('media::setDrm() - type= '+args[0]);
 
         webapis.avplay.setDrm.apply(webapis.avplay, args);
     }
