@@ -17,7 +17,7 @@ module TVAudioControl {
 
     [NoInterfaceObject] interface TVAudioControlManager {
         void setMute(boolean mute, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
-        boolean isMute(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+        void isMute(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
         void setVolume(unsigned short volume, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
         void setVolumeUp(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
         void setVolumeDown(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
@@ -59,7 +59,7 @@ Speaker UI might not be shown according to platform.
             });
 			```
 			
-* boolean isMute(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+* void isMute(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
 This method gets mute state.
 	* Parameters
         - successCallback : The method to call when the state of mute got successfully.
