@@ -135,11 +135,11 @@
 	</platform>
 
 	<!-- tv-webos -->
-	<platform name='tv-webos'>		
+	<platform name='tv-webos'>
 		<js-module src='src/tv-webos/inputdeviceProxy.js' name='inputdeviceProxy'>
 			<runs />
 		</js-module>
-		<js-module src='src/tv-webosn/tvwindowProxy.js' name='tvwindowProxy'>
+		<js-module src='src/tv-webos/tvwindowProxy.js' name='tvwindowProxy'>
 			<runs />
 		</js-module>
 		<js-module src='src/tv-webos/tvchannelProxy.js' name='tvchannelProxy'>
@@ -169,5 +169,5 @@
 		<js-module src='src/tv-webos/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
-	</platform>	
+	</platform>
 </plugin>

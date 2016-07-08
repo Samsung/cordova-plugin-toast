@@ -45,7 +45,7 @@ module.exports = function(grunt) {
       },
       "tv-webos": {
           //dest: "platform_www/tv-webos/toast.js" // default
-      }      
+      }
     },
     watch: {
       'sectv-orsay': {
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
       'tv-webos': {
         files: ['www/**/*.js', 'src/tv-webos/*.js'],
         tasks: ['jshint:src', 'compile:tv-webos']
-      }      
+      }
     }
   });
 
