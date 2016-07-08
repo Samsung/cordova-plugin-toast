@@ -26,7 +26,8 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
      |-src/ ................... Platform dependent modules for the plugin TOAST
      |  |-browser/ ............ Plugin implementation for the platform `browser`
      |  |-sectv-orsay/ ........ Plugin implementation for the platform `sectv-orsay`
-     |  `-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
+     |  |-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
+     |  `-tv-webos/ ........... Plugin implementation for the platform `tv-webos`
      |-tasks/ ................. custom grunt tasks to build the toast.js
      |-www/ ................... Platform independent modules for the plugin TOAST
      |-Gruntfile.js ........... Gruntfile to build the toast.js
@@ -36,12 +37,15 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
 # Associated Projects
 * [cordova-sectv-orsay](http://github.com/Samsung/cordova-sectv-orsay) is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV Platform.(A.K.A Orsay)
 * [cordova-sectv-tizen](http://github.com/Samsung/cordova-sectv-tizen) is an application library that allows for Cordova-based projects to be built for the Samsung Tizen TV Platform.
-* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [grunt](http://gruntjs.com/) task to prepare and build package from a cordova project for `sectv-orsay` and `sectv-tizen` platforms.
+* [cordova-tv-webos](http://github.com/Samsung/cordova-tv-webos) is an application library that allows for Cordova-based projects to be built for the LG WebOS TV Platform.
+* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [grunt](http://gruntjs.com/) task to prepare and build package from a cordova project for `sectv-orsay` and `sectv-tizen` and `tv-webos` platforms.
+
 
 # Supported platform
 * browser
 * Legacy Samsung Smart TV (sectv-orsay)
 * Tizen Samsung Smart TV (sectv-tizen)
+* WebOS LG Smart TV (tv-webos)
 
 <table>
   <tr align="center">
