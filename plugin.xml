@@ -139,16 +139,7 @@
 		<js-module src='src/tv-webos/inputdeviceProxy.js' name='inputdeviceProxy'>
 			<runs />
 		</js-module>
-		<js-module src='src/tv-webos/tvwindowProxy.js' name='tvwindowProxy'>
-			<runs />
-		</js-module>
-		<js-module src='src/tv-webos/tvchannelProxy.js' name='tvchannelProxy'>
-			<runs />
-		</js-module>
 		<js-module src='src/tv-webos/tvaudiocontrolProxy.js' name='tvaudiocontrolProxy'>
-			<runs />
-		</js-module>
-		<js-module src='src/tv-webos/drminfoProxy.js' name='drminfoProxy'>
 			<runs />
 		</js-module>
 		<js-module src='src/tv-webos/applicationProxy.js' name='applicationProxy'>
