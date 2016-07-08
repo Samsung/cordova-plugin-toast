@@ -21,6 +21,7 @@ var supportedKeys = [
     {name: 'ArrowLeft', code: 37},
     {name: 'ArrowRight', code: 39},
     {name: 'Enter', code: 13},
+    {name: 'Return', code: 461},
     {name: 'ColorF0Red', code: 403},
     {name: 'ColorF1Green', code: 404},
     {name: 'ColorF2Yellow', code: 405},
