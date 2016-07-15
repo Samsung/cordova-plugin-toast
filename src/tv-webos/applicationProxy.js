@@ -39,10 +39,15 @@ module.exports = {
     },
     getRequestedAppInfo: function (success, fail, args) {
         try {
-            var receivedData = window.device.receivedData;
-            if(typeof receivedData === 'object' && receivedData.detail.hasOwnProperty('data')) {
-                var passedData = receivedData.detail.data;
-                var callerAppId = receivedData.detail.callerAppId;
+            var receivedData = null;
+            if(receivedData === null) {
+                receivedData = JSON.parse(window.localStorage.getItem('requestedappinfodata'));
+                window.localStorage.setItem('requestedappinfodata', '');
+            }
+
+            if(typeof receivedData === 'object' && receivedData.hasOwnProperty('data')) {
+                var passedData = receivedData.data;
+                var callerAppId = receivedData.callerAppId;
                 success({callerAppId: callerAppId, data: passedData});
             }
             else {
