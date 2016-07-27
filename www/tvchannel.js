@@ -23,10 +23,10 @@ var argscheck = require('cordova/argscheck'),
 var tvchannelExport = {
     tune: function (tuneOption, successCallback, errorCallback) {
         argscheck.checkArgs('ooF', 'tvchannel.tune', arguments);
-        if(!tuneOption.major || typeof tuneOption.major != 'number') {
+        if(typeof tuneOption.major != 'number') {
             throw new TypeError('tuneOption is not a number.');
         }
-        if(!tuneOption.minor || typeof tuneOption.minor != 'number') {
+        if(typeof tuneOption.minor != 'number') {
             throw new TypeError('tuneOption is not a number.');
         }
         if(!successCallback.onsuccess || typeof successCallback.onsuccess != 'function') {
