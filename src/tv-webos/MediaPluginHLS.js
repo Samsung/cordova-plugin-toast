@@ -19,15 +19,11 @@
 var MediaPlugin = require('cordova-plugin-toast.MediaPlugin');
 
 function MediaPluginHLS () {
-    MediaPlugin.apply(this, arguments);
-    this.name = 'MediaPluginHLS';
 }
 
 MediaPluginHLS.prototype = new MediaPlugin();
 
 MediaPluginHLS.prototype.onAttachToMedia = function (media) {
-    media.registerHook('beforeopen', function (media, args) {
-    });
 };
 
 module.exports = MediaPluginHLS;

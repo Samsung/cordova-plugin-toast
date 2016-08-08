@@ -51,6 +51,7 @@
     testsuite('IME (TV Only)', 'blur event', function(report) {
 
         var elInput = document.createElement('input');
+
         report.append(elInput);
 
         elInput.addEventListener('blur', function (e) {

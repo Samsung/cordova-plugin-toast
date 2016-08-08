@@ -45,13 +45,14 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
 * browser
 * Legacy Samsung Smart TV (sectv-orsay)
 * Tizen Samsung Smart TV (sectv-tizen)
+
 * WebOS LG Smart TV (tv-webos)
 
 <table>
   <tr align="center">
     <td rowspan="2" style="">Feature Name</td>
     <td rowspan="2" style="">Browser</td>
-    <td colspan="2" style="">Legacy Samsung Smart TV</td>
+    <td colspan="3" style="">Legacy Samsung Smart TV</td>
     <td colspan="2" style="width:220px">Tizen Samsung Smart TV</td>
     <td colspan="2" style="width:220px">WebOS LG Smart TV</td>
   </tr>
