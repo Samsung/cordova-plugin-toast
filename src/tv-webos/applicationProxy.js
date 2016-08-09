@@ -4,8 +4,8 @@ var hookSuccessCallback = {};
 
 document.addEventListener('webOSLaunch', function(inData) {
     console.log('webOSLaunch');
-    
-    if(typeof hookSuccessCallback === 'function'){
+
+    if(typeof hookSuccessCallback === 'function') {
         window.localStorage.setItem('requestedappinfodata', JSON.stringify(inData.detail));
         hookSuccessCallback({callerAppId: inData.detail.callerAppId, data: inData.detail.data});
     }
@@ -14,8 +14,8 @@ document.addEventListener('webOSLaunch', function(inData) {
 document.addEventListener('webOSRelaunch', function(inData) {
     /*jshint undef: false */
     console.log('webOSRelaunch');
-    
-    if(typeof hookSuccessCallback === 'function'){
+
+    if(typeof hookSuccessCallback === 'function') {
         window.localStorage.setItem('requestedappinfodata', JSON.stringify(inData.detail));
         hookSuccessCallback({callerAppId: inData.detail.callerAppId, data: inData.detail.data});
     }
@@ -61,23 +61,23 @@ module.exports = {
         }
     },
     getRequestedAppInfo: function (success, fail, args) {
-         try {
-             console.log('getRequestedAppInfo');
+        try {
+            console.log('getRequestedAppInfo');
 
-             var receivedData = {};
+            var receivedData = {};
 
-             if(!!window.localStorage.getItem('requestedappinfodata')){
-                 receivedData = JSON.parse(window.localStorage.getItem('requestedappinfodata'));
-             }
+            if(!!window.localStorage.getItem('requestedappinfodata')) {
+                receivedData = JSON.parse(window.localStorage.getItem('requestedappinfodata'));
+            }
 
-             if(typeof receivedData === 'object' && receivedData.hasOwnProperty('data')){
-                 success({callerAppId: receivedData.callerAppId, data: receivedData.data}); 
-             }
-             else {
-                 hookSuccessCallback = success;
-             }
+            if(typeof receivedData === 'object' && receivedData.hasOwnProperty('data')) {
+                success({callerAppId: receivedData.callerAppId, data: receivedData.data});
+            }
+            else {
+                hookSuccessCallback = success;
+            }
         }
-        catch(e) {
+        catch (e) {
             setTimeout(function() {
                 fail(e);
             }, 0);
