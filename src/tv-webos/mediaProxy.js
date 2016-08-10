@@ -192,7 +192,6 @@ module.exports = {
 
         sourceElem.src = src;
 
-        mediaObjects[id].load();
         currentMediaState = Media.STATE_IDLE;
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
     },
