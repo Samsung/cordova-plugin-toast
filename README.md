@@ -45,7 +45,6 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
 * browser
 * Legacy Samsung Smart TV (sectv-orsay)
 * Tizen Samsung Smart TV (sectv-tizen)
-
 * WebOS LG Smart TV (tv-webos)
 
 <table>
