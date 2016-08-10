@@ -30,7 +30,7 @@ MediaPluginPlayReady.prototype.onAttachToMedia = function (media) {
     var me = this;
 
     media.registerHook('beforeopen', function (media, args) {
-        exec(null, null, 'toast.Media', 'setStreamingProperty', {
+        exec(null, null, 'toast.Media', 'setDRM', {
             'drmType': 'playready',
             'msgType': 'application/vnd.ms-playready.initiator+xml',
             'drmSystemId': 'urn:dvb:casystemid:19219',

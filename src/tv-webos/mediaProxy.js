@@ -243,7 +243,7 @@ module.exports = {
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     },
 
-    setStreamingProperty: function(successCallback, errorCallback, args) {
+    setDRM: function(successCallback, errorCallback, args) {
         console.log('media::loadDrmClient() - type= ' + args.drmType);
 
         var appId = webOS.fetchAppId();

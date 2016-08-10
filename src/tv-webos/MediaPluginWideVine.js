@@ -30,7 +30,7 @@ MediaPluginWideVine.prototype.onAttachToMedia = function (media) {
     var me = this;
 
     media.registerHook('beforeopen', function (media, args) {
-        exec(null, null, 'toast.Media', 'setStreamingProperty', {
+        exec(null, null, 'toast.Media', 'setDRM', {
             'drmType': 'widevine',
             'msgType': 'application/widevine+xml',
             'drmSystemId': 'urn:dvb:casystemid:19156',
