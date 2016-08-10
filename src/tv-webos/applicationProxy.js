@@ -1,5 +1,28 @@
 'use strict';
 
+var hookSuccessCallback = {};
+
+document.addEventListener('webOSLaunch', function(inData) {
+    console.log('webOSLaunch');
+
+    if(typeof hookSuccessCallback === 'function') {
+        window.localStorage.setItem('requestedappinfodata', JSON.stringify(inData.detail));
+        hookSuccessCallback({callerAppId: inData.detail.callerAppId, data: inData.detail.data});
+    }
+}, false);
+
+document.addEventListener('webOSRelaunch', function(inData) {
+    /*jshint undef: false */
+    console.log('webOSRelaunch');
+
+    if(typeof hookSuccessCallback === 'function') {
+        window.localStorage.setItem('requestedappinfodata', JSON.stringify(inData.detail));
+        hookSuccessCallback({callerAppId: inData.detail.callerAppId, data: inData.detail.data});
+    }
+
+    PalmSystem.activate();
+}, false);
+
 module.exports = {
     exit: function (success, fail, args) {
         window.close();
@@ -39,25 +62,22 @@ module.exports = {
     },
     getRequestedAppInfo: function (success, fail, args) {
         try {
-            var receivedData = null;
-            if(receivedData === null) {
+            console.log('getRequestedAppInfo');
+
+            var receivedData = {};
+
+            if(!!window.localStorage.getItem('requestedappinfodata')) {
                 receivedData = JSON.parse(window.localStorage.getItem('requestedappinfodata'));
-                window.localStorage.setItem('requestedappinfodata', '');
             }
 
             if(typeof receivedData === 'object' && receivedData.hasOwnProperty('data')) {
-                var passedData = receivedData.data;
-                var callerAppId = receivedData.callerAppId;
-                success({callerAppId: callerAppId, data: passedData});
+                success({callerAppId: receivedData.callerAppId, data: receivedData.data});
             }
             else {
-                var error = new Error();
-                error.message = 'failed to get data';
-                error.name = 'failed to get data';
-                throw error;
+                hookSuccessCallback = success;
             }
         }
-        catch(e) {
+        catch (e) {
             setTimeout(function() {
                 fail(e);
             }, 0);
