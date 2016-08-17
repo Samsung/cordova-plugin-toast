@@ -207,6 +207,7 @@ module.exports = {
             Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,mediaObjects[id].duration));
         }
 
+        mediaObjects[id].load();
         mediaObjects[id].play();
     },
 
@@ -242,7 +243,7 @@ module.exports = {
         Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
     },
 
-    setDRM: function(successCallback, errorCallback, args) {
+    setDrm: function(successCallback, errorCallback, args) {
         console.log('media::loadDrmClient() - type= ' + args.drmType);
 
         var appId = webOS.fetchAppId();
@@ -315,6 +316,14 @@ module.exports = {
                 }
             });
         }
+    },
+
+    setStreamingProperty: function(successCallback, errorCallback, args) {
+        var mediaOptionObj = JSON.parse(args.mediaOption);
+
+        /* jshint undef: false*/
+        var mediaOption = escape(JSON.stringify(mediaOptionObj));
+        sourceElem.type = 'mediaOption=' + JSON.stringify(mediaOption);
     }
 };
 

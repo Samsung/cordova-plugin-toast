@@ -16,14 +16,24 @@
 
 'use strict';
 
-var MediaPlugin = require('cordova-plugin-toast.MediaPlugin');
+var exec = require('cordova/exec'),
+    MediaPlugin = require('cordova-plugin-toast.MediaPlugin');
 
 function MediaPluginHLS () {
+    MediaPlugin.apply(this, arguments);
+    this.name = 'MediaPluginHLS';
 }
 
 MediaPluginHLS.prototype = new MediaPlugin();
 
 MediaPluginHLS.prototype.onAttachToMedia = function (media) {
+    var me = this;
+
+    media.registerHook('beforeopen', function (media, args) {
+        exec(null, null, 'toast.Media', 'setStreamingProperty', {
+            'mediaOption': me.options.Options
+        });
+    });
 };
 
 module.exports = MediaPluginHLS;
