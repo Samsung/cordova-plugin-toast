@@ -1,37 +1,44 @@
 'use strict';
 
+// Store success callback of getRequestedAppInfo
 var hookSuccessCallback = {};
 
 document.addEventListener('webOSLaunch', function(inData) {
-    console.log('webOSLaunch');
-
     if(typeof hookSuccessCallback === 'function') {
+
+        // Keep receivedData in localStorage
         window.localStorage.setItem('requestedappinfodata', JSON.stringify(inData.detail));
         hookSuccessCallback({callerAppId: inData.detail.callerAppId, data: inData.detail.data});
     }
 }, false);
 
 document.addEventListener('webOSRelaunch', function(inData) {
-    /*jshint undef: false */
-    console.log('webOSRelaunch');
-
     if(typeof hookSuccessCallback === 'function') {
+
+        // Keep receivedData in localStorage
         window.localStorage.setItem('requestedappinfodata', JSON.stringify(inData.detail));
         hookSuccessCallback({callerAppId: inData.detail.callerAppId, data: inData.detail.data});
     }
 
+    // Run in the foreground
+    /*jshint undef: false */
     PalmSystem.activate();
 }, false);
 
 module.exports = {
     exit: function (success, fail, args) {
+
+        // Use web standard 'window.close', since webos doesn't have exit method.
         window.close();
     },
     launchApp: function (success, fail, args) {
         try {
             var paramAppId = args[0].appId;
             var paramData = {};
+
             paramData.data = args[0].data;
+
+            // When launching callee app with data, pass callerAPPId additionally.
             /*jshint undef: false */
             paramData.callerAppId = webOS.fetchAppId();
 
@@ -67,13 +74,19 @@ module.exports = {
             var receivedData = {};
 
             if(!!window.localStorage.getItem('requestedappinfodata')) {
+
+                // If have localStorage value, return receivedData in localStorage.
                 receivedData = JSON.parse(window.localStorage.getItem('requestedappinfodata'));
             }
 
             if(typeof receivedData === 'object' && receivedData.hasOwnProperty('data')) {
+
+                // If receivedData has data, return value.
                 success({callerAppId: receivedData.callerAppId, data: receivedData.data});
             }
             else {
+
+                // If receivedData doesn't have data, hold success callback until responding Launch Event from webos.
                 hookSuccessCallback = success;
             }
         }

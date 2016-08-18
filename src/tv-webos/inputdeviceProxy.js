@@ -83,6 +83,8 @@ module.exports = {
             }, 0);
         }
     },
+
+    // Not supported method for webos platform
     registerKey: function(success, fail, args) {
         for(var i = 0; i < supportedKeys.length; i++) {
             if(supportedKeys[i].name === args[0]) {
@@ -102,6 +104,8 @@ module.exports = {
             }, 0);
         }
     },
+
+    // Not supported method for webos platform
     unregisterKey: function(success, fail, args) {
         for(var i = 0; i < supportedKeys.length; i++) {
             if(supportedKeys[i].name === args[0]) {
