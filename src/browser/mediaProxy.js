@@ -194,11 +194,6 @@ module.exports = {
     play: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::play() - id =' + id);
-
-        if (currentMediaState == Media.STATE_IDLE) {
-            Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,mediaObjects[id].duration * 1000));
-        }
-
         mediaObjects[id].play();
     },
 
