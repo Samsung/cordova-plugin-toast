@@ -40,7 +40,7 @@ function createVideContainer(id) {
             subtree: false,
             attributes: true
         });
-        Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,elem));
+        Media.mediaEvent(id,getMediaEventValue(Media._MEDIA_CONTAINER,elem));
     }
 
     if(window.MutationObserver) {
@@ -72,7 +72,7 @@ function containerStyleEventCallback(MutationRecordProperty) {
     },0);
 }
 
-function getMediaEventVaule (type,data) {
+function getMediaEventValue (type,data) {
     var reval = {};
     switch(type) {
     case Media.EVENT_STATE :
@@ -141,30 +141,30 @@ module.exports = {
         mediaObjects[id] = document.createElement('video');
         mediaObjects[id].onStalledCB = function () {
             console.log('media::onStalled()');
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_STALLED));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_STALLED));
         };
         mediaObjects[id].onEndedCB = function () {
             console.log('media::onEndedCB() - MEDIA_STATE -> IDLE');
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_ENDED));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_ENDED));
         };
         mediaObjects[id].onErrorCB = function () {
             console.log('media::onErrorCB() - MEDIA_ERROR -> ' + event.srcElement.error);
-            Media.mediaEvent(id, getMediaEventVaule(Media._MEDIA_ERROR, event.srcElement.error));
+            Media.mediaEvent(id, getMediaEventValue(Media._MEDIA_ERROR, event.srcElement.error));
         };
         mediaObjects[id].onLoadedMetaDataCB = function () {
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_DURATION, mediaObjects[id].duration * 1000));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_DURATION, mediaObjects[id].duration * 1000));
         };
         mediaObjects[id].onPlayingCB = function () {
             console.log('media::onPlayingCB() - MEDIA_STATE -> PLAYING');
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PLAYING));
         };
         mediaObjects[id].onDurationChangeCB = function () {
             console.log('media::onDurationChangeCB() - EVENT_DURATION -> ' + mediaObjects[id].duration * 1000);
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_DURATION, mediaObjects[id].duration * 1000));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_DURATION, mediaObjects[id].duration * 1000));
         };
         mediaObjects[id].onTimeUpdateCB = function () {
             console.log('media::onTimeUpdateCB() - EVENT_POSITION -> ' + mediaObjects[id].currentTime * 1000);
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_POSITION, mediaObjects[id].currentTime * 1000));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_POSITION, mediaObjects[id].currentTime * 1000));
         };
 
         mediaObjects[id].addEventListener('loadedmetadata', mediaObjects[id].onLoadedMetaDataCB);
@@ -187,7 +187,7 @@ module.exports = {
         mediaObjects[id].src = src;
         mediaObjects[id].load();
         currentMediaState = Media.STATE_IDLE;
-        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
     },
 
     // play
@@ -207,7 +207,7 @@ module.exports = {
         }
         console.log('media::stop() - MEDIA_STATE -> IDLE');
 
-        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback(mediaObjects[id].currentTime);
     },
 
@@ -226,7 +226,7 @@ module.exports = {
 
         console.log('media::pause() - MEDIA_STATE -> PAUSED');
         mediaObjects[id].pause();
-        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
+        Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PAUSED));
     }
 };
 

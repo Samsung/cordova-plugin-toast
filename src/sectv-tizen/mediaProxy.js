@@ -62,7 +62,7 @@ function createVideoContainer(id) {
     containerElem.style.width = '0px';
     containerElem.style.height = '0px';
     containerElem.innerHTML = '<OBJECT type="application/avplayer" style="width:0px; height:0px;"></OBJECT>';
-    Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_CONTAINER,containerElem));
+    Media.mediaEvent(id,getMediaEventValue(Media._MEDIA_CONTAINER,containerElem));
 
     if(window.MutationObserver) {
         setContainerStyleEventListener(containerElem,containerStyleEventCallback);
@@ -145,7 +145,7 @@ function setAvplayVideoRect(rect) {
 }
 
 var currentMediaState = null;
-function getMediaEventVaule (type,data) {
+function getMediaEventValue (type,data) {
     var reval = {};
     switch(type) {
     case Media.EVENT_STATE :
@@ -262,7 +262,7 @@ module.exports = {
 
         if(state !== avplayState.NONE && state !== avplayState.IDLE) {
             webapis.avplay.stop();
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
             bBlockTimeUpdate = false;
         }
 
@@ -273,30 +273,30 @@ module.exports = {
                 onbufferingstart: function() {
                     console.log('media::onStalled()');
                     bBlockTimeUpdate = true;
-                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,Media.STATE_STALLED));
+                    Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,Media.STATE_STALLED));
                 },
                 onbufferingprogress: function(percent) {
                     console.log('media::Buffering progress data: ' + percent);
-                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_BUFFERINGPROGRESS,percent));
+                    Media.mediaEvent(id,getMediaEventValue(Media.EVENT_BUFFERINGPROGRESS,percent));
                 },
                 onbufferingcomplete: function() {
                     console.log('media::Buffering complete.');
                     bBlockTimeUpdate = false;
                     state = webapis.avplay.getState();
                     if(state !== 'READY') {
-                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_STATE,state));
+                        Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,state));
                     }
-                    Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
+                    Media.mediaEvent(id,getMediaEventValue(Media.EVENT_POSITION,webapis.avplay.getCurrentTime()));
                 },
                 onstreamcompleted: function(currentTime) {
                     console.log('media::ended()');
-                    Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_ENDED));
+                    Media.mediaEvent(id, getMediaEventValue(Media.EVENT_ENDED));
                 },
                 oncurrentplaytime: function(currentTime) {
                     state = webapis.avplay.getState();
                     if(!bBlockTimeUpdate && (state == avplayState.PLAYING || state == avplayState.PAUSED)) {
                         console.log('media::Current playtime: ' + currentTime);
-                        Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_POSITION,currentTime));
+                        Media.mediaEvent(id,getMediaEventValue(Media.EVENT_POSITION,currentTime));
                     }
                 },
                 onevent: function(eventType, eventData) {
@@ -304,7 +304,7 @@ module.exports = {
                 },
                 onerror: function(errorData) {
                     console.log('media::Event type error: ' + errorData);
-                    Media.mediaEvent(id,getMediaEventVaule(Media._MEDIA_ERROR,errorData));
+                    Media.mediaEvent(id,getMediaEventValue(Media._MEDIA_ERROR,errorData));
                 },
                 onsubtitlechange: function(duration, text, data1, data2) {
                     console.log('media::Subtitle Changed.');
@@ -314,7 +314,7 @@ module.exports = {
                 }
             });
             currentMediaState = Media.STATE_IDLE;
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         }
     },
 
@@ -327,16 +327,16 @@ module.exports = {
             webapis.avplay.prepareAsync(function() {
                 webapis.avplay.play();
                 setScreenSaver('off');
-                Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+                Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PLAYING));
                 var duration = webapis.avplay.getDuration();
                 console.log('media:: duration = '+duration);
-                Media.mediaEvent(id,getMediaEventVaule(Media.EVENT_DURATION,duration));
+                Media.mediaEvent(id,getMediaEventValue(Media.EVENT_DURATION,duration));
             });
         }
         else {
             webapis.avplay.play();
             setScreenSaver('off');
-            Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PLAYING));
+            Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PLAYING));
         }
     },
 
@@ -345,7 +345,7 @@ module.exports = {
         var id = args[0];
         console.log('media::stop() - EVENT_STATE -> IDLE');
         webapis.avplay.stop();
-        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_IDLE));
+        Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback();
         bBlockTimeUpdate = false;
         setScreenSaver('on');
@@ -371,7 +371,7 @@ module.exports = {
         console.log('media::pause() - EVENT_STATE -> PAUSED');
 
         webapis.avplay.pause();
-        Media.mediaEvent(id, getMediaEventVaule(Media.EVENT_STATE, Media.STATE_PAUSED));
+        Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PAUSED));
         setScreenSaver('on');
     },
 
