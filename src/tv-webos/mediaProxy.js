@@ -203,10 +203,6 @@ module.exports = {
 
         mediaObjects[id].appendChild(sourceElem);
 
-        if(currentMediaState == Media.STATE_IDLE) {
-            Media.mediaEvent(id,getMediaEventValue(Media.EVENT_DURATION,mediaObjects[id].duration));
-        }
-
         mediaObjects[id].load();
         mediaObjects[id].play();
     },
