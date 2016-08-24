@@ -235,8 +235,6 @@ function setScreenSaver(state) {
     }
 }
 
-var bBlockTimeUpdate = false;
-
 module.exports = {
     create: function(successCallback, errorCallback, args) {
         var id = args[0];
@@ -263,7 +261,6 @@ module.exports = {
         if(state !== avplayState.NONE && state !== avplayState.IDLE) {
             webapis.avplay.stop();
             Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
-            bBlockTimeUpdate = false;
         }
 
         if(window.webapis) {
@@ -272,7 +269,6 @@ module.exports = {
             webapis.avplay.setListener({
                 onbufferingstart: function() {
                     console.log('media::onStalled()');
-                    bBlockTimeUpdate = true;
                     Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,Media.STATE_STALLED));
                 },
                 onbufferingprogress: function(percent) {
@@ -281,7 +277,6 @@ module.exports = {
                 },
                 onbufferingcomplete: function() {
                     console.log('media::Buffering complete.');
-                    bBlockTimeUpdate = false;
                     state = webapis.avplay.getState();
                     if(state !== 'READY') {
                         Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,state));
@@ -293,11 +288,11 @@ module.exports = {
                     Media.mediaEvent(id, getMediaEventValue(Media.EVENT_ENDED));
                 },
                 oncurrentplaytime: function(currentTime) {
-                    state = webapis.avplay.getState();
-                    if(!bBlockTimeUpdate && (state == avplayState.PLAYING || state == avplayState.PAUSED)) {
-                        console.log('media::Current playtime: ' + currentTime);
-                        Media.mediaEvent(id,getMediaEventValue(Media.EVENT_POSITION,currentTime));
+                    if(currentMediaState !== Media.STATE_PLAYING) {
+                        Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,Media.STATE_PLAYING));
                     }
+                    console.log('media::Current playtime: ' + currentTime);
+                    Media.mediaEvent(id,getMediaEventValue(Media.EVENT_POSITION,currentTime));
                 },
                 onevent: function(eventType, eventData) {
                     console.log('media::Event type error: ' + eventType + ', eventData: ' + eventData);
@@ -347,7 +342,6 @@ module.exports = {
         webapis.avplay.stop();
         Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback();
-        bBlockTimeUpdate = false;
         setScreenSaver('on');
     },
 
@@ -362,7 +356,6 @@ module.exports = {
         },function(e) {
             throw Error('Failed to seekTo');
         });
-        bBlockTimeUpdate = true;
     },
 
     // Pauses the playing media
