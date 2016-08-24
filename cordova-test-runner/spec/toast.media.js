@@ -262,7 +262,7 @@ describe('Video playback feature of toast.Media', function() {
                         expect(typeof evt.data.position).toBe('number');
                         expect(evt.data.position).toBe(media.getCurrentPosition());
                         if(waitForCurrentTime) {
-                            expect(evt.data.position > 1000).toBeTruthy();
+                            expect(evt.data.position > 0).toBeTruthy();
                             waitForCurrentTime = false;
                         }
                         if(state !== 'STALLED' && waitForSeekForward && evt.data.position > waitForSeekForward) {
