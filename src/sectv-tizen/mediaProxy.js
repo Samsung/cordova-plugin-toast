@@ -272,6 +272,9 @@ module.exports = {
                     Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,Media.STATE_STALLED));
                 },
                 onbufferingprogress: function(percent) {
+                    if(currentMediaState !== Media.STATE_STALLED) {
+                        Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,Media.STATE_STALLED));
+                    }
                     console.log('media::Buffering progress data: ' + percent);
                     Media.mediaEvent(id,getMediaEventValue(Media.EVENT_BUFFERINGPROGRESS,percent));
                 },
@@ -288,7 +291,7 @@ module.exports = {
                     Media.mediaEvent(id, getMediaEventValue(Media.EVENT_ENDED));
                 },
                 oncurrentplaytime: function(currentTime) {
-                    if(currentMediaState !== Media.STATE_PLAYING) {
+                    if(currentMediaState !== Media.STATE_PLAYING && currentTime > 0) {
                         Media.mediaEvent(id,getMediaEventValue(Media.EVENT_STATE,Media.STATE_PLAYING));
                     }
                     console.log('media::Current playtime: ' + currentTime);
