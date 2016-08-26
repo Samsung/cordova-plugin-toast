@@ -31,7 +31,7 @@ MediaPluginHLS.prototype.onAttachToMedia = function (media) {
 
     media.registerHook('beforeopen', function (media, args) {
         exec(null, null, 'toast.Media', 'setStreamingProperty', {
-            'mediaOption': me.options.Options
+            'mediaOption': me.options.OPTIONS
         });
     });
 };
