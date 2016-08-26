@@ -287,6 +287,7 @@ module.exports = {
 
         var msgType = args.msgType;
         var drmSystemId = args.drmSystemId;
+        var sourceType = args.sourceType || 'video/mp4';
 
         function sendRightInformation(isLoadedclientId) {
             clientId = isLoadedclientId || clientId;
@@ -305,7 +306,7 @@ module.exports = {
 
                     /* jshint undef: false*/
                     var mediaOption = escape(JSON.stringify(mediaOptionObj));
-                    sourceElem.type = 'mediaOption=' + JSON.stringify(mediaOption);
+                    sourceElem.type = sourceType + ';mediaOption=' + mediaOption;
                 },
                 onFailure: function (result) {
                     console.log('[' + result.errorCode + ']' + result.errorText);

@@ -30,12 +30,13 @@ MediaPluginWideVine.prototype.onAttachToMedia = function (media) {
     var me = this;
 
     media.registerHook('beforeopen', function (media, args) {
-        exec(null, null, 'toast.Media', 'setDRM', {
+        exec(null, null, 'toast.Media', 'setDrm', {
             'drmType': 'widevine',
             'msgType': 'application/widevine+xml',
             'drmSystemId': 'urn:dvb:casystemid:19156',
-            'mediaOption': me.options.Options,
-            'msg': me.options.CustomData
+            'mediaOption': me.options.OPTIONS,
+            'sourceType': me.options.SOURCE_TYPE,
+            'msg': me.options.CUSTOM_DATA
         });
     });
 };
