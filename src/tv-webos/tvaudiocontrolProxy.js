@@ -1,122 +1,216 @@
-// /*
-//  * Copyright 2015 Samsung Electronics Co., Ltd.
-//  *
-//  * Licensed under the Apache License, Version 2.0 (the "License");
-//  * you may not use this file except in compliance with the License.
-//  * You may obtain a copy of the License at
-//  *
-//  *     http://www.apache.org/licenses/LICENSE-2.0
-//  *
-//  * Unless required by applicable law or agreed to in writing, software
-//  * distributed under the License is distributed on an "AS IS" BASIS,
-//  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  * See the License for the specific language governing permissions and
-//  * limitations under the License.
-//  */
+/*
+ * Copyright 2015 Samsung Electronics Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-// 'use strict';
+'use strict';
 
-// module.exports = {
-//     setMute: function (success, fail, args) {
-//         try {
-//             tizen.tvaudiocontrol.setMute(args[0]);
+var volumeChangeCallback = null;
 
-//             setTimeout(function () {
-//                 success();
-//             }, 0);
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     isMute: function (success, fail, args) {
-//         try {
-//             var result = tizen.tvaudiocontrol.isMute();
+function volumeTrigger(volume) {
+    if(!volume) {
+        webOS.service.request('luna://com.webos.audio', {
+                method: 'getVolume',
+                onSuccess: function (inResponse) {
+                    volume = inResponse.volume;
+                },
+                onFailure: function (inError) {
+                }
+            });
+    }
 
-//             if (typeof result == 'boolean') {
-//                 setTimeout(function () {
-//                     success(result);
-//                 }, 0);
-//             }
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     setVolume: function (success, fail, args) {
-//         try {
-//             tizen.tvaudiocontrol.setVolume(args[0]);
+    if(volumeChangeCallback) {
+        if((typeof volume == 'number') && (volume != -1)) {
+            volumeChangeCallback(volume);
+        }
+    }
+}
 
-//             setTimeout(function () {
-//                 success();
-//             }, 0);
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     setVolumeUp: function (success, fail, args) {
-//         try {
-//             tizen.tvaudiocontrol.setVolumeUp();
+module.exports = {
+    setMute: function (success, fail, args) {
+        try {
+            var isMuted = args[0];
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'setMuted',
+                parameters: {
+                    'muted': isMuted
+                },
+                onSuccess: function (inResponse) {
+                    success();
+                },
+                onFailure: function (inError) {
+                    fail();
+                }
+            });
+        }
+        catch (e) {
+            var error = new Error('failed to setMute');
+            error.name = e.name;
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
 
-//             setTimeout(function () {
-//                 success();
-//             }, 0);
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     setVolumeDown: function (success, fail, args) {
-//         try {
-//             tizen.tvaudiocontrol.setVolumeDown();
+    // Not supported method for webos platform
+    isMute: function (success, fail, args) {
+        try {
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'getVolume',
+                onSuccess: function (inResponse) {
+                    console.log(inResponse);
+                    success(inResponse.muted);
+                },
+                onFailure: function (inError) {
+                    fail();
+                }
+            });
+        }
+        catch (e) {
+            var error = new Error('failed to execute isMute');
+            error.name = e.name;
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
 
-//             setTimeout(function () {
-//                 success();
-//             }, 0);
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     getVolume: function (success, fail, args) {
-//         try {
-//             var result = tizen.tvaudiocontrol.getVolume();
+    // Not supported method for webos platform
+    setVolume: function (success, fail, args) {
+        try {
+            var volume = args[0];
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'setVolume',
+                parameters: {
+                    'volume': volume
+                },
+                onSuccess: function (inResponse) {
+                    volumeTrigger(volume);
+                    success();
+                },
+                onFailure: function (inError) {
+                    fail();
+                }
+            });
+        }
+        catch (e) {
+            var error = new Error('failed to setVolume');
+            error.name = e.name;
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
 
-//             if (typeof result == 'number') {
-//                 setTimeout(function () {
-//                     success(result);
-//                 }, 0);
-//             }
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     setVolumeChangeListener: function (success, fail, args) {
-//         try {
-//             tizen.tvaudiocontrol.setVolumeChangeListener(args[0]);
+    setVolumeUp: function (success, fail, args) {
+        try {
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'volumeUp',
+                onSuccess: function (inResponse) {
+                    volumeTrigger();
+                    success();
+                },
+                onFailure: function (inError) {
+                    fail();
+                }
+            });
+        }
+        catch (e) {
+            var error = new Error('failed to setVolumeUp');
+            error.name = e.name;
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
 
-//             setTimeout(function () {
-//                 success();
-//             }, 0);
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     },
-//     unsetVolumeChangeListener: function (success, fail, args) {
-//         try {
-//             tizen.tvaudiocontrol.unsetVolumeChangeListener();
+    setVolumeDown: function (success, fail, args) {
+        try {
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'volumeDown',
+                onSuccess: function (inResponse) {
+                    volumeTrigger();
+                    success();
+                },
+                onFailure: function (inError) {
+                    fail();
+                }
+            });
+        }
+        catch (e) {
+            var error = new Error('failed to setVolumeDown');
+            error.name = e.name;
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
 
-//             setTimeout(function () {
-//                 success();
-//             }, 0);
-//         }
-//         catch (e) {
-//             fail(e);
-//         }
-//     }
-// };
+    // Not supported method for webos platform
+    getVolume: function (success, fail, args) {
+        try {
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'getVolume',
+                onSuccess: function (inResponse) {
+                    console.log(inResponse);
+                    success(inResponse.volume);
+                },
+                onFailure: function (inError) {
+                    fail();
+                }
+            });
+        }
+        catch (e) {
+            var error = new Error('failed to getVolume');
+            error.name = e.name;
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
 
-// require('cordova/exec/proxy').add('toast.tvaudiocontrol', module.exports);
+    setVolumeChangeListener: function (success, fail, args) {
+        volumeChangeCallback = args[0];
+        if(volumeChangeCallback) {
+            setTimeout(function () {
+                success();
+            }, 0);
+        }
+        else {
+            var error = new Error('failed to setVolumeChangeListener');
+            error.name = 'Fail';
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    },
+
+    unsetVolumeChangeListener: function (success, fail, args) {
+        volumeChangeCallback = '';
+        if(!volumeChangeCallback) {
+            setTimeout(function () {
+                success();
+            }, 0);
+        }
+        else {
+            var error = new Error('failed to unsetVolumeChangeListener');
+            error.name = 'Fail';
+            setTimeout(function() {
+                fail(error);
+            }, 0);
+        }
+    }
+};
+
+require('cordova/exec/proxy').add('toast.tvaudiocontrol', module.exports);
