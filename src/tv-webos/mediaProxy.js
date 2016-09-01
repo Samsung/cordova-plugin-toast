@@ -29,6 +29,13 @@ var sourceElem = null;
 
 var containerStylecallbackFnTimer = null;
 
+var mediaId = '';
+var mediaSrc = '';
+
+var isDrm = false;
+var isOpenFinished = false;
+var isPlayCalled = false;
+
 function createVideContainer(id) {
     function setContainerStyleEventListener(elem,callback) {
         var containerObserver = new MutationObserver(function(mutations) {
@@ -134,13 +141,29 @@ function getMediaEventValue (type,data) {
     return reval;
 }
 
+function openMedia(id, src) {
+
+    sourceElem.src = src;
+
+    mediaObjects[id].appendChild(sourceElem);
+    mediaObjects[id].load();
+
+    currentMediaState = Media.STATE_IDLE;
+    Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
+
+    isOpenFinished = true;
+
+    if(isPlayCalled === true) {
+        mediaObjects[id].play();
+        isPlayCalled = false;
+    }
+}
+
 module.exports = {
     create: function(successCallback, errorCallback, args) {
         var id = args[0];
 
         console.log('media::create() - id =' + id);
-
-        sourceElem = document.createElement('source');
 
         mediaObjects[id] = document.createElement('video');
         mediaObjects[id].setAttribute('style', 'background-color: black');
@@ -187,24 +210,26 @@ module.exports = {
     open: function(successCallback, errorCallback, args) {
         var id = args[0],
             src = args[1];
-
+        mediaId = id;
+        mediaSrc = src;
+        isOpenFinished = false;
         console.log('media::open() - id =' + id + ' src =' + src);
 
-        sourceElem.src = src;
-
-        currentMediaState = Media.STATE_IDLE;
-        Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
+        if(isDrm === false) {
+            sourceElem = document.createElement('source');
+            openMedia(id, src);
+        }
     },
 
     // play
     play: function(successCallback, errorCallback, args) {
         var id = args[0];
+        isPlayCalled = true;
         console.log('media::play() - id =' + id);
 
-        mediaObjects[id].appendChild(sourceElem);
-
-        mediaObjects[id].load();
-        mediaObjects[id].play();
+        if(isOpenFinished === true) {
+            mediaObjects[id].play();
+        }
     },
 
     // Stops the playing media
@@ -216,6 +241,9 @@ module.exports = {
             mediaObjects[id].currentTime = 0;
         }
         console.log('media::stop() - MEDIA_STATE -> IDLE');
+
+        mediaObjects[id].removeChild(sourceElem);
+        mediaObjects[id].load();
 
         Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback(mediaObjects[id].currentTime);
@@ -241,6 +269,8 @@ module.exports = {
 
     setDrm: function(successCallback, errorCallback, args) {
         console.log('media::loadDrmClient() - type= ' + args.drmType);
+
+        isDrm = true;
 
         var appId = webOS.fetchAppId();
 
@@ -306,10 +336,15 @@ module.exports = {
 
                     /* jshint undef: false*/
                     var mediaOption = escape(JSON.stringify(mediaOptionObj));
+                    sourceElem = document.createElement('source');
                     sourceElem.type = sourceType + ';mediaOption=' + mediaOption;
+
+                    openMedia(mediaId, mediaSrc);
+                    isDrm = false;
                 },
                 onFailure: function (result) {
                     console.log('[' + result.errorCode + ']' + result.errorText);
+                    isDrm = false;
                 }
             });
         }
