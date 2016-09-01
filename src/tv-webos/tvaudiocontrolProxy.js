@@ -19,19 +19,20 @@
 var volumeChangeCallback = null;
 
 function volumeTrigger(volume) {
-    if(!volume) {
-        webOS.service.request('luna://com.webos.audio', {
-                method: 'getVolume',
-                onSuccess: function (inResponse) {
-                    volume = inResponse.volume;
-                },
-                onFailure: function (inError) {
-                }
-            });
-    }
-    if(volumeChangeCallback) {
+    if(volumeChangeCallback && (typeof volumeChangeCallback == 'function')) {
         if((typeof volume == 'number') && (volume != -1)) {
             volumeChangeCallback(volume);
+        }
+        else {
+            webOS.service.request('luna://com.webos.audio', {
+                method: 'getVolume',
+                onSuccess: function (inResponse) {
+                    volumeChangeCallback(inResponse.volume);
+                },
+                onFailure: function (inError) {
+                    console.log('failed to volumeTrigger');
+                }
+            });
         }
     }
 }
