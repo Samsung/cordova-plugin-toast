@@ -29,7 +29,6 @@ function volumeTrigger(volume) {
                 }
             });
     }
-
     if(volumeChangeCallback) {
         if((typeof volume == 'number') && (volume != -1)) {
             volumeChangeCallback(volume);
@@ -63,7 +62,6 @@ module.exports = {
         }
     },
 
-    // Not supported method for webos platform
     isMute: function (success, fail, args) {
         try {
             webOS.service.request('luna://com.webos.audio', {
@@ -86,7 +84,6 @@ module.exports = {
         }
     },
 
-    // Not supported method for webos platform
     setVolume: function (success, fail, args) {
         try {
             var volume = args[0];
@@ -157,7 +154,6 @@ module.exports = {
         }
     },
 
-    // Not supported method for webos platform
     getVolume: function (success, fail, args) {
         try {
             webOS.service.request('luna://com.webos.audio', {
