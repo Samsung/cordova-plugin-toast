@@ -8,6 +8,7 @@ This plugin defines a toast.MediaPlugin Constructor.
 ## Supported platforms
 * sectv-orsay
 * sectv-tizen
+* tv-webos
 
 ## Full WebIDL
 ```WebIDL

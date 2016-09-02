@@ -6,6 +6,7 @@ toast.inputdevice privides TV's inputdevice related APIs.
 * sectv-orsay
 * sectv-tizen
 	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
+* tv-webos
 
 ## Full WebIDL
 ```widl
