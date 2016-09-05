@@ -53,18 +53,18 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
     <td rowspan="2" style="">Browser</td>
     <td colspan="3" style="">Legacy Samsung Smart TV</td>
     <td colspan="2" style="width:220px">Tizen Samsung Smart TV</td>
-    <td colspan="2" style="width:220px">WebOS LG Smart TV</td>
+    <td colspan="3" style="width:220px">WebOS LG Smart TV</td>
   </tr>
-  <tr align="center"><td>2013</td><td>2014</td><td>2015</td><td>2016</td><td>2.0</td><td>3.0</td></tr>
-  <tr align="center"><td>toast.Media</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.MediaPlugin</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.drminfo</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
-  <tr align="center"><td>toast.application</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.inputdevice</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Partly</td><td>Partly</td></tr>
-  <tr align="center"><td>toast.tvaudiocontrol</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.tvwindow</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
-  <tr align="center"><td>toast.tvchannel</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td></tr>
-  <tr align="center"><td>IME</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>2012</td><td>2013</td><td>2014</td><td>2015</td><td>2016</td><td>2014</td><td>2015</td><td>2016</td></tr>
+  <tr align="center"><td>toast.Media</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.MediaPlugin</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.drminfo</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr align="center"><td>toast.application</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.inputdevice</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.tvaudiocontrol</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.tvwindow</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr align="center"><td>toast.tvchannel</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr align="center"><td>IME</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
  </table>
 
 # Prepare to start
