@@ -163,7 +163,6 @@ This function retrieves information of the given keyName.
 
 ### void registerKey(InputDeviceKeyName keyName);
 This function registers given key. After this operation, pressing the key on remote controller will fire key events with correspond keyCode.
-It is not supported on tv-webos platform. 
 * Parameters
 	* keyName: Name of key to register.
 	* successCallback: The method to call when a list of supported keys are retrieved successfully.
@@ -190,7 +189,6 @@ It is not supported on tv-webos platform.
 
 ### void unregisterKey(InputDeviceKeyName keyName);
 This function unregisters given key. The key can not be handled with key event after this operation.
-It is not supported on tv-webos platform.
 * Parameters
 	* keyName: Name of key to unregister.
 	* successCallback: The method to call when a list of supported keys are retrieved successfully.
