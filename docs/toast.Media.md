@@ -2,10 +2,35 @@
 toast.Media play back video or audio files.
 
 ## Supported platforms
-* browser
-* sectv-orsay
-* sectv-tizen
-* tv-webos
+* Browser
+* sectv-orsay (sectv-orsay)
+* sectv-tizen (sectv-tizen)
+* tv-webos (tv-webos)
+
+<table>
+  <tr align="center">
+    <td rowspan="2" style="">Method Name</td>
+    <td rowspan="2" style="">Browser</td>
+    <td colspan="2" style="">Legacy Samsung Smart TV</td>
+    <td colspan="2" style="">Tizen Samsung Smart TV</td>
+    <td colspan="2" style="">WebOS LG Smart TV</td>
+  </tr>
+  <tr align="center"><td>Emulator (ver 5.1)</td><td>Device ('12 - '14)</td><td>Emulator (ver 2.3.1)</td><td>Device ('15 - '16)</td><td>Emulator (ver 3.0.0)</td><td>Device ('14 - '16)</td></tr>
+  <tr align="center"><td>getInstance</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>open</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>play</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>stop</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>pause</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>seekTo</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>getDuration</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>getCurrentPosition</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>setListener</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>unsetListener</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>getContainerElement</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>syncVideoRect</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>resetPlugin</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>attachPlugin</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+ </table>
 
 ## Full WebIDL
 ```WebIDL

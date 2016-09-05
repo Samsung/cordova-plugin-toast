@@ -3,10 +3,29 @@ toast.inputdevice privides TV's inputdevice related APIs.
 
 ## Supported platforms
 * browser
-* sectv-orsay
-* sectv-tizen
+* sectv-orsay (sectv-orsay)
+* sectv-tizen (sectv-tizen)
 	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
-* tv-webos
+* tv-webos (tv-webos)
+
+<table>
+  <tr align="center">
+    <td rowspan="2" style="">Method Name</td>
+    <td rowspan="2" style="">Browser</td>
+    <td colspan="2" style="">Legacy Samsung Smart TV</td>
+    <td colspan="2" style="">Tizen Samsung Smart TV</td>
+    <td colspan="2" style="">WebOS LG Smart TV</td>
+    <td rowspan="2" style="">MEMO</td>
+  </tr>
+  <tr align="center"><td>Emulator (ver 5.1)</td><td>Device ('12 - '14)</td><td>Emulator (ver 2.3.1)</td><td>Device ('15 - '16)</td><td>Emulator (ver 3.0.0)</td><td>Device ('14 - '16)</td></tr>
+  <tr align="center"><td>getSupportedKeys</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td></td></tr>
+  <tr align="center"><td>getKey</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td></td></tr>
+  <tr align="center"><td>registerKey</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td rowspan="2">This API is not supported on webos platform. It might not work as real operation. It is supported to avoid error on webos platform.
+</td>
+</tr>
+  <tr align="center"><td>unregisterKey</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td>
+</tr>
+ </table>
 
 ## Full WebIDL
 ```widl

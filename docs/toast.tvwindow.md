@@ -3,9 +3,25 @@ toast.tvwindow provides picture in graphic on application.
 
 ## Supported platforms
 * browser
-* sectv-orsay
-* sectv-tizen
+* sectv-orsay (sectv-orsay)
+* sectv-tizen (sectv-tizen)
     - Privilege `<tizen:privilege name="http://tizen.org/privilege/tv.window"/>` must be declared in the config.xml of tizen package.
+
+<table>
+  <tr align="center">
+    <td rowspan="2" style="">Method Name</td>
+    <td rowspan="2" style="">Browser</td>
+    <td colspan="2" style="">Legacy Samsung Smart TV</td>
+    <td colspan="2" style="">Tizen Samsung Smart TV</td>
+    <td colspan="2" style="">WebOS LG Smart TV</td>
+  </tr>
+  <tr align="center"><td>Emulator (ver 5.1)</td><td>Device ('12 - '14)</td><td>Emulator (ver 2.3.1)</td><td>Device ('15 - '16)</td><td>Emulator (ver 3.0.0)</td><td>Device ('14 - '16)</td></tr>
+  <tr align="center"><td>setSource</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>getSource</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>show</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>hide</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>getRect</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+ </table>
 
 ## Full WebIDL
 ```WebIDL
