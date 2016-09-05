@@ -20,7 +20,7 @@ This plugin defines a toast.MediaPlugin Constructor.
     <td rowspan="2" style="">MEMO</td>
   </tr>
   <tr align="center"><td>Emulator (ver 5.1)</td><td>Device ('12 - '14)</td><td>Emulator (ver 2.3.1)</td><td>Device ('15 - '16)</td><td>Emulator (ver 3.0.0)</td><td>Device ('14 - '16)</td></tr>
-  <tr align="center"><td>setOption</td><td>X</td><td>X</td><td>O</td><td>X</td><td>O</td><td>X</td><td>O</td><td>MPEG-DASH is not recommended on webOS.<br>Smooth Streaming is not recommended on webOS.<br>Please refer to the following URL for detail.<br>Orsay / Tizen : https://www.samsungdforum.com/Tizen/Spec#2016TVSpec<br>WebOS : http://developer.lge.com/webOSTV/discover/specifications/webos-tv-platform/supported-media-formats/
+  <tr align="center"><td>setOption</td><td>X</td><td>X</td><td>O</td><td>X</td><td>O</td><td>X</td><td>O</td><td>MPEG-DASH is not recommended on webOS.<br>Smooth Streaming is not recommended on webOS.<br>Please refer to the following URL for detail.<br>[Orsay / Tizen](https://www.samsungdforum.com/Tizen/Spec#2016TVSpec)<br>[WebOS](http://developer.lge.com/webOSTV/discover/specifications/webos-tv-platform/supported-media-formats/)
 </td></tr>
   <tr align="center"><td>unsetOption</td><td>X</td><td>X</td><td>O</td><td>X</td><td>O</td><td>X</td><td>O</td><td></td></tr>
  </table>
