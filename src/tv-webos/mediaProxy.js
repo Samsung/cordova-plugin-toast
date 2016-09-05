@@ -227,8 +227,16 @@ module.exports = {
         isPlayCalled = true;
         console.log('media::play() - id =' + id);
 
+        var videoChildNodes = mediaObjects[id].childNodes;
+
         if(isOpenFinished === true) {
-            mediaObjects[id].play();
+            if(videoChildNodes.length === 0) {
+                openMedia(id, sourceElem.src);
+            }
+            else {
+                mediaObjects[id].play();
+                isPlayCalled = false;
+            }
         }
     },
 
