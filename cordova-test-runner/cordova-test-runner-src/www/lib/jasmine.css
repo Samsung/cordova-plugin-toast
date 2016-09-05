@@ -39,6 +39,26 @@ body { overflow-y: scroll; }
 .jasmine_html-reporter.spec-list .bar.menu.failure-list, .jasmine_html-reporter.spec-list .results .failures { display: none; }
 .jasmine_html-reporter.failure-list .bar.menu.spec-list, .jasmine_html-reporter.failure-list .summary { display: none; }
 .jasmine_html-reporter .results { margin-top: 14px; margin-left: 14px; margin-right: 14px;}
+
+@media (min-width: 768px) {
+  .jasmine_html-reporter .results {
+    height:305px;
+    overflow-y: scroll;
+  }
+}
+@media (min-width: 992px) {
+  .jasmine_html-reporter .results {
+    height:485px;
+    overflow-y: scroll;
+  }
+}
+@media (min-width: 1200px) {
+  .jasmine_html-reporter .results {
+    height:860px;
+    overflow-y: scroll;
+  }
+}
+
 .jasmine_html-reporter .summary { margin-top: 14px; }
 .jasmine_html-reporter .summary ul { list-style-type: none; margin-left: 14px; padding-top: 0; padding-left: 0; }
 .jasmine_html-reporter .summary ul.suite { margin-top: 7px; margin-bottom: 7px; }

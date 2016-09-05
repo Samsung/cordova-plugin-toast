@@ -26,7 +26,8 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
      |-src/ ................... Platform dependent modules for the plugin TOAST
      |  |-browser/ ............ Plugin implementation for the platform `browser`
      |  |-sectv-orsay/ ........ Plugin implementation for the platform `sectv-orsay`
-     |  `-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
+     |  |-sectv-tizen/ ........ Plugin implementation for the platform `sectv-tizen`
+     |  `-tv-webos/ ........... Plugin implementation for the platform `tv-webos`
      |-tasks/ ................. custom grunt tasks to build the toast.js
      |-www/ ................... Platform independent modules for the plugin TOAST
      |-Gruntfile.js ........... Gruntfile to build the toast.js
@@ -36,12 +37,15 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
 # Associated Projects
 * [cordova-sectv-orsay](http://github.com/Samsung/cordova-sectv-orsay) is an application library that allows for Cordova-based projects to be built for the Legacy Samsung Smart TV Platform.(A.K.A Orsay)
 * [cordova-sectv-tizen](http://github.com/Samsung/cordova-sectv-tizen) is an application library that allows for Cordova-based projects to be built for the Samsung Tizen TV Platform.
-* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [grunt](http://gruntjs.com/) task to prepare and build package from a cordova project for `sectv-orsay` and `sectv-tizen` platforms.
+* [cordova-tv-webos](http://github.com/Samsung/cordova-tv-webos) is an application library that allows for Cordova-based projects to be built for the LG WebOS TV Platform.
+* [grunt-cordova-sectv](http://github.com/Samsung/grunt-cordova-sectv) is a [grunt](http://gruntjs.com/) task to prepare and build package from a cordova project for `sectv-orsay` and `sectv-tizen` and `tv-webos` platforms.
+
 
 # Supported platform
 * browser
 * Legacy Samsung Smart TV (sectv-orsay)
 * Tizen Samsung Smart TV (sectv-tizen)
+* WebOS LG Smart TV (tv-webos)
 
 <table>
   <tr align="center">
@@ -49,17 +53,18 @@ Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech sess
     <td rowspan="2" style="">Browser</td>
     <td colspan="3" style="">Legacy Samsung Smart TV</td>
     <td colspan="2" style="width:220px">Tizen Samsung Smart TV</td>
+    <td colspan="3" style="width:220px">WebOS LG Smart TV</td>
   </tr>
-  <tr align="center"><td>2012</td><td>2013</td><td>2014</td><td>2015</td><td>2016</td></tr>
-  <tr align="center"><td>toast.Media</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.MediaPlugin</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.drminfo</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.application</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.inputdevice</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.tvaudiocontrol</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.tvwindow</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>toast.tvchannel</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-  <tr align="center"><td>IME</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>2012</td><td>2013</td><td>2014</td><td>2015</td><td>2016</td><td>2014</td><td>2015</td><td>2016</td></tr>
+  <tr align="center"><td>toast.Media</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.MediaPlugin</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.drminfo</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr align="center"><td>toast.application</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.inputdevice</td><td>Partly</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.tvaudiocontrol</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+  <tr align="center"><td>toast.tvwindow</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr align="center"><td>toast.tvchannel</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+  <tr align="center"><td>IME</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
  </table>
 
 # Prepare to start
@@ -94,11 +99,12 @@ First, TOAST needs the followings. Please install these.
     $ git clone https://github.com/Samsung/cordova-plugin-toast.git
     $ git clone https://github.com/Samsung/cordova-sectv-orsay.git
     $ git clone https://github.com/Samsung/cordova-sectv-tizen.git
+    $ git clone https://github.com/Samsung/cordova-tv-webos.git
     $ git clone https://github.com/Samsung/grunt-cordova-sectv.git
     ```
 
 ## Configuration
-* Please `npm install` to install dependencies in `cordova-js`, `cordova-plugin-toast`, `cordova-sectv-orsay`, `cordova-sectv-tizen`, `grunt-cordova-sectv`.
+* Please `npm install` to install dependencies in `cordova-js`, `cordova-plugin-toast`, `cordova-sectv-orsay`, `cordova-sectv-tizen`, `cordova-tv-webos`, `grunt-cordova-sectv`.
 
     ```sh
     $ npm install
@@ -113,7 +119,8 @@ First, TOAST needs the followings. Please install these.
         compile: {
             ...
             "sectv-orsay": {},
-            "sectv-tizen": {}
+            "sectv-tizen": {},
+            "tv-webos": {}
         },
     ```
 
@@ -123,7 +130,8 @@ First, TOAST needs the followings. Please install these.
   "cordova-platforms" : {
         ...
     "cordova-sectv-orsay"   : "../cordova-sectv-orsay",
-    "cordova-sectv-tizen"   : "../cordova-sectv-tizen"
+    "cordova-sectv-tizen"   : "../cordova-sectv-tizen",
+    "cordova-tv-webos"   : "../cordova-tv-webos"
   }
   ```
 
@@ -132,13 +140,13 @@ First, TOAST needs the followings. Please install these.
 * In `cordova-js`, please `grunt compile` for packaging.
 
     ```sh
-    $ grunt compile:sectv-orsay compile:sectv-tizen
+    $ grunt compile:sectv-orsay compile:sectv-tizen compile:tv-webos
     ```
 
 * In `cordova-plugin-toast`, please `grunt compile` for packaging.
 
     ```sh
-    $ grunt compile:sectv-orsay compile:sectv-tizen
+    $ grunt compile:sectv-orsay compile:sectv-tizen compile:tv-webos
     ```
 
 # Create Project
@@ -155,6 +163,7 @@ First, TOAST needs the followings. Please install these.
      |-cordova-plugin-toast/ ..
      |-cordova-sectv-orsay/ ...
      |-cordova-sectv-tizen/ ...
+     |-cordova-tv-webos/ ......
      |-grunt-cordova-sectv/ ...
      '-TestApp/ ...........
    ```
@@ -225,6 +234,11 @@ First, TOAST needs the followings. Please install these.
     ```sh
     $ grunt sectv-prepare:sectv-tizen
     ```
+* tv-webos
+
+    ```sh
+    $ grunt sectv-prepare:tv-webos
+    ```    
 
 ## How to build and package
 * browser
@@ -247,6 +261,13 @@ First, TOAST needs the followings. Please install these.
     $ grunt sectv-build:sectv-tizen
     # Run the application on target by using SDK
     ```
+* tv-webos
+
+    ```sh
+    # Test on tv-webos platform
+    $ grunt sectv-build:tv-webos
+    # Run the application on target by using SDK
+    ```    
 
 * For more details, please refer the [tizen package](https://github.com/Samsung/grunt-cordova-sectv/blob/master/README.md#how-to-package-the-application-by-platforms)
 * For more details, please refer the [README.md](https://github.com/Samsung/grunt-cordova-sectv/blob/master/README.md)

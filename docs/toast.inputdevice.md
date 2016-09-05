@@ -6,6 +6,7 @@ toast.inputdevice privides TV's inputdevice related APIs.
 * sectv-orsay
 * sectv-tizen
 	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
+* tv-webos
 
 ## Full WebIDL
 ```widl
@@ -44,36 +45,36 @@ Supported Keys are different by each platforms.
 
 :star: Yes*: supported, but callling `registerKey` with the `keyName` is needed.
 
-| keyName            | browser (keyboard) | sectv-orsay | sectv-tizen |
-|--------------------|--------------------|-------------|-------------|
-| ArrowUp            | Yes                | Yes         | Yes         |
-| ArrowDown          | Yes                | Yes         | Yes         |
-| ArrowLeft          | Yes                | Yes         | Yes         |
-| ArrowRight         | Yes                | Yes         | Yes         |
-| Enter              | Yes                | Yes         | Yes         |
-| Return             | Yes (ESC)          | Yes         | Yes         |
-| ColorF0Red         | Yes (F1)           | Yes*        | Yes*        |
-| ColorF1Green       | Yes (F2)           | Yes*        | Yes*        |
-| ColorF2Yellow      | Yes (F3)           | Yes*        | Yes*        |
-| ColorF3Blue        | Yes (F4)           | Yes*        | Yes*        |
-| MediaRecord        | Yes (F5)           | Yes*        | Yes*        |
-| MediaPlayPause     | Yes (F6)           | No          | Yes*        |
-| MediaStop          | Yes (F7)           | Yes*        | Yes*        |
-| MediaFastForward   | Yes (F8)           | Yes*        | Yes*        |
-| MediaPlay          | Yes (F9)           | Yes*        | Yes*        |
-| MediaPause         | Yes (F10)          | Yes*        | Yes*        |
-| MediaRewind        | Yes (F11)          | Yes*        | Yes*        |
-| Tools              | Yes (Context)      | Yes*        | Yes*        |
-| 0					 | Yes (0)			  | Yes*		| Yes*		  |
-| 1					 | Yes (1)			  | Yes*		| Yes*		  |
-| 2					 | Yes (2)			  | Yes*		| Yes*		  |
-| 3					 | Yes (3)			  | Yes*		| Yes*		  |
-| 4					 | Yes (4)			  | Yes*		| Yes*		  |
-| 5					 | Yes (5)			  | Yes*		| Yes*		  |
-| 6					 | Yes (6)			  | Yes*		| Yes*		  |
-| 7					 | Yes (7)			  | Yes*		| Yes*		  |
-| 8					 | Yes (8)			  | Yes*		| Yes*		  |
-| 9					 | Yes (9)			  | Yes*		| Yes*		  |
+| keyName            | browser (keyboard) | sectv-orsay | sectv-tizen | tv-webos |
+|--------------------|--------------------|-------------|-------------|----------|
+| ArrowUp            | Yes                | Yes         | Yes         | Yes      |
+| ArrowDown          | Yes                | Yes         | Yes         | Yes      |
+| ArrowLeft          | Yes                | Yes         | Yes         | Yes      |
+| ArrowRight         | Yes                | Yes         | Yes         | Yes      |
+| Enter              | Yes                | Yes         | Yes         | Yes      |
+| Return             | Yes (ESC)          | Yes         | Yes         | Yes      |
+| ColorF0Red         | Yes (F1)           | Yes*        | Yes*        | Yes      |
+| ColorF1Green       | Yes (F2)           | Yes*        | Yes*        | Yes      |
+| ColorF2Yellow      | Yes (F3)           | Yes*        | Yes*        | Yes      |
+| ColorF3Blue        | Yes (F4)           | Yes*        | Yes*        | Yes      |
+| MediaRecord        | Yes (F5)           | Yes*        | Yes*        | No       |
+| MediaPlayPause     | Yes (F6)           | No          | Yes*        | No       |
+| MediaStop          | Yes (F7)           | Yes*        | Yes*        | Yes      |
+| MediaFastForward   | Yes (F8)           | Yes*        | Yes*        | Yes      |
+| MediaPlay          | Yes (F9)           | Yes*        | Yes*        | Yes      |
+| MediaPause         | Yes (F10)          | Yes*        | Yes*        | Yes      |
+| MediaRewind        | Yes (F11)          | Yes*        | Yes*        | Yes      |
+| Tools              | Yes (Context)      | Yes*        | Yes*        | No       |
+| 0					 | Yes (0)			  | Yes*		| Yes*		  | Yes      |
+| 1					 | Yes (1)			  | Yes*		| Yes*		  | Yes      |
+| 2					 | Yes (2)			  | Yes*		| Yes*		  | Yes      |
+| 3					 | Yes (3)			  | Yes*		| Yes*		  | Yes      |
+| 4					 | Yes (4)			  | Yes*		| Yes*		  | Yes      |
+| 5					 | Yes (5)			  | Yes*		| Yes*		  | Yes      |
+| 6					 | Yes (6)			  | Yes*		| Yes*		  | Yes      |
+| 7					 | Yes (7)			  | Yes*		| Yes*		  | Yes      |
+| 8					 | Yes (8)			  | Yes*		| Yes*		  | Yes      |
+| 9					 | Yes (9)			  | Yes*		| Yes*		  | Yes      |
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:
 	`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter` and `Return`

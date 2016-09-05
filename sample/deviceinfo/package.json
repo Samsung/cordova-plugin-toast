@@ -1,0 +1,27 @@
+{
+  "name": "deviceinfo",
+  "version": "1.1.0",
+  "description": "sample app for deviceinfo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsung/cordova-plugin-toast/sample/deviceinfo"
+  },
+  "homepage": "https://github.com/samsung/cordova-plugin-toast/sample/deviceinfo",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova:template",
+    "cordova-sectv-tizen",
+    "cordova-sectv-orsay",
+    "cordova-browser",
+    "samsung",
+    "cordova",
+    "tizen",
+    "tv"
+  ],
+  "author": "Samsung",
+  "license": "Apache-2.0"
+}

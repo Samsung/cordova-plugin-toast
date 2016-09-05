@@ -1,0 +1,27 @@
+{
+  "name": "cordova-test-runner",
+  "version": "1.1.0",
+  "description": "Testsuite for Toast Apis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsung/cordova-plugin-toast/cordova-test-runner"
+  },
+  "homepage": "https://github.com/samsung/cordova-plugin-toast/cordova-test-runner",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova:template",
+    "cordova-sectv-tizen",
+    "cordova-sectv-orsay",
+    "cordova-browser",
+    "samsung",
+    "cordova",
+    "tizen",
+    "tv"
+  ],
+  "author": "Samsung",
+  "license": "Apache-2.0"
+}

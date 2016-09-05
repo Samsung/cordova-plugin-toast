@@ -5,6 +5,7 @@ Module Toast provides global namespace named "toast" to provide APIs for TV appl
 * browser
 * sectv-orsay
 * sectv-tizen
+* tv-webos
 
 ## Full WebIDL
 ```WebIDL

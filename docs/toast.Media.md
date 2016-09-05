@@ -5,6 +5,7 @@ toast.Media play back video or audio files.
 * browser
 * sectv-orsay
 * sectv-tizen
+* tv-webos
 
 ## Full WebIDL
 ```WebIDL
@@ -209,7 +210,8 @@ Synchronize videoRect with container element. This function references the style
  ---------------|---------------|------------------------
   sectv-orsay   | 2013 or older | Mandatory              
   sectv-orsay   | 2014          | Optional               
-  sectv-tizen   | 2015 or later | Optional               
+  sectv-tizen   | 2015 or later | Optional
+  tv-webos      | 2014 or later | Optional               
   browser       |               | Optional               
 
 * Parameters

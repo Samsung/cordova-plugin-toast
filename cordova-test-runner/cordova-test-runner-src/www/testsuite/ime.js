@@ -22,16 +22,11 @@
         report.append(elInput);
 
         elInput.addEventListener('submit', function (e) {
-            setTimeout(function() {
-                report('Success: submit event ' + JSON.stringify(elInput.value));
-            },100);
-
+            report('Success: submit event ' + JSON.stringify(elInput.value));
         });
 
         elInput.addEventListener('cancel', function (e) {
-            setTimeout(function() {
-                report('Error: cancel event');
-            },100);
+            report('Error: cancel event');
         });
 
         elInput.focus();
@@ -43,15 +38,11 @@
         report.append(elInput);
 
         elInput.addEventListener('submit', function (e) {
-            setTimeout(function() {
-                report('Error: submit event');
-            },100);
+            report('Error: submit event');
         });
 
         elInput.addEventListener('cancel', function (e) {
-            setTimeout(function() {
-                report('Success: cancel event');
-            },100);
+            report('Success: cancel event');
         });
 
         elInput.focus();

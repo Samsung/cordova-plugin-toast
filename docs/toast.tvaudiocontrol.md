@@ -6,6 +6,7 @@ toast.tvaudiocontrol provides audio control such as volume or mute.
 * sectv-orsay
 * sectv-tizen
     - Privilege `<tizen:privilege name="http://tizen.org/privilege/tv.audio"/>` must be declared in the config.xml of tizen package.
+* tv-webos
 
 ## Full WebIDL
 ```WebIDL

@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         options: {
             jshintrc: '.jshintrc'
         },
-        src: ['cordova-test-runner/**/*.js']
+        src: ['cordova-test-runner/cordova-test-runner-src/www/spec/*.js', 'cordova-test-runner/cordova-test-runner-src/www/testsuite/*.js']
       }
     },
     jscs: {
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         options: {
             config: '.jscsrc'
         },
-        src: ['cordova-test-runner/**/*.js']
+        src: ['cordova-test-runner/cordova-test-runner-src/www/spec/*.js', 'cordova-test-runner/cordova-test-runner-src/www/testsuite/*.js']
       }
     },
     compile: {
@@ -42,6 +42,9 @@ module.exports = function(grunt) {
       },
       "sectv-tizen": {
           //dest: "platform_www/sectv-tizen/toast.js" // default
+      },
+      "tv-webos": {
+          //dest: "platform_www/tv-webos/toast.js" // default
       }
     },
     watch: {
@@ -52,6 +55,10 @@ module.exports = function(grunt) {
       'sectv-tizen': {
         files: ['www/**/*.js', 'src/sectv-tizen/*.js'],
         tasks: ['jshint:src', 'compile:sectv-tizen']
+      },
+      'tv-webos': {
+        files: ['www/**/*.js', 'src/tv-webos/*.js'],
+        tasks: ['jshint:src', 'compile:tv-webos']
       }
     }
   });

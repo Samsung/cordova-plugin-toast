@@ -98,6 +98,7 @@
       "webapis": true,  // Orsay/Tizen Samsung webapis
       "toast": true,
       "curWidget": true, // for Orsay
-      "tizen": true // Tizen webapi
+      "tizen": true, // Tizen webapi
+      "webOS": true // WebOS api
     } // additional predefined global variables
 }

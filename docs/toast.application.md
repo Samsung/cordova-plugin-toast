@@ -4,6 +4,7 @@ toast.application privides APIs related with the application.
 ## Supported platforms
 * sectv-orsay
 * sectv-tizen
+* tv-webos
 
 ## Full WebIDL
 ```WebIDL
