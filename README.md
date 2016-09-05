@@ -269,8 +269,7 @@ First, TOAST needs the followings. Please install these.
     # Run the application on target by using SDK
     ```    
 
-* For more details, please refer the [tizen package](https://github.com/Samsung/grunt-cordova-sectv/blob/master/README.md#how-to-package-the-application-by-platforms)
-* For more details, please refer the [README.md](https://github.com/Samsung/grunt-cordova-sectv/blob/master/README.md)
+* For more details, please refer the [tizen package](https://github.com/Samsung/grunt-cordova-sectv/blob/master/README.md#how-to-build-and-package-the-application-by-platforms)
 
 # How to Test with TestRunner
 * You can test on each platforms with Test Runner cordova application which is located at 'cordova-test-runner' directory of this project.

@@ -214,7 +214,7 @@ The method registers a volume change callback for getting notified when TV volum
 
 			```js
 			function onVolumeChanged(volume){
-			    console.log('volume changes to ' + value);
+			    console.log('volume changes to ' + volume);
 			}
             toast.tvaudiocontrol.setVolumeChangeListener(onVolumeChanged, function() {
                 console.log('Success');
