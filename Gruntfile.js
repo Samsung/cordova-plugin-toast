@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         options: {
             jshintrc: '.jshintrc'
         },
-        src: ['cordova-test-runner/**/*.js']
+        src: ['cordova-test-runner/cordova-test-runner-src/www/spec/*.js', 'cordova-test-runner/cordova-test-runner-src/www/testsuite/*.js']
       }
     },
     jscs: {
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         options: {
             config: '.jscsrc'
         },
-        src: ['cordova-test-runner/**/*.js']
+        src: ['cordova-test-runner/cordova-test-runner-src/www/spec/*.js', 'cordova-test-runner/cordova-test-runner-src/www/testsuite/*.js']
       }
     },
     compile: {
