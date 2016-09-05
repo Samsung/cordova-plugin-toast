@@ -2,9 +2,25 @@
 toast.application privides APIs related with the application.
 
 ## Supported platforms
-* sectv-orsay
-* sectv-tizen
-* tv-webos
+* Browser
+* sectv-orsay (sectv-orsay)
+* sectv-tizen (sectv-tizen)
+* tv-webos (tv-webos)
+
+<table>
+  <tr align="center">
+    <td rowspan="2" style="">Method Name</td>
+    <td rowspan="2" style="">Browser</td>
+    <td rowspan="2" style="">Emulator<br>(ver 5.1)</td>
+    <td colspan="3" style="">Legacy Samsung Smart TV</td>
+    <td colspan="2" style="width:220px">Tizen Samsung Smart TV</td>
+    <td colspan="3" style="width:220px">WebOS LG Smart TV</td>
+  </tr>
+  <tr align="center"><td>2012</td><td>2013</td><td>2014</td><td>2015</td><td>2016</td><td>2014</td><td>2015</td><td>2016</td></tr>
+  <tr align="center"><td>exit</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>launchApp</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>getRequestedAppInfo</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+ </table>
 
 ## Full WebIDL
 ```WebIDL
@@ -106,7 +122,6 @@ This interface has an application information requested and passed from another 
         	console.log('fail' + err.message);
         });
 		```
-
 
 ## See others
 [toast.inputdevice](toast.inputdevice.md)
