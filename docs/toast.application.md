@@ -75,7 +75,7 @@ This function terminates current application.
 		```
 
 ### void launchApp(AppInfo appInfo, SuccessCallback successCallback, optional ErrorCallback? errorCallback);
-Launches an application with the specified application control.
+Launches an application with application details.
 * Parameters
 	* appInfo: The data structure describing application details.
 	* successCallback: The method to call when the source is changed successfully.
