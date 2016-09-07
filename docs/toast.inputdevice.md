@@ -233,3 +233,4 @@ This function unregisters given key. The key can not be handled with key event a
 		```
 
 ## See others
+None
