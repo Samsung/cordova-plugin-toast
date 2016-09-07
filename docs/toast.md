@@ -21,19 +21,18 @@ module Toast {
 ```
 
 ## APIs
-* Toast `toast`
+### Toast `toast`
+Toast provides global namespace named `toast` to provide APIs for TV application.
+Every toast APIs will be appended to this namespace.
 
-	Toast provides global namespace named `toast` to provide APIs for TV application.
-	Every toast APIs will be appended to this namespace.
+* Examples
+	1. accessing "toast" namespace
 
-	* Examples
-		1. accessing "toast" namespace
-
-			```js
-			document.addEventListener('deviceready', function () {
-				console.log(toast);	// [object Object] will be printed.
-			});
-			```
+		```js
+		document.addEventListener('deviceready', function () {
+			console.log(toast);	// [object Object] will be printed.
+		});
+		```
 
 ## See others
 * [toast.application](toast.application.md)
