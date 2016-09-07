@@ -32,52 +32,51 @@ module IME {
 ```
 
 ## Examples
-* Examples
-    1. Showing IME and adding event on Tizen, Legacy.
+1. Showing IME and adding event on Tizen, Legacy.
 
-        ```js
-        imeEle = document.getElementById('searchText'); // 'searchText' : id of input tag
+    ```js
+    imeEle = document.getElementById('searchText'); // 'searchText' : id of input tag
 
-        imeEle.addEventListener('submit', function (e) {
-            console.log("The DONE button of IME is pushed");
-        });
+    imeEle.addEventListener('submit', function (e) {
+        console.log("The DONE button of IME is pushed");
+    });
 
-        imeEle.addEventListener('cancel', function (e) {
-            console.log("The CANCEL button of IME is pushed");
-        });
+    imeEle.addEventListener('cancel', function (e) {
+        console.log("The CANCEL button of IME is pushed");
+    });
 
-        imeEle.addEventListener('blur', function (e) {
-            console.log("The INPUT element loses focus");
+    imeEle.addEventListener('blur', function (e) {
+        console.log("The INPUT element loses focus");
 
-            if(imeEle.getAttribute('data-ime-show') == 'false') {
-                console.log("The IME is closed");
-            }
+        if(imeEle.getAttribute('data-ime-show') == 'false') {
+            console.log("The IME is closed");
+        }
 
-        });
+    });
 
-        imeEle.focus();
-        ```
+    imeEle.focus();
+    ```
 
-    2. Showing IME and adding event on Webos. (On Webos platform, cancel event is not supported.)
+2. Showing IME and adding event on Webos. (On Webos platform, cancel event is not supported.)
 
-        ```js
-        imeEle = document.getElementById('searchText'); // 'searchText' : id of input tag
+    ```js
+    imeEle = document.getElementById('searchText'); // 'searchText' : id of input tag
 
-        imeEle.addEventListener('submit', function (e) {
-            console.log("The DONE button of IME is pushed");
-        });
+    imeEle.addEventListener('submit', function (e) {
+        console.log("The DONE button of IME is pushed");
+    });
 
-        imeEle.addEventListener('blur', function (e) {
-            console.log("The INPUT element loses focus");
+    imeEle.addEventListener('blur', function (e) {
+        console.log("The INPUT element loses focus");
 
-            if(imeEle.getAttribute('data-ime-show') == 'false') {
-                console.log("The IME is closed");
-            }
+        if(imeEle.getAttribute('data-ime-show') == 'false') {
+            console.log("The IME is closed");
+        }
 
-        });
-        
-        imeEle.focus();
-        ```
+    });
+    
+    imeEle.focus();
+    ```
 
 ## See others
 None
