@@ -55,72 +55,72 @@ module Application {
 ### void exit();
 This function terminates current application.
 * Parameters
-	N/A
+    N/A
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* If given arguments are not matched with API specification.
-	* throws Error
-		* if any error occured during the operation.
+    * throws TypeError
+        * If given arguments are not matched with API specification.
+    * throws Error
+        * if any error occured during the operation.
 * Examples
-	1. Terminate current application when Return key pressed.
+    1. Terminate current application when Return key pressed.
 
-		```js
-		window.addEventListener('keydown', function (e) {
-			if(e.keyCode === tvKeyCode.Return) {
-				toast.application.exit();
-			}
-		});
-		```
+        ```js
+        window.addEventListener('keydown', function (e) {
+            if(e.keyCode === tvKeyCode.Return) {
+                toast.application.exit();
+            }
+        });
+        ```
 
 ### void launchApp(AppInfo appInfo, SuccessCallback successCallback, optional ErrorCallback? errorCallback);
 Launches an application with application details.
 * Parameters
-	* appInfo: The data structure describing application details.
-	* successCallback: The method to call when the source is changed successfully.
-	* errorCallback: The method to invoke when an error occurs.
+    * appInfo: The data structure describing application details.
+    * successCallback: The method to call when the source is changed successfully.
+    * errorCallback: The method to invoke when an error occurs.
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* If given arguments are not matched with API specification.
-	* throws Error
-		* if any error occured during the operation.
+    * throws TypeError
+        * If given arguments are not matched with API specification.
+    * throws Error
+        * if any error occured during the operation.
 * Examples
-	1. Callee(appId) will be lauched with data.
+    1. Callee(appId) will be lauched with data.
 
-		```js
+        ```js
         toast.application.launchApp({appId: 'xxxxxxx', data: {url: 'http://...', info: 'This is video url.'}}, function() {
-        	console.log('success');
+            console.log('success');
         }, function(err) {
-        	console.log('fail' + err.message);
+            console.log('fail' + err.message);
         });
 
-		```
+        ```
 
 ### void getRequestedAppInfo(ReqAppInfoCallback successCallback, optional ErrorCallback? errorCallback);
 This interface has an application information requested and passed from another application and is passed to launch other applications. 
 * Parameters
-	* successCallback: The method to call when the source is changed successfully.
-	* errorCallback: The method to invoke when an error occurs.
+    * successCallback: The method to call when the source is changed successfully.
+    * errorCallback: The method to invoke when an error occurs.
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* If given arguments are not matched with API specification.
-	* throws Error
-		* if any error occured during the operation.
+    * throws TypeError
+        * If given arguments are not matched with API specification.
+    * throws Error
+        * if any error occured during the operation.
 * Examples
-	1. Callee received the Data from caller.
+    1. Callee received the Data from caller.
 
-		```js
+        ```js
         toast.application.getRequestedAppInfo(function(reqAppInfo) {
-        	console.log('success' + reqAppInfo.callerAppId + ' ' + JSON.stringify(reqAppInfo.data));
+            console.log('success' + reqAppInfo.callerAppId + ' ' + JSON.stringify(reqAppInfo.data));
         }, function(err) {
-        	console.log('fail' + err.message);
+            console.log('fail' + err.message);
         });
-		```
+        ```
 
 ## See others
 [toast.inputdevice](toast.inputdevice.md)

@@ -47,21 +47,21 @@ This method gets the ESN data of given component name.
 * Return value
     - N/A
 * Exceptions
-	* throws TypeError
-	    * if type of any parameters is not matched to specification.
-	* throws Error
-	    * if unknown error occured.
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws Error
+        * if unknown error occured.
 * Examples
-	1. Getting ESN of 'WIDEVINE'.
+    1. Getting ESN of 'WIDEVINE'.
 
-		```js
-		toast.drminfo.getEsn('WIDEVINE', function(value) {
+        ```js
+        toast.drminfo.getEsn('WIDEVINE', function(value) {
             console.log('Success: ' + value);
         }, function(err) {
             console.log('Error: ' + err.message);
         });
-		```
-			
+        ```
+
 ### void getSdi(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
 This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to distinguish devices instead of DUID.
 * Parameters
@@ -70,20 +70,20 @@ This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to
 * Return value
     - N/A
 * Exceptions
-	* throws TypeError
-	    * if type of any parameters is not matched to specification.
-	* throws Error
-	    * if unknown error occured.
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws Error
+        * if unknown error occured.
 * Examples
-	1. Getting value of SDI.
+    1. Getting value of SDI.
 
-		```js
+        ```js
         toast.drminfo.getSdi(function(value) {
             console.log('Success: ' + value);
         }, function(err) {
             console.log('Error: ' + err.message);
         });
-		```
+        ```
 
 ## See others
 None
