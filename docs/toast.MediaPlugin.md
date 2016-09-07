@@ -79,6 +79,7 @@ Unset the option in Media plugin.
 		```
 
 ## Examples
+* Examples
 	1. Basic usage of MediaPluginWideVine which is inherited from MediaPlugin
 		* Make a new file.(deviceInfo.js)
 		* Set the DRM options in self-invoking function.
@@ -142,7 +143,7 @@ Unset the option in Media plugin.
 			```
 		* Include the new file in index.html.
 
-			```js
+			```html
 				<script src='deviceInfo.js'></script>
 			```
 		* Use the API.
@@ -218,7 +219,7 @@ Unset the option in Media plugin.
 			```
 		* Include the new file in index.html.
 
-			```js
+			```html
 				<script src='deviceInfo.js'></script>
 			```
 		* Use the API.
@@ -270,7 +271,7 @@ Unset the option in Media plugin.
 			```
 		* Include the new file in index.html.
 
-			```js
+			```html
 				<script src='deviceInfo.js'></script>
 			```
 		* Use the API.

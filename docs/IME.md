@@ -32,6 +32,7 @@ module IME {
 ```
 
 ## Examples
+* Examples
     1. Showing IME and adding event on Tizen, Legacy.
 
         ```js
