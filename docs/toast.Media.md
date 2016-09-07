@@ -305,6 +305,7 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 		```
 
 ## Examples
+### Examples
 	1. Basic usage to play back an Audio file
 
 	```js
