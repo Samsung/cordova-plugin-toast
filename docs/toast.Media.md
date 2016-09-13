@@ -305,113 +305,114 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 		```
 
 ## Examples
-1. Basic usage to play back an Audio file
+* Examples
+	1. Basic usage to play back an Audio file
 
-```js
-device.addEventListener('deviceready', function () {
-	var media, tvKeyCode;
-	function onKeyDown(e) {
-		switch(e.keyCode) {
-			case tvKeyCode.MediaPlay:
-				media.play();
-				break;
-			case tvKeyCode.MediaPause:
-				media.pause();
-				break;
-			case tvKeyCode.MediaFastForward:
-				var curPos = media.getCurrentPostion();
-				media.seekTo(curPos + 10000);	// +10 seconds
-				break;
-			case tvKeyCode.MediaRewind:
-				var curPos = media.getCurrentPostion();
-				media.seekTo(curPos - 10000);	// -10 seconds
-				break;
-			case tvKeyCode.MediaStop:
-				media.stop();
-				break;
-			case tvKeyCode.Return:
-				toast.application.exit();
-				break;
-		}
-	}
-	window.addEventListener('keydown', onKeyDown);
-	toast.inputdevice.getSupportedKeys(function (keys) {
-		for(var i=0, len=keys.length; i<keys.length; i++) {
-			tvKeyCode[keys[i].name] = keys[i].code;
-			if(['MediaPlay', 'MediaPause', 'MediaFastForward', 'MediaRewind', 'MediaStop'].indexOf(keys[i].name) >= 0) {
-				toast.inputdevice.registerKey(keys[i].name);
+		```js
+		device.addEventListener('deviceready', function () {
+			var media, tvKeyCode;
+			function onKeyDown(e) {
+				switch(e.keyCode) {
+					case tvKeyCode.MediaPlay:
+						media.play();
+						break;
+					case tvKeyCode.MediaPause:
+						media.pause();
+						break;
+					case tvKeyCode.MediaFastForward:
+						var curPos = media.getCurrentPostion();
+						media.seekTo(curPos + 10000);	// +10 seconds
+						break;
+					case tvKeyCode.MediaRewind:
+						var curPos = media.getCurrentPostion();
+						media.seekTo(curPos - 10000);	// -10 seconds
+						break;
+					case tvKeyCode.MediaStop:
+						media.stop();
+						break;
+					case tvKeyCode.Return:
+						toast.application.exit();
+						break;
+				}
 			}
-		}
-	});
-
-	var media = toast.Media.getInstance();
-	media.setListener({
-		onevent: function (evt) {
-			switch(evt.type) {
-				case "STATE":
-					console.log("Media State changed: " + evt.data.oldState + " -> " + evt.data.state);
-					break;
-				case "DURATION":
-					console.log("Media duration updated: " + evt.data.duration + "ms");
-					break;
-				case "POSITION":
-					console.log("Media position updated: " + evt.data.position + "ms");
-					break;
-				case "BUFFERINGPROGRESS":
-					console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
-					if(evt.data.bufferingPercentage >= 100) {
-						console.log("Buffering completed");
+			window.addEventListener('keydown', onKeyDown);
+			toast.inputdevice.getSupportedKeys(function (keys) {
+				for(var i=0, len=keys.length; i<keys.length; i++) {
+					tvKeyCode[keys[i].name] = keys[i].code;
+					if(['MediaPlay', 'MediaPause', 'MediaFastForward', 'MediaRewind', 'MediaStop'].indexOf(keys[i].name) >= 0) {
+						toast.inputdevice.registerKey(keys[i].name);
 					}
-					break;
-				case "ENDED":
-					console.log("Media ended");
-					break;
-			}
-		},
-		onerror: function (err) {
-			console.error("MediaError occured: " + JSON.stringify(err));
-		}
-	});
-	media.open('http://mydomain.com/audio.mp3');
-	media.play();
-});
-```
+				}
+			});
 
-2. Basic usage to play back a Video file
+			var media = toast.Media.getInstance();
+			media.setListener({
+				onevent: function (evt) {
+					switch(evt.type) {
+						case "STATE":
+							console.log("Media State changed: " + evt.data.oldState + " -> " + evt.data.state);
+							break;
+						case "DURATION":
+							console.log("Media duration updated: " + evt.data.duration + "ms");
+							break;
+						case "POSITION":
+							console.log("Media position updated: " + evt.data.position + "ms");
+							break;
+						case "BUFFERINGPROGRESS":
+							console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
+							if(evt.data.bufferingPercentage >= 100) {
+								console.log("Buffering completed");
+							}
+							break;
+						case "ENDED":
+							console.log("Media ended");
+							break;
+					}
+				},
+				onerror: function (err) {
+					console.error("MediaError occured: " + JSON.stringify(err));
+				}
+			});
+			media.open('http://mydomain.com/audio.mp3');
+			media.play();
+		});
+		```
 
-```js
-device.addEventListener('deviceready', function () {
-	// ... Please refer to "Basic usage to play back an Audio" for basic media key handling.
+	2. Basic usage to play back a Video file
 
-	media.open('http://mydomain.com/video.mp4');
+		```js
+		device.addEventListener('deviceready', function () {
+			// ... Please refer to "Basic usage to play back an Audio" for basic media key handling.
 
-	// Getting container element which is used for displaying the video.
-	// Video will be rendered in the container element. You can change the rect of video by changing the container's style.
-	// Before you change the container's style, the video will not be rendered on a screen, but its sound will be played in backgrond.
-	var elContainer = media.getContainerElement();
+			media.open('http://mydomain.com/video.mp4');
 
-	// OPTION 1: Let's set the render area to full screen.
-	elContainer.style.position = 'fixed';
-	elContainer.style.left = 0;
-	elContainer.style.top = 0;
-	elContainer.style.width = window.innerWidth;
-	elContainer.style.height = window.innerHeight;
-	document.body.appendChild(elContainer);
-	
-	// OPTION 2: Instead of attaching the container to body,
-	//           you can append the 'elContainer' to any other DOM element to show the video in partial screen like below:
-	var elPlayer = document.querySelecter(".videoplayer")
-	elContainer.className = 'renderarea';	// .renderarea style could be pre-defined with CSS.
-	elPlayer.appendChild(elContainer);
+			// Getting container element which is used for displaying the video.
+			// Video will be rendered in the container element. You can change the rect of video by changing the container's style.
+			// Before you change the container's style, the video will not be rendered on a screen, but its sound will be played in backgrond.
+			var elContainer = media.getContainerElement();
 
-	// OPTION others...
-	// you can handle the container to show the video with any styles.
-	// The position will be calculated and the video will be displayed in the container.
+			// OPTION 1: Let's set the render area to full screen.
+			elContainer.style.position = 'fixed';
+			elContainer.style.left = 0;
+			elContainer.style.top = 0;
+			elContainer.style.width = window.innerWidth;
+			elContainer.style.height = window.innerHeight;
+			document.body.appendChild(elContainer);
+			
+			// OPTION 2: Instead of attaching the container to body,
+			//           you can append the 'elContainer' to any other DOM element to show the video in partial screen like below:
+			var elPlayer = document.querySelecter(".videoplayer")
+			elContainer.className = 'renderarea';	// .renderarea style could be pre-defined with CSS.
+			elPlayer.appendChild(elContainer);
 
-	// now, start play back!
-	media.play();
-});
-```
+			// OPTION others...
+			// you can handle the container to show the video with any styles.
+			// The position will be calculated and the video will be displayed in the container.
+
+			// now, start play back!
+			media.play();
+		});
+		```
 
 ## See others
 [toast.drminfo](toast.drminfo.md)

@@ -276,7 +276,7 @@ First, TOAST needs the followings. Please install these.
 
     ```sh
     # Create cordova project
-    $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
+    $ cordova create TestRunner --template=cordova-plugin-toast/cordova-test-runner
     $ cd TestRunner
 
     # Beware of hidden file
