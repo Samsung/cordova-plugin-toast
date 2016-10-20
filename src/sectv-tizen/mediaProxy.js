@@ -28,6 +28,8 @@ var avplayState = {
     PAUSED: 'PAUSED'
 };
 var containerElem = null;
+var subtitleUrl = null;
+var subtitleLanguageObj = null;
 
 function createVideoContainer(id) {
     function setContainerStyleEventListener(elem,callback) {
@@ -182,6 +184,14 @@ function getMediaEventValue (type,data) {
             }
         };
         break;
+    case Media.EVENT_SUBTITLE :
+        reval = {
+            'type': type,
+            'data': {
+                'text': data
+            }
+        };
+        break;
     case Media.EVENT_ENDED :
         reval = {
             'type': type,
@@ -306,6 +316,7 @@ module.exports = {
                 },
                 onsubtitlechange: function(duration, text, data1, data2) {
                     console.log('media::Subtitle Changed.');
+                    Media.mediaEvent(id,getMediaEventValue(Media.EVENT_SUBTITLE,text));
                 },
                 ondrmevent: function(drmEvent, drmData) {
                     console.log('media::DRM callback: ' + drmEvent + ', data: ' + drmData);
@@ -322,19 +333,59 @@ module.exports = {
 
         console.log('media::play() - id =' + id);
         if(webapis.avplay.getState() == avplayState.IDLE) {
-            webapis.avplay.prepareAsync(function() {
-                webapis.avplay.play();
-                setScreenSaver('off');
-                Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PLAYING));
-                var duration = webapis.avplay.getDuration();
-                console.log('media:: duration = '+duration);
-                Media.mediaEvent(id,getMediaEventValue(Media.EVENT_DURATION,duration));
-            });
+            if(subtitleUrl) {
+                var download = new tizen.DownloadRequest(subtitleUrl, 'wgt-private-tmp');
+                tizen.download.start(download, {
+                    oncompleted: function(downloadId, fullPath) {
+                        console.log('fullPath...............'+fullPath);
+                        webapis.avplay.setExternalSubtitlePath(fullPath);
+                        playMedia();
+                    },
+                    onfailed: function (error) {
+                        console.log('[Warning] Failed to download Subtitle');
+                        playMedia();
+                    }
+                });
+            }
+            else {
+                playMedia();
+            }
         }
         else {
             webapis.avplay.play();
             setScreenSaver('off');
             Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PLAYING));
+        }
+
+        function playMedia() {
+            webapis.avplay.prepareAsync(function() {
+                webapis.avplay.play();
+                setScreenSaver('off');
+                var totalTrackInfo = webapis.avplay.getTotalTrackInfo();
+                subtitleLanguageObj = {};
+                for(var i=0; i < totalTrackInfo.length; i++) {
+                    if(totalTrackInfo[i].type == 'TEXT') {
+                        //Tizen webapis.avplay.getTotalTrackInfo return the value does not follow camelcase rule.
+                        //Jshint camelcase and jscs requireCamelCaseOrUpperCaseIdentifiers are temporarily disabled. because It is a spec of webapis avplay.getTotalTrackInfo.
+
+                        /*jshint camelcase: false */
+                        /*jscs:disable requireCamelCaseOrUpperCaseIdentifiers*/
+                        var extraInfo = JSON.parse(totalTrackInfo[i].extra_info);
+                        if(extraInfo && extraInfo.hasOwnProperty('track_lang')) {
+                            console.log('extraInfo.track_lang...............'+extraInfo.track_lang);
+                            if(extraInfo.track_lang !== '') {
+                                subtitleLanguageObj[extraInfo.track_lang] = totalTrackInfo[i].index;
+                            }
+                        }
+                        /*jshint camelcase: true */
+                        /*jscs:enable requireCamelCaseOrUpperCaseIdentifiers*/
+                    }
+                }
+                Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PLAYING));
+                var duration = webapis.avplay.getDuration();
+                console.log('media:: duration = '+duration);
+                Media.mediaEvent(id,getMediaEventValue(Media.EVENT_DURATION,duration));
+            });
         }
     },
 
@@ -342,6 +393,7 @@ module.exports = {
     stop: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::stop() - EVENT_STATE -> IDLE');
+        subtitleUrl = null;
         webapis.avplay.stop();
         Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback();
@@ -365,7 +417,6 @@ module.exports = {
     pause: function(successCallback, errorCallback, args) {
         var id = args[0];
         console.log('media::pause() - EVENT_STATE -> PAUSED');
-
         webapis.avplay.pause();
         Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_PAUSED));
         setScreenSaver('on');
@@ -381,6 +432,64 @@ module.exports = {
         console.log('media::setDrm() - type= '+args[0]);
 
         webapis.avplay.setDrm.apply(webapis.avplay, args);
+    },
+
+    setSubtitlePath: function(successCallback, errorCallback, args) {
+        console.log('media::setSubtitlePath()');
+        var path = args[1],
+            absoluteUrl = Urlutil.makeAbsolute(args[1]);
+
+        if(path && typeof path == 'string') {
+            if(!Util.isRemoteUrl(absoluteUrl)) {
+                webapis.avplay.setExternalSubtitlePath(absoluteUrl.replace(/^file:\/\//,''));
+            }
+            else {
+                subtitleUrl = absoluteUrl;
+            }
+
+        }
+        else {
+            console.log('[Warning] Subtitle path is not valid.');
+        }
+    },
+
+    getSubtitleLanguageList: function(successCallback, errorCallback, args) {
+        console.log('media::getSubtitleLanguageList()');
+        var subtitleLanguageArr = [];
+
+        if(subtitleLanguageObj) {
+            for(var key in subtitleLanguageObj) {
+                subtitleLanguageArr.push(key);
+            }
+        }
+
+        if(subtitleLanguageArr.length !== 0 ) {
+            setTimeout(function() {
+                successCallback(subtitleLanguageArr);
+            },0);
+        }
+        else {
+            subtitleLanguageArr = null;
+            errorCallback(new Error('Fail to get subtitle language information'));
+        }
+    },
+
+    setSubtitleLanguage: function(successCallback, errorCallback, args) {
+        console.log('media::setSubtitleLanguage()');
+        var lang = args[1].toLowerCase();
+
+        if(subtitleLanguageObj.hasOwnProperty(lang)) {
+            webapis.avplay.setSelectTrack('TEXT',subtitleLanguageObj.lang);
+        }
+        else {
+            throw new Error('Subtitle is not support this language.');
+        }
+    },
+
+    setSubtitleSync: function(successCallback, errorCallback, args) {
+        console.log('media::setSubtitleSync()');
+        var milliseconds = args[1];
+        webapis.avplay.setSubtitlePosition(milliseconds);
     }
 };
 

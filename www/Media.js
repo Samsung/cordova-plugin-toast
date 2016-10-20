@@ -44,6 +44,7 @@ Media.EVENT_STATE = 'STATE';
 Media.EVENT_DURATION = 'DURATION';
 Media.EVENT_POSITION = 'POSITION';
 Media.EVENT_BUFFERINGPROGRESS = 'BUFFERINGPROGRESS';
+Media.EVENT_SUBTITLE = 'SUBTITLE';
 Media.EVENT_ENDED = 'ENDED';
 
 //Media.MEDIA_SUBTITLE = 5;
@@ -81,6 +82,9 @@ Media.mediaEvent = function(id, value) {
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media.EVENT_BUFFERINGPROGRESS :
+            media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
+            break;
+        case Media.EVENT_SUBTITLE :
             media._mediaEventCallBack.onevent && media._mediaEventCallBack.onevent(value);
             break;
         case Media.EVENT_ENDED :
@@ -145,6 +149,7 @@ Media.prototype.stop = function() {
 };
 
 Media.prototype.seekTo = function(milliseconds) {
+    argscheck.checkArgs('n', 'Media.seekTo', arguments);
     var me = this;
     exec(function(p) {
         me._position = p;
@@ -219,6 +224,28 @@ Media.prototype.syncVideoRect = function() {
         me._position = p;
     }, null, 'toast.Media', 'syncVideoRect');
 };
+
+Media.prototype.setSubtitlePath = function(path) {
+    argscheck.checkArgs('s', 'Media.setSubtitlePath', arguments);
+    exec(null, null, 'toast.Media', 'setSubtitlePath',[this.id,path]);
+};
+
+Media.prototype.getSubtitleLanguageList = function(successCallback, errorCallback) {
+    argscheck.checkArgs('fF', 'Media.getSubtitleLanguageList', arguments);
+    errorCallback = errorCallback || function () {};
+    exec(successCallback, errorCallback, 'toast.Media', 'getSubtitleLanguageList',[this.id]);
+};
+
+Media.prototype.setSubtitleLanguage = function(language) {
+    argscheck.checkArgs('s', 'Media.setSubtitleLanguage', arguments);
+    exec(null, null, 'toast.Media', 'setSubtitleLanguage',[this.id,language]);
+};
+
+Media.prototype.setSubtitleSync = function(milliseconds) {
+    argscheck.checkArgs('n', 'Media.setSubtitleSync', arguments);
+    exec(null, null, 'toast.Media', 'setSubtitleSync',[this.id,milliseconds]);
+};
+
 function invokeHooks (hook, args) {
     var media = args[0];
     args = args.slice(1);

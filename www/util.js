@@ -98,7 +98,7 @@ function getElementExp(elmt) {
 }
 
 function isRemoteUrl(url) {
-    var reg = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i;
+    var reg = /^((ftp|https?):\/\/)?([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)/igm;
     return !!reg.test(url);
 }
 
