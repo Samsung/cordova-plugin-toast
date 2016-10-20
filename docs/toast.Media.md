@@ -27,6 +27,10 @@ toast.Media play back video or audio files.
   <tr align="center"><td>setListener</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
   <tr align="center"><td>unsetListener</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
   <tr align="center"><td>getContainerElement</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
+  <tr align="center"><td>setSubtitlePath</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>getSubtitleLanguageList</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>setSubtitleLanguage</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
+  <tr align="center"><td>setSubtitleSync</td><td>X</td><td>O</td><td>O</td><td>O</td><td>O</td><td>X</td><td>X</td></tr>
   <tr align="center"><td>syncVideoRect</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
   <tr align="center"><td>resetPlugin</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
   <tr align="center"><td>attachPlugin</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td><td>O</td></tr>
@@ -35,7 +39,7 @@ toast.Media play back video or audio files.
 ## Full WebIDL
 ```WebIDL
 module Media {
-	enum MediaEventType {"STATE", "DURATION", "POSITION", "BUFFERINGPROGRESS", "ENDED"};
+	enum MediaEventType {"STATE", "DURATION", "POSITION", "BUFFERINGPROGRESS", "SUBTITLE", "ENDED"};
 	enum MediaState {"IDLE", "PLAYING", "PAUSED", "STALLED", "SEEK"};
 
 	[Constructor()]
@@ -51,6 +55,10 @@ module Media {
 		long setListener(MediaEventListener listener) raises(Error);
 		long unsetListener();
 		DOMElement getContainerElement();
+		void setSubtitlePath(DOMString subtitlePath) raises(Error);;
+		DOMString[] getSubtitleLanguageList() raises(Error);
+		void setSubtitleLanguage(DOMString language) raises(Error);
+		void setSubtitleSync(long syncValue) raises(Error);
 		void syncVideoRect();
 		void resetPlugin();
 		void attachPlugin(MediaPlugin plugin);
@@ -77,6 +85,7 @@ module Media {
 		long? duration;
 		long? position;
 		long? bufferingPercentage;
+		DOMString? text;
 	};
 };
 ```
@@ -224,6 +233,59 @@ The media status is not changed. (Remained as paused if this operation is invoke
 					break;
 			}
 		}
+		```
+
+### void setSubtitlePath(DOMString subtitlePath)
+Set the subtitle path to given path.
+A valid state of its method, is after the IDEL state(after open method)
+* Parameters
+	* subtitlePath: path to subtitle. local or remote path.
+* Return value
+	N/A
+* Exceptions
+	* throws TypeError
+		* if type of any parameters is not matched to specification.
+	* throws Error
+		* if unknown error occured.
+* Examples
+
+		```js
+		var media = toast.Media.getInstance();
+
+		media.setListener({
+			onevent: function (evt) {
+				switch(evt.type) {
+					case "STATE":
+						console.log("Media State changed: " + evt.data.oldState + " -> " + evt.data.state);
+						break;
+					case "DURATION":
+						console.log("Media duration updated: " + evt.data.duration + "ms");
+						break;
+					case "POSITION":
+						console.log("Media position updated: " + evt.data.position + "ms");
+						break;
+					case "BUFFERINGPROGRESS":
+						console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
+						if(evt.data.bufferingPercentage >= 100) {
+							console.log("Buffering completed");
+						}
+						break;
+					case "SUBTITLE":
+						console.log("Media subtitle text: " + evt.data.text);
+						break;
+					case "ENDED":
+						console.log("Media ended");
+						break;
+				}
+			},
+			onerror: function (err) {
+				console.error("MediaError occured: " + JSON.stringify(err));
+			}
+		});
+
+		media.open('http://mydomain.com/1.mp3');
+		media.setSubtitlePath('http://mydomain.com/1.smi');
+
 		```
 		
 ### void syncVideoRect();
