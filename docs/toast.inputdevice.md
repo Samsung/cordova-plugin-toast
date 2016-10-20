@@ -5,7 +5,7 @@ toast.inputdevice privides TV's inputdevice related APIs.
 * browser
 * sectv-orsay (sectv-orsay)
 * sectv-tizen (sectv-tizen)
-	* Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
+    * Privilege `http://tizen.org/privilege/tv.inputdevice` must be declared in the config.xml of tizen package.
 * tv-webos (tv-webos)
 
 <table>
@@ -84,39 +84,39 @@ Supported Keys are different by each platforms.
 | MediaPause         | Yes (F10)          | Yes*        | Yes*        | Yes      |
 | MediaRewind        | Yes (F11)          | Yes*        | Yes*        | Yes      |
 | Tools              | Yes (Context)      | Yes*        | Yes*        | No       |
-| 0					 | Yes (0)			  | Yes*		| Yes*		  | Yes      |
-| 1					 | Yes (1)			  | Yes*		| Yes*		  | Yes      |
-| 2					 | Yes (2)			  | Yes*		| Yes*		  | Yes      |
-| 3					 | Yes (3)			  | Yes*		| Yes*		  | Yes      |
-| 4					 | Yes (4)			  | Yes*		| Yes*		  | Yes      |
-| 5					 | Yes (5)			  | Yes*		| Yes*		  | Yes      |
-| 6					 | Yes (6)			  | Yes*		| Yes*		  | Yes      |
-| 7					 | Yes (7)			  | Yes*		| Yes*		  | Yes      |
-| 8					 | Yes (8)			  | Yes*		| Yes*		  | Yes      |
-| 9					 | Yes (9)			  | Yes*		| Yes*		  | Yes      |
+| 0                  | Yes (0)            | Yes*        | Yes*        | Yes      |
+| 1                  | Yes (1)            | Yes*        | Yes*        | Yes      |
+| 2                  | Yes (2)            | Yes*        | Yes*        | Yes      |
+| 3                  | Yes (3)            | Yes*        | Yes*        | Yes      |
+| 4                  | Yes (4)            | Yes*        | Yes*        | Yes      |
+| 5                  | Yes (5)            | Yes*        | Yes*        | Yes      |
+| 6                  | Yes (6)            | Yes*        | Yes*        | Yes      |
+| 7                  | Yes (7)            | Yes*        | Yes*        | Yes      |
+| 8                  | Yes (8)            | Yes*        | Yes*        | Yes      |
+| 9                  | Yes (9)            | Yes*        | Yes*        | Yes      |
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:
-	`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter` and `Return`
+    `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter` and `Return`
 * keyCode of each keys could be different by platforms. So, we recommend to generate `tvKeyCode` collection like below:
 
 ```js
 var tvKeyCode = {};
 device.addEventListener('deviceready', function () {
-	toast.inputdevice.getSupportedKeys(function (keys) {
-		for(var i=0, len=keys.length; i<len; i++) {
-			tvKeyCode[keys[i].name] = keys[i].code;
-		}
-	});
-	window.addEventListener('keydown', function (e) {
-		switch(e.keyCode) {
-			case tvKeyCode.Enter:
-				// handle Enter key
-				break;
-			case tvKeyCode.ArrowLeft:
-				// handle Enter key
-				break;
-		}
-	});
+    toast.inputdevice.getSupportedKeys(function (keys) {
+        for(var i=0, len=keys.length; i<len; i++) {
+            tvKeyCode[keys[i].name] = keys[i].code;
+        }
+    });
+    window.addEventListener('keydown', function (e) {
+        switch(e.keyCode) {
+            case tvKeyCode.Enter:
+                // handle Enter key
+                break;
+            case tvKeyCode.ArrowLeft:
+                // handle Enter key
+                break;
+        }
+    });
 });
 ```
 
@@ -125,111 +125,112 @@ device.addEventListener('deviceready', function () {
 ### void getSupportedKeys(InputDeviceKeyArrayCallback successCallback, optional ErrorCallback? errorCallback);
 This function retrieves supported keys list of the running platform.
 * Parameters
-	* successCallback: The method to call when a list of supported keys are retrieved successfully.
-	* errorCallback: The method to invoke when an error occurs.
+    * successCallback: The method to call when a list of supported keys are retrieved successfully.
+    * errorCallback: The method to invoke when an error occurs.
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* if type of any parameters is not matched to specification.
-	* throws Error
-		* if unknown error occured.
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws Error
+        * if unknown error occured.
 * Examples
-	1. Getting supported keys and register RED button if it is supported.
+    1. Getting supported keys and register RED button if it is supported.
 
-		```js
-		var i, keyCode = {};
-		toast.inputdevice.getSupportedKeys(function (supportedKeys) {
-			for (i = 0; i < supportedKeys.length; i++) {
-				keyCode[supportedKeys[i].name] = supportedKeys[i].code;
-			}
-			if(keyCode.hasOwnProperty("ColorF0Red")) {
-				toast.inputdevice.registerKey("ColorF0Red", function () {});
-			}
-		});
-		window.addEventListener("keydown", function(keyEvent) {
-			if(keyEvent.keyCode === keyCode.ColorF0Red) {
-				console.log("The RED was pressed");
-			}
-		});
-		```
+        ```js
+        var i, keyCode = {};
+        toast.inputdevice.getSupportedKeys(function (supportedKeys) {
+            for (i = 0; i < supportedKeys.length; i++) {
+                keyCode[supportedKeys[i].name] = supportedKeys[i].code;
+            }
+            if(keyCode.hasOwnProperty("ColorF0Red")) {
+                toast.inputdevice.registerKey("ColorF0Red", function () {});
+            }
+        });
+        window.addEventListener("keydown", function(keyEvent) {
+            if(keyEvent.keyCode === keyCode.ColorF0Red) {
+                console.log("The RED was pressed");
+            }
+        });
+        ```
 
 ### void getKey(InputDeviceKeyName keyName, InputDeviceKeyCallback successCallback, optional ErrorCallback? errorCallback);
 This function retrieves information of the given keyName.
 * Parameters
-	* keyName: Name of key to retrieve.
-	* successCallback: The method to call when a list of supported keys are retrieved successfully.
-	* errorCallback: The method to invoke when an error occurs.
+    * keyName: Name of key to retrieve.
+    * successCallback: The method to call when a list of supported keys are retrieved successfully.
+    * errorCallback: The method to invoke when an error occurs.
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* if type of any parameters is not matched to specification.
-	* throws RangeError
-		* if given value is not in the set or range of allowed values.
-	* throws Error
-		* if unknown error occured.
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws RangeError
+        * if given value is not in the set or range of allowed values.
+    * throws Error
+        * if unknown error occured.
 * Examples
-	1. Getting key code of RED button.
+    1. Getting key code of RED button.
 
-		```js
-		toast.inputdevice.getKey("ColorF0Red", function (key) {
-			console.log("RED button code: " + key.code);
-		}, function(err){
-			console.log("Error : " + err.message);
-		});
-		```
+        ```js
+        toast.inputdevice.getKey("ColorF0Red", function (key) {
+            console.log("RED button code: " + key.code);
+        }, function(err){
+            console.log("Error : " + err.message);
+        });
+        ```
 
 ### void registerKey(InputDeviceKeyName keyName);
 This function registers given key. After this operation, pressing the key on remote controller will fire key events with correspond keyCode.
 * Parameters
-	* keyName: Name of key to register.
-	* successCallback: The method to call when a list of supported keys are retrieved successfully.
-	* errorCallback: The method to invoke when an error occurs.
+    * keyName: Name of key to register.
+    * successCallback: The method to call when a list of supported keys are retrieved successfully.
+    * errorCallback: The method to invoke when an error occurs.
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* if type of any parameters is not matched to specification.
-	* throws RangeError
-		* if given value is not in the set or range of allowed values.
-	* throws Error
-		* if unknown error occured.
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws RangeError
+        * if given value is not in the set or range of allowed values.
+    * throws Error
+        * if unknown error occured.
 * Examples
-	1. Register the RED button.
-		
-		```js
-		toast.inputdevice.registerKey("ColorF0Red", function () {
-			console.log("Success");
-		},function(err){
-			console.log("Error : " + err.message);
-		});
-		```
+    1. Register the RED button.
+        
+        ```js
+        toast.inputdevice.registerKey("ColorF0Red", function () {
+            console.log("Success");
+        },function(err){
+            console.log("Error : " + err.message);
+        });
+        ```
 
 ### void unregisterKey(InputDeviceKeyName keyName);
 This function unregisters given key. The key can not be handled with key event after this operation.
 * Parameters
-	* keyName: Name of key to unregister.
-	* successCallback: The method to call when a list of supported keys are retrieved successfully.
-	* errorCallback: The method to invoke when an error occurs.	
+    * keyName: Name of key to unregister.
+    * successCallback: The method to call when a list of supported keys are retrieved successfully.
+    * errorCallback: The method to invoke when an error occurs.    
 * Return value
-	N/A
+    N/A
 * Exceptions
-	* throws TypeError
-		* if type of any parameters is not matched to specification.
-	* throws RangeError
-		* if given value is not in the set or range of allowed values.
-	* throws Error
-		* if unknown error occured.
+    * throws TypeError
+        * if type of any parameters is not matched to specification.
+    * throws RangeError
+        * if given value is not in the set or range of allowed values.
+    * throws Error
+        * if unknown error occured.
 * Examples
-	1. UnRegister the RED button.
-		
-		```js
-		toast.inputdevice.unregisterKey("ColorF0Red", function () {
-			console.log("Success");
-		},function(err){
-			console.log("Error : " + err.message);
-		});
-		```
+    1. UnRegister the RED button.
+        
+        ```js
+        toast.inputdevice.unregisterKey("ColorF0Red", function () {
+            console.log("Success");
+        },function(err){
+            console.log("Error : " + err.message);
+        });
+        ```
 
 ## See others
+None

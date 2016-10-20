@@ -13,9 +13,15 @@ function onDeviceReady() {
     console.log(toast);
 }
 ```
-If you want more project details, please refer to [wiki](https://github.com/Samsung/cordova-plugin-toast/wiki).
 
-Please refer [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech session : Write Once and Run Everywhere with TOAST for Smart TV. 
+# TOAST references
+If you want more details, please refer belows.
+* Guide
+    - [wiki](https://github.com/Samsung/cordova-plugin-toast/wiki).
+* Youtube
+    - [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech session : Write Once and Run Everywhere with TOAST for Smart TV.
+* TOAST introduce video
+    - [TOAST video](https://www.samsungdforum.com/toastAD) contains introduce for TOAST briefly. It would help you understand easily.
 
 # Project Structure
 ```
@@ -276,7 +282,7 @@ First, TOAST needs the followings. Please install these.
 
     ```sh
     # Create cordova project
-    $ cordova create TestRunner --src=cordova-plugin-toast/cordova-test-runner
+    $ cordova create TestRunner --template=cordova-plugin-toast/cordova-test-runner
     $ cd TestRunner
 
     # Beware of hidden file
