@@ -62,6 +62,9 @@
                                 report('Success: Buffering completed');
                             }
                             break;
+                        case 'SUBTITLE' :
+                            report('Success: Media subtitle text updated: ' + evt.data.text);
+                            break;
                     }
                 },
                 onerror: function (err) {

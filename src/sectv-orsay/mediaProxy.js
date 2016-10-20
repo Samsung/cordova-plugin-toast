@@ -22,6 +22,7 @@ var Util = require('cordova-plugin-toast.util');
 var Urlutil = require('cordova/urlutil');
 
 var containerElem = null;
+var subtitleInfoObj= null;
 
 function createVideoContainer(id) {
     function setContainerStyleEventListener(elem,callback) {
@@ -229,6 +230,14 @@ function getMediaEventValue (type,data) {
             }
         };
         break;
+    case Media.EVENT_SUBTITLE :
+        reval = {
+            'type': type,
+            'data': {
+                'text': data
+            }
+        };
+        break;
     case Media.EVENT_ENDED :
         reval = {
             'type': type,
@@ -280,6 +289,29 @@ function mediaEventListener(type,data1,data2) {
         currentMediaInfo.duration = duration;
         Media.mediaEvent(currentMediaInfo.id,getMediaEventValue(Media.EVENT_DURATION,Number(duration)));
         synchronizeVideoRect();
+        if(subtitleInfoObj && subtitleInfoObj.url) {
+            var retValue = mediaObjects[currentMediaInfo.id].Execute('StartSubtitle',subtitleInfoObj.url);
+            if ( retValue < 1 ) {
+                console.log('[Warning] Failed to Subtitle setting');
+            }
+            else {
+                var subtitleStreamType = 5,
+                    reval = 0,
+                    index = 0;
+
+                mediaObjects[currentMediaInfo.id].subtitleLanguageObj = {};
+
+                while(reval != -1) {
+                    reval = mediaObjects[currentMediaInfo.id].Execute('GetStreamLanguageInfo', subtitleStreamType, index); //-1: fail
+                    if(reval != -1) {
+                        mediaObjects[currentMediaInfo.id].subtitleLanguageObj[getLanguageStr(reval)] = index;
+                        index++;
+                    }
+                }
+                mediaObjects[currentMediaInfo.id].Execute('SetStreamID', subtitleStreamType, 0);
+                mediaObjects[currentMediaInfo.id].Execute('SetSubtitleSync', 0);
+            }
+        }
         break;
     case mediaObjects.BUFFERING_START :
         console.log('media::onStalled()');
@@ -310,14 +342,14 @@ function mediaEventListener(type,data1,data2) {
         break;
     case mediaObjects.CURRENT_PLAYTIME :
         console.log('media::Current playtime: ' + data1);
-
         if(currentMediaInfo.state !== Media.STATE_IDLE) {
             currentMediaInfo.position = data1;
             Media.mediaEvent(currentMediaInfo.id,getMediaEventValue(Media.EVENT_POSITION,Number(data1)));
         }
         break;
     case mediaObjects.SUBTITLE :
-
+        console.log('media::Subtitle Changed.');
+        Media.mediaEvent(currentMediaInfo.id,getMediaEventValue(Media.EVENT_SUBTITLE,data1));
         break;
     case mediaObjects.CONNECTION_FAILED :
         console.log('media::Event type error: ' + data1);
@@ -347,8 +379,8 @@ function mediaEventListener(type,data1,data2) {
 }
 
 var currentMediaInfo = {};
-
 var MediaSource = 43;
+var SEFDownLoad = null;
 function createSEF(id) {
     var SEFWindow = SEF.get('Window');
     if(SEFWindow.Execute('GetSource') != MediaSource) {
@@ -416,6 +448,41 @@ function setScreenSaver (state) {
     }
 }
 
+function getSubtitleExtension(url) {
+    var extension = null;
+    extension = url.match(/(\.\w+$)/igm,'');
+    return extension ? extension : '.smi';
+}
+
+function getLanguageStr(num) {
+    /*
+    streamLanguageStr = {
+        7040882 : 'kor',
+        6647399 : 'eng',
+        7565409 : 'spa',
+        6713957 : 'fre',
+        6975598 : 'jpn',
+        6514793 : 'chi',
+        6776178 : 'ger',
+        6911073 : 'ita',
+        7501171 : 'rus',
+        7368562 : 'por',
+    }
+    */
+
+    var nHex = num.toString(16);
+
+    var sHex1 = '0x'+nHex.substr(0,2);
+    var sHex2 = '0x'+nHex.substr(2,2);
+
+    var str1 = String.fromCharCode(sHex1);
+    var str2 = String.fromCharCode(sHex2);
+
+    var str = str1 + str2;
+
+    return str;
+}
+
 module.exports = {
     create: function(successCallback, errorCallback, args) {
         var id = args[0];
@@ -461,18 +528,52 @@ module.exports = {
         var reval = 0;
         console.log('media::play() - id =' + id);
         if(currentMediaInfo.state == Media.STATE_IDLE) {
-            reval = mediaObjects[id].Execute('InitPlayer',currentMediaInfo.src);
-            reval += mediaObjects[id].Execute('StartPlayback',currentMediaInfo.position);
+            if(subtitleInfoObj && subtitleInfoObj.isRemoteUrl) {
+                SEFDownLoad.OnEvent = function (type,data1,data2) {
+                    _downloadCallback(type,data1,data2);
+                };
+                var extension = getSubtitleExtension(subtitleInfoObj.url);
+
+                SEFDownLoad.Execute('StartDownFile', subtitleInfoObj.url, '$TEMP/TOAST_MediaSubtitle'+extension);
+
+                var _downloadCallback = function(type, param1, param2) {
+                    console.log('[Subtitle] _downloadCallback('+type+','+param1+','+param2+')');
+                    var aResult = param1.split('?');
+                    switch (aResult[0]) {
+                        case '1000': // download is complete
+                            if (aResult[1] == 1) { // success
+                                console.log('download success!!');
+                                subtitleInfoObj.url = '$TEMP/TOAST_MediaSubtitle'+extension;
+                                playMedia();
+                            }
+                            else { // fail
+                                console.log('[Warning] Failed to download Subtitle');
+                                playMedia();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                };
+            }
+            else {
+                playMedia();
+            }
         }
         else {
             reval = mediaObjects[id].Execute('Resume');
         }
-        if(reval > 0) {
-            console.log('Success to Media play');
-            setScreenSaver('off');
-        }
-        else {
-            throw new Error('Fail to Media play');
+
+        function playMedia() {
+            reval = mediaObjects[id].Execute('InitPlayer',currentMediaInfo.src);
+            reval += mediaObjects[id].Execute('StartPlayback',currentMediaInfo.position);
+            if(reval > 0) {
+                console.log('Success to Media play');
+                setScreenSaver('off');
+            }
+            else {
+                throw new Error('Fail to Media play');
+            }
         }
     },
 
@@ -483,6 +584,10 @@ module.exports = {
         console.log('media::stop() - MEDIA_STATE -> IDLE');
 
         currentMediaInfo.position = 0;
+        subtitleInfoObj = null;
+        if(mediaObjects[id].hasOwnProperty('subtitleLanguageObj')) {
+            delete mediaObjects[currentMediaInfo.id].subtitleLanguageObj;
+        }
         reval = mediaObjects[id].Execute('Stop');
 
         if(reval > 0) {
@@ -584,6 +689,89 @@ module.exports = {
     syncVideoRect: function(successCallback, errorCallback, args) {
         console.log('media::syncVideoRect');
         synchronizeVideoRect();
+    },
+
+    setSubtitlePath: function(successCallback, errorCallback, args) {
+        console.log('media::setSubtitle()');
+        var path = args[1],
+            absoluteUrl = Urlutil.makeAbsolute(args[1]);
+
+        subtitleInfoObj = {};
+
+        if(path && typeof path == 'string') {
+            if(!Util.isRemoteUrl(absoluteUrl)) {
+                subtitleInfoObj.isRemoteUrl = false;
+                subtitleInfoObj.url = absoluteUrl.replace(/^file:\/\//,'');
+            }
+            else {
+                subtitleInfoObj.isRemoteUrl = true;
+                subtitleInfoObj.url = absoluteUrl;
+                if(SEFDownLoad === null) {
+                    SEFDownLoad=SEF.get('Download');
+                }
+            }
+
+        }
+        else {
+            console.log('[Warning] Subtitle path is not valid.');
+        }
+    },
+
+    getSubtitleLanguageList: function(successCallback, errorCallback, args) {
+        console.log('media::getSubtitleLanguageList()');
+        var id = args[0],
+            subtitleLanguageArr = [];
+
+        if(mediaObjects[id].hasOwnProperty('subtitleLanguageObj')) {
+            for(var key in mediaObjects[id].subtitleLanguageObj) {
+                subtitleLanguageArr.push(key);
+            }
+        }
+
+        if(subtitleLanguageArr.length !== 0 ) {
+            setTimeout(function() {
+                successCallback(subtitleLanguageArr);
+            },0);
+        }
+        else {
+            subtitleLanguageArr = null;
+            errorCallback(new Error('Fail to get subtitle language information'));
+        }
+    },
+
+    setSubtitleLanguage: function(successCallback, errorCallback, args) {
+        console.log('media::setSubtitleLanguage()');
+        var id = args[0],
+            lang = args[1].toLowerCase(),
+            reval = 0,
+            subtitleStreamType = 5;
+
+        if(mediaObjects[id].hasOwnProperty('subtitleLanguageObj') && mediaObjects[id].subtitleLanguageObj.hasOwnProperty(lang)) {
+            reval = mediaObjects[id].Execute('SetStreamID', subtitleStreamType, mediaObjects[id].subtitleLanguageObj[lang]);
+            if(reval > 0) {
+                console.log('Success to setSubtitleLanguage');
+            }
+            else {
+                throw new Error('Fail to Media setSubtitleLanguage');
+            }
+        }
+        else {
+            throw new Error('Subtitle is not support this language.');
+        }
+    },
+
+    setSubtitleSync: function(successCallback, errorCallback, args) {
+        console.log('media::setSubtitleSync()');
+        var id = args[0],
+            milliseconds = args[1],
+            reval = 0;
+        reval = mediaObjects[id].Execute('SetSubtitleSync', milliseconds/100); //orsay platform has bug about time unit converting
+        if(reval > 0) {
+            console.log('Success to setSubtitleSync');
+        }
+        else {
+            throw new Error('Fail to Media setSubtitleSync');
+        }
     }
 };
 
