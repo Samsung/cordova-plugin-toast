@@ -45,7 +45,7 @@ cd ..
 echo "================ Add compile task in 'Gruntfile.js'"
 cd cordova-js
 sed -e "s/compile: {/compile: {\"sectv-orsay\": {},\"sectv-tizen\": {},\"tv-webos\": {},/g" Gruntfile.js > Gruntfile.js.tmp && mv Gruntfile.js.tmp Gruntfile.js
-sed -e "s/\"cordova-platforms\" : {/\"cordova-platforms\": {\"cordova-sectv-orsay\": \"..\/cordova-sectv-orsay\",\"cordova-sectv-tizen\": \"..\/cordova-sectv-tizen\",\"cordova-tv-webos\": \"..\/cordova-tv-webos\",/g" package.json > package.json.tmp && mv package.json.tmp package.json
+sed -e "s/\"cordova-platforms\" : {/\"cordova-platforms\" : {\"cordova-sectv-orsay\": \"..\/cordova-sectv-orsay\",\"cordova-sectv-tizen\": \"..\/cordova-sectv-tizen\",\"cordova-tv-webos\": \"..\/cordova-tv-webos\",/g" package.json > package.json.tmp && mv package.json.tmp package.json
 cd ..
 
 echo "================ Compile project"
