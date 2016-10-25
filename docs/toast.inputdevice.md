@@ -180,7 +180,7 @@ This function retrieves information of the given keyName.
         });
         ```
 
-### void registerKey(InputDeviceKeyName keyName);
+### void registerKey(InputDeviceKeyName keyName, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
 This function registers given key. After this operation, pressing the key on remote controller will fire key events with correspond keyCode.
 * Parameters
     * keyName: Name of key to register.
@@ -206,7 +206,7 @@ This function registers given key. After this operation, pressing the key on rem
         });
         ```
 
-### void unregisterKey(InputDeviceKeyName keyName);
+### void unregisterKey(InputDeviceKeyName keyName, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
 This function unregisters given key. The key can not be handled with key event after this operation.
 * Parameters
     * keyName: Name of key to unregister.
