@@ -64,14 +64,12 @@ Media.mediaEvent = function(id, value) {
     if(media) {
         switch(value.type) {
         case Media.EVENT_STATE :
-            setTimeout(function() {
-                if(media._mediaEventCallBack.onevent && value.data.oldState === null) {
-                    media._mediaEventCallBack.onevent(value);
-                }
-                else if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state) {
-                    media._mediaEventCallBack.onevent(value);
-                }
-            },0);
+            if(media._mediaEventCallBack.onevent && value.data.oldState === null) {
+                media._mediaEventCallBack.onevent(value);
+            }
+            else if(media._mediaEventCallBack.onevent && value.data.oldState !== value.data.state) {
+                media._mediaEventCallBack.onevent(value);
+            }
             break;
         case Media.EVENT_DURATION :
             media._duration = value.data.duration;
@@ -95,9 +93,7 @@ Media.mediaEvent = function(id, value) {
             media._containerElem = value.data.containerElem;
             break;
         case Media._MEDIA_ERROR :
-            setTimeout(function() {
-                media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
-            },0);
+            media._mediaEventCallBack.onerror && media._mediaEventCallBack.onerror(value);
             break;
         default :
             console.log('Unhandled Media.mediaEvent :: ' + value.type);

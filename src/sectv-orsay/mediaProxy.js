@@ -489,6 +489,7 @@ module.exports = {
         console.log('media::create() - id =' + id);
         createSEF(id);
         currentMediaInfo = {};
+        currentMediaInfo.id = id;
         createVideoContainer(id);
     },
 
