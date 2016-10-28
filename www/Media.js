@@ -137,7 +137,9 @@ Media.prototype.play = function() {
 };
 
 Media.prototype.stop = function() {
-    var me = this;
+    var me = this,
+        media = mediaObjects[this.id];
+    media.resetPlugin();
     exec(function() {
         me._position = 0;
         me._duration = -1;
