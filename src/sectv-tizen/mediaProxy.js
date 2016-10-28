@@ -395,6 +395,7 @@ module.exports = {
         console.log('media::stop() - EVENT_STATE -> IDLE');
         subtitleUrl = null;
         webapis.avplay.stop();
+        webapis.avplay.close();
         Media.mediaEvent(id, getMediaEventValue(Media.EVENT_STATE, Media.STATE_IDLE));
         successCallback();
         setScreenSaver('on');
