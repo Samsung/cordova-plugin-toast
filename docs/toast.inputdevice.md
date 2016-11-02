@@ -94,6 +94,8 @@ Supported Keys are different by each platforms.
 | 7                  | Yes (7)            | Yes*        | Yes*        | Yes      |
 | 8                  | Yes (8)            | Yes*        | Yes*        | Yes      |
 | 9                  | Yes (9)            | Yes*        | Yes*        | Yes      |
+| ChannelUp          | Yes (+)            | Yes*        | Yes*        | No       |
+| ChannelDown        | Yes (-)            | Yes*        | Yes*        | No       |
 * Please refer to the result of `getSupportedKeys` method for more keys' information.
 * We recommend to use below d-pad keys for better user experience for TV device:
     `ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter` and `Return`
