@@ -58,29 +58,28 @@ module.exports = {
         }
     },
     getSource: function (success, fail, args) {
-        if (videoSource.type) {
+        var sourceInfo = webapis.tv.window.getSource(windowType);
+
+        if (sourceInfo.type !== undefined && typeof sourceInfo.type == 'number' && 0 <= sourceInfo.type && sourceInfo.type <= 8) {
+            videoSource.type = videoSourceTypeList[sourceInfo.type];
+
+            if (videoSource.type == 'TV') {
+                videoSource.number = 1;
+            }
+            else {
+                videoSource.number = sourceInfo.number;
+            }
+
             setTimeout(function () {
                 success(videoSource);
             }, 0);
         }
         else {
-            var sourceInfo = webapis.tv.window.getSource(windowType);
-
-            if (sourceInfo.type !== undefined && typeof sourceInfo.type == 'number' && 0 <= sourceInfo.type && sourceInfo.type <= 8) {
-                videoSource.type = videoSourceTypeList[sourceInfo.type];
-                videoSource.number = sourceInfo.number;
-
-                setTimeout(function () {
-                    success(videoSource);
-                }, 0);
-            }
-            else {
-                setTimeout(function () {
-                    fail(new Error('Fail to get source.'));
-                }, 0);
-            }
+            setTimeout(function () {
+                fail(new Error('Fail to get source.'));
+            }, 0);
         }
-    },
+},
     show: function (success, fail, args) {
         var result = webapis.tv.window.setRect({
             left: args[0][0],
