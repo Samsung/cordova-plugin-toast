@@ -63,7 +63,7 @@ module.exports = {
         if (sourceInfo.type !== undefined && typeof sourceInfo.type == 'number' && 0 <= sourceInfo.type && sourceInfo.type <= 8) {
             videoSource.type = videoSourceTypeList[sourceInfo.type];
 
-            if (videoSource.type == 'TV') {
+            if (videoSource.type == 'TV' || videoSource.type == 'MEDIA') {
                 videoSource.number = 1;
             }
             else {
