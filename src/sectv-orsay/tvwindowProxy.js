@@ -79,7 +79,7 @@ module.exports = {
                 fail(new Error('Fail to get source.'));
             }, 0);
         }
-},
+    },
     show: function (success, fail, args) {
         var result = webapis.tv.window.setRect({
             left: args[0][0],
