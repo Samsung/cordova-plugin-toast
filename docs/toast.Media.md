@@ -358,6 +358,7 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 		```js
 		var media = toast.Media.getInstance();
 		var plWideVine = toast.MediaPluginWideVine(options);
+		media.resetPlugin();
 		media.attachPlugin(plWideVine);
 		media.open('http://mydomain.com/1.mp3');
 		media.play();
