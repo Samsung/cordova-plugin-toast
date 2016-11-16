@@ -80,15 +80,12 @@ function registerKeyHandler(){
 			case tvKey.KEY_0:
 				log(); // log clear
 				break;
-
 			case tvKey.KEY_1:
 				test1();
 				break;
-
 			case tvKey.KEY_2:
 				test2();
 				break;
-
 			case tvKey.KEY_RETURN:
 				log('[Callee App] return');
 				toast.application.exit();

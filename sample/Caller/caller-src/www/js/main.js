@@ -1,8 +1,8 @@
 var tvKey = {};
-var platform = cordova.require('cordova/platform');
-var paramAppId;
 var text = '';
 
+var platform = cordova.require('cordova/platform');
+var paramAppId; // variable for launch app.
 
 function main() {
 	log('[TOAST Sample App] onload - [Caller App]');
@@ -149,11 +149,11 @@ function test2() {
 function test3() {
 	if(platform.id == 'sectv-orsay'){
 		//change variable value.
-		paramAppId = 'application_NAME'; // ex) paramAppId = 'callee'
+		paramAppId = 'application name'; // ex) paramAppId = 'callee'
 	}
 	else if(platform.id == 'sectv-tizen'){
 		//change variable value.
-		paramAppId = 'application_ID'; // ex) paramAppId = '4m0xhrnm0k.callee'
+		paramAppId = 'application id'; // ex) paramAppId = '4m0xhrnm0k.callee'
 	}
 	var petsName = ['dog','cat','bird'];
 
