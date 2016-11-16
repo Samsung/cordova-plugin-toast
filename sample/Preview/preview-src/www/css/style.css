@@ -1,0 +1,44 @@
+body {
+    margin: 0px;
+    padding: 0px 10px 0px 10px;
+    
+    background-color: #ccffcc;
+}
+
+table {
+	font-size: 20px;
+	
+	border: 1px solid black;	
+}
+
+tr {
+	text-align: center;
+}
+
+td {
+	padding: 10px;
+	
+	text-align: center;
+	
+	border: 1px solid black;
+}
+
+.video {
+	position: absolute;
+	
+	left: 0px;
+	top: 0px;
+	
+	width: 1920px;
+	height: 1080px;
+}
+
+.img {
+	position: absolute;
+
+	left: 0px;
+	top: 0px;
+	
+	width: 1920px;
+	height: 1080px;
+}

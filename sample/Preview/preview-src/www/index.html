@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' type='text/css' href='css/style.css'/>
+    <script>
+    	document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            main();
+        }
+    </script>
+</head>
+<body>
+	<script type="text/javascript" src="cordova.js"></script>
+    <!-- Add toast.js to use toast api -->
+    <script type="text/javascript" src="toast.js"></script>
+    <script type='text/javascript' src='js/main.js'></script>
+
+	<h1>TOAST Preview Application</h1>
+	<h2>Please click buttons.</h2>
+	<br>
+	
+	<table>
+		<tr>
+			<td>Function</td>
+			<td>Play action</td>
+		</tr>
+		<tr>
+			<td>Play contents 1</td>
+			<td><input type='button' onclick='play(1);' value='Click'> / Number 1</td>
+		</tr>
+		<tr>
+			<td>Play contents 2</td>
+			<td><input type='button' onclick='play(2);' value='Click'> / Number 2</td>
+		</tr>
+		<tr>
+			<td>Paint contents 3</td>
+			<td><input type='button' onclick='paint(3);' value='Click'> / Number 3</td>
+		</tr>
+		<tr>
+			<td>Paint contents 4</td>
+			<td><input type='button' onclick='paint(4);' value='Click'> / Number 4</td>
+		</tr>
+		<tr>
+			<td>Paint contents 5</td>
+			<td><input type='button' onclick='paint(5);' value='Click'> / Number 5</td>
+		</tr>
+		<tr>
+			<td align='center'>Log Clear</td>
+			<td><input type='button' onclick='logClear()' value='Click'> / Number 0</td>
+		</tr>
+	</table>
+
+	<br>
+	<h2>Result</h2>
+	<h3 id='logs'></h3>
+</body>
+</html>
