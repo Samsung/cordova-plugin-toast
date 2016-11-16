@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script>
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            main();
+        }
+    </script>
+</head>
+<body bgcolor='#ccffcc'>
+	<script type="text/javascript" src="cordova.js"></script>
+
+    <!-- Add toast.js to use toast api -->
+    <script type="text/javascript" src="toast.js"></script>
+    <script type='text/javascript' src='js/main.js'></script>
+
+	<h1>TOAST Callee Application</h1>
+	<h2>Please click buttons OR press keys.</h2>
+	<br>
+
+	<table class='launch' border='1' cellpadding='10px'>
+		<tr align='center'>
+			<td>Function</td>
+			<td>Play action</td>
+		</tr>
+		<tr>
+			<td align='center'>Callee App Exit</td>
+			<td><input class='exit' type='button' value='Click'> / Number 1</td>
+		</tr>
+		<tr>
+			<td align='center'>Data from Caller App</td>
+			<td><input class='data' type='button' value='Click'> / Number 2</td>
+		</tr>
+		<tr>
+			<td align='center'>Log Clear</td>
+			<td><input class='clear' type='button' value='Click'> / Number 0</td>
+		</tr>
+	</table>
+
+	<br>
+	<h2>Result</h2>
+	<h3 id='logs'></h3>
+</body>
+</html>
