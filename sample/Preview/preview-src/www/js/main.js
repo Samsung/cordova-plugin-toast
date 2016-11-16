@@ -1,3 +1,4 @@
+var tvKey = {};
 var text = '';
 
 var element = '';
@@ -5,8 +6,6 @@ var isPlay = false;
 var isPaint = false;
 
 var contentsURL = 'https://www.samsungdforum.com/Preview/';
-
-var tvKey = {};
 
 function main() {
 	log('[TOAST Sample App] onload - [Preview]');
