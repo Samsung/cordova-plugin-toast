@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=1920">
+        
+        <title>TV tuner test Application</title>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script>
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                main();
+            }
+        </script>
+    </head>
+
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+        <!-- Add toast.js to use toast api -->
+        <script type="text/javascript" src="toast.js"></script>
+        <script src="js/main.js"></script>
+        <div id="progInfo">
+            <h1></h1>
+        </div>
+
+        <div id="appInfo">
+            <h2>Use [KEY UP/DOWN] - change channels, [KEY 1] - show program list to console, [KEY 2] - show current channel information to console</h2>
+        </div>
+
+        <div id="logs">
+
+        </div>
+    </body>
+</html>

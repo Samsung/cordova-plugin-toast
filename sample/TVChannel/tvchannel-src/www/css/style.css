@@ -1,0 +1,40 @@
+* {
+    font-family: Lucida Sans, Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0px auto;
+    color: silver;
+    text-shadow: #000 3px 3px 3px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#progInfo, #appInfo, #logs{
+    position: absolute;
+    left: 0px;
+    height: 100px;
+    width: 100%;
+    background-color:rgba(255,255,255,0.2);
+}
+
+#appInfo {
+    top: 980px;
+}
+
+#progInfo {
+    top: 0px;
+}
+
+#logs {
+    top: 100px;
+    left: 1320px;
+    height: 880px;
+    width: 600px;
+    overflow: hidden;
+}
+
+#version {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+}
