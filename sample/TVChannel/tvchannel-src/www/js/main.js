@@ -1,12 +1,12 @@
+var tvKey={};
+
 /**
  * @name TVtuner module manager
  * @type {Object}
  * @property {Number} channelListenerID - The identifier of the listener for channel changes
  * @property {HTMLElement} progInfo - HTML element which displays information at the top of the screen
- * @property {Object} tvTunerObj - wrapper for tizen.tvchannel namespace
  */
 var TVtuner = (function() {
-
     var progInfo = null;
 
     /**
@@ -51,8 +51,7 @@ var TVtuner = (function() {
      * @public
      */
     function init() {
-        log('[TOAST Sample App] onload - [TVChannel]');
-        log("init() called");
+        log("init method");
 
         progInfo = document.getElementById("progInfo").getElementsByTagName("h1")[0];
 
@@ -444,7 +443,7 @@ var TVtuner = (function() {
 
 }());
 
-var tvKey={};
 function main() {
+    log('[TOAST Sample App] onload - [TVChannel]');
     TVtuner.init();
 }
