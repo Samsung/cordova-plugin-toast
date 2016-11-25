@@ -183,6 +183,11 @@ function setAvplayVideoRect(rect) {
     var videoResolution = getVideoResolution();
     var FitRect = getFitDisplayRect(rect,videoResolution);
 
+    if(FitRect && (FitRect.left < 0 || FitRect.top < 0 || FitRect.width < 0 || FitRect.height < 0)) {
+        console.log('[Warning] Rect size value is RangeError');
+        return;
+    }
+
     try {
         if(mediaObjects[currentMediaInfo.id]) {
             mediaObjects[currentMediaInfo.id].Execute('SetDisplayArea',Number(FitRect.left),Number(FitRect.top),Number(FitRect.width),Number(FitRect.height),curWidget.height);

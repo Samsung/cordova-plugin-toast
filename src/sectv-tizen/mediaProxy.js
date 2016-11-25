@@ -125,6 +125,11 @@ function setAvplayVideoRect(rect) {
     var ratio = avplayBaseWidth / window.document.documentElement.clientWidth; // Calculate ratio as base resolution
     var videoRect = {};
 
+    if(rect && (rect.left < 0 || rect.top < 0 || rect.width < 0 || rect.height < 0)) {
+        console.log('[Warning] Rect size value is RangeError');
+        return;
+    }
+
     if(rect && (rect.left > 0 || rect.top > 0 || rect.width > 0 || rect.height > 0)) {
         try {
             videoRect.left = rect.left * ratio; // Convert rect as base resolution
