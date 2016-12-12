@@ -18,8 +18,8 @@ objFile.Close
 
 
 strFileName = "package.json"
-strOldText = Chr(34)+"cordova-platforms"+Chr(34)+" : {"
-strNewText = Chr(34)+"cordova-platforms"+Chr(34)+" : {"+Chr(13)+Chr(9)+Chr(9)+Chr(34)+"cordova-sectv-orsay"+Chr(34)+Chr(9)+Chr(9)+": "+Chr(34)+"../cordova-sectv-orsay"+Chr(34)+","+Chr(13)+Chr(9)+Chr(9)+Chr(34)+"cordova-sectv-tizen"+Chr(34)+Chr(9)+Chr(9)+": "+Chr(34)+"../cordova-sectv-tizen"+Chr(34)+","+Chr(13)+Chr(9)+Chr(9)+Chr(34)+"cordova-tv-webos"+Chr(34)+Chr(9)+Chr(9)+Chr(9)+": "+Chr(34)+"../cordova-tv-webos"+Chr(34)+","
+strOldText = Chr(34)+"cordova-platforms"+Chr(34)+": {"
+strNewText = Chr(34)+"cordova-platforms"+Chr(34)+": {"+Chr(13)+Chr(9)+Chr(9)+Chr(34)+"cordova-sectv-orsay"+Chr(34)+Chr(9)+Chr(9)+": "+Chr(34)+"../cordova-sectv-orsay"+Chr(34)+","+Chr(13)+Chr(9)+Chr(9)+Chr(34)+"cordova-sectv-tizen"+Chr(34)+Chr(9)+Chr(9)+": "+Chr(34)+"../cordova-sectv-tizen"+Chr(34)+","+Chr(13)+Chr(9)+Chr(9)+Chr(34)+"cordova-tv-webos"+Chr(34)+Chr(9)+Chr(9)+Chr(9)+": "+Chr(34)+"../cordova-tv-webos"+Chr(34)+","
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objFile = objFSO.OpenTextFile(strFileName, ForReading)
