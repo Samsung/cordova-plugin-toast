@@ -27,7 +27,7 @@ module.exports = {
                     browserData += '|?|' + '29_fullbrowser';
                 }
                 browserData += '|?|' + paramData[paramDataKeys[0]];
-                
+
                 /*jshint undef: false */
                 var browserWidgetEvent = new WidgetEvent(webbrowserType, browserData);
                 sendWidgetEvent('', browserWidgetEvent, false);
