@@ -14,16 +14,20 @@ module.exports = {
             var webbrowserType = '3010'; // Common.API.EVENT_ENUM.RUN_WEBBROWSER
 
             /*jshint undef: false */
-            if(device.version < 'T-INFOLINK2013-9999') { // for 2013'
+            if(device.version < 'T-INFOLINK2012-9999') { // for 2012'
+                webbrowserType = '02'; // Common.API.EVENT_ENUM.RUN_SEARCH_WIDGET
+            }
+            else if(device.version < 'T-INFOLINK2013-9999') { // for 2013'
                 webbrowserType = '3008'; // Common.API.EVENT_ENUM.RUN_WEBBROWSER
             }
 
             if(paramAppId == '29_fullbrowser') {
                 var browserData = window.curWidget.id;
-                if(paramData) {
-                    browserData += '|?|' + paramData[paramDataKeys[0]];
+                if(webbrowserType == '02') { // for 2012'
+                    browserData += '|?|' + '29_fullbrowser';
                 }
-
+                browserData += '|?|' + paramData[paramDataKeys[0]];
+                
                 /*jshint undef: false */
                 var browserWidgetEvent = new WidgetEvent(webbrowserType, browserData);
                 sendWidgetEvent('', browserWidgetEvent, false);
