@@ -111,8 +111,8 @@ describe('toast.billing', function() {
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
-            expect(firstArgs.key).toBeDefined().toEqual(jasmine.any(String));
-            expect(firstArgs.appId).toBeDefined().toEqual(jasmine.any(String));;
+            expect(typeof firstArgs.key).toBe('string');
+            expect(typeof firstArgs.appId).toBe('string');
         });
     });
 
@@ -202,8 +202,8 @@ describe('toast.billing', function() {
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
-            expect(firstArgs.productId).toBeDefined().toEqual(jasmine.any(String));
-            expect(firstArgs.appId).toBeDefined().toEqual(jasmine.any(String));;
+            expect(typeof firstArgs.productId).toBe('string');
+            expect(typeof firstArgs.appId).toBe('string');
         });
     });
 
@@ -284,8 +284,9 @@ describe('toast.billing', function() {
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
-            expect(firstArgs.productId).toBeDefined().toEqual(jasmine.any(String));
-            expect(firstArgs.userId).toBeDefined().toEqual(jasmine.any(String));;
+            expect(typeof firstArgs.productId).toBe('string');
+            expect(typeof firstArgs.userId).toBe('string');
+
         });
     });
 
@@ -366,8 +367,8 @@ describe('toast.billing', function() {
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
-            expect(firstArgs.productId).toBeDefined().toEqual(jasmine.any(String));
-            expect(firstArgs.userId).toBeDefined().toEqual(jasmine.any(String));;
+            expect(typeof firstArgs.productId).toBe('string');
+            expect(typeof firstArgs.userId).toBe('string');
         });
     });
 });
