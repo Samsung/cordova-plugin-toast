@@ -103,6 +103,17 @@ describe('toast.billing', function() {
                 toast.billing.init(billingInfoDummy, function() {}, {});
             }).toThrowError(TypeError);
         });
+
+        // toast.billing.init 1st argument check
+        it('verify the 1st arguments are all matched to spec', function() {
+            var spy = spyOn(toast.billing, init);
+            var firstArgs = {};
+            expect(spy).toHaveBeenCalled();
+
+            firstArgs = spy.getCall(0).args[0];
+            expect(firstArgs.key).toBeDefined().toEqual(jasmine.any(String));
+            expect(firstArgs.appId).toBeDefined().toEqual(jasmine.any(String));;
+        });
     });
 
     describe('toast.billing.buyProduct', function() {
@@ -183,6 +194,17 @@ describe('toast.billing', function() {
                 toast.billing.buyProduct(productInfoDummy, function() {}, {});
             }).toThrowError(TypeError);
         });
+
+        // toast.billing.buyProduct 1st argument check
+        it('verify the 1st arguments are all matched to spec', function() {
+            var spy = spyOn(toast.billing, buyProduct);
+            var firstArgs = {};
+            expect(spy).toHaveBeenCalled();
+
+            firstArgs = spy.getCall(0).args[0];
+            expect(firstArgs.productId).toBeDefined().toEqual(jasmine.any(String));
+            expect(firstArgs.appId).toBeDefined().toEqual(jasmine.any(String));;
+        });
     });
 
     describe('toast.billing.checkPurchaseStatus', function() {
@@ -254,6 +276,17 @@ describe('toast.billing', function() {
                 toast.billing.checkPurchaseStatus(productInfoDummy, function() {}, {});
             }).toThrowError(TypeError);
         });
+
+        // toast.billing.checkPurchaseStatus 1st argument check
+        it('verify the 1st arguments are all matched to spec', function() {
+            var spy = spyOn(toast.billing, checkPurchaseStatus);
+            var firstArgs = {};
+            expect(spy).toHaveBeenCalled();
+
+            firstArgs = spy.getCall(0).args[0];
+            expect(firstArgs.productId).toBeDefined().toEqual(jasmine.any(String));
+            expect(firstArgs.userId).toBeDefined().toEqual(jasmine.any(String));;
+        });
     });
 
     describe('toast.billing.cancelSubscription', function() {
@@ -324,6 +357,17 @@ describe('toast.billing', function() {
             expect(function() {
                 toast.billing.cancelSubscription(productInfoDummy, function() {}, {});
             }).toThrowError(TypeError);
+        });
+
+        // toast.billing.cancelSubscription 1st argument check
+        it('verify the 1st arguments are all matched to spec', function() {
+            var spy = spyOn(toast.billing, cancelSubscription);
+            var firstArgs = {};
+            expect(spy).toHaveBeenCalled();
+
+            firstArgs = spy.getCall(0).args[0];
+            expect(firstArgs.productId).toBeDefined().toEqual(jasmine.any(String));
+            expect(firstArgs.userId).toBeDefined().toEqual(jasmine.any(String));;
         });
     });
 });
