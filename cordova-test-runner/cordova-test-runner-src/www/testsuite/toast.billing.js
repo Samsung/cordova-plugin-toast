@@ -13,8 +13,8 @@
             // brand : 'samsung'
         };
 
-        toast.billing.init(billingInfoDummy, function() {
-            report('Success');
+        toast.billing.init(billingInfoDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + err.message);
         });
@@ -40,8 +40,8 @@
             // paymentServer : 'FAKE'
         };
 
-        toast.billing.buyProduct(productInfoDummy, function() {
-            report('Success');
+        toast.billing.buyProduct(productInfoDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + err.message);
         });
@@ -58,8 +58,8 @@
             // countryCode : 'KR'
         };
 
-        toast.billing.checkPurchaseStatus(productInfoDummy, function() {
-            report('Success');
+        toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + err.message);
         });
@@ -76,8 +76,8 @@
             // CustomID : 'customId'
         };
 
-        toast.billing.cancelSubscription(productInfoDummy, function() {
-            report('Success');
+        toast.billing.cancelSubscription(productInfoDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + err.message);
         });
