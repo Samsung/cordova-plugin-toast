@@ -114,6 +114,35 @@ describe('toast.billing', function() {
             expect(typeof firstArgs.key).toBe('string');
             expect(typeof firstArgs.appId).toBe('string');
         });
+
+        // toast.billing.init return data check
+        it('verify the return data is ok', function() {
+            var result;
+            runs(function() {
+                var billingInfoDummy = {
+                    key : '',
+                    countryCode : 'KR',
+                    containerId : 'containerid',
+                    lang : 'KO',
+                    gaWebPreopertyId : 'googleAccount',
+                    appId : 'applicationId',
+                    serverType : 'FAKE'
+                    // brand : 'samsung'
+                };
+
+                toast.billing.init(billingInfoDummy, function(data) {
+                    result = data;
+                }, function(e) {});
+            });
+
+            waitsFor(function() {
+                return result;
+            }, 'received return data', 1000);
+
+            runs(function() {
+                console.log('Received data is ' + JSON.stringify(result));
+            });
+        });
     });
 
     describe('toast.billing.buyProduct', function() {
@@ -205,6 +234,43 @@ describe('toast.billing', function() {
             expect(typeof firstArgs.productId).toBe('string');
             expect(typeof firstArgs.appId).toBe('string');
         });
+
+        // toast.billing.buyProduct return data check
+        it('verify the return data is ok', function() {
+            var result;
+            runs(function() {
+                var productInfoDummy = {
+                    productId : 'alpahId',
+                    productName : 'productName',
+                    currency : 'USD',
+                    amount : '10.00',
+                    period : 'week',
+                    duration : 3,
+                    userId : 'numericID',
+                    onExit : function () {},
+                    showBackButton : yes,
+                    enablePaymentRecoverFlow : yes,
+                    titles : {key : "test", value : "test"},
+                    orderId : 'orderId',
+                    orderItemPath : 'jpg'
+                    // appId : 'applicationId',
+                    // paymentDetails : {},
+                    // paymentServer : 'FAKE'
+                };
+
+                toast.billing.buyProduct(productInfoDummy, function(data) {
+                    result = data;
+                }, function(e) {});
+            });
+
+            waitsFor(function() {
+                return result;
+            }, 'received return data', 1000);
+
+            runs(function() {
+                console.log('Received data is ' + JSON.stringify(result));
+            });
+        });
     });
 
     describe('toast.billing.checkPurchaseStatus', function() {
@@ -286,7 +352,34 @@ describe('toast.billing', function() {
             firstArgs = spy.getCall(0).args[0];
             expect(typeof firstArgs.productId).toBe('string');
             expect(typeof firstArgs.userId).toBe('string');
+        });
 
+        // toast.billing.checkPurchaseStatus return data check
+        it('verify the return data is ok', function() {
+            var result;
+            runs(function() {
+                var productInfoDummy = {
+                    productId : 'productId',
+                    userId : 'userId'
+                    // pageSize : 10,
+                    // pageNumber : 10,
+                    // appId : 'appId',
+                    // checkValue : 'checkValue',
+                    // countryCode : 'KR'
+                };
+
+                toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+                    result = data;
+                }, function(e) {});
+            });
+
+            waitsFor(function() {
+                return result;
+            }, 'received return data', 1000);
+
+            runs(function() {
+                console.log('Received data is ' + JSON.stringify(result));
+            });
         });
     });
 
@@ -360,15 +453,32 @@ describe('toast.billing', function() {
             }).toThrowError(TypeError);
         });
 
-        // toast.billing.cancelSubscription 1st argument check
-        it('verify the 1st arguments are all matched to spec', function() {
-            var spy = spyOn(toast.billing, cancelSubscription);
-            var firstArgs = {};
-            expect(spy).toHaveBeenCalled();
+        // toast.billing.cancelSubscription return data check
+        it('verify the return data is ok', function() {
+            var result;
+            runs(function() {
+                var productInfoDummy = {
+                    productId : 'productId',
+                    userId : 'userId'
+                    // appId : 'appId',
+                    // InvoiceID : 'invoiceID',
+                    // appId : 'appId',
+                    // countryCode : 'KR',
+                    // CustomID : 'customId'
+                };
 
-            firstArgs = spy.getCall(0).args[0];
-            expect(typeof firstArgs.productId).toBe('string');
-            expect(typeof firstArgs.userId).toBe('string');
+                toast.billing.cancelSubscription(productInfoDummy, function(data) {
+                    result = data;
+                }, function(e) {});
+            });
+
+            waitsFor(function() {
+                return result;
+            }, 'received return data', 1000);
+
+            runs(function() {
+                console.log('Received data is ' + JSON.stringify(result));
+            });
         });
     });
 });
