@@ -5,7 +5,7 @@ var specList = [
             ];
 var testsuiteList = [
                         'toast.application', 'toast.inputdevice', 'toast.tvwindow',
-                        'toast.tvchannel', 'toast.tvaudiocontrol', 'toast.billing'
+                        'toast.tvchannel', 'toast.tvaudiocontrol', 'toast.billing',
                         'toast.media', 'toast.drminfo', 'ime'
                     ];
 

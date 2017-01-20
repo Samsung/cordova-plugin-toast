@@ -3,15 +3,15 @@
     testsuite('toast.billing', 'init()', function(report) {
         // toast.billing.init 1st argument : dummy data
         var billingInfoDummy = {
-            key : '',
-            countryCode : 'KR',
-            containerId : 'containerid',
-            lang : 'KO',
-            gaWebPreopertyId : 'googleAccount',
-            appId : 'applicationId',
-            serverType : 'FAKE'
-            // brand : 'samsung'
-        };
+            key : 'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',
+	        countryCode : 'KR',
+	        containerId : 'containerid',
+	        lang : 'KO',
+	        gaWebPropertyId : 'googleAccount',
+	        appId : '3201611011047',
+	        serverType : 'FAKE'
+	        // brand : 'samsung'
+	    };
 
         toast.billing.init(billingInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
@@ -30,8 +30,8 @@
             duration : 3,
             userId : 'numericID',
             onExit : function () {},
-            showBackButton : yes,
-            enablePaymentRecoverFlow : yes,
+            showBackButton : false,
+            enablePaymentRecoverFlow : false,
             titles : {key : "test", value : "test"},
             orderId : 'orderId',
             orderItemPath : 'jpg'

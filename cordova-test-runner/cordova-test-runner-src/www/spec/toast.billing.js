@@ -34,19 +34,22 @@ describe('toast.billing', function() {
     });
 
     describe('toast.billing.init', function() {
-        it('throws TypeError when given arguments is not matched to spec.', function() {
+        var billingInfoDummy = {};
+        beforeEach(function() {
             // toast.billing.init 1st argument : dummy data
-            var billingInfoDummy = {
-                key : '',
+            billingInfoDummy = {
+                key : 'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',
                 countryCode : 'KR',
                 containerId : 'containerid',
                 lang : 'KO',
-                gaWebPreopertyId : 'googleAccount',
-                appId : 'applicationId',
+                gaWebPropertyId : 'googleAccount',
+                appId : '3201611011047',
                 serverType : 'FAKE'
                 // brand : 'samsung'
             };
+        });
 
+        it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
                 toast.billing.init();
@@ -105,50 +108,50 @@ describe('toast.billing', function() {
         });
 
         // toast.billing.init 1st argument check
-        it('verify the 1st arguments are all matched to spec', function() {
-            var spy = spyOn(toast.billing, init);
+        it('verify the 1st arguments are all matched to spec', function(done) {
+            var spy = spyOn(toast.billing, 'init').and.callThrough();
             var firstArgs = {};
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
             expect(typeof firstArgs.key).toBe('string');
             expect(typeof firstArgs.appId).toBe('string');
-        });
+        }, 3000);
 
-        // toast.billing.init return data check
-        it('verify the return data is ok', function() {
-            var result;
-            runs(function() {
-                var billingInfoDummy = {
-                    key : '',
-                    countryCode : 'KR',
-                    containerId : 'containerid',
-                    lang : 'KO',
-                    gaWebPreopertyId : 'googleAccount',
-                    appId : 'applicationId',
-                    serverType : 'FAKE'
-                    // brand : 'samsung'
-                };
+        // // toast.billing.init return data check
+        // it('verify the return data is ok', function() {
+        //     toast.billing.init(billingInfoDummy, function(data) {
+        //         expect(typeof data).toBe('object');
+        //         done();
+        //     }, function(e) {
+        //         done.fail();
+        //     });
+        // }, 3000);
 
-                toast.billing.init(billingInfoDummy, function(data) {
-                    result = data;
-                }, function(e) {});
-            });
-
-            waitsFor(function() {
-                return result;
-            }, 'received return data', 1000);
-
-            runs(function() {
-                console.log('Received data is ' + JSON.stringify(result));
-            });
-        });
+        // // toast.billing.init return data check
+        // it('verify the return data is ok', function() {
+        //     var result;
+        //     runs(function() {
+        //         toast.billing.init(billingInfoDummy, function(data) {
+        //             result = data;
+        //         }, function(e) {});
+        //     });
+        //
+        //     waitsFor(function() {
+        //         return result;
+        //     }, 'received return data', 1000);
+        //
+        //     runs(function() {
+        //         console.log('Received data is ' + JSON.stringify(result));
+        //     });
+        // });
     });
 
     describe('toast.billing.buyProduct', function() {
-        it('throws TypeError when given arguments is not matched to spec.', function() {
+        var productInfoDummy = {};
+        beforeEach(function() {
             // toast.billing.buyProduct 1st argument : dummy data
-            var productInfoDummy = {
+            productInfoDummy = {
                 productId : 'alpahId',
                 productName : 'productName',
                 currency : 'USD',
@@ -157,8 +160,8 @@ describe('toast.billing', function() {
                 duration : 3,
                 userId : 'numericID',
                 onExit : function () {},
-                showBackButton : yes,
-                enablePaymentRecoverFlow : yes,
+                showBackButton : false,
+                enablePaymentRecoverFlow : false,
                 titles : {key : "test", value : "test"},
                 orderId : 'orderId',
                 orderItemPath : 'jpg'
@@ -166,7 +169,8 @@ describe('toast.billing', function() {
                 // paymentDetails : {},
                 // paymentServer : 'FAKE'
             };
-
+        });
+        it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
                 toast.billing.buyProduct();
@@ -225,58 +229,51 @@ describe('toast.billing', function() {
         });
 
         // toast.billing.buyProduct 1st argument check
-        it('verify the 1st arguments are all matched to spec', function() {
-            var spy = spyOn(toast.billing, buyProduct);
+        it('verify the 1st arguments are all matched to spec', function(done) {
+            var spy = spyOn(toast.billing, 'buyProduct').and.callThrough();
             var firstArgs = {};
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
             expect(typeof firstArgs.productId).toBe('string');
             expect(typeof firstArgs.appId).toBe('string');
-        });
+            done();
+        }, 3000);
 
-        // toast.billing.buyProduct return data check
-        it('verify the return data is ok', function() {
-            var result;
-            runs(function() {
-                var productInfoDummy = {
-                    productId : 'alpahId',
-                    productName : 'productName',
-                    currency : 'USD',
-                    amount : '10.00',
-                    period : 'week',
-                    duration : 3,
-                    userId : 'numericID',
-                    onExit : function () {},
-                    showBackButton : yes,
-                    enablePaymentRecoverFlow : yes,
-                    titles : {key : "test", value : "test"},
-                    orderId : 'orderId',
-                    orderItemPath : 'jpg'
-                    // appId : 'applicationId',
-                    // paymentDetails : {},
-                    // paymentServer : 'FAKE'
-                };
+        // // toast.billing.buyProduct return data check
+        // it('verify the return data is ok', function() {
+        //     toast.billing.buyProduct(productInfoDummy, function(data) {
+        //         expect(typeof data).toBe('object');
+        //         done();
+        //     }, function(e) {
+        //         done.fail();
+        //     });
+        // }, 3000);
 
-                toast.billing.buyProduct(productInfoDummy, function(data) {
-                    result = data;
-                }, function(e) {});
-            });
-
-            waitsFor(function() {
-                return result;
-            }, 'received return data', 1000);
-
-            runs(function() {
-                console.log('Received data is ' + JSON.stringify(result));
-            });
-        });
+        // // toast.billing.buyProduct return data check
+        // it('verify the return data is ok', function() {
+        //     var result;
+        //     runs(function() {
+        //         toast.billing.buyProduct(productInfoDummy, function(data) {
+        //             result = data;
+        //         }, function(e) {});
+        //     });
+        //
+        //     waitsFor(function() {
+        //         return result;
+        //     }, 'received return data', 1000);
+        //
+        //     runs(function() {
+        //         console.log('Received data is ' + JSON.stringify(result));
+        //     });
+        // });
     });
 
     describe('toast.billing.checkPurchaseStatus', function() {
-        it('throws TypeError when given arguments is not matched to spec.', function() {
+        var productInfoDummy = {};
+        beforeEach(function() {
             // toast.billing.checkPurchaseStatus 1st argument : dummy data
-            var productInfoDummy = {
+            productInfoDummy = {
                 productId : 'productId',
                 userId : 'userId'
                 // pageSize : 10,
@@ -285,7 +282,9 @@ describe('toast.billing', function() {
                 // checkValue : 'checkValue',
                 // countryCode : 'KR'
             };
+        });
 
+        it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
                 toast.billing.checkPurchaseStatus();
@@ -344,49 +343,57 @@ describe('toast.billing', function() {
         });
 
         // toast.billing.checkPurchaseStatus 1st argument check
-        it('verify the 1st arguments are all matched to spec', function() {
-            var spy = spyOn(toast.billing, checkPurchaseStatus);
+        it('verify the 1st arguments are all matched to spec', function(done) {
+            var spy = spyOn(toast.billing, 'checkPurchaseStatus').and.callThrough();
             var firstArgs = {};
             expect(spy).toHaveBeenCalled();
 
             firstArgs = spy.getCall(0).args[0];
             expect(typeof firstArgs.productId).toBe('string');
             expect(typeof firstArgs.userId).toBe('string');
-        });
+            done();
+        }, 3000);
 
         // toast.billing.checkPurchaseStatus return data check
-        it('verify the return data is ok', function() {
-            var result;
-            runs(function() {
-                var productInfoDummy = {
-                    productId : 'productId',
-                    userId : 'userId'
-                    // pageSize : 10,
-                    // pageNumber : 10,
-                    // appId : 'appId',
-                    // checkValue : 'checkValue',
-                    // countryCode : 'KR'
-                };
-
-                toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
-                    result = data;
-                }, function(e) {});
+        it('verify the return data is ok', function(done) {
+            toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+                expect(typeof data).toBe('object');
+                helper.alert('Received data : ' + JSON.stringify(data), function(ok){
+                    expect(ok).not.toBe('TIMEOUT');
+                    expect(ok).toBeTruthy();
+                    done();
+                }, 5000);
+            }, function(e) {
+                helper.alert('Error : ' + e.message, function(){
+                    done.fail();
+                }, 5000);
             });
+        }, 10000);
 
-            waitsFor(function() {
-                return result;
-            }, 'received return data', 1000);
-
-            runs(function() {
-                console.log('Received data is ' + JSON.stringify(result));
-            });
-        });
+        // // toast.billing.checkPurchaseStatus return data check
+        // it('verify the return data is ok', function() {
+        //     var result;
+        //     runs(function() {
+        //         toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+        //             result = data;
+        //         }, function(e) {});
+        //     });
+        //
+        //     waitsFor(function() {
+        //         return result;
+        //     }, 'received return data', 1000);
+        //
+        //     runs(function() {
+        //         console.log('Received data is ' + JSON.stringify(result));
+        //     });
+        // });
     });
 
     describe('toast.billing.cancelSubscription', function() {
-        it('throws TypeError when given arguments is not matched to spec.', function() {
+        var productInfoDummy = {};
+        beforeEach(function() {
             // toast.billing.cancelSubscription 1st argument : dummy data
-            var productInfoDummy = {
+            productInfoDummy = {
                 productId : 'productId',
                 userId : 'userId'
                 // appId : 'appId',
@@ -395,7 +402,9 @@ describe('toast.billing', function() {
                 // countryCode : 'KR',
                 // CustomID : 'customId'
             };
+        });
 
+        it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
                 toast.billing.cancelSubscription();
@@ -453,32 +462,50 @@ describe('toast.billing', function() {
             }).toThrowError(TypeError);
         });
 
+        // toast.billing.cancelSubscription 1st argument check
+        it('verify the 1st arguments are all matched to spec', function(done) {
+            var spy = spyOn(toast.billing, 'cancelSubscription').and.callThrough();
+            var firstArgs = {};
+            expect(spy).toHaveBeenCalled();
+
+            firstArgs = spy.getCall(0).args[0];
+            expect(typeof firstArgs.productId).toBe('string');
+            expect(typeof firstArgs.userId).toBe('string');
+            done();
+        }, 3000);
+
         // toast.billing.cancelSubscription return data check
-        it('verify the return data is ok', function() {
-            var result;
-            runs(function() {
-                var productInfoDummy = {
-                    productId : 'productId',
-                    userId : 'userId'
-                    // appId : 'appId',
-                    // InvoiceID : 'invoiceID',
-                    // appId : 'appId',
-                    // countryCode : 'KR',
-                    // CustomID : 'customId'
-                };
-
-                toast.billing.cancelSubscription(productInfoDummy, function(data) {
-                    result = data;
-                }, function(e) {});
+        it('verify the return data is ok', function(done) {
+            toast.billing.cancelSubscription(productInfoDummy, function(data) {
+                expect(typeof data).toBe('object');
+                helper.alert('Received data : ' + JSON.stringify(data), function(ok){
+                    expect(ok).not.toBe('TIMEOUT');
+                    expect(ok).toBeTruthy();
+                    done();
+                }, 5000);
+            }, function(e) {
+                helper.alert('Error : ' + e.message, function(){
+                    done.fail();
+                }, 5000);
             });
+        }, 10000);
 
-            waitsFor(function() {
-                return result;
-            }, 'received return data', 1000);
-
-            runs(function() {
-                console.log('Received data is ' + JSON.stringify(result));
-            });
-        });
+        // // toast.billing.cancelSubscription return data check
+        // it('verify the return data is ok', function() {
+        //     var result;
+        //     runs(function() {
+        //         toast.billing.cancelSubscription(productInfoDummy, function(data) {
+        //             result = data;
+        //         }, function(e) {});
+        //     });
+        //
+        //     waitsFor(function() {
+        //         return result;
+        //     }, 'received return data', 1000);
+        //
+        //     runs(function() {
+        //         console.log('Received data is ' + JSON.stringify(result));
+        //     });
+        // });
     });
 });

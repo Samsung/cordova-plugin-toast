@@ -24,7 +24,8 @@
     document.addEventListener('deviceready', function () {
         window.addEventListener('keydown', function(e) {
             if (keyInfo[e.keyCode] === 'RETURN') {
-                toast.application.exit();
+//                toast.application.exit();
+            	location.reload();
             }
         });
     });
@@ -85,6 +86,10 @@
                 localStorage.setItem(TESTRUNNER_TYPE_KEY, 'TESTSUITE');
                 document.body.innerHTML += '<br>SELECTED: ' + localStorage.getItem(TESTRUNNER_TYPE_KEY) + '<br>Please restart the application.';
                 break;
+            case 27:
+            case 88:
+            	location.reload();
+            	break;
         }
     });
 })();
