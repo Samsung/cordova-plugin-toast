@@ -4,7 +4,10 @@
     testsuite('toast.billing', 'init()', function(report) {
         // toast.billing.init 1st argument : dummy data
         var billingInfoDummy = {
-            key : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=', //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+            key : {
+                paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
+                checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+            },
             countryCode : 'US',
             containerId : 'containerid',
             lang : 'EN',
@@ -26,7 +29,7 @@
             productId : 'DP111000002594',//'DP111000002594',
             productName : 'rozanne_product_01',//rozanne_product_01',
             currency : 'USD',
-            amount : '0.79',
+            amount : 0.79,
             period : '',
             duration : 3,
             userId : '',
@@ -87,7 +90,10 @@
     testsuite('toast.billing', 'init()', function(report) {
         // toast.billing.init 1st argument : dummy data
         var billingInfoDummy = {
-            key : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=', //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+            key : {
+                paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
+                checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+            },
             countryCode : 'US',
             containerId : 'containerid',
             lang : 'EN',
@@ -109,7 +115,7 @@
             productId : 'DP111000002597',//'DP111000002594',
             productName : 'rozanne_subscription_01',//rozanne_product_01',
             currency : 'USD',
-            amount : '0.79',
+            amount : 0.79,
             period : '',
             duration : 3,
             userId : '',
