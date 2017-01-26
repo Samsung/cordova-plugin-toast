@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Samsung Electronics Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /* globals helper */
 describe('toast.billing', function() {
     it('should be defined as "toast.billing" namespace.', function() {
@@ -169,12 +185,13 @@ describe('toast.billing', function() {
 
     describe('toast.billing.buyProduct', function() {
         var productInfoDummy = {};
-        var spy;
+        var billingInfoDummy = {};
+        var interval = 5000;
         beforeEach(function() {
             // toast.billing.buyProduct 1st argument : dummy data
             productInfoDummy = {
-                productId : 'DP111000002597',//'DP111000002594',
-                productName : 'rozanne_subscription_01',//rozanne_product_01',
+                productId : 'DP111000002594',//'DP111000002594',
+                productName : 'rozanne_product_01',//rozanne_product_01',
                 currency : 'USD',
                 amount : '0.79',
                 period : '',
@@ -190,7 +207,18 @@ describe('toast.billing', function() {
                 // paymentDetails : {},
                 // paymentServer : 'FAKE'
             };
-            spy = spyOn(toast.billing, 'buyProduct').and.callThrough();
+
+            // toast.billing.init 1st argument : dummy data
+            billingInfoDummy = {
+                key : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=', //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+                countryCode : 'US',
+                containerId : 'containerid',
+                lang : 'EN',
+                gaWebPropertyId : 'poSample', //googleAccount
+                appId : '3201508004443', //yours 3201611011047
+                serverType : 'FAKE'
+                // brand : 'samsung'
+            };
         });
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
@@ -250,44 +278,70 @@ describe('toast.billing', function() {
             }).toThrowError(TypeError);
         });
 
-        // toast.billing.buyProduct 1st argument check
-        it('verify the 1st arguments are all matched to spec', function(done) {
-            var firstArgs = {};
-            expect(window.toast.billing.buyProduct).toHaveBeenCalled();
+        it('throws Error when mandatory value of 1st argument is missing.', function() {
+            expect(function(done) {
+                var tempProductInfoDummy = productInfoDummy;
+                tempProductInfoDummy.productId = '';
 
-            // firstArgs = spy.getCall(0).args[0];
-            // expect(typeof firstArgs.productId).toBe('string');
-            // expect(typeof firstArgs.appId).toBe('string');
-            done();
-        }, 3000);
+                toast.billing.buyProduct(tempProductInfoDummy, function() {
+                    done.fail();
+                }, function(){
+                    done();
+                });
+            }).toThrowError(TypeError);
 
-        // // toast.billing.buyProduct return data check
-        // it('verify the return data is ok', function() {
-        //     toast.billing.buyProduct(productInfoDummy, function(data) {
-        //         expect(typeof data).toBe('object');
-        //         done();
-        //     }, function(e) {
-        //         done.fail();
-        //     });
-        // }, 3000);
+            expect(function(done) {
+                var tempProductInfoDummy = productInfoDummy;
+                tempProductInfoDummy.userId = '';
 
-        // // toast.billing.buyProduct return data check
-        // it('verify the return data is ok', function() {
-        //     var result;
-        //     runs(function() {
-        //         toast.billing.buyProduct(productInfoDummy, function(data) {
-        //             result = data;
-        //         }, function(e) {});
-        //     });
-        //
-        //     waitsFor(function() {
-        //         return result;
-        //     }, 'received return data', 1000);
-        //
-        //     runs(function() {
-        //         console.log('Received data is ' + JSON.stringify(result));
-        //     });
-        // });
+                toast.billing.buyProduct(tempProductInfoDummy, function() {
+                    done.fail();
+                }, function(){
+                    done();
+                });
+            }).toThrowError(TypeError);
+
+            expect(function(done) {
+                var tempProductInfoDummy = productInfoDummy;
+                tempProductInfoDummy.productId = '';
+                tempProductInfoDummy.userId = '';
+
+                toast.billing.buyProduct(tempProductInfoDummy, function() {
+                    done.fail();
+                }, function(){
+                    done();
+                });
+            }).toThrowError(TypeError);
+        });
+
+        it('verify working this method was normal', function(done) {
+            toast.billing.init(billingInfoDummy, function () {
+                toast.billing.buyProduct(productInfoDummy, function(data) {
+                    helper.aOrB('Did you see "buyProduct" screen?', ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
+                        expect(answer).not.toBe('TIMEOUT');
+                        done();
+                    });
+                }, function(e) {
+                    done.fail();
+                });
+            }, function(e) {
+                done.fail();
+            });
+        }, 60000);
+
+        it('verify error callback is invoked', function(done) {
+            var tempProductInfoDummy = productInfoDummy;
+            tempProductInfoDummy.productId = 'ErrorProductId';
+
+            toast.billing.buyProduct(tempProductInfoDummy, function() {
+                done.fail();
+            }, function(e) {
+                expect(typeof e).toBe('object');
+                expect(e).not.toBeUndefined();
+                done();
+            });
+        }, interval);
     });
 
     describe('toast.billing.checkPurchaseStatus', function() {
@@ -297,7 +351,7 @@ describe('toast.billing', function() {
         beforeEach(function() {
             // toast.billing.checkPurchaseStatus 1st argument : dummy data
             productInfoDummy = {
-                productId : 'DP111000002597',
+                productId : 'DP111000002594',
                 userId : 'orderId'
                 // pageSize : 10,
                 // pageNumber : 10,
@@ -419,7 +473,7 @@ describe('toast.billing', function() {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
 
-                    helper.alert('Received data : ' + JSON.stringify(data), function(ok){
+                    helper.alert('Received data : ' + JSON.stringify(data), function(){
                         done();
                     },5000);
                 }, function(e) {
@@ -451,7 +505,7 @@ describe('toast.billing', function() {
         beforeEach(function() {
             // toast.billing.cancelSubscription 1st argument : dummy data
             productInfoDummy = {
-                productId : 'DP111000002597',
+                productId : 'DP111000002594',
                 userId : 'orderId'
                 // appId : 'appId',
                 // appId : 'appId',
@@ -572,7 +626,7 @@ describe('toast.billing', function() {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
 
-                    helper.alert('Received data : ' + JSON.stringify(data), function(ok){
+                    helper.alert('Received data : ' + JSON.stringify(data), function(){
                         done();
                     },5000);
                 }, function(e) {
