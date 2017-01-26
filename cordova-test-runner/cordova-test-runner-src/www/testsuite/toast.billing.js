@@ -2,16 +2,16 @@
 (function() {
     testsuite('toast.billing', 'init()', function(report) {
         // toast.billing.init 1st argument : dummy data
-        var billingInfoDummy = {
-            key : 'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',
-	        countryCode : 'KR',
-	        containerId : 'containerid',
-	        lang : 'KO',
-	        gaWebPropertyId : 'googleAccount',
-	        appId : '3201611011047',
-	        serverType : 'FAKE'
-	        // brand : 'samsung'
-	    };
+        billingInfoDummy = {
+            key : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=', //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+            countryCode : 'US',
+            containerId : 'containerid',
+            lang : 'EN',
+            gaWebPropertyId : 'poSample', //googleAccount
+            appId : '3201508004443', //yours 3201611011047
+            serverType : 'FAKE'
+            // brand : 'samsung'
+        };
 
         toast.billing.init(billingInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
@@ -21,14 +21,14 @@
     });
     testsuite('toast.billing', 'buyProduct()', function(report) {
         // toast.billing.buyProduct 1st argument : dummy data
-        var productInfoDummy = {
-            productId : 'alpahId',
-            productName : 'productName',
+        productInfoDummy = {
+            productId : 'DP111000002597',//'DP111000002594',
+            productName : 'rozanne_subscription_01',//rozanne_product_01',
             currency : 'USD',
-            amount : '10.00',
-            period : 'week',
+            amount : '0.79',
+            period : '',
             duration : 3,
-            userId : 'numericID',
+            userId : '',
             onExit : function () {},
             showBackButton : false,
             enablePaymentRecoverFlow : false,
@@ -49,8 +49,8 @@
     testsuite('toast.billing', 'checkPurchaseStatus()', function(report) {
         // toast.billing.checkPurchaseStatus 1st argument : dummy data
         var productInfoDummy = {
-            productId : 'productId',
-            userId : 'userId'
+            productId : 'DP111000002597',
+            userId : 'orderId'
             // pageSize : 10,
             // pageNumber : 10,
             // appId : 'appId',
@@ -67,10 +67,10 @@
     testsuite('toast.billing', 'cancelSubscription()', function(report) {
         // toast.billing.cancelSubscription 1st argument : dummy data
         var productInfoDummy = {
-            productId : 'productId',
-            userId : 'userId'
+            productId : 'DP111000002597',
+            userId : 'orderId',
+            invoiceId : 'DMY1701US000106775'
             // appId : 'appId',
-            // InvoiceID : 'invoiceID',
             // appId : 'appId',
             // countryCode : 'KR',
             // CustomID : 'customId'
