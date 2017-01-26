@@ -130,7 +130,8 @@ describe('toast.billing', function() {
         it('throws Error when mandatory value of 1st argument is missing.', function() {
             expect(function(done) {
                 var tempBillingInfoDummy = billingInfoDummy;
-                tempBillingInfoDummy.key = '';
+                tempBillingInfoDummy.key.checkoutKey = '';
+                tempBillingInfoDummy.key.paymentwallKey = '';
 
                 toast.billing.init(tempBillingInfoDummy, function() {
                     done.fail();
@@ -152,7 +153,8 @@ describe('toast.billing', function() {
 
             expect(function(done) {
                 var tempBillingInfoDummy = billingInfoDummy;
-                tempBillingInfoDummy.key = '';
+                tempBillingInfoDummy.key.checkoutKey = '';
+                tempBillingInfoDummy.key.paymentwallKey = '';
                 tempBillingInfoDummy.appId = '';
 
                 toast.billing.init(tempBillingInfoDummy, function() {
@@ -174,7 +176,8 @@ describe('toast.billing', function() {
 
         it('verify error callback is invoked', function(done) {
             var tempBillingInfoDummy = billingInfoDummy;
-            tempBillingInfoDummy.key = 'ErrorKey';
+            tempBillingInfoDummy.key.checkoutKey = 'ErrorKey';
+            tempBillingInfoDummy.key.paymentwallKey = 'ErrorKey';
 
             toast.billing.init(tempBillingInfoDummy, function() {
                 done.fail();
