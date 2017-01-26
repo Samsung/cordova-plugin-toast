@@ -19,7 +19,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'non-subscription');
     testsuite('toast.billing', 'buyProduct()', function(report) {
         // toast.billing.buyProduct 1st argument : dummy data
         var productInfoDummy = {
@@ -46,7 +46,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'non-subscription');
     testsuite('toast.billing', 'checkPurchaseStatus()', function(report) {
         // toast.billing.checkPurchaseStatus 1st argument : dummy data
         var productInfoDummy = {
@@ -64,7 +64,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'non-subscription');
     testsuite('toast.billing', 'cancelSubscription()', function(report) {
         // toast.billing.cancelSubscription 1st argument : dummy data
         var productInfoDummy = {
@@ -81,7 +81,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'non-subscription');
 
     //subscription
     testsuite('toast.billing', 'init()', function(report) {
@@ -102,7 +102,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'subscription');
     testsuite('toast.billing', 'buyProduct()', function(report) {
         // toast.billing.buyProduct 1st argument : dummy data
         var productInfoDummy = {
@@ -129,7 +129,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'subscription');
     testsuite('toast.billing', 'checkPurchaseStatus()', function(report) {
         // toast.billing.checkPurchaseStatus 1st argument : dummy data
         var productInfoDummy = {
@@ -147,7 +147,7 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'subscription');
     testsuite('toast.billing', 'cancelSubscription()', function(report) {
         // toast.billing.cancelSubscription 1st argument : dummy data
         var productInfoDummy = {
@@ -164,5 +164,5 @@
         }, function(err) {
             report('Error : ' + err.message);
         });
-    });
+    }, 'subscription');
 })();

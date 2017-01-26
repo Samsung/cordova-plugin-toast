@@ -1,11 +1,12 @@
 /* jshint loopfunc: true */
 (function() {
     var tests = {};
-    window.testsuite = function(category, feature, testfn) {
+    window.testsuite = function(category, feature, testfn, description) {
         tests[category] = tests[category] || [];
         tests[category].push({
             feature: feature,
-            testfn: testfn
+            testfn: testfn,
+            description: description
         });
     };
     var TEST_TIMEOUT = 10000;
@@ -35,17 +36,18 @@
     function renderTests() {
         var count = 0;
         document.body.appendChild(createElem('h1', {}, 'Cordova TOAST TestSuite'));
-        var container = createElem('div', {className: 'container'});
+        var container = createElem('div', {className: 'container-fluid'});
         document.body.appendChild(container);
         for (var category in tests) {
             for (var i = 0; i < tests[category].length; i++) {
                 var testerId = count++;
                 var fields = [];
-                fields.push(createElem('div', {className: 'col-md-2'}, category));
-                fields.push(createElem('div', {className: 'col-md-3'}, [
-                    createElem('button', {className: 'btn btn-default', testerId: testerId}, tests[category][i].feature)
+                fields.push(createElem('div', {className: 'col-lg-1'}, category));
+                fields.push(createElem('div', {className: 'col-lg-2'}, [
+                    createElem('button', {className: 'btn btn-default', testerId: testerId}, tests[category][i].feature),
+                    createElem('div', {className: 'badge'}, tests[category][i].description)
                 ]));
-                var reporter = createElem('div', {className: 'col-md-7 reporter'+testerId});
+                var reporter = createElem('div', {className: 'panel panel-info reporter col-lg-8 reporter'+testerId});
                 fields.push(reporter);
 
                 var row = createElem('div', {className: 'row'}, fields);
