@@ -16,6 +16,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <platform name="sectv-tizen">
+        <access origin="*" subdomains="true"></access>
         <tizen:privilege name="http://developer.samsung.com/privilege/productinfo"/>
         <tizen:privilege name="http://developer.samsung.com/privilege/sso.partner"/>
         <tizen:privilege name="http://developer.samsung.com/privilege/billing"/>

@@ -323,35 +323,43 @@ describe('toast.billing', function() {
             }).toThrowError(TypeError);
         });
 
-        it('verify working this method was normal (non-subscription)', function(done) {
+        it('verify "buyProduct" screen was shown (non-subscription)', function(done) {
             toast.billing.init(billingInfoDummy, function () {
                 toast.billing.buyProduct(productInfoDummy, function() {
-                    helper.aOrB('Did you see "buyProduct" screen? (non-subscription)', ['YES', 'NO'], function(answer) {
+                    helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Success callback was invoked normally', ['YES', 'NO'], function(answer) {
                         expect(answer).toBe(true);
                         expect(answer).not.toBe('TIMEOUT');
                         done();
                     });
                 }, function(e) {
-                    done.fail();
+                    helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Error callback was invoked normally : ' + JSON.stringify(e), ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
+                        expect(answer).not.toBe('TIMEOUT');
+                        done();
+                    });
                 });
             }, function(e) {
                 done.fail();
             });
         }, 60000);
 
-        it('verify working this method was normal (subscription)', function(done) {
+        it('verify "buyProduct" screen was shown (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'DP111000002597';
             tempProductInfoDummy.productName = 'rozanne_subscription_01';
             toast.billing.init(billingInfoDummy, function () {
-                toast.billing.buyProduct(tempProductInfoDummy, function() {
-                    helper.aOrB('Did you see "buyProduct" screen? (subscription)', ['YES', 'NO'], function(answer) {
+                toast.billing.buyProduct(productInfoDummy, function() {
+                    helper.aOrB('(subscription) Did you see "buyProduct" screen? Success callback was invoked normally', ['YES', 'NO'], function(answer) {
                         expect(answer).toBe(true);
                         expect(answer).not.toBe('TIMEOUT');
                         done();
                     });
                 }, function(e) {
-                    done.fail();
+                    helper.aOrB('(subscription) Did you see "buyProduct" screen? Error callback was invoked normally : ' + JSON.stringify(e), ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
+                        expect(answer).not.toBe('TIMEOUT');
+                        done();
+                    });
                 });
             }, function(e) {
                 done.fail();
@@ -508,10 +516,14 @@ describe('toast.billing', function() {
                         done();
                     },5000);
                 }, function(e) {
-                    done.fail();
+                    helper.alert('(non-subscription) toast.billing.checkPurchaseStatus Error : ' + JSON.stringify(e), function(){
+                        done.fail();
+                    },5000);
                 });
             }, function(e) {
-                done.fail();
+                helper.alert('(non-subscription) toast.billing.init Error : ' + JSON.stringify(e), function(){
+                    done.fail();
+                },5000);
             })
         }, 10000);
 
@@ -527,10 +539,14 @@ describe('toast.billing', function() {
                         done();
                     },5000);
                 }, function(e) {
-                    done.fail();
+                    helper.alert('(subscription) toast.billing.checkPurchaseStatus Error : ' + JSON.stringify(e), function(){
+                        done.fail();
+                    },5000);
                 });
             }, function(e) {
-                done.fail();
+                helper.alert('(subscription) toast.billing.init Error : ' + JSON.stringify(e), function(){
+                    done.fail();
+                },5000);
             })
         }, 10000);
 
@@ -683,10 +699,14 @@ describe('toast.billing', function() {
                         done();
                     },5000);
                 }, function(e) {
-                    done.fail();
+                    helper.alert('(non-subscription) toast.billing.cancelSubscription Error : ' + JSON.stringify(e), function(){
+                        done.fail();
+                    },5000);
                 });
             }, function(e) {
-                done.fail();
+                helper.alert('(non-subscription) toast.billing.init Error : ' + JSON.stringify(e), function(){
+                    done.fail();
+                },5000);
             })
         }, 10000);
 
@@ -703,10 +723,14 @@ describe('toast.billing', function() {
                         done();
                     },5000);
                 }, function(e) {
-                    done.fail();
+                    helper.alert('(subscription) toast.billing.cancelSubscription Error : ' + JSON.stringify(e), function(){
+                        done.fail();
+                    },5000);
                 });
             }, function(e) {
-                done.fail();
+                helper.alert('(subscription) toast.billing.init Error : ' + JSON.stringify(e), function(){
+                    done.fail();
+                },5000);
             })
         }, 10000);
 
