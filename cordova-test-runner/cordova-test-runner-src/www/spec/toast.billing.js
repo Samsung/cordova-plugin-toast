@@ -16,6 +16,46 @@
 
 /* globals helper */
 describe('toast.billing', function() {
+    // toast.billing.init 1st argument : dummy data
+    var billingInfoDummy = {};
+    // toast.billing.buyProduct/checkPurchaseStatus/cancelSubscription 1st argument : dummy data
+    var productInfoDummy = {};
+
+    beforeEach(function() {
+        billingInfoDummy = {
+            key : {
+                paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
+                checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+            },
+            countryCode : 'US',
+            containerId : 'containerid',
+            lang : 'EN',
+            gaWebPropertyId : 'poSample', //googleAccount
+            appId : '3201508004443', //yours 3201611011047
+            serverType : 'FAKE'
+            // brand : 'samsung'
+        };
+
+        productInfoDummy = {
+            productId : 'DP111000002594',//'DP111000002594',
+            productName : 'rozanne_product_01',//rozanne_product_01',
+            currency : 'USD',
+            amount : 0.79,
+            period : '',
+            duration : 3,
+            userId : 'orderId',
+            onExit : function () {},
+            showBackButton : false,
+            enablePaymentRecoverFlow : false,
+            titles : {key : "test", value : "test"},
+            orderId : 'orderId',
+            orderItemPath : 'jpg'
+            // appId : 'applicationId',
+            // paymentDetails : {},
+            // paymentServer : 'FAKE'
+        };
+    });
+
     it('should be defined as "toast.billing" namespace.', function() {
         expect(window.toast).toBeDefined();
         expect(window.toast.billing).toBeDefined();
@@ -50,24 +90,7 @@ describe('toast.billing', function() {
     });
 
     describe('toast.billing.init', function() {
-        var billingInfoDummy = {};
         var interval = 5000;
-        beforeEach(function() {
-            // toast.billing.init 1st argument : dummy data
-            billingInfoDummy = {
-                key : {
-                    paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
-                    checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
-                },
-                countryCode : 'US',
-                containerId : 'containerid',
-                lang : 'EN',
-                gaWebPropertyId : 'poSample', //googleAccount
-                appId : '3201508004443', //yours 3201611011047
-                serverType : 'FAKE'
-                // brand : 'samsung'
-            };
-        });
 
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
@@ -190,45 +213,8 @@ describe('toast.billing', function() {
     });
 
     describe('toast.billing.buyProduct', function() {
-        var productInfoDummy = {};
-        var billingInfoDummy = {};
         var interval = 5000;
-        beforeEach(function() {
-            // toast.billing.buyProduct 1st argument : dummy data
-            productInfoDummy = {
-                productId : 'DP111000002594',//'DP111000002594',
-                productName : 'rozanne_product_01',//rozanne_product_01',
-                currency : 'USD',
-                amount : 0.79,
-                period : '',
-                duration : 3,
-                userId : '',
-                onExit : function () {},
-                showBackButton : false,
-                enablePaymentRecoverFlow : false,
-                titles : {key : "test", value : "test"},
-                orderId : 'orderId',
-                orderItemPath : 'jpg'
-                // appId : 'applicationId',
-                // paymentDetails : {},
-                // paymentServer : 'FAKE'
-            };
 
-            // toast.billing.init 1st argument : dummy data
-            billingInfoDummy = {
-                key : {
-                    paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
-                    checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
-                },
-                countryCode : 'US',
-                containerId : 'containerid',
-                lang : 'EN',
-                gaWebPropertyId : 'poSample', //googleAccount
-                appId : '3201508004443', //yours 3201611011047
-                serverType : 'FAKE'
-                // brand : 'samsung'
-            };
-        });
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
             expect(function() {
@@ -381,36 +367,7 @@ describe('toast.billing', function() {
     });
 
     describe('toast.billing.checkPurchaseStatus', function() {
-        var productInfoDummy = {};
-        var billingInfoDummy = {};
         var interval = 5000;
-        beforeEach(function() {
-            // toast.billing.checkPurchaseStatus 1st argument : dummy data
-            productInfoDummy = {
-                productId : 'DP111000002594',
-                userId : 'orderId'
-                // pageSize : 10,
-                // pageNumber : 10,
-                // appId : 'appId',
-                // checkValue : 'checkValue',
-                // countryCode : 'KR'
-            };
-
-            // toast.billing.init 1st argument : dummy data
-            billingInfoDummy = {
-                key : {
-                    paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
-                    checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
-                },
-                countryCode : 'US',
-                containerId : 'containerid',
-                lang : 'EN',
-                gaWebPropertyId : 'poSample', //googleAccount
-                appId : '3201508004443', //yours 3201611011047
-                serverType : 'FAKE'
-                // brand : 'samsung'
-            };
-        });
 
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
@@ -565,35 +522,7 @@ describe('toast.billing', function() {
     });
 
     describe('toast.billing.cancelSubscription', function() {
-        var productInfoDummy = {};
-        var billingInfoDummy = {};
         var interval = 5000;
-        beforeEach(function() {
-            // toast.billing.cancelSubscription 1st argument : dummy data
-            productInfoDummy = {
-                productId : 'DP111000002594',
-                userId : 'orderId'
-                // appId : 'appId',
-                // appId : 'appId',
-                // countryCode : 'KR',
-                // CustomID : 'customId'
-            };
-
-            // toast.billing.init 1st argument : dummy data
-            billingInfoDummy = {
-                key : {
-                    paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
-                    checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
-                },
-                countryCode : 'US',
-                containerId : 'containerid',
-                lang : 'EN',
-                gaWebPropertyId : 'poSample', //googleAccount
-                appId : '3201508004443', //yours 3201611011047
-                serverType : 'FAKE'
-                // brand : 'samsung'
-            };
-        });
 
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
@@ -744,6 +673,74 @@ describe('toast.billing', function() {
                 expect(typeof e).toBe('object');
                 expect(e).not.toBeUndefined();
                 done();
+            });
+        }, interval);
+    });
+
+    describe('init/buyProduct/checkPurchaseStatus/cancelSubscription combination', function() {
+        var interval = 60000;
+
+        it('execute init/buyProduct/checkPurchaseStatus for non-subscription item', function(done) {
+            toast.billing.init(billingInfoDummy, function () {
+                toast.billing.buyProduct(productInfoDummy, function() {
+                    helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Success callback was invoked normally', ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
+                        expect(answer).not.toBe('TIMEOUT');
+
+                        toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+                            expect(data).not.toBeUndefined();
+                            expect(typeof data).toBe('object');
+
+                            helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function(){
+                                done();
+                            },5000);
+                        }, function(e) {
+                            done.fail();
+                        });
+                    });
+                }, function(e) {
+                    done.fail();
+                });
+            }, function(e) {
+                done.fail();
+            });
+        }, interval);
+
+        it('execute init/buyProduct/checkPurchaseStatus/cancelSubscription for subscription item', function(done) {
+            var tempProductInfoDummy = productInfoDummy;
+            tempProductInfoDummy.productId = 'DP111000002597';
+
+            toast.billing.init(billingInfoDummy, function () {
+                toast.billing.buyProduct(tempProductInfoDummy, function() {
+                    helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Success callback was invoked normally', ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
+                        expect(answer).not.toBe('TIMEOUT');
+
+                        toast.billing.checkPurchaseStatus(tempProductInfoDummy, function(data) {
+                            expect(data).not.toBeUndefined();
+                            expect(typeof data).toBe('object');
+
+                            helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function(){
+                                toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
+                                    expect(data).not.toBeUndefined();
+                                    expect(typeof data).toBe('object');
+
+                                    helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function(){
+                                        done();
+                                    },5000);
+                                }, function(e) {
+                                    done.fail();
+                                });
+                            },5000);
+                        }, function(e) {
+                            done.fail();
+                        });
+                    });
+                }, function(e) {
+                    done.fail();
+                });
+            }, function(e) {
+                done.fail();
             });
         }, interval);
     });
