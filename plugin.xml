@@ -6,6 +6,7 @@
 		<engine name='cordova' version='>=3.5.2'/>
 	</engines>
 
+
 	<js-module src='www/inputdevice.js' name='inputdevice'>
 		<clobbers target='toast.inputdevice' />
 	</js-module>
@@ -29,6 +30,9 @@
 	</js-module>
 	<js-module src='www/MediaPlugin.js' name='MediaPlugin'>
 		<clobbers target='toast.MediaPlugin' />
+	</js-module>
+	<js-module src='www/billing.js' name='billing'>
+		<clobbers target='toast.billing' />
 	</js-module>
 	<js-module src='www/util.js' name='util'>
 	</js-module>
@@ -95,6 +99,9 @@
 		<js-module src='src/sectv-orsay/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
+		<js-module src='src/sectv-orsay/billingProxy.js' name='billingProxy'>
+      <runs />
+		</js-module>
 	</platform>
 
 	<!-- sectv-tizen -->
@@ -132,6 +139,9 @@
 		<js-module src='src/sectv-tizen/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
+		<js-module src='src/sectv-tizen/billingProxy.js' name='billingProxy'>
+      <runs />
+		</js-module>
 	</platform>
 
 	<!-- tv-webos -->
@@ -159,6 +169,9 @@
 		</js-module>
 		<js-module src='src/tv-webos/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
+		</js-module>
+		<js-module src='src/tv-webos/billingProxy.js' name='billingProxy'>
+      <runs />
 		</js-module>
 	</platform>
 </plugin>
