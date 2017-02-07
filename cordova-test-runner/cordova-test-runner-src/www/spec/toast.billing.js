@@ -624,17 +624,20 @@ describe('toast.billing', function() {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
 
-                    helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function(){
+                    helper.aOrB('(non-subscription) Please check received data is valid : ' + JSON.stringify(data), ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
                         done();
-                    },5000);
+                    });
                 }, function(e) {
                     helper.alert('(non-subscription) toast.billing.cancelSubscription Error : ' + JSON.stringify(e), function(){
-                        done.fail();
+                        expect(typeof e).toBe('object');
+                        done();
                     },5000);
                 });
             }, function(e) {
                 helper.alert('(non-subscription) toast.billing.init Error : ' + JSON.stringify(e), function(){
-                    done.fail();
+                    expect(typeof e).toBe('object');
+                    done();
                 },5000);
             })
         }, 10000);
@@ -648,17 +651,20 @@ describe('toast.billing', function() {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
 
-                    helper.alert('(subscription) Received data : ' + JSON.stringify(data), function(){
+                    helper.aOrB('(subscription) Please check received data is valid : ' + JSON.stringify(data), ['YES', 'NO'], function(answer) {
+                        expect(answer).toBe(true);
                         done();
-                    },5000);
+                    });
                 }, function(e) {
                     helper.alert('(subscription) toast.billing.cancelSubscription Error : ' + JSON.stringify(e), function(){
-                        done.fail();
+                        expect(typeof e).toBe('object');
+                        done();
                     },5000);
                 });
             }, function(e) {
                 helper.alert('(subscription) toast.billing.init Error : ' + JSON.stringify(e), function(){
-                    done.fail();
+                    expect(typeof e).toBe('object');
+                    done();
                 },5000);
             })
         }, 10000);
