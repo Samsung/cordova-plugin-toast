@@ -2,57 +2,50 @@
 (function() {
     // toast.billing.init 1st argument : dummy data
     var billingInfoDummy = {
-        key : {
-            paymentwallKey : 't_0f6a922e0d3af023124ae0dc2374b6',
-            checkoutKey : 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
+        key: {
+            paymentwallKey: 't_0f6a922e0d3af023124ae0dc2374b6',
+            checkoutKey: 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
         },
-        countryCode : 'US',
-        containerId : 'containerid',
-        lang : 'EN',
-        gaWebPropertyId : 'poSample', //googleAccount
-        appId : '3201508004443', //yours 3201611011047
-        serverType : 'FAKE'
-        // brand : 'samsung'
+        countryCode: 'US',
+        containerId: 'containerid',
+        lang: 'EN',
+        gaWebPropertyId: 'poSample', //googleAccount
+        appId: '3201508004443', //yours 3201611011047
+        serverType: 'FAKE'
     };
 
     // non-subscription product info 1st argument : dummy data
     var nonSubscriptionInfoDummy = {
-        productId : 'DP111000002594',//'DP111000002594',
-        productName : 'rozanne_product_01',//rozanne_product_01',
-        currency : 'USD',
-        amount : 0.79,
-        period : '',
-        duration : 3,
-        userId : 'orderId',
-        onExit : function () {},
-        showBackButton : false,
-        enablePaymentRecoverFlow : false,
-        titles : {key : "test", value : "test"},
-        orderId : 'orderId',
-        orderItemPath : 'jpg'
-        // appId : 'applicationId',
-        // paymentDetails : {},
-        // paymentServer : 'FAKE'
+        productId: 'DP111000002594',//'DP111000002594',
+        productName: 'rozanne_product_01',//rozanne_product_01',
+        currency: 'USD',
+        amount: 0.79,
+        period: '',
+        duration: 3,
+        userId: 'orderId',
+        onExit: function () {},
+        showBackButton: false,
+        enablePaymentRecoverFlow: false,
+        titles: {key: 'test', value: 'test'},
+        orderId: 'orderId',
+        orderItemPath: 'jpg'
     };
 
     // subscription product info 1st argument : dummy data
     var subscriptionInfoDummy = {
-        productId : 'DP111000002597',//'DP111000002594',
-        productName : 'rozanne_subscription_01',//rozanne_product_01',
-        currency : 'USD',
-        amount : 0.79,
-        period : '',
-        duration : 3,
-        userId : 'orderId',
-        onExit : function () {},
-        showBackButton : false,
-        enablePaymentRecoverFlow : false,
-        titles : {key : "test", value : "test"},
-        orderId : 'orderId',
-        orderItemPath : 'jpg'
-        // appId : 'applicationId',
-        // paymentDetails : {},
-        // paymentServer : 'FAKE'
+        productId: 'DP111000002597',//'DP111000002594',
+        productName: 'rozanne_subscription_01',//rozanne_product_01',
+        currency: 'USD',
+        amount: 0.79,
+        period: '',
+        duration: 3,
+        userId: 'orderId',
+        onExit: function () {},
+        showBackButton: false,
+        enablePaymentRecoverFlow: false,
+        titles: {key: 'test', value: 'test'},
+        orderId: 'orderId',
+        orderItemPath: 'jpg'
     };
 
     // non-subscription
