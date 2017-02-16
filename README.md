@@ -21,7 +21,7 @@ If you want more details, please refer belows.
 * Youtube
     - [Youtube link](https://youtu.be/vv5emwgtrDc) for 2016 SDC tech session : Write Once and Run Everywhere with TOAST for Smart TV.
 * TOAST introduce video
-    - [TOAST video](https://www.samsungdforum.com/toastAD) contains introduce for TOAST briefly. It would help you understand easily.
+    - [TOAST video](http://developer.samsung.com/onlinedocs/tv/toastAD/) contains introduce for TOAST briefly. It would help you understand easily.
 
 # Project Structure
 ```
