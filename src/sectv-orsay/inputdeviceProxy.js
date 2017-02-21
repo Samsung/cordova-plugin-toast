@@ -44,7 +44,8 @@ var supportedKeys = [
     {name: '8', code: 13},
     {name: '9', code: 14},
     {name: 'ChannelUp', code: 68},
-    {name: 'ChannelDown', code: 65}
+    {name: 'ChannelDown', code: 65},
+    {name: 'Info', code: 31}
 ];
 
 module.exports = {
