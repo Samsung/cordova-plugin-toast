@@ -35,7 +35,9 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        registerKey();
+        setKeyTable();
+        registerKeys();
+        registerKeyHandler();
         document.getElementById('ready').addEventListener('click', function() {
             playMedia();
         });
