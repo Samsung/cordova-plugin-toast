@@ -18,19 +18,61 @@
  */
 var tvKeyCode = [];
 
-function registerKey() {
-    console.log('[drmMediaSample] registerKey');
-
+function setKeyTable() {
+    console.log('[drmMediaSample] setKeyTable');
     toast.inputdevice.getSupportedKeys(function(keys) {
         for(var i = 0, len = keys.length; i < len; i++) {
             tvKeyCode[keys[i].name] = keys[i].code;
         }
     });
+}
 
+function registerKeys() {
+    console.log('[drmMediaSample] registerKeys');
+    var usedKeys = [
+        'MediaPause',
+        'MediaPlay',
+        'MediaFastForward',
+        'MediaRewind',
+        'MediaStop'
+    ];
+
+    for (var i = 0; i < usedKeys.length; i++) {
+        try{
+            toast.inputdevice.registerKey(usedKeys[i], function() {}, function(err) {
+                console.log('Error: ' + err.message);
+            });
+        } catch(e){
+            console.log("failed to register " + usedKeys[i] + ": " + e);
+        }
+    }
+}
+
+function registerKeyHandler() {
     window.addEventListener('keydown', function(e) {
         switch(e.keyCode) {
             case tvKeyCode.Return:
                 toast.application.exit();
+                break;
+
+            case tvKeyCode.MediaPause:
+                playOrPause();
+                break;
+
+            case tvKeyCode.MediaPlay:
+                playOrPause();
+                break;
+
+            case tvKeyCode.MediaFastForward:
+                seekTo('next');
+                break;
+
+            case tvKeyCode.MediaRewind:
+                seekTo('prev');
+                break;
+
+            case tvKeyCode.MediaStop:
+                // do nothing. If you want, add code.
                 break;
         }
     });
