@@ -153,7 +153,7 @@ Unset the option in Media plugin.
 
 				var mediaIns = toast.Media.getInstance();
 				var drmOptions = window.getMediaOption(url);
-				var mediaPlugin = new toast.MediaPluginWideVine(wideVineData);
+				var mediaPlugin = new toast.MediaPluginWideVine(drmOptions);
 
 				mediaIns.resetPlugin();
 				mediaIns.attachPlugin(mediaPlugin);
