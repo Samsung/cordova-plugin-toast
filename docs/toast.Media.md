@@ -249,44 +249,48 @@ A valid state of its method, is after the IDEL state(after open method)
 		* if unknown error occured.
 * Examples
 
-		```js
-		var media = toast.Media.getInstance();
+	```js
+	var media = toast.Media.getInstance();
 
-		media.setListener({
-			onevent: function (evt) {
-				switch(evt.type) {
-					case "STATE":
-						console.log("Media State changed: " + evt.data.oldState + " -> " + evt.data.state);
-						break;
-					case "DURATION":
-						console.log("Media duration updated: " + evt.data.duration + "ms");
-						break;
-					case "POSITION":
-						console.log("Media position updated: " + evt.data.position + "ms");
-						break;
-					case "BUFFERINGPROGRESS":
-						console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
-						if(evt.data.bufferingPercentage >= 100) {
-							console.log("Buffering completed");
-						}
-						break;
-					case "SUBTITLE":
-						console.log("Media subtitle text: " + evt.data.text);
-						break;
-					case "ENDED":
-						console.log("Media ended");
-						break;
-				}
-			},
-			onerror: function (err) {
-				console.error("MediaError occured: " + JSON.stringify(err));
+	media.setListener({
+		onevent: function (evt) {
+			switch(evt.type) {
+				case "STATE":
+					console.log("Media State changed: " + evt.data.oldState + " -> " + evt.data.state);
+
+					if(evt.data.oldState != 'STALLED' && evt.data.state == 'STALLED'){
+                        document.getElementById('log').innerHTML = 'Buffering is started';
+                    }
+                    else if(evt.data.oldState == 'STALLED' && evt.data.state != 'STALLED'){
+                        document.getElementById('log').innerHTML = 'Buffering is ended';
+                    }
+					break;
+				case "DURATION":
+					console.log("Media duration updated: " + evt.data.duration + "ms");
+					break;
+				case "POSITION":
+					console.log("Media position updated: " + evt.data.position + "ms");
+					break;
+				case "BUFFERINGPROGRESS":
+					console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
+					break;
+				case "SUBTITLE":
+					console.log("Media subtitle text: " + evt.data.text);
+					break;
+				case "ENDED":
+					console.log("Media ended");
+					break;
 			}
-		});
+		},
+		onerror: function (err) {
+			console.error("MediaError occured: " + JSON.stringify(err));
+		}
+	});
 
-		media.open('http://mydomain.com/1.mp3');
-		media.setSubtitlePath('http://mydomain.com/1.smi');
+	media.open('http://mydomain.com/1.mp3');
+	media.setSubtitlePath('http://mydomain.com/1.smi');
 
-		```
+	```
 		
 ### void syncVideoRect();
 Synchronize videoRect with container element. This function references the style property of container element which is obtained by `getContainerElement` function.
@@ -413,6 +417,12 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 					switch(evt.type) {
 						case "STATE":
 							console.log("Media State changed: " + evt.data.oldState + " -> " + evt.data.state);
+							if(evt.data.oldState != 'STALLED' && evt.data.state == 'STALLED'){
+                        		document.getElementById('log').innerHTML = 'Buffering is started';
+                    		}
+                    		else if(evt.data.oldState == 'STALLED' && evt.data.state != 'STALLED'){
+                        		document.getElementById('log').innerHTML = 'Buffering is ended';
+                    		}
 							break;
 						case "DURATION":
 							console.log("Media duration updated: " + evt.data.duration + "ms");
@@ -422,9 +432,6 @@ Attache the given plugin instance to the Media instance. This will be affect to 
 							break;
 						case "BUFFERINGPROGRESS":
 							console.log("Media buffering in progress: " + evt.data.bufferingPercentage + "%");
-							if(evt.data.bufferingPercentage >= 100) {
-								console.log("Buffering completed");
-							}
 							break;
 						case "ENDED":
 							console.log("Media ended");

@@ -67,6 +67,13 @@ function playMedia() {
                         document.getElementById('playOrPauseButton').innerHTML = '||';
                     }
 
+                    if(evt.data.oldState != 'STALLED' && evt.data.state == 'STALLED'){
+                        document.getElementById('log').innerHTML = 'Buffering is started';
+                    }
+                    else if(evt.data.oldState == 'STALLED' && evt.data.state != 'STALLED'){
+                        document.getElementById('log').innerHTML = 'Buffering is ended';
+                    }
+
                     break;
                 case 'DURATION':
                     document.getElementById('log').innerHTML = 'Duration is ' + evt.data.duration + 'ms';
@@ -81,10 +88,6 @@ function playMedia() {
                     break;
                 case 'BUFFERINGPROGRESS':
                     document.getElementById('log').innerHTML = 'Buffering is ' + evt.data.bufferingPercentage + '%';
-
-                    if(evt.data.bufferingPercentage >= 100) {
-                        document.getElementById('log').innerHTML = 'Buffering is completed';
-                    }
 
                     break;
                 case 'ENDED':
