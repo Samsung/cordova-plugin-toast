@@ -22,13 +22,13 @@ describe('toast.billing', function() {
     beforeEach(function() {
         billingInfoDummy = {
             key: {
-                paymentwallKey: 't_0f6a922e0d3af023124ae0dc2374b6',
+                paymentwallKey: 'dc50d495932a7009b3f193916aab5005', //t_0f6a922e0d3af023124ae0dc2374b6
                 checkoutKey: 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
             },
             countryCode: 'US',
-            containerId: 'containerid',
-            lang: 'EN',
-            gaWebPropertyId: 'poSample', //googleAccount
+            containerId: 'billing_form',
+            lang: 'en',
+            gaWebPropertyId: 'googleAccount', //googleAccount
             appId: '3201508004443', //yours 3201611011047
             serverType: 'FAKE'
         };
@@ -38,15 +38,13 @@ describe('toast.billing', function() {
             productName: 'rozanne_product_01',//rozanne_product_01',
             currency: 'USD',
             amount: 0.79,
-            period: '',
-            duration: 3,
+            period: 'month',
+            duration: 1,
             userId: 'orderId',
             onExit: function () {},
             showBackButton: false,
             enablePaymentRecoverFlow: false,
-            titles: {key: 'test', value: 'test'},
-            orderId: 'orderId',
-            orderItemPath: 'jpg'
+            titles: {'buyHeading': 'Subscribe to #product', 'buyHeadingRecurring': '#price per #period'}
         };
     });
 
@@ -155,7 +153,7 @@ describe('toast.billing', function() {
                 }, function() {
                     done();
                 });
-            }).toThrowError(TypeError);
+            });
 
             expect(function(done) {
                 var tempBillingInfoDummy = billingInfoDummy;
@@ -166,20 +164,7 @@ describe('toast.billing', function() {
                 }, function() {
                     done();
                 });
-            }).toThrowError(TypeError);
-
-            expect(function(done) {
-                var tempBillingInfoDummy = billingInfoDummy;
-                tempBillingInfoDummy.key.checkoutKey = '';
-                tempBillingInfoDummy.key.paymentwallKey = '';
-                tempBillingInfoDummy.appId = '';
-
-                toast.billing.init(tempBillingInfoDummy, function() {
-                    done.fail();
-                }, function() {
-                    done();
-                });
-            }).toThrowError(TypeError);
+            });
         });
 
         it('verify the value of success callback is empty', function(done) {
@@ -191,7 +176,7 @@ describe('toast.billing', function() {
             });
         }, interval);
 
-        it('verify error callback is invoked', function(done) {
+        it('verify error callback which has Error object is invoked', function(done) {
             var tempBillingInfoDummy = billingInfoDummy;
             tempBillingInfoDummy.key.checkoutKey = 'ErrorKey';
             tempBillingInfoDummy.key.paymentwallKey = 'ErrorKey';
@@ -346,7 +331,7 @@ describe('toast.billing', function() {
             });
         }, 60000);
 
-        it('verify error callback is invoked', function(done) {
+        it('verify error callback which has Error object is invoked', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'ErrorProductId';
 
@@ -501,7 +486,7 @@ describe('toast.billing', function() {
             });
         }, 10000);
 
-        it('verify error callback is invoked', function(done) {
+        it('verify error callback which has Error object is invoked', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'ErrorProductId';
 
@@ -663,7 +648,7 @@ describe('toast.billing', function() {
             });
         }, 10000);
 
-        it('verify error callback is invoked', function(done) {
+        it('verify error callback which has Error object is invoked', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'ErrorProductId';
 

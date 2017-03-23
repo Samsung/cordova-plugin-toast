@@ -9,7 +9,7 @@
             description: description
         });
     };
-    var TEST_TIMEOUT = 10000;
+    var TEST_TIMEOUT = 20000;
 
     function createElem(tagName, attributes, children) {
         var elem = document.createElement(tagName);
@@ -36,6 +36,7 @@
     function renderTests() {
         var count = 0;
         document.body.appendChild(createElem('h1', {}, 'Cordova TOAST TestSuite'));
+//        document.body.appendChild(createElem('div', {id: 'billing_form'}));
         var container = createElem('div', {className: 'container-fluid'});
         document.body.appendChild(container);
         for (var category in tests) {

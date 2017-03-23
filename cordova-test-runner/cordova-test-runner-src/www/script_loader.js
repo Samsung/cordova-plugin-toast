@@ -1,13 +1,15 @@
 var specList = [
-                '_specHelper', 'toast', 'toast.application',
-                'toast.inputdevice', 'toast.tvwindow', 'toast.tvchannel',
-                'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo'
-                // , 'toast.billing'
+                '_specHelper', 'toast',
+                // 'toast.application',
+                // 'toast.inputdevice', 'toast.tvwindow', 'toast.tvchannel',
+                // 'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo'
+                // ,
+                'toast.billing'
             ];
 var testsuiteList = [
-                        'toast.application', 'toast.inputdevice', 'toast.tvwindow',
-                        'toast.tvchannel', 'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo', 'ime'
-                        // , 'toast.billing'
+                        // 'toast.application', 'toast.inputdevice', 'toast.tvwindow',
+                        // 'toast.tvchannel', 'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo', 'ime'
+                        'toast.billing'
                     ];
 
 function specScriptLoad(spec) {

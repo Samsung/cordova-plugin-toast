@@ -25,7 +25,7 @@
         window.addEventListener('keydown', function(e) {
             if (keyInfo[e.keyCode] === 'RETURN') {
 //                toast.application.exit();
-            	location.reload();
+                location.reload();
             }
         });
     });
@@ -88,8 +88,8 @@
                 break;
             case 27:
             case 88:
-            	location.reload();
-            	break;
+                location.reload();
+                break;
         }
     });
 })();

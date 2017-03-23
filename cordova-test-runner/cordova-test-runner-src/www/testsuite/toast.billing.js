@@ -3,13 +3,13 @@
     // toast.billing.init 1st argument : dummy data
     var billingInfoDummy = {
         key: {
-            paymentwallKey: 't_0f6a922e0d3af023124ae0dc2374b6',
+            paymentwallKey: 'dc50d495932a7009b3f193916aab5005', //'t_0f6a922e0d3af023124ae0dc2374b6',
             checkoutKey: 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
         },
         countryCode: 'US',
-        containerId: 'containerid',
-        lang: 'EN',
-        gaWebPropertyId: 'poSample', //googleAccount
+        containerId: 'billing_form',
+        lang: 'en',
+        gaWebPropertyId: 'googleAccount', //googleAccount
         appId: '3201508004443', //yours 3201611011047
         serverType: 'FAKE'
     };
@@ -20,15 +20,13 @@
         productName: 'rozanne_product_01',//rozanne_product_01',
         currency: 'USD',
         amount: 0.79,
-        period: '',
-        duration: 3,
+        period: 'month',
+        duration: 1,
         userId: 'orderId',
         onExit: function () {},
         showBackButton: false,
         enablePaymentRecoverFlow: false,
-        titles: {key: 'test', value: 'test'},
-        orderId: 'orderId',
-        orderItemPath: 'jpg'
+        titles: {'buyHeading': 'Subscribe to #product', 'buyHeadingRecurring': '#price per #period'}
     };
 
     // subscription product info 1st argument : dummy data
@@ -37,13 +35,13 @@
         productName: 'rozanne_subscription_01',//rozanne_product_01',
         currency: 'USD',
         amount: 0.79,
-        period: '',
-        duration: 3,
+        period: 'month',
+        duration: 1,
         userId: 'orderId',
         onExit: function () {},
         showBackButton: false,
         enablePaymentRecoverFlow: false,
-        titles: {key: 'test', value: 'test'},
+        titles: {'buyHeading': 'Subscribe to #product', 'buyHeadingRecurring': '#price per #period'},
         orderId: 'orderId',
         orderItemPath: 'jpg'
     };
