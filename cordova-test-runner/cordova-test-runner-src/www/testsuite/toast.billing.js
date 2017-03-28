@@ -14,6 +14,24 @@
         serverType: 'FAKE'
     };
 
+    var requestPurchaseInfoDummy = {
+        itemType: '2',
+        pageNumber: 1
+    };
+
+    var requestProductInfoDummy = {
+        pageSize: '1',
+        pageNumber: 1
+    };
+
+    var verifyPurchaseDummy = {
+        invoiceID: 'DMY1701US000108283'
+    };
+
+    var applyProductDummy = {
+        invoiceID: 'DMY1701US000108283'
+    };
+
     // non-subscription product info 1st argument : dummy data
     var nonSubscriptionInfoDummy = {
         productId: 'DP111000002594',//'DP111000002594',
@@ -50,6 +68,34 @@
     testsuite('toast.billing', 'init()', function(report) {
         toast.billing.init(billingInfoDummy, function() {
             report('Success');
+        }, function(err) {
+            report('Error : ' + JSON.stringify(err));
+        });
+    }, 'non-subscription');
+    testsuite('toast.billing', 'requestPurchasesList()', function(report) {
+        toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
+        }, function(err) {
+            report('Error : ' + JSON.stringify(err));
+        });
+    }, 'non-subscription');
+    testsuite('toast.billing', 'requestProductsList()', function(report) {
+        toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
+        }, function(err) {
+            report('Error : ' + JSON.stringify(err));
+        });
+    }, 'non-subscription');
+    testsuite('toast.billing', 'verifyPurchase()', function(report) {
+        toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
+        }, function(err) {
+            report('Error : ' + JSON.stringify(err));
+        });
+    }, 'non-subscription');
+    testsuite('toast.billing', 'applyProduct()', function(report) {
+        toast.billing.applyProduct(applyProductDummy, function(data) {
+            report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + JSON.stringify(err));
         });
