@@ -57,16 +57,16 @@ describe('toast.billing', function() {
         };
 
         requestProductInfoDummy = {
-            pageSize: '1',
+            pageSize: 1,
             pageNumber: 1
         };
 
         verifyPurchaseDummy = {
-            invoiceID: 'DMY1701US000108283'
+            invoiceId: 'DMY1701US000108283'
         };
 
         applyProductDummy = {
-            invoiceID: 'DMY1701US000108283'
+            invoiceId: 'DMY1701US000108283'
         };
     });
 
@@ -670,7 +670,7 @@ describe('toast.billing', function() {
         it('throws Error when mandatory value of 1st argument is missing.', function() {
             expect(function(done) {
                 var tempVerifyPurchaseDummy = verifyPurchaseDummy;
-                tempVerifyPurchaseDummy.invoiceID = '';
+                tempVerifyPurchaseDummy.invoiceId = '';
 
                 toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function() {
                     done.fail();
@@ -703,7 +703,7 @@ describe('toast.billing', function() {
 
         it('verify error callback which has Error object is invoked', function(done) {
             var tempVerifyPurchaseDummy = verifyPurchaseDummy;
-            tempVerifyPurchaseDummy.invoiceID = 'ErrorInvoiceID';
+            tempVerifyPurchaseDummy.invoiceId = 'ErrorInvoiceId';
 
             toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function() {
                 done.fail();
@@ -780,7 +780,7 @@ describe('toast.billing', function() {
         it('throws Error when mandatory value of 1st argument is missing.', function() {
             expect(function(done) {
                 var tempApplyProductDummy = applyProductDummy;
-                tempApplyProductDummy.invoiceID = '';
+                tempApplyProductDummy.invoiceId = '';
 
                 toast.billing.applyProduct(tempApplyProductDummy, function() {
                     done.fail();
@@ -813,7 +813,7 @@ describe('toast.billing', function() {
 
         it('verify error callback which has Error object is invoked', function(done) {
             var tempApplyProductDummy = applyProductDummy;
-            tempApplyProductDummy.invoiceID = 'ErrorInvoiceID';
+            tempApplyProductDummy.invoiceId = 'ErrorInvoiceId';
 
             toast.billing.applyProduct(tempApplyProductDummy, function() {
                 done.fail();
@@ -1192,7 +1192,7 @@ describe('toast.billing', function() {
                     expect(typeof data).toBe('object');
 
                     var tempVerifyPurchaseDummy = verifyPurchaseDummy;
-                    tempVerifyPurchaseDummy.invoiceID = data[0].invoiceID;
+                    tempVerifyPurchaseDummy.invoiceId = data[0].invoiceId;
 
                     toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function(data) {
                         expect(data).not.toBeUndefined();
@@ -1219,7 +1219,7 @@ describe('toast.billing', function() {
                     expect(typeof data).toBe('object');
 
                     var tempApplyProductDummy = applyProductDummy;
-                    tempApplyProductDummy.invoiceID = data[0].invoiceID;
+                    tempApplyProductDummy.invoiceId = data[0].invoiceId;
 
                     toast.billing.applyProduct(tempApplyProductDummy, function(data) {
                         expect(data).not.toBeUndefined();

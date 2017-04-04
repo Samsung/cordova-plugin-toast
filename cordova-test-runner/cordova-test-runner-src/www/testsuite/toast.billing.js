@@ -20,16 +20,16 @@
     };
 
     var requestProductInfoDummy = {
-        pageSize: '1',
+        pageSize: 1,
         pageNumber: 1
     };
 
     var verifyPurchaseDummy = {
-        invoiceID: 'DMY1701US000108283'
+        invoiceId: 'DMY1701US000108283'
     };
 
     var applyProductDummy = {
-        invoiceID: 'DMY1701US000108283'
+        invoiceId: 'DMY1701US000108283'
     };
 
     // non-subscription product info 1st argument : dummy data
