@@ -34,7 +34,7 @@ describe('toast.billing', function() {
             lang: 'en',
             gaWebPropertyId: 'googleAccount', //googleAccount
             appId: '3201508004443', //yours 3201611011047
-            serverType: 'FAKE'
+            serverType: 'DUMMY'
         };
 
         productInfoDummy = {
@@ -682,15 +682,24 @@ describe('toast.billing', function() {
 
         it('verify the return data is ok', function(done) {
             toast.billing.init(billingInfoDummy, function () {
-                toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
-                    expect(data).not.toBeUndefined();
-                    expect(typeof data).toBe('object');
-
-                    helper.alert('verifyPurchase Data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+                    var invoiceDetails = data.InvoiceDetails;
+                    verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
+                    
+                    toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
+                        expect(data).not.toBeUndefined();
+                        expect(typeof data).toBe('object');
+    
+                        helper.alert('verifyPurchase Data : ' + JSON.stringify(data), function() {
+                            done();
+                        },5000);
+                    }, function(e) {
+                        helper.alert('verifyPurchase Error : ' + JSON.stringify(e), function() {
+                            done.fail();
+                        },5000);
+                    });
                 }, function(e) {
-                    helper.alert('verifyPurchase Error : ' + JSON.stringify(e), function() {
+                    helper.alert('requestPurchasesList Error : ' + JSON.stringify(e), function() {
                         done.fail();
                     },5000);
                 });
@@ -792,15 +801,24 @@ describe('toast.billing', function() {
 
         it('verify the return data is ok', function(done) {
             toast.billing.init(billingInfoDummy, function () {
-                toast.billing.applyProduct(applyProductDummy, function(data) {
-                    expect(data).not.toBeUndefined();
-                    expect(typeof data).toBe('object');
-
-                    helper.alert('applyProduct Data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+                    var invoiceDetails = data.InvoiceDetails;
+                    applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
+                    
+                    toast.billing.applyProduct(applyProductDummy, function(data) {
+                        expect(data).not.toBeUndefined();
+                        expect(typeof data).toBe('object');
+    
+                        helper.alert('applyProductDummy Data : ' + JSON.stringify(data), function() {
+                            done();
+                        },5000);
+                    }, function(e) {
+                        helper.alert('applyProductDummy Error : ' + JSON.stringify(e), function() {
+                            done.fail();
+                        },5000);
+                    });
                 }, function(e) {
-                    helper.alert('applyProduct Error : ' + JSON.stringify(e), function() {
+                    helper.alert('requestPurchasesList Error : ' + JSON.stringify(e), function() {
                         done.fail();
                     },5000);
                 });

@@ -11,7 +11,7 @@
         lang: 'en',
         gaWebPropertyId: 'googleAccount', //googleAccount
         appId: '3201508004443', //yours 3201611011047
-        serverType: 'FAKE'
+        serverType: 'DUMMY'
     };
 
     var requestPurchaseInfoDummy = {
@@ -63,7 +63,7 @@
         orderId: 'orderId',
         orderItemPath: 'jpg'
     };
-
+    
     // non-subscription
     testsuite('toast.billing', 'init()', function(report) {
         toast.billing.init(billingInfoDummy, function() {
@@ -87,17 +87,29 @@
         });
     }, 'non-subscription');
     testsuite('toast.billing', 'verifyPurchase()', function(report) {
-        toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
-            report('Success : ' + JSON.stringify(data));
+        toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+            var invoiceDetails = data.InvoiceDetails;
+            verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
+            toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
+                report('Success : ' + JSON.stringify(data));
+            }, function(err) {
+                report('Error : ' + JSON.stringify(err));
+            });
         }, function(err) {
-            report('Error : ' + JSON.stringify(err));
+            console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
     }, 'non-subscription');
     testsuite('toast.billing', 'applyProduct()', function(report) {
-        toast.billing.applyProduct(applyProductDummy, function(data) {
-            report('Success : ' + JSON.stringify(data));
+        toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+            var invoiceDetails = data.InvoiceDetails;
+            applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
+            toast.billing.applyProduct(applyProductDummy, function(data) {
+                report('Success : ' + JSON.stringify(data));
+            }, function(err) {
+                report('Error : ' + JSON.stringify(err));
+            });
         }, function(err) {
-            report('Error : ' + JSON.stringify(err));
+            console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
     }, 'non-subscription');
     testsuite('toast.billing', 'buyProduct()', function(report) {
