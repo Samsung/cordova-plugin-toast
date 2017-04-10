@@ -340,11 +340,18 @@ describe('toast.billing', function() {
                         done();
                     });
                 }, function(e) {
-                    helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Error callback was invoked normally : ' + JSON.stringify(e), ['YES', 'NO'], function(answer) {
-                        expect(answer).toBe(true);
-                        expect(answer).not.toBe('TIMEOUT');
-                        done();
-                    });
+                    expect(typeof e).toBe('object');
+                    console.log('verify "buyProduct" screen was shown (non-subscription) : e : ' + e.code);
+                    if(e.code === 1000) {
+                        helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
+                            expect(answer).toBe(true);
+                            expect(answer).not.toBe('TIMEOUT');
+                            done();
+                        });
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 done.fail();
@@ -353,21 +360,29 @@ describe('toast.billing', function() {
 
         it('verify "buyProduct" screen was shown (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
-            tempProductInfoDummy.productId = 'DP111000002597';
+//            tempProductInfoDummy.productId = 'DP111000002597';
+            tempProductInfoDummy.productId = 'DP111000002757';
             tempProductInfoDummy.productName = 'rozanne_subscription_01';
             toast.billing.init(billingInfoDummy, function () {
                 toast.billing.buyProduct(productInfoDummy, function() {
-                    helper.aOrB('(subscription) Did you see "buyProduct" screen? Success callback was invoked normally', ['YES', 'NO'], function(answer) {
+                    helper.aOrB('(subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                         expect(answer).toBe(true);
                         expect(answer).not.toBe('TIMEOUT');
                         done();
                     });
                 }, function(e) {
-                    helper.aOrB('(subscription) Did you see "buyProduct" screen? Error callback was invoked normally : ' + JSON.stringify(e), ['YES', 'NO'], function(answer) {
-                        expect(answer).toBe(true);
-                        expect(answer).not.toBe('TIMEOUT');
-                        done();
-                    });
+                    expect(typeof e).toBe('object');
+                    console.log('verify "buyProduct" screen was shown (subscription) : e : ' + e.code);
+                    if(e.code === 1000) {
+                        helper.aOrB('(subscription) Did you see "buyProduct" screen? Canceled buying process well.', ['YES', 'NO'], function(answer) {
+                            expect(answer).toBe(true);
+                            expect(answer).not.toBe('TIMEOUT');
+                            done();
+                        });
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 done.fail();
@@ -478,19 +493,12 @@ describe('toast.billing', function() {
                 toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.alert('requestPurchasesList Data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                    done();
                 }, function(e) {
-                    helper.alert('requestPurchasesList Error : ' + JSON.stringify(e), function() {
-                        done.fail();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    done.fail();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
@@ -575,19 +583,12 @@ describe('toast.billing', function() {
                 toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.alert('requestProductInfoDummy Data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                    done();
                 }, function(e) {
-                    helper.alert('requestProductInfoDummy Error : ' + JSON.stringify(e), function() {
-                        done.fail();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    done.fail();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
@@ -689,24 +690,15 @@ describe('toast.billing', function() {
                     toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
-    
-                        helper.alert('verifyPurchase Data : ' + JSON.stringify(data), function() {
-                            done();
-                        },5000);
+                        done();
                     }, function(e) {
-                        helper.alert('verifyPurchase Error : ' + JSON.stringify(e), function() {
-                            done.fail();
-                        },5000);
+                        done.fail();
                     });
                 }, function(e) {
-                    helper.alert('requestPurchasesList Error : ' + JSON.stringify(e), function() {
-                        done.fail();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    done.fail();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
@@ -808,24 +800,15 @@ describe('toast.billing', function() {
                     toast.billing.applyProduct(applyProductDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
-    
-                        helper.alert('applyProductDummy Data : ' + JSON.stringify(data), function() {
-                            done();
-                        },5000);
+                        done();
                     }, function(e) {
-                        helper.alert('applyProductDummy Error : ' + JSON.stringify(e), function() {
-                            done.fail();
-                        },5000);
+                        done.fail();
                     });
                 }, function(e) {
-                    helper.alert('requestPurchasesList Error : ' + JSON.stringify(e), function() {
-                        done.fail();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    done.fail();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
@@ -946,42 +929,29 @@ describe('toast.billing', function() {
                 toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                    done();
                 }, function(e) {
-                    helper.alert('(non-subscription) toast.billing.checkPurchaseStatus Error : ' + JSON.stringify(e), function() {
-                        done.fail();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('(non-subscription) toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    done.fail();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
         it('verify the return data is ok (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
-            tempProductInfoDummy.productId = 'DP111000002597';
+//            tempProductInfoDummy.productId = 'DP111000002597';
+            tempProductInfoDummy.productId = 'DP111000002757';
             toast.billing.init(billingInfoDummy, function () {
                 toast.billing.checkPurchaseStatus(tempProductInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.alert('(subscription) Received data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                    done();
                 }, function(e) {
-                    helper.alert('(subscription) toast.billing.checkPurchaseStatus Error : ' + JSON.stringify(e), function() {
-                        done.fail();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('(subscription) toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    done.fail();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
@@ -1102,22 +1072,12 @@ describe('toast.billing', function() {
                 toast.billing.cancelSubscription(productInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.aOrB('(non-subscription) Please check received data is valid : ' + JSON.stringify(data), ['YES', 'NO'], function(answer) {
-                        expect(answer).toBe(true);
-                        done();
-                    });
+                    done();
                 }, function(e) {
-                    helper.alert('(non-subscription) toast.billing.cancelSubscription Error : ' + JSON.stringify(e), function() {
-                        expect(typeof e).toBe('object');
-                        done();
-                    },5000);
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('(non-subscription) toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    expect(typeof e).toBe('object');
-                    done();
-                },5000);
+                done.fail();
             });
         }, 10000);
 
@@ -1129,24 +1089,51 @@ describe('toast.billing', function() {
                 toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.aOrB('(subscription) Please check received data is valid : ' + JSON.stringify(data), ['YES', 'NO'], function(answer) {
-                        expect(answer).toBe(true);
-                        done();
-                    });
+                    done();
                 }, function(e) {
-                    helper.alert('(subscription) toast.billing.cancelSubscription Error : ' + JSON.stringify(e), function() {
-                        expect(typeof e).toBe('object');
-                        done();
-                    },5000);
+                    expect(typeof e).toBe('object');
+                    done.fail();
                 });
             }, function(e) {
-                helper.alert('(subscription) toast.billing.init Error : ' + JSON.stringify(e), function() {
-                    expect(typeof e).toBe('object');
-                    done();
-                },5000);
+                expect(typeof e).toBe('object');
+                expect(e).not.toBeUndefined();
+                done.fail();
             });
         }, 10000);
+        
+        it('verify working well in case of passing invoiceId property value', function(done) {
+            var tempProductInfoDummy = productInfoDummy;
+            tempProductInfoDummy.productId = 'DP111000002757';
+            toast.billing.checkPurchaseStatus(tempProductInfoDummy, function(data) {
+                tempProductInfoDummy.invoiceId = data[0].invoiceId;
+
+                toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
+                    expect(typeof data).toBe('object');
+                    done();
+                }, function(e) {
+                    expect(typeof e).toBe('object');
+                    expect(e).not.toBeUndefined();
+                    done.fail();
+                });
+            }, function(e) {
+                expect(typeof e).toBe('object');
+                expect(e).not.toBeUndefined();
+                done.fail();
+            });
+        }, interval);
+        
+        it('verify working well in case of not passing invoiceId property value', function(done) {
+            var tempProductInfoDummy = productInfoDummy;
+            tempProductInfoDummy.productId = 'DP111000002757';
+            toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
+                expect(typeof data).toBe('object');
+                done();
+            }, function(e) {
+                expect(typeof e).toBe('object');
+                expect(e).not.toBeUndefined();
+                done.fail();
+            });
+        }, interval);
 
         it('verify error callback which has Error object is invoked', function(done) {
             var tempProductInfoDummy = productInfoDummy;
@@ -1170,10 +1157,7 @@ describe('toast.billing', function() {
                 toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.alert('requestPurchasesList data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                    done();
                 }, function(e) {
                     done.fail();
                 });
@@ -1187,10 +1171,7 @@ describe('toast.billing', function() {
                 toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-
-                    helper.alert('requestProductsList data : ' + JSON.stringify(data), function() {
-                        done();
-                    },5000);
+                    done();
                 }, function(e) {
                     done.fail();
                 });
@@ -1215,10 +1196,7 @@ describe('toast.billing', function() {
                     toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
-
-                        helper.alert('verifyPurchase data : ' + JSON.stringify(data), function() {
-                            done();
-                        },5000);
+                        done();
                     }, function(e) {
                         done.fail();
                     });
@@ -1242,10 +1220,7 @@ describe('toast.billing', function() {
                     toast.billing.applyProduct(tempApplyProductDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
-
-                        helper.alert('applyProduct data : ' + JSON.stringify(data), function() {
-                            done();
-                        },5000);
+                        done();
                     }, function(e) {
                         done.fail();
                     });
@@ -1271,16 +1246,22 @@ describe('toast.billing', function() {
                         toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
                             expect(data).not.toBeUndefined();
                             expect(typeof data).toBe('object');
-
-                            helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function() {
-                                done();
-                            },5000);
+                            done();
                         }, function(e) {
                             done.fail();
                         });
                     });
                 }, function(e) {
-                    done.fail();
+                    if(e.code === 1000) {
+                        helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
+                            expect(answer).toBe(true);
+                            expect(answer).not.toBe('TIMEOUT');
+                            done();
+                        });
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 done.fail();
@@ -1289,7 +1270,8 @@ describe('toast.billing', function() {
 
         it('execute init/buyProduct/checkPurchaseStatus/cancelSubscription for subscription item', function(done) {
             var tempProductInfoDummy = productInfoDummy;
-            tempProductInfoDummy.productId = 'DP111000002597';
+//            tempProductInfoDummy.productId = 'DP111000002597';
+            tempProductInfoDummy.productId = 'DP111000002757';
 
             toast.billing.init(billingInfoDummy, function () {
                 toast.billing.buyProduct(tempProductInfoDummy, function() {
@@ -1305,10 +1287,7 @@ describe('toast.billing', function() {
                                 toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
                                     expect(data).not.toBeUndefined();
                                     expect(typeof data).toBe('object');
-
-                                    helper.alert('(non-subscription) Received data : ' + JSON.stringify(data), function() {
-                                        done();
-                                    },5000);
+                                    done();
                                 }, function(e) {
                                     done.fail();
                                 });
@@ -1318,7 +1297,16 @@ describe('toast.billing', function() {
                         });
                     });
                 }, function(e) {
-                    done.fail();
+                    if(e.code === 1000) {
+                        helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
+                            expect(answer).toBe(true);
+                            expect(answer).not.toBe('TIMEOUT');
+                            done();
+                        });
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 done.fail();

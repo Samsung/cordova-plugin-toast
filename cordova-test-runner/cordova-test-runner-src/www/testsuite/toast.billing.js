@@ -49,7 +49,8 @@
 
     // subscription product info 1st argument : dummy data
     var subscriptionInfoDummy = {
-        productId: 'DP111000002597',//'DP111000002594',
+//        productId: 'DP111000002597',//'DP111000002594',
+        productId: 'DP111000002757',
         productName: 'rozanne_subscription_01',//rozanne_product_01',
         currency: 'USD',
         amount: 0.79,
@@ -154,4 +155,18 @@
             report('Error : ' + JSON.stringify(err));
         });
     }, 'subscription');
+    testsuite('toast.billing', 'cancelSubscription()', function(report) {
+        toast.billing.checkPurchaseStatus(subscriptionInfoDummy, function(data) {
+            var productInfoDummy = subscriptionInfoDummy;
+            productInfoDummy.invoiceId = data[0].invoiceId;
+            
+            toast.billing.cancelSubscription(productInfoDummy, function(data) {
+                report('Success : ' + JSON.stringify(data));
+            }, function(err) {
+                report('Error : ' + JSON.stringify(err));
+            });
+        }, function(err) {
+            console.log('requestPurchasesList Error : ' + JSON.stringify(err));
+        });
+    }, 'subscription (have an invoiceId)');
 })();
