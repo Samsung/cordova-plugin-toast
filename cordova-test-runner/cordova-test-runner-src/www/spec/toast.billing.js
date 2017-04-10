@@ -360,7 +360,6 @@ describe('toast.billing', function() {
 
         it('verify "buyProduct" screen was shown (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
-//            tempProductInfoDummy.productId = 'DP111000002597';
             tempProductInfoDummy.productId = 'DP111000002757';
             tempProductInfoDummy.productName = 'rozanne_subscription_01';
             toast.billing.init(billingInfoDummy, function () {
@@ -686,7 +685,7 @@ describe('toast.billing', function() {
                 toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
                     var invoiceDetails = data.InvoiceDetails;
                     verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
-                    
+
                     toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
@@ -796,7 +795,7 @@ describe('toast.billing', function() {
                 toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
                     var invoiceDetails = data.InvoiceDetails;
                     applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
-                    
+
                     toast.billing.applyProduct(applyProductDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
@@ -940,7 +939,6 @@ describe('toast.billing', function() {
 
         it('verify the return data is ok (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
-//            tempProductInfoDummy.productId = 'DP111000002597';
             tempProductInfoDummy.productId = 'DP111000002757';
             toast.billing.init(billingInfoDummy, function () {
                 toast.billing.checkPurchaseStatus(tempProductInfoDummy, function(data) {
@@ -1100,7 +1098,7 @@ describe('toast.billing', function() {
                 done.fail();
             });
         }, 10000);
-        
+
         it('verify working well in case of passing invoiceId property value', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'DP111000002757';
@@ -1121,7 +1119,7 @@ describe('toast.billing', function() {
                 done.fail();
             });
         }, interval);
-        
+
         it('verify working well in case of not passing invoiceId property value', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'DP111000002757';
@@ -1270,7 +1268,6 @@ describe('toast.billing', function() {
 
         it('execute init/buyProduct/checkPurchaseStatus/cancelSubscription for subscription item', function(done) {
             var tempProductInfoDummy = productInfoDummy;
-//            tempProductInfoDummy.productId = 'DP111000002597';
             tempProductInfoDummy.productId = 'DP111000002757';
 
             toast.billing.init(billingInfoDummy, function () {
