@@ -218,13 +218,19 @@ describe('toast.billing', function() {
             });
         }, interval);
 
-        it('verify error callback which has Error object is invoked', function(done) {
+        it('verify the error callback invoked when passing wrong value of property', function(done) {
             var tempBillingInfoDummy = billingInfoDummy;
             tempBillingInfoDummy.key.checkoutKey = 'ErrorKey';
             tempBillingInfoDummy.key.paymentwallKey = 'ErrorKey';
 
             toast.billing.init(tempBillingInfoDummy, function() {
-                done.fail();
+                toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+                    done.fail();
+                }, function(e) {
+                    expect(typeof e).toBe('object');
+                    expect(e).not.toBeUndefined();
+                    done();
+                });
             }, function(e) {
                 expect(typeof e).toBe('object');
                 expect(e).not.toBeUndefined();
@@ -593,7 +599,7 @@ describe('toast.billing', function() {
 
         it('verify error callback which has Error object is invoked', function(done) {
             var tempRequestProductInfoDummy = requestProductInfoDummy;
-            tempRequestProductInfoDummy.pageSize = 'ErrorPageSize';
+            tempRequestProductInfoDummy.pageSize = -1;
 
             toast.billing.requestProductsList(tempRequestProductInfoDummy, function() {
                 done.fail();
@@ -1072,7 +1078,18 @@ describe('toast.billing', function() {
                     expect(typeof data).toBe('object');
                     done();
                 }, function(e) {
-                    done.fail();
+                    expect(typeof e).toBe('object');
+                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 1001, message : Not found product
+                        done();
+                    }
+                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 1002, message : Requested InvoicedID is canceled already
+                        done();
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 done.fail();
@@ -1090,7 +1107,17 @@ describe('toast.billing', function() {
                     done();
                 }, function(e) {
                     expect(typeof e).toBe('object');
-                    done.fail();
+                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 1001, message : Not found product
+                        done();
+                    }
+                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 1002, message : Requested InvoicedID is canceled already
+                        done();
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 expect(typeof e).toBe('object');
@@ -1106,12 +1133,22 @@ describe('toast.billing', function() {
                 tempProductInfoDummy.invoiceId = data[0].invoiceId;
 
                 toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
+                    expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
                     done();
                 }, function(e) {
                     expect(typeof e).toBe('object');
-                    expect(e).not.toBeUndefined();
-                    done.fail();
+                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 1001, message : Not found product
+                        done();
+                    }
+                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 1002, message : Requested InvoicedID is canceled already
+                        done();
+                    }
+                    else {
+                        done.fail();
+                    }
                 });
             }, function(e) {
                 expect(typeof e).toBe('object');
@@ -1124,12 +1161,22 @@ describe('toast.billing', function() {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'DP111000002757';
             toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
+                expect(data).not.toBeUndefined();
                 expect(typeof data).toBe('object');
                 done();
             }, function(e) {
                 expect(typeof e).toBe('object');
-                expect(e).not.toBeUndefined();
-                done.fail();
+                if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                    // code : 1001, message : Not found product
+                    done();
+                }
+                else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                    // code : 1002, message : Requested InvoicedID is canceled already
+                    done();
+                }
+                else {
+                    done.fail();
+                }
             });
         }, interval);
 
@@ -1286,7 +1333,18 @@ describe('toast.billing', function() {
                                     expect(typeof data).toBe('object');
                                     done();
                                 }, function(e) {
-                                    done.fail();
+                                    expect(typeof e).toBe('object');
+                                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                                        // code : 1001, message : Not found product
+                                        done();
+                                    }
+                                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                                        // code : 1002, message : Requested InvoicedID is canceled already
+                                        done();
+                                    }
+                                    else {
+                                        done.fail();
+                                    }
                                 });
                             },5000);
                         }, function(e) {
