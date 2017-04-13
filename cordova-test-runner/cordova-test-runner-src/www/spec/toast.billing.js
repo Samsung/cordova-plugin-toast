@@ -26,7 +26,7 @@ describe('toast.billing', function() {
     beforeEach(function() {
         billingInfoDummy = {
             key: {
-                paymentwallKey: 'dc50d495932a7009b3f193916aab5005', //t_0f6a922e0d3af023124ae0dc2374b6
+                paymentwallKey: 't_36ee924e678a7a985ba50088afb3fd', //t_0f6a922e0d3af023124ae0dc2374b6
                 checkoutKey: 'rCvi9+aOAYxlzBZgTlGe/ajDHWo6GF4W+JiHWn8Uuzc=' //'o8KzSGh22UN6CZzQ6qQTiGJiWqgXFwVeNmhr0uzo7jo=',yours
             },
             countryCode: 'US',
@@ -1076,20 +1076,10 @@ describe('toast.billing', function() {
                 toast.billing.cancelSubscription(productInfoDummy, function(data) {
                     expect(data).not.toBeUndefined();
                     expect(typeof data).toBe('object');
-                    done();
+                    done.fail();
                 }, function(e) {
                     expect(typeof e).toBe('object');
-                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                        // code : 1001, message : Not found product
-                        done();
-                    }
-                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                        // code : 1002, message : Requested InvoicedID is canceled already
-                        done();
-                    }
-                    else {
-                        done.fail();
-                    }
+                    done();
                 });
             }, function(e) {
                 done.fail();
