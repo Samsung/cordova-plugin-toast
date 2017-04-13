@@ -78,14 +78,14 @@
         }, function(err) {
             report('Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription');
+    }, 'non-subscription', 'INVISIBLE');
     testsuite('toast.billing', 'requestProductsList()', function(report) {
         toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription');
+    }, 'non-subscription', 'INVISIBLE');
     testsuite('toast.billing', 'verifyPurchase()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
             var invoiceDetails = data.InvoiceDetails;
@@ -98,7 +98,7 @@
         }, function(err) {
             console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription');
+    }, 'non-subscription', 'INVISIBLE');
     testsuite('toast.billing', 'applyProduct()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
             var invoiceDetails = data.InvoiceDetails;
@@ -111,7 +111,7 @@
         }, function(err) {
             console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription');
+    }, 'non-subscription', 'INVISIBLE');
     testsuite('toast.billing', 'buyProduct()', function(report) {
         var productInfoDummy = nonSubscriptionInfoDummy;
         toast.billing.buyProduct(productInfoDummy, function() {

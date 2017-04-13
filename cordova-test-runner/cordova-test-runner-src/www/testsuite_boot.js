@@ -1,12 +1,17 @@
 /* jshint loopfunc: true */
 (function() {
     var tests = {};
-    window.testsuite = function(category, feature, testfn, description) {
+    window.testsuite = function(category, feature, testfn, description, visibility) {
         tests[category] = tests[category] || [];
+        
+        if(description == null || description == undefined) { description = ''; }
+        if(visibility == null || visibility == undefined) { visibility = 'VISIBLE'; }
+        
         tests[category].push({
             feature: feature,
             testfn: testfn,
-            description: description
+            description: description,
+            visibility: visibility
         });
     };
     var TEST_TIMEOUT = 20000;
@@ -36,11 +41,11 @@
     function renderTests() {
         var count = 0;
         document.body.appendChild(createElem('h1', {}, 'Cordova TOAST TestSuite'));
-//        document.body.appendChild(createElem('div', {id: 'billing_form'}));
         var container = createElem('div', {className: 'container-fluid'});
         document.body.appendChild(container);
         for (var category in tests) {
             for (var i = 0; i < tests[category].length; i++) {
+                if(tests[category][i].visibility === 'INVISIBLE') continue;
                 var testerId = count++;
                 var fields = [];
                 fields.push(createElem('div', {className: 'col-lg-1'}, category));
