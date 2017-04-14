@@ -532,8 +532,6 @@ describe('toast.billing', function() {
     
         // toast.billing.requestProductsList
         describe('toast.billing.requestProductsList', function() {
-            var interval = 5000;
-    
             it('throws TypeError when given arguments is not matched to spec.', function() {
                 // no argument
                 expect(function() {
