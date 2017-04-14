@@ -3,19 +3,30 @@
     var tests = {};
     window.testsuite = function(category, feature, testfn, description, visibility) {
         tests[category] = tests[category] || [];
+        var currentPlatform = detectPlatform();
         
         if(description == null || description == undefined) { description = ''; }
-        if(visibility == null || visibility == undefined) { visibility = 'VISIBLE'; }
+        if(visibility == null || visibility == undefined) {
+            visibility = {};
+            visibility[currentPlatform] = 'VISIBLE';
+        }
         
         tests[category].push({
             feature: feature,
             testfn: testfn,
             description: description,
-            visibility: visibility
+            visibility: visibility[currentPlatform]
         });
     };
     var TEST_TIMEOUT = 20000;
 
+    function detectPlatform() {
+        var platform = 'sectv-tizen';
+        if(navigator.userAgent.match('Web0S')) { platform = 'tv-webos' }
+        
+        return platform;
+    }
+    
     function createElem(tagName, attributes, children) {
         var elem = document.createElement(tagName);
         for(var attr in attributes) {
@@ -95,7 +106,7 @@
             }
         });
     }
-
+    
     var type = localStorage.getItem('CORDOVA_TOAST_TESTRUNNER_TYPE');
     if (type !== 'TESTSUITE') {
         return;

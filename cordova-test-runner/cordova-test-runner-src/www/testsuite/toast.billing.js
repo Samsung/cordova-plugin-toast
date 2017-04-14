@@ -78,14 +78,14 @@
         }, function(err) {
             report('Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription', 'INVISIBLE');
+    }, 'non-subscription', {'tv-webos' : 'INVISIBLE'});
     testsuite('toast.billing', 'requestProductsList()', function(report) {
         toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
         }, function(err) {
             report('Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription', 'INVISIBLE');
+    }, 'non-subscription', {'tv-webos' : 'INVISIBLE'});
     testsuite('toast.billing', 'verifyPurchase()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
             var invoiceDetails = data.InvoiceDetails;
@@ -98,7 +98,7 @@
         }, function(err) {
             console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription', 'INVISIBLE');
+    }, 'non-subscription', {'tv-webos' : 'INVISIBLE'});
     testsuite('toast.billing', 'applyProduct()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
             var invoiceDetails = data.InvoiceDetails;
@@ -106,12 +106,18 @@
             toast.billing.applyProduct(applyProductDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
-                report('Error : ' + JSON.stringify(err));
+                if(err.code === 400303 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                    // code : 400303, message : Purchase for the requested InvoiceID was already applied
+                    report('Success : ' + JSON.stringify(err));
+                }
+                else {
+                    report('Error : ' + JSON.stringify(err));
+                }
             });
         }, function(err) {
             console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
-    }, 'non-subscription', 'INVISIBLE');
+    }, 'non-subscription', {'tv-webos' : 'INVISIBLE'});
     testsuite('toast.billing', 'buyProduct()', function(report) {
         var productInfoDummy = nonSubscriptionInfoDummy;
         toast.billing.buyProduct(productInfoDummy, function() {
@@ -187,5 +193,5 @@
         }, function(err) {
             console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
-    }, 'subscription (have an invoiceId)');
+    }, 'subscription(invoiceId)');
 })();
