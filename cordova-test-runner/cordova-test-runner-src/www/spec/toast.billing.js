@@ -189,30 +189,22 @@ describe('toast.billing', function() {
         it('throws Error when mandatory value of 1st argument is missing.', function() {
             expect(function(done) {
                 var tempBillingInfoDummy = billingInfoDummy;
-                tempBillingInfoDummy.key.checkoutKey = '';
-                tempBillingInfoDummy.key.paymentwallKey = '';
-
-                toast.billing.init(tempBillingInfoDummy, function() {
-                    done.fail();
-                }, function(e) {
-                    expect(typeof e).toBe('object');
-                    expect(e).not.toBeUndefined();
-                    done();
-                });
-            });
-
-            expect(function(done) {
-                var tempBillingInfoDummy = billingInfoDummy;
                 tempBillingInfoDummy.appId = '';
 
                 toast.billing.init(tempBillingInfoDummy, function() {
-                    done.fail();
+                    toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
+                        done.fail();
+                    }, function(e) {
+                        expect(typeof e).toBe('object');
+                        expect(e).not.toBeUndefined();
+                        done();
+                    });
                 }, function(e) {
                     expect(typeof e).toBe('object');
                     expect(e).not.toBeUndefined();
                     done();
                 });
-            });
+            }).toThrowError(TypeError);
         });
 
         it('verify the value of success callback is empty', function(done) {
