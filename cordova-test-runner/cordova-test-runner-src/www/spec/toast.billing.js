@@ -82,7 +82,7 @@ describe('toast.billing', function() {
         expect(window.toast.billing.init).toBeDefined();
         expect(typeof window.toast.billing.init).toBe('function');
     });
-    
+
     if('PLATFORM' in localStorage && localStorage.getItem('PLATFORM') !== 'tv-webos') {
         it('should contain a "requestPurchasesList" function.', function() {
             expect(window.toast.billing.requestPurchasesList).toBeDefined();
@@ -101,7 +101,7 @@ describe('toast.billing', function() {
             expect(typeof window.toast.billing.applyProduct).toBe('function');
         });
     }
-    
+
     it('should contain a "checkPurchaseStatus" function.', function() {
         expect(window.toast.billing.checkPurchaseStatus).toBeDefined();
         expect(typeof window.toast.billing.checkPurchaseStatus).toBe('function');
@@ -118,7 +118,7 @@ describe('toast.billing', function() {
         if('PLATFORM' in localStorage && localStorage.getItem('PLATFORM') === 'tv-webos') {
             specList = ['init', 'buyProduct', 'checkPurchaseStatus', 'cancelSubscription'];
         }
-        
+
         for (var prop in toast.billing) {
             expect(specList.indexOf(prop) >= 0).toBeTruthy();
         }
@@ -415,18 +415,18 @@ describe('toast.billing', function() {
             });
         }, interval);
     });
-    
+
     if('PLATFORM' in localStorage && localStorage.getItem('PLATFORM') !== 'tv-webos') {
         // toast.billing.requestPurchasesList
         describe('toast.billing.requestPurchasesList', function() {
             var interval = 5000;
-    
+
             it('throws TypeError when given arguments is not matched to spec.', function() {
                 // no argument
                 expect(function() {
                     toast.billing.requestPurchasesList();
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 1st argument
                 expect(function() {
                     toast.billing.requestPurchasesList([]);
@@ -443,7 +443,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.requestPurchasesList(function () {});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 2nd argument
                 expect(function() {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, []);
@@ -460,7 +460,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy,{});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 3rd argument
                 expect(function() {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function() {}, []);
@@ -478,12 +478,12 @@ describe('toast.billing', function() {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function() {}, {});
                 }).toThrowError(TypeError);
             });
-    
+
             it('throws Error when mandatory value of 1st argument is missing.', function() {
                 expect(function(done) {
                     var tempRequestPurchaseInfoDummy = requestPurchaseInfoDummy;
                     tempRequestPurchaseInfoDummy.itemType = '';
-    
+
                     toast.billing.requestPurchasesList(tempRequestPurchaseInfoDummy, function() {
                         done.fail();
                     }, function() {
@@ -493,7 +493,7 @@ describe('toast.billing', function() {
                 expect(function(done) {
                     var tempRequestPurchaseInfoDummy = requestPurchaseInfoDummy;
                     tempRequestPurchaseInfoDummy.pageNumber = '';
-    
+
                     toast.billing.requestPurchasesList(tempRequestPurchaseInfoDummy, function() {
                         done.fail();
                     }, function() {
@@ -501,7 +501,7 @@ describe('toast.billing', function() {
                     });
                 }).toThrowError(TypeError);
             });
-    
+
             it('verify the return data is ok', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
@@ -515,11 +515,11 @@ describe('toast.billing', function() {
                     done.fail();
                 });
             }, 10000);
-    
+
             it('verify error callback which has Error object is invoked', function(done) {
                 var tempRequestPurchaseInfoDummy = requestPurchaseInfoDummy;
                 tempRequestPurchaseInfoDummy.itemType = 'ErrorItemType';
-    
+
                 toast.billing.requestPurchasesList(tempRequestPurchaseInfoDummy, function() {
                     done.fail();
                 }, function(e) {
@@ -529,7 +529,7 @@ describe('toast.billing', function() {
                 });
             }, interval);
         });
-    
+
         // toast.billing.requestProductsList
         describe('toast.billing.requestProductsList', function() {
             it('throws TypeError when given arguments is not matched to spec.', function() {
@@ -537,7 +537,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.requestProductsList();
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 1st argument
                 expect(function() {
                     toast.billing.requestProductsList([]);
@@ -554,7 +554,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.requestProductsList(function () {});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 2nd argument
                 expect(function() {
                     toast.billing.requestProductsList(requestProductInfoDummy, []);
@@ -571,7 +571,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.requestProductsList(requestProductInfoDummy,{});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 3rd argument
                 expect(function() {
                     toast.billing.requestProductsList(requestProductInfoDummy, function() {}, []);
@@ -589,7 +589,7 @@ describe('toast.billing', function() {
                     toast.billing.requestProductsList(requestProductInfoDummy, function() {}, {});
                 }).toThrowError(TypeError);
             });
-    
+
             it('verify the return data is ok', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
@@ -603,27 +603,27 @@ describe('toast.billing', function() {
                     done.fail();
                 });
             }, 10000);
-    
+
             it('verify throw exception when type of property value is invalid', function() {
                 var tempRequestProductInfoDummy = requestProductInfoDummy;
                 tempRequestProductInfoDummy.pageSize = -1;
-    
+
                 expect(function() {
                     toast.billing.requestProductsList(tempRequestProductInfoDummy, function() {}, function(e) {});
                 }).toThrowError(TypeError);
             });
         });
-    
+
         // toast.billing.verifyPurchase
         describe('toast.billing.verifyPurchase', function() {
             var interval = 5000;
-    
+
             it('throws TypeError when given arguments is not matched to spec.', function() {
                 // no argument
                 expect(function() {
                     toast.billing.verifyPurchase();
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 1st argument
                 expect(function() {
                     toast.billing.verifyPurchase([]);
@@ -640,7 +640,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.verifyPurchase(function () {});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 2nd argument
                 expect(function() {
                     toast.billing.verifyPurchase(verifyPurchaseDummy, []);
@@ -657,7 +657,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.verifyPurchase(verifyPurchaseDummy,{});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 3rd argument
                 expect(function() {
                     toast.billing.verifyPurchase(verifyPurchaseDummy, function() {}, []);
@@ -675,12 +675,12 @@ describe('toast.billing', function() {
                     toast.billing.verifyPurchase(verifyPurchaseDummy, function() {}, {});
                 }).toThrowError(TypeError);
             });
-    
+
             it('throws Error when mandatory value of 1st argument is missing.', function() {
                 expect(function(done) {
                     var tempVerifyPurchaseDummy = verifyPurchaseDummy;
                     tempVerifyPurchaseDummy.invoiceId = '';
-    
+
                     toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function() {
                         done.fail();
                     }, function() {
@@ -688,13 +688,13 @@ describe('toast.billing', function() {
                     });
                 }).toThrowError(TypeError);
             });
-    
+
             it('verify the return data is ok', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
                         var invoiceDetails = data.InvoiceDetails;
                         verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
-    
+
                         toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
                             expect(data).not.toBeUndefined();
                             expect(typeof data).toBe('object');
@@ -709,11 +709,11 @@ describe('toast.billing', function() {
                     done.fail();
                 });
             }, 10000);
-    
+
             it('verify error callback which has Error object is invoked', function(done) {
                 var tempVerifyPurchaseDummy = verifyPurchaseDummy;
                 tempVerifyPurchaseDummy.invoiceId = 'ErrorInvoiceId';
-    
+
                 toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function() {
                     done.fail();
                 }, function(e) {
@@ -723,17 +723,17 @@ describe('toast.billing', function() {
                 });
             }, interval);
         });
-    
+
         // toast.billing.applyProduct
         describe('toast.billing.applyProduct', function() {
             var interval = 5000;
-    
+
             it('throws TypeError when given arguments is not matched to spec.', function() {
                 // no argument
                 expect(function() {
                     toast.billing.applyProduct();
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 1st argument
                 expect(function() {
                     toast.billing.applyProduct([]);
@@ -750,7 +750,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.applyProduct(function () {});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 2nd argument
                 expect(function() {
                     toast.billing.applyProduct(applyProductDummy, []);
@@ -767,7 +767,7 @@ describe('toast.billing', function() {
                 expect(function() {
                     toast.billing.applyProduct(applyProductDummy,{});
                 }).toThrowError(TypeError);
-    
+
                 // invalid type for 3rd argument
                 expect(function() {
                     toast.billing.applyProduct(applyProductDummy, function() {}, []);
@@ -785,12 +785,12 @@ describe('toast.billing', function() {
                     toast.billing.applyProduct(applyProductDummy, function() {}, {});
                 }).toThrowError(TypeError);
             });
-    
+
             it('throws Error when mandatory value of 1st argument is missing.', function() {
                 expect(function(done) {
                     var tempApplyProductDummy = applyProductDummy;
                     tempApplyProductDummy.invoiceId = '';
-    
+
                     toast.billing.applyProduct(tempApplyProductDummy, function() {
                         done.fail();
                     }, function() {
@@ -798,13 +798,13 @@ describe('toast.billing', function() {
                     });
                 }).toThrowError(TypeError);
             });
-    
+
             it('verify the return data is ok', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
                         var invoiceDetails = data.InvoiceDetails;
                         applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
-    
+
                         toast.billing.applyProduct(applyProductDummy, function(data) {
                             expect(data).not.toBeUndefined();
                             expect(typeof data).toBe('object');
@@ -819,11 +819,11 @@ describe('toast.billing', function() {
                     done.fail();
                 });
             }, 10000);
-    
+
             it('verify error callback which has Error object is invoked', function(done) {
                 var tempApplyProductDummy = applyProductDummy;
                 tempApplyProductDummy.invoiceId = 'ErrorInvoiceId';
-    
+
                 toast.billing.applyProduct(tempApplyProductDummy, function() {
                     done.fail();
                 }, function(e) {
@@ -834,7 +834,7 @@ describe('toast.billing', function() {
             }, interval);
         });
     }
-    
+
     // toast.billing.checkPurchaseStatus
     describe('toast.billing.checkPurchaseStatus', function() {
         var interval = 5000;
@@ -1191,7 +1191,7 @@ describe('toast.billing', function() {
     if('PLATFORM' in localStorage && localStorage.getItem('PLATFORM') !== 'tv-webos') {
         describe('init/requestPurchasesList/requestProductsList combination', function() {
             var interval = 60000;
-    
+
             it('execute init/requestPurchasesList', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
@@ -1205,7 +1205,7 @@ describe('toast.billing', function() {
                     done.fail();
                 });
             }, interval);
-    
+
             it('execute init/requestProductsList', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestProductsList(requestProductInfoDummy, function(data) {
@@ -1220,19 +1220,19 @@ describe('toast.billing', function() {
                 });
             }, interval);
         });
-    
+
         describe('init/checkPurchaseStatus/verifyPurchase/applyProduct combination', function() {
             var interval = 60000;
-    
+
             it('execute init/checkPurchaseStatus/verifyPurchase', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
-    
+
                         var tempVerifyPurchaseDummy = verifyPurchaseDummy;
                         tempVerifyPurchaseDummy.invoiceId = data[0].invoiceId;
-    
+
                         toast.billing.verifyPurchase(tempVerifyPurchaseDummy, function(data) {
                             expect(data).not.toBeUndefined();
                             expect(typeof data).toBe('object');
@@ -1247,16 +1247,16 @@ describe('toast.billing', function() {
                     done.fail();
                 });
             }, interval);
-    
+
             it('execute init/checkPurchaseStatus/applyProduct', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.checkPurchaseStatus(productInfoDummy, function(data) {
                         expect(data).not.toBeUndefined();
                         expect(typeof data).toBe('object');
-    
+
                         var tempApplyProductDummy = applyProductDummy;
                         tempApplyProductDummy.invoiceId = data[0].invoiceId;
-    
+
                         toast.billing.applyProduct(tempApplyProductDummy, function(data) {
                             expect(data).not.toBeUndefined();
                             expect(typeof data).toBe('object');
