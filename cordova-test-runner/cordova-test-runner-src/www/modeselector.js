@@ -77,7 +77,6 @@
         }
         
         var platform = cordova.require('cordova/platform').id;
-        if(navigator.userAgent.match('Chrome')) { platform = 'chrome' }
         
         if(platform !== null && platform !== undefined && typeof platform === 'string') {
             localStorage.setItem('PLATFORM', platform);

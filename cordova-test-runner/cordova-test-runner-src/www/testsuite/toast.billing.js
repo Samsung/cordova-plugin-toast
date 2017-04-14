@@ -157,12 +157,12 @@
         toast.billing.cancelSubscription(productInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
         }, function(err) {
-            if(err.code === 1001 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
-                // code : 1001, message : Not found product
+            if(err.code === 100001 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                // code : 100001, message : Not found product
                 report('Success : ' + JSON.stringify(err));
             }
-            else if (err.code === 1002 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
-                // code : 1002, message : Requested InvoicedID is canceled already
+            else if (err.code === 410410 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                // code : 410410, message : Requested InvoicedID is canceled already
                 report('Success : ' + JSON.stringify(err));
             }
             else {
@@ -178,12 +178,12 @@
             toast.billing.cancelSubscription(productInfoDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
-                if(err.code === 1001 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
-                    // code : 1001, message : Not found product
+                if(err.code === 100001 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                    // code : 100001, message : Not found product
                     report('Success : ' + JSON.stringify(err));
                 }
-                else if (err.code === 1002 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
-                    // code : 1002, message : Requested InvoicedID is canceled already
+                else if (err.code === 410410 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                    // code : 410410, message : Requested InvoicedID is canceled already
                     report('Success : ' + JSON.stringify(err));
                 }
                 else {

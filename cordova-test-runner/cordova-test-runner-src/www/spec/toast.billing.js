@@ -356,7 +356,7 @@ describe('toast.billing', function() {
                 }, function(e) {
                     expect(typeof e).toBe('object');
                     console.log('verify "buyProduct" screen was shown (non-subscription) : e : ' + e.code);
-                    if(e.code === 1000) {
+                    if(e.code === 100002) {
                         helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
                             expect(answer).not.toBe('TIMEOUT');
@@ -386,7 +386,7 @@ describe('toast.billing', function() {
                 }, function(e) {
                     expect(typeof e).toBe('object');
                     console.log('verify "buyProduct" screen was shown (subscription) : e : ' + e.code);
-                    if(e.code === 1000) {
+                    if(e.code === 100002) {
                         helper.aOrB('(subscription) Did you see "buyProduct" screen? Canceled buying process well.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
                             expect(answer).not.toBe('TIMEOUT');
@@ -610,7 +610,7 @@ describe('toast.billing', function() {
 
                 expect(function() {
                     toast.billing.requestProductsList(tempRequestProductInfoDummy, function() {}, function(e) {});
-                }).toThrowError(TypeError);
+                }).toThrowError(RangeError);
             });
         });
 
@@ -810,7 +810,13 @@ describe('toast.billing', function() {
                             expect(typeof data).toBe('object');
                             done();
                         }, function(e) {
-                            done.fail();
+                            if(e.code === 400303 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                                // code : 400303, message : Purchase for the requested InvoiceID was already applied
+                                done();
+                            }
+                            else {
+                                done.fail();
+                            }
                         });
                     }, function(e) {
                         done.fail();
@@ -1101,12 +1107,12 @@ describe('toast.billing', function() {
                     done();
                 }, function(e) {
                     expect(typeof e).toBe('object');
-                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                        // code : 1001, message : Not found product
+                    if(e.code === 100001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 100001, message : Not found product
                         done();
                     }
-                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                        // code : 1002, message : Requested InvoicedID is canceled already
+                    else if (e.code === 410410 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 410410, message : Requested InvoicedID is canceled already
                         done();
                     }
                     else {
@@ -1132,12 +1138,12 @@ describe('toast.billing', function() {
                     done();
                 }, function(e) {
                     expect(typeof e).toBe('object');
-                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                        // code : 1001, message : Not found product
+                    if(e.code === 100001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 100001, message : Not found product
                         done();
                     }
-                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                        // code : 1002, message : Requested InvoicedID is canceled already
+                    else if (e.code === 410410 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                        // code : 410410, message : Requested InvoicedID is canceled already
                         done();
                     }
                     else {
@@ -1160,12 +1166,12 @@ describe('toast.billing', function() {
                 done();
             }, function(e) {
                 expect(typeof e).toBe('object');
-                if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                    // code : 1001, message : Not found product
+                if(e.code === 100001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                    // code : 100001, message : Not found product
                     done();
                 }
-                else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                    // code : 1002, message : Requested InvoicedID is canceled already
+                else if (e.code === 410410 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                    // code : 410410, message : Requested InvoicedID is canceled already
                     done();
                 }
                 else {
@@ -1262,7 +1268,13 @@ describe('toast.billing', function() {
                             expect(typeof data).toBe('object');
                             done();
                         }, function(e) {
-                            done.fail();
+                            if(e.code === 400303 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                                // code : 400303, message : Purchase for the requested InvoiceID was already applied
+                                done();
+                            }
+                            else {
+                                done.fail();
+                            }
                         });
                     }, function(e) {
                         done.fail();
@@ -1293,7 +1305,7 @@ describe('toast.billing', function() {
                         });
                     });
                 }, function(e) {
-                    if(e.code === 1000) {
+                    if(e.code === 100002) {
                         helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
                             expect(answer).not.toBe('TIMEOUT');
@@ -1330,12 +1342,12 @@ describe('toast.billing', function() {
                                     done();
                                 }, function(e) {
                                     expect(typeof e).toBe('object');
-                                    if(e.code === 1001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                                        // code : 1001, message : Not found product
+                                    if(e.code === 100001 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                                        // code : 100001, message : Not found product
                                         done();
                                     }
-                                    else if (e.code === 1002 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
-                                        // code : 1002, message : Requested InvoicedID is canceled already
+                                    else if (e.code === 410410 && typeof e.code === 'number' && e.code !== undefined && e.code !== null) {
+                                        // code : 410410, message : Requested InvoicedID is canceled already
                                         done();
                                     }
                                     else {
@@ -1348,7 +1360,7 @@ describe('toast.billing', function() {
                         });
                     });
                 }, function(e) {
-                    if(e.code === 1000) {
+                    if(e.code === 100002) {
                         helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
                             expect(answer).not.toBe('TIMEOUT');
