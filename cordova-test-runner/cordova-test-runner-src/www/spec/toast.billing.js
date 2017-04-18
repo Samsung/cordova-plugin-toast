@@ -241,7 +241,7 @@ describe('toast.billing', function() {
 
     // toast.billing.buyProduct
     describe('toast.billing.buyProduct', function() {
-        var interval = 5000;
+        var interval = 60000;
 
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
@@ -362,7 +362,7 @@ describe('toast.billing', function() {
             }, function(e) {
                 done.fail();
             });
-        }, 60000);
+        }, interval);
 
         it('verify "buyProduct" screen was shown (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
@@ -392,18 +392,21 @@ describe('toast.billing', function() {
             }, function(e) {
                 done.fail();
             });
-        }, 60000);
+        }, interval);
 
-        it('verify error callback which has Error object is invoked', function(done) {
+        it('verify to invoke error callback when passing invalid parameter value', function(done) {
             var tempProductInfoDummy = productInfoDummy;
             tempProductInfoDummy.productId = 'ErrorProductId';
 
-            toast.billing.buyProduct(tempProductInfoDummy, function() {
-                done.fail();
+            toast.billing.init(billingInfoDummy, function () {
+                toast.billing.buyProduct(tempProductInfoDummy, function() {
+                    done.fail();
+                }, function(e) {
+                    expect(typeof e).toBe('object');
+                    done();
+                });
             }, function(e) {
-                expect(typeof e).toBe('object');
-                expect(e).not.toBeUndefined();
-                done();
+                done.fail();
             });
         }, interval);
     });
