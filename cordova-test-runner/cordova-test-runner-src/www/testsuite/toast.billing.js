@@ -106,7 +106,7 @@
             toast.billing.applyProduct(applyProductDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
-                if(err.code === 400303 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 400303) {
                     // code : 400303, message : Purchase for the requested InvoiceID was already applied
                     report('Success : ' + JSON.stringify(err));
                 }
@@ -141,7 +141,13 @@
         toast.billing.buyProduct(productInfoDummy, function() {
             report('Success');
         }, function(err) {
-            report('Error : ' + JSON.stringify(err));
+        	if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100002) {
+                // code : 100002, message : User cancelled payment process
+                report('Success : ' + JSON.stringify(err));
+            }
+        	else {
+        		report('Error : ' + JSON.stringify(err));
+        	}
         });
     }, 'subscription');
     testsuite('toast.billing', 'checkPurchaseStatus()', function(report) {
@@ -157,11 +163,11 @@
         toast.billing.cancelSubscription(productInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
         }, function(err) {
-            if(err.code === 100001 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+        	if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100001) {
                 // code : 100001, message : Not found product
                 report('Success : ' + JSON.stringify(err));
             }
-            else if (err.code === 410410 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+            else if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 410410) {
                 // code : 410410, message : Requested InvoicedID is canceled already
                 report('Success : ' + JSON.stringify(err));
             }
@@ -178,11 +184,11 @@
             toast.billing.cancelSubscription(productInfoDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
-                if(err.code === 100001 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+            	if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100001) {
                     // code : 100001, message : Not found product
                     report('Success : ' + JSON.stringify(err));
                 }
-                else if (err.code === 410410 && typeof err.code === 'number' && err.code !== undefined && err.code !== null) {
+                else if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 410410) {
                     // code : 410410, message : Requested InvoicedID is canceled already
                     report('Success : ' + JSON.stringify(err));
                 }
