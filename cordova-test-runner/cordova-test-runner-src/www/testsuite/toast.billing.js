@@ -199,5 +199,5 @@
         }, function(err) {
             console.log('requestPurchasesList Error : ' + JSON.stringify(err));
         });
-    }, 'subscription(invoiceId)');
+    }, 'subscription(invoiceId)', {'tv-webos': 'INVISIBLE'});
 })();
