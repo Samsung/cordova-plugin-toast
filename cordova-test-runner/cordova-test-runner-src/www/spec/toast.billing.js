@@ -22,7 +22,7 @@ describe('toast.billing', function() {
     var requestProductInfoDummy = {};
     var verifyPurchaseDummy = {};
     var applyProductDummy = {};
-    
+
     beforeEach(function() {
         billingInfoDummy = {
             key: {
@@ -346,10 +346,10 @@ describe('toast.billing', function() {
                         done();
                     });
                 }, function(e) {
-                	expect(e).not.toBe(null);
-                	expect(e).not.toBeUndefined();
-                	expect(typeof e).toBe('object');
-                	expect(typeof e.code).toBe('number');
+                    expect(e).not.toBe(null);
+                    expect(e).not.toBeUndefined();
+                    expect(typeof e).toBe('object');
+                    expect(typeof e.code).toBe('number');
                     if(e.code === 100002) {
                         helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
@@ -378,10 +378,10 @@ describe('toast.billing', function() {
                         done();
                     });
                 }, function(e) {
-                	expect(e).not.toBe(null);
-                	expect(e).not.toBeUndefined();
-                	expect(typeof e).toBe('object');
-                	expect(typeof e.code).toBe('number');
+                    expect(e).not.toBe(null);
+                    expect(e).not.toBeUndefined();
+                    expect(typeof e).toBe('object');
+                    expect(typeof e.code).toBe('number');
                     if(e.code === 100002) {
                         helper.aOrB('(subscription) Did you see "buyProduct" screen? Canceled buying process well.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
@@ -809,10 +809,10 @@ describe('toast.billing', function() {
                             expect(typeof data).toBe('object');
                             done();
                         }, function(e) {
-                        	expect(e).not.toBe(null);
-                        	expect(e).not.toBeUndefined();
-                        	expect(typeof e).toBe('object');
-                        	expect(typeof e.code).toBe('number');
+                            expect(e).not.toBe(null);
+                            expect(e).not.toBeUndefined();
+                            expect(typeof e).toBe('object');
+                            expect(typeof e.code).toBe('number');
                             if(e.code === 400303) {
                                 // code : 400303, message : Purchase for the requested InvoiceID was already applied
                                 done();
@@ -1110,10 +1110,10 @@ describe('toast.billing', function() {
                     expect(typeof data).toBe('object');
                     done();
                 }, function(e) {
-                	expect(e).not.toBe(null);
-                	expect(e).not.toBeUndefined();
-                	expect(typeof e).toBe('object');
-                	expect(typeof e.code).toBe('number');
+                    expect(e).not.toBe(null);
+                    expect(e).not.toBeUndefined();
+                    expect(typeof e).toBe('object');
+                    expect(typeof e.code).toBe('number');
                     if(e.code === 100001) {
                         // code : 100001, message : Not found product
                         done();
@@ -1132,41 +1132,41 @@ describe('toast.billing', function() {
                 done.fail();
             });
         }, 10000);
-        
+
         if('PLATFORM' in localStorage && localStorage.getItem('PLATFORM') !== 'tv-webos') {
-	        it('verify working well in case of passing invoiceId property value', function(done) {
-	            var tempProductInfoDummy = productInfoDummy;
-	            tempProductInfoDummy.productId = 'DP111000002757';
-	            toast.billing.checkPurchaseStatus(tempProductInfoDummy, function(data) {
-	                tempProductInfoDummy.invoiceId = data[0].invoiceId;
-	
-	                toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
-	                    expect(data).not.toBeUndefined();
-	                    expect(typeof data).toBe('object');
-	                    done();
-	                }, function(e) {
-	                    expect(e).not.toBe(null);
-	                	expect(e).not.toBeUndefined();
-	                	expect(typeof e).toBe('object');
-	                	expect(typeof e.code).toBe('number');
-	                    if(e.code === 100001) {
-	                        // code : 100001, message : Not found product
-	                        done();
-	                    }
-	                    else if (e.code === 410410) {
-	                        // code : 410410, message : Requested InvoicedID is canceled already
-	                        done();
-	                    }
-	                    else {
-	                        done.fail();
-	                    }
-	                });
-	            }, function(e) {
-	                expect(typeof e).toBe('object');
-	                expect(e).not.toBeUndefined();
-	                done.fail();
-	            });
-	        }, interval);
+            it('verify working well in case of passing invoiceId property value', function(done) {
+                var tempProductInfoDummy = productInfoDummy;
+                tempProductInfoDummy.productId = 'DP111000002757';
+                toast.billing.checkPurchaseStatus(tempProductInfoDummy, function(data) {
+                    tempProductInfoDummy.invoiceId = data[0].invoiceId;
+
+                    toast.billing.cancelSubscription(tempProductInfoDummy, function(data) {
+                        expect(data).not.toBeUndefined();
+                        expect(typeof data).toBe('object');
+                        done();
+                    }, function(e) {
+                        expect(e).not.toBe(null);
+                        expect(e).not.toBeUndefined();
+                        expect(typeof e).toBe('object');
+                        expect(typeof e.code).toBe('number');
+                        if(e.code === 100001) {
+                            // code : 100001, message : Not found product
+                            done();
+                        }
+                        else if (e.code === 410410) {
+                            // code : 410410, message : Requested InvoicedID is canceled already
+                            done();
+                        }
+                        else {
+                            done.fail();
+                        }
+                    });
+                }, function(e) {
+                    expect(typeof e).toBe('object');
+                    expect(e).not.toBeUndefined();
+                    done.fail();
+                });
+            }, interval);
         }
 
         it('verify working well in case of not passing invoiceId property value', function(done) {
@@ -1177,10 +1177,10 @@ describe('toast.billing', function() {
                 expect(typeof data).toBe('object');
                 done();
             }, function(e) {
-            	expect(e).not.toBe(null);
-            	expect(e).not.toBeUndefined();
-            	expect(typeof e).toBe('object');
-            	expect(typeof e.code).toBe('number');
+                expect(e).not.toBe(null);
+                expect(e).not.toBeUndefined();
+                expect(typeof e).toBe('object');
+                expect(typeof e.code).toBe('number');
                 if(e.code === 100001) {
                     // code : 100001, message : Not found product
                     done();
@@ -1283,10 +1283,10 @@ describe('toast.billing', function() {
                             expect(typeof data).toBe('object');
                             done();
                         }, function(e) {
-                        	expect(e).not.toBe(null);
-                        	expect(e).not.toBeUndefined();
-                        	expect(typeof e).toBe('object');
-                        	expect(typeof e.code).toBe('number');
+                            expect(e).not.toBe(null);
+                            expect(e).not.toBeUndefined();
+                            expect(typeof e).toBe('object');
+                            expect(typeof e.code).toBe('number');
                             if(e.code === 400303) {
                                 // code : 400303, message : Purchase for the requested InvoiceID was already applied
                                 done();
@@ -1324,10 +1324,10 @@ describe('toast.billing', function() {
                         });
                     });
                 }, function(e) {
-                	expect(e).not.toBe(null);
-                	expect(e).not.toBeUndefined();
-                	expect(typeof e).toBe('object');
-                	expect(typeof e.code).toBe('number');
+                    expect(e).not.toBe(null);
+                    expect(e).not.toBeUndefined();
+                    expect(typeof e).toBe('object');
+                    expect(typeof e.code).toBe('number');
                     if(e.code === 100002) {
                         helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);
@@ -1364,10 +1364,10 @@ describe('toast.billing', function() {
                                     expect(typeof data).toBe('object');
                                     done();
                                 }, function(e) {
-                                	expect(e).not.toBe(null);
-                                	expect(e).not.toBeUndefined();
-                                	expect(typeof e).toBe('object');
-                                	expect(typeof e.code).toBe('number');
+                                    expect(e).not.toBe(null);
+                                    expect(e).not.toBeUndefined();
+                                    expect(typeof e).toBe('object');
+                                    expect(typeof e.code).toBe('number');
                                     if(e.code === 100001) {
                                         // code : 100001, message : Not found product
                                         done();
@@ -1386,10 +1386,10 @@ describe('toast.billing', function() {
                         });
                     });
                 }, function(e) {
-                	expect(e).not.toBe(null);
-                	expect(e).not.toBeUndefined();
-                	expect(typeof e).toBe('object');
-                	expect(typeof e.code).toBe('number');
+                    expect(e).not.toBe(null);
+                    expect(e).not.toBeUndefined();
+                    expect(typeof e).toBe('object');
+                    expect(typeof e.code).toBe('number');
                     if(e.code === 100002) {
                         helper.aOrB('(non-subscription) Did you see "buyProduct" screen? Canceled buying process by user.', ['YES', 'NO'], function(answer) {
                             expect(answer).toBe(true);

@@ -141,13 +141,13 @@
         toast.billing.buyProduct(productInfoDummy, function() {
             report('Success');
         }, function(err) {
-        	if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100002) {
+            if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100002) {
                 // code : 100002, message : User cancelled payment process
                 report('Success : ' + JSON.stringify(err));
             }
-        	else {
-        		report('Error : ' + JSON.stringify(err));
-        	}
+            else {
+                report('Error : ' + JSON.stringify(err));
+            }
         });
     }, 'subscription');
     testsuite('toast.billing', 'checkPurchaseStatus()', function(report) {
@@ -163,7 +163,7 @@
         toast.billing.cancelSubscription(productInfoDummy, function(data) {
             report('Success : ' + JSON.stringify(data));
         }, function(err) {
-        	if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100001) {
+            if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100001) {
                 // code : 100001, message : Not found product
                 report('Success : ' + JSON.stringify(err));
             }
@@ -184,7 +184,7 @@
             toast.billing.cancelSubscription(productInfoDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
-            	if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100001) {
+                if(err.code !== null && err.code !== undefined && typeof err.code === 'number' && err.code === 100001) {
                     // code : 100001, message : Not found product
                     report('Success : ' + JSON.stringify(err));
                 }
