@@ -119,5 +119,71 @@ module.exports = {
 
         var args = [productInfo];
         exec(successCallback, errorCallback, 'toast.billing', 'checkPurchaseStatus', args);
+    },
+    requestPurchasesList: function(productInfo, successCallback, errorCallback) {
+        argscheck.checkArgs('ofF', 'billing.requestPurchasesList', arguments);
+
+        errorCallback = errorCallback || function() {};
+
+        if(!productInfo.itemType || typeof productInfo.itemType != 'string') {
+            throw new TypeError('productInfo.itemType is not a string');
+        }
+
+        if(!productInfo.pageNumber || typeof productInfo.pageNumber != 'number') {
+            throw new TypeError('productInfo.pageNumber is not a number');
+        }
+
+        var args = [productInfo];
+        exec(successCallback, errorCallback, 'toast.billing', 'requestPurchasesList', args);
+
+    },
+    requestProductsList: function(productInfo, successCallback, errorCallback) {
+        argscheck.checkArgs('ofF', 'billing.requestProductsList', arguments);
+
+        errorCallback = errorCallback || function() {};
+
+        if(productInfo.pageSize && typeof productInfo.pageSize != 'number') {
+            throw new TypeError('productInfo.pageSize is not a number');
+        }
+        if(productInfo.pageNumber && typeof productInfo.pageNumber != 'number') {
+            throw new TypeError('productInfo.pageNumber is not a number');
+        }
+
+        if(productInfo.pageSize && ((productInfo.pageSize < 0) || (productInfo.pageSize > 100))) {
+            throw new RangeError('productInfo.pageSize value is RangeError');
+        }
+
+        if(productInfo.pageNumber && (productInfo.pageNumber < 0)) {
+            throw new RangeError('productInfo.pageNumber value is RangeError');
+        }
+
+        var args = [productInfo];
+        exec(successCallback, errorCallback, 'toast.billing', 'requestProductsList', args);
+
+    },
+    verifyPurchase: function(productInfo, successCallback, errorCallback) {
+        argscheck.checkArgs('ofF', 'billing.verifyPurchase', arguments);
+
+        errorCallback = errorCallback || function() {};
+
+        if(!productInfo.invoiceId || typeof productInfo.invoiceId != 'string') {
+            throw new TypeError('productInfo.invoiceId is not a string');
+        }
+
+        var args = [productInfo];
+        exec(successCallback, errorCallback, 'toast.billing', 'verifyPurchase', args);
+
+    },
+    applyProduct: function(productInfo, successCallback, errorCallback) {
+        argscheck.checkArgs('ofF', 'billing.applyProduct', arguments);
+
+        errorCallback = errorCallback || function() {};
+
+        if(!productInfo.invoiceId || typeof productInfo.invoiceId != 'string') {
+            throw new TypeError('productInfo.invocieId is not a string');
+        }
+
+        var args = [productInfo];
+        exec(successCallback, errorCallback, 'toast.billing', 'applyProduct', args);
     }
 };
