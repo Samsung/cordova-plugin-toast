@@ -6,7 +6,7 @@ var countryCode;
 var appId;
 var curServerType;
 var serverDpiUrlList = {
-    'FAKE': 'https://sbox-dpiapi.samsungcloudsolution.com/openapi',
+    'DUMMY': 'https://sbox-dpiapi.samsungcloudsolution.com/openapi',
     'DEV': 'https://sbox-dpiapi.samsungcloudsolution.com/openapi',
     'PRD': 'https://dpiapi.samsungcloudsolution.com/openapi'
 };
