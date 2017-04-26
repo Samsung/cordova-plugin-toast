@@ -989,7 +989,7 @@ describe('toast.billing', function() {
 
     // toast.billing.cancelSubscription
     describe('toast.billing.cancelSubscription', function() {
-        var interval = 5000;
+        var interval = 10000;
 
         it('throws TypeError when given arguments is not matched to spec.', function() {
             // no argument
@@ -1098,7 +1098,7 @@ describe('toast.billing', function() {
             }, function(e) {
                 done.fail();
             });
-        }, 10000);
+        }, interval);
 
         it('verify the return data is ok (subscription)', function(done) {
             var tempProductInfoDummy = productInfoDummy;
