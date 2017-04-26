@@ -32,6 +32,9 @@
 	</js-module>
 	<js-module src='www/util.js' name='util'>
 	</js-module>
+	<js-module src='www/billing.js' name='billing'>
+		<clobbers target='toast.billing' />
+	</js-module>
 
 	<!-- browser -->
 	<platform name='browser'>
@@ -131,6 +134,9 @@
 		</js-module>
 		<js-module src='src/sectv-tizen/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
+		</js-module>
+		<js-module src='src/sectv-tizen/billingProxy.js' name='billingProxy'>
+			<runs />
 		</js-module>
 	</platform>
 
