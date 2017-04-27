@@ -9,6 +9,10 @@ module.exports = {
 
         errorCallback = errorCallback || function() {};
 
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
+
         // madatory param
         if (!billingInfo.key || typeof billingInfo.key != 'object') {
             throw new TypeError('billingInfo.key is not a object');
@@ -41,6 +45,10 @@ module.exports = {
         argscheck.checkArgs('ofF', 'billing.buyProduct', arguments);
 
         errorCallback = errorCallback || function() {};
+
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
 
         // mandatory param
         if (!productInfo.productId || typeof productInfo.productId != 'string') {
@@ -93,6 +101,10 @@ module.exports = {
 
         errorCallback = errorCallback || function() {};
 
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
+
         // mandatory param
         if (!productInfo.productId || typeof productInfo.productId != 'string') {
             throw new TypeError('productInfo.productId is not a string');
@@ -108,6 +120,10 @@ module.exports = {
         argscheck.checkArgs('ofF', 'billing.checkPurchaseStatus', arguments);
 
         errorCallback = errorCallback || function() {};
+
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
 
         // mandatory param
         if (!productInfo.productId || typeof productInfo.productId != 'string') {
@@ -125,6 +141,10 @@ module.exports = {
 
         errorCallback = errorCallback || function() {};
 
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
+
         if(!productInfo.itemType || typeof productInfo.itemType != 'string') {
             throw new TypeError('productInfo.itemType is not a string');
         }
@@ -141,6 +161,10 @@ module.exports = {
         argscheck.checkArgs('ofF', 'billing.requestProductsList', arguments);
 
         errorCallback = errorCallback || function() {};
+
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
 
         if(productInfo.pageSize && typeof productInfo.pageSize != 'number') {
             throw new TypeError('productInfo.pageSize is not a number');
@@ -166,6 +190,10 @@ module.exports = {
 
         errorCallback = errorCallback || function() {};
 
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
+
         if(!productInfo.invoiceId || typeof productInfo.invoiceId != 'string') {
             throw new TypeError('productInfo.invoiceId is not a string');
         }
@@ -178,6 +206,10 @@ module.exports = {
         argscheck.checkArgs('ofF', 'billing.applyProduct', arguments);
 
         errorCallback = errorCallback || function() {};
+
+        if(device.platform != 'sectv-tizen') {
+            throw new Error('Not supported platform');
+        }
 
         if(!productInfo.invoiceId || typeof productInfo.invoiceId != 'string') {
             throw new TypeError('productInfo.invocieId is not a string');
