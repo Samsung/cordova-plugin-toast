@@ -23,6 +23,9 @@ describe('toast.billing', function() {
     var verifyPurchaseDummy = {};
     var applyProductDummy = {};
 
+    // Notice supported platform for each module
+    var supportedPlatform = {'sectv-tizen': true, 'sectv-orsay': false, 'tv-webos': false};
+
     beforeEach(function() {
         billingInfoDummy = {
             key: {
@@ -69,6 +72,13 @@ describe('toast.billing', function() {
             invoiceId: 'DMY1701US000108283'
         };
     });
+
+    // Defect whether current platform supports this module
+    if(!(supportedPlatform['PLATFORM' in localStorage && localStorage.getItem('PLATFORM')])) {
+        if(!it('should be throw error if platform not support this module.', function() {
+            expect(function() {toast.billing.init(billingInfoDummy, function() {}, function() {});}).toThrowError('Not supported platform');
+        }).throwOnExpectationFailure) {	return; }
+    }
 
     it('should be defined as "toast.billing" namespace.', function() {
         expect(window.toast).toBeDefined();
