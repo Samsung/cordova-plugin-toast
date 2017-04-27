@@ -1,13 +1,13 @@
 var specList = [
-                '_specHelper', 'toast', 'toast.application',
-                'toast.inputdevice', 'toast.tvwindow', 'toast.tvchannel',
-                'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo'
-                // , 'toast.billing'
+                '_specHelper', 'toast',
+                 'toast.application',
+                 'toast.inputdevice', 'toast.tvwindow', 'toast.tvchannel',
+                 'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo',
+                 'toast.billing'
             ];
 var testsuiteList = [
                         'toast.application', 'toast.inputdevice', 'toast.tvwindow',
-                        'toast.tvchannel', 'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo', 'ime'
-                        // , 'toast.billing'
+                        'toast.tvchannel', 'toast.tvaudiocontrol', 'toast.media', 'toast.drminfo', 'ime', 'toast.billing'
                     ];
 
 function specScriptLoad(spec) {
@@ -36,11 +36,11 @@ function testsuiteScriptLoad(testsuite) {
     }
 }
 
-var specforDefault = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-var testsuiteforDefault = [0, 1, 2, 3, 4, 5, 6, 7];
+var specforDefault = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var testsuiteforDefault = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-var specforWebOS = [0, 1, 2, 3, 6, 7];
-var testsuiteforWebOS = [0, 1, 4, 5, 7];
+var specforWebOS = [0, 1, 2, 3, 6, 7, 8];
+var testsuiteforWebOS = [0, 1, 4, 5, 7, 8];
 
 var testsuiteforBrowser = [0, 1, 2, 3, 4, 5, 6];
 

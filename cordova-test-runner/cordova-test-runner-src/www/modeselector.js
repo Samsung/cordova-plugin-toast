@@ -20,16 +20,17 @@
         // 15' Tizen TV
         10009: 'RETURN'
     };
-
+          
     document.addEventListener('deviceready', function () {
+        initPlatformDetecting();
         window.addEventListener('keydown', function(e) {
             if (keyInfo[e.keyCode] === 'RETURN') {
 //                toast.application.exit();
-            	location.reload();
+                location.reload();
             }
         });
     });
-
+    
     var type = localStorage.getItem(TESTRUNNER_TYPE_KEY);
     if (type) {
         var magicKey = ['LEFT', 'RIGHT', 'UP', 'DOWN', 'ENTER'];
@@ -69,6 +70,18 @@
         localStorage.removeItem(TESTRUNNER_TYPE_KEY);
         location.reload(true);
     }
+    
+    function initPlatformDetecting() {
+        if('PLATFORM' in localStorage) {
+            return; 
+        }
+        
+        var platform = cordova.require('cordova/platform').id;
+        
+        if(platform !== null && platform !== undefined && typeof platform === 'string') {
+            localStorage.setItem('PLATFORM', platform);
+        }
+    }
 
     document.body.innerHTML = 'Please select mode:<br>' + 'LEFT: Jasmine TestRunner<br>' + 'RIGHT: Toast TestSuite<br>';
     window.addEventListener('keydown', function(e) {
@@ -88,8 +101,8 @@
                 break;
             case 27:
             case 88:
-            	location.reload();
-            	break;
+                location.reload();
+                break;
         }
     });
 })();
