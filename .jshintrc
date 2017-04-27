@@ -99,6 +99,7 @@
       "toast": true,
       "curWidget": true, // for Orsay
       "tizen": true, // Tizen webapi
-      "webOS": true // WebOS api
+      "webOS": true, // WebOS api
+      "device": true
     } // additional predefined global variables
 }
