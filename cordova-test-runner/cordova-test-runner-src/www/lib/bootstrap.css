@@ -9,7 +9,6 @@ html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
-  overflow-y: scroll;
 }
 body {
   margin: 0;
@@ -1397,33 +1396,32 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-    height:445px;
-    overflow-y: scroll;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-    height:625px;
-    overflow-y: scroll;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-    height:985px;
-    overflow-y: scroll;
-  }
-}
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  overflow: scroll;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 860px;
+    height: 445px;
+    overflow-y: scroll;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 1180px;
+    height: 625px;
+    overflow-y: scroll;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1820px;
+    height: 985px;
+    overflow-y: scroll;
+  }
 }
 .row {
   margin-right: -15px;

@@ -52,7 +52,7 @@
     function renderTests() {
         var count = 0;
         document.body.appendChild(createElem('h1', {}, 'Cordova TOAST TestSuite'));
-        var container = createElem('div', {className: 'container-fluid'});
+        var container = createElem('div', {className: 'container'});
         document.body.appendChild(container);
         for (var category in tests) {
             for (var i = 0; i < tests[category].length; i++) {
