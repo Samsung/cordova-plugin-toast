@@ -73,7 +73,7 @@ describe('toast.billing', function() {
         };
     });
 
-    // Defect whether current platform supports this module
+    // Detect whether current platform supports this module
     if(!(supportedPlatform['PLATFORM' in localStorage && localStorage.getItem('PLATFORM')])) {
         if(!it('should be throw error if platform not support this module.', function() {
             expect(function() {toast.billing.init(billingInfoDummy, function() {}, function() {});}).toThrowError('Not supported platform');
@@ -701,8 +701,8 @@ describe('toast.billing', function() {
             it('verify the return data is ok', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
-                        var invoiceDetails = data.InvoiceDetails;
-                        verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
+                        var invoiceDetails = data.invoiceDetails;
+                        verifyPurchaseDummy.invoiceId = invoiceDetails[0].invoiceId;
 
                         toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
                             expect(data).not.toBeUndefined();
@@ -811,8 +811,8 @@ describe('toast.billing', function() {
             it('verify the return data is ok', function(done) {
                 toast.billing.init(billingInfoDummy, function () {
                     toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
-                        var invoiceDetails = data.InvoiceDetails;
-                        applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
+                        var invoiceDetails = data.invoiceDetails;
+                        applyProductDummy.invoiceId = invoiceDetails[0].invoiceId;
 
                         toast.billing.applyProduct(applyProductDummy, function(data) {
                             expect(data).not.toBeUndefined();

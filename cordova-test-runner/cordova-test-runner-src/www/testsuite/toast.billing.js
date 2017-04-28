@@ -65,7 +65,7 @@
     };
 
     var error = {
-        NOT_EXIST_INVOICEDETAILS: 'InvoiceDetails property is not exist.',
+        NOT_EXIST_INVOICEDETAILS: 'invoiceDetails property is not exist.',
         NOT_EXIST_INVOICEID: 'invoiceId property is not exist.'
     };
 
@@ -93,14 +93,14 @@
     }, 'non-subscription', {'tv-webos': 'INVISIBLE', 'sectv-orsay': 'INVISIBLE'});
     testsuite('toast.billing', 'verifyPurchase()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
-            // Check InvoiceDetails property is exist or not
-            if(data === null || data === undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
+            // Check invoiceDetails property is exist or not
+            if(data === null || data === undefined || typeof data !== 'object' || !data.hasOwnProperty('invoiceDetails')) {
                 report('Failed : ' + error.NOT_EXIST_INVOICEDETAILS);
                 return;
             }
 
-            var invoiceDetails = data.InvoiceDetails;
-            verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
+            var invoiceDetails = data.invoiceDetails;
+            verifyPurchaseDummy.invoiceId = invoiceDetails[0].invoideId;
             toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
@@ -112,14 +112,14 @@
     }, 'non-subscription', {'tv-webos': 'INVISIBLE', 'sectv-orsay': 'INVISIBLE'});
     testsuite('toast.billing', 'applyProduct()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
-            // Check InvoiceDetails property is exist or not
-            if(data === null || data === undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
+            // Check invoiceDetails property is exist or not
+            if(data === null || data === undefined || typeof data !== 'object' || !data.hasOwnProperty('invoiceDetails')) {
                 report('Failed : ' + error.NOT_EXIST_INVOICEDETAILS);
                 return;
             }
 
-            var invoiceDetails = data.InvoiceDetails;
-            applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
+            var invoiceDetails = data.invoiceDetails;
+            applyProductDummy.invoiceId = invoiceDetails[0].invoideId;
             toast.billing.applyProduct(applyProductDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
