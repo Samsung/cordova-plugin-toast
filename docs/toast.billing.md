@@ -3,8 +3,11 @@ toast.billing provides billing APIs.
 
 ## Supported platforms
 * sectv-tizen (sectv-tizen)
-    * Privilege 'http://developer.samsung.com/privilege/productinfo' 'http://developer.samsung.com/privilege/sso.partner' 'http://developer.samsung.com/privilege/billing' must be declared in the config.xml of tizen package.
-    :red_circle: For using the billing module, you should learn the billing process through refering to the [Samsung Developers Site](http://developer.samsung.com/tv/develop/tutorials/samsung-checkout).
+    * Privileges must be declared in the config.xml of tizen package.       
+        * http://developer.samsung.com/privilege/productinfo
+        * http://developer.samsung.com/privilege/sso.partner
+        * http://developer.samsung.com/privilege/billing
+    * For using the billing module, you should learn the billing process through refering to the [Samsung Developers Site](http://developer.samsung.com/tv/develop/tutorials/samsung-checkout).
 
 <table>
   <tr align="center">
