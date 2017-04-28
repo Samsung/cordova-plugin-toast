@@ -100,7 +100,7 @@
             }
 
             var invoiceDetails = data.invoiceDetails;
-            verifyPurchaseDummy.invoiceId = invoiceDetails[0].invoideId;
+            verifyPurchaseDummy.invoiceId = invoiceDetails[0].invoiceId;
             toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
@@ -119,7 +119,7 @@
             }
 
             var invoiceDetails = data.invoiceDetails;
-            applyProductDummy.invoiceId = invoiceDetails[0].invoideId;
+            applyProductDummy.invoiceId = invoiceDetails[0].invoiceId;
             toast.billing.applyProduct(applyProductDummy, function(data) {
                 report('Success : ' + JSON.stringify(data));
             }, function(err) {
