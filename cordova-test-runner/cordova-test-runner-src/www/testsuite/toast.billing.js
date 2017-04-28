@@ -65,9 +65,9 @@
     };
 
     var error = {
-        NOT_EXIST_INVOICEDETAILS : 'InvoiceDetails property is not exist.',
-        NOT_EXIST_INVOICEID : 'invoiceId property is not exist.',
-    }
+        NOT_EXIST_INVOICEDETAILS: 'InvoiceDetails property is not exist.',
+        NOT_EXIST_INVOICEID: 'invoiceId property is not exist.'
+    };
 
     // non-subscription
     testsuite('toast.billing', 'init()', function(report) {
@@ -94,7 +94,7 @@
     testsuite('toast.billing', 'verifyPurchase()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
             // Check InvoiceDetails property is exist or not
-            if(data == null || data == undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
+            if(data === null || data === undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
                 report('Failed : ' + error.NOT_EXIST_INVOICEDETAILS);
                 return;
             }
@@ -113,11 +113,11 @@
     testsuite('toast.billing', 'applyProduct()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
             // Check InvoiceDetails property is exist or not
-            if(data == null || data == undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
+            if(data === null || data === undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
                 report('Failed : ' + error.NOT_EXIST_INVOICEDETAILS);
                 return;
             }
-            
+
             var invoiceDetails = data.InvoiceDetails;
             applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
             toast.billing.applyProduct(applyProductDummy, function(data) {
@@ -196,7 +196,7 @@
     testsuite('toast.billing', 'cancelSubscription()', function(report) {
         toast.billing.checkPurchaseStatus(subscriptionInfoDummy, function(data) {
             // Check invoiceId property is exist or not
-            if(data == null || data == undefined || typeof data[0] !== 'object' || !data[0].hasOwnProperty('invoiceId')) {
+            if(data === null || data === undefined || typeof data[0] !== 'object' || !data[0].hasOwnProperty('invoiceId')) {
                 report('Failed : ' + error.NOT_EXIST_INVOICEID);
                 return;
             }
