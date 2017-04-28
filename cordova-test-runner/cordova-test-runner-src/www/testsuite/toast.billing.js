@@ -64,6 +64,11 @@
         orderItemPath: 'jpg'
     };
 
+    var error = {
+        NOT_EXIST_INVOICEDETAILS : 'InvoiceDetails property is not exist.',
+        NOT_EXIST_INVOICEID : 'invoiceId property is not exist.',
+    }
+
     // non-subscription
     testsuite('toast.billing', 'init()', function(report) {
         toast.billing.init(billingInfoDummy, function() {
@@ -88,6 +93,12 @@
     }, 'non-subscription', {'tv-webos': 'INVISIBLE', 'sectv-orsay': 'INVISIBLE'});
     testsuite('toast.billing', 'verifyPurchase()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+            // Check InvoiceDetails property is exist or not
+            if(data == null || data == undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
+                report('Failed : ' + error.NOT_EXIST_INVOICEDETAILS);
+                return;
+            }
+
             var invoiceDetails = data.InvoiceDetails;
             verifyPurchaseDummy.invoiceId = invoiceDetails[0].InvoiceID;
             toast.billing.verifyPurchase(verifyPurchaseDummy, function(data) {
@@ -101,6 +112,12 @@
     }, 'non-subscription', {'tv-webos': 'INVISIBLE', 'sectv-orsay': 'INVISIBLE'});
     testsuite('toast.billing', 'applyProduct()', function(report) {
         toast.billing.requestPurchasesList(requestPurchaseInfoDummy, function(data) {
+            // Check InvoiceDetails property is exist or not
+            if(data == null || data == undefined || typeof data !== 'object' || !data.hasOwnProperty('InvoiceDetails')) {
+                report('Failed : ' + error.NOT_EXIST_INVOICEDETAILS);
+                return;
+            }
+            
             var invoiceDetails = data.InvoiceDetails;
             applyProductDummy.invoiceId = invoiceDetails[0].InvoiceID;
             toast.billing.applyProduct(applyProductDummy, function(data) {
@@ -178,6 +195,12 @@
     }, 'subscription');
     testsuite('toast.billing', 'cancelSubscription()', function(report) {
         toast.billing.checkPurchaseStatus(subscriptionInfoDummy, function(data) {
+            // Check invoiceId property is exist or not
+            if(data == null || data == undefined || typeof data[0] !== 'object' || !data[0].hasOwnProperty('invoiceId')) {
+                report('Failed : ' + error.NOT_EXIST_INVOICEID);
+                return;
+            }
+
             var productInfoDummy = subscriptionInfoDummy;
             productInfoDummy.invoiceId = data[0].invoiceId;
 
