@@ -1,5 +1,16 @@
-# Constructor toast.billing
-toast.billing provides billing APIs.
+# toast.billing
+toast.billing provides billing APIs.<br>
+Each platform supports different billing system.<br>
+
+- Tizen : [Checkout](http://developer.samsung.com/tv/develop/guides/monetization/samsung-checkout/)
+- Legacy / WebOS : [Paymentwall](https://www.paymentwall.com/)
+
+For using the billing system you should register the products in each system.<br>
+At this moment, you should register the same value of products for using TOAST APIs.<br>
+Then, you can manage the products of both systems using the TOAST APIs at once.<br>
+
+But now, toast.billing feature is released only for Tizen platform.<br>
+It will be updated for legacy and webos platforms soon.<br>
 
 ## Supported platforms
 * sectv-tizen (sectv-tizen)
@@ -214,7 +225,7 @@ It is in order to make the purchase of paid item.
 	* throws TypeError
 		* if type of any parameters is not matched to specification.
     * throws Error
-        * if it is excute on platform that is not supprted.        
+        * if it is excute on platform that is not supprted.
 * Examples
 	1. Call the buyProduct API
 
@@ -327,6 +338,44 @@ Request the list of purchased items for a specific user.
     </table>
 
     * successCallback: The method to call when get the purchases list successfully.
+
+    <table>
+     <tr align="center">
+       <td colspan="3" rowspan="2" style="">Parameter</td>
+       <td rowspan="2" style="">Required</td>
+       <td rowspan="2" style="">Type</td>
+       <td rowspan="2" style="">Description</td>
+       <td colspan="2" style="">Influenced Module</td>
+     </tr>
+     <tr align="center"><td>PaymentWall</td><td>CheckOut</td></tr>
+     <tr align="center"><td colspan="3">cPStatus</td><td>true</td><td>String</td><td align="left">-“100000”(Success)</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td colspan="3">cPResult</td><td>false</td><td>String</td><td align="left">-“EOF” : the last page<br>-“hasNext:TRUE” : There’s next page</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td colspan="3">totalCount</td><td>true</td><td>Number</td><td align="left">Entire number of Invoices.<br>-The total sum of all page’s purchase history<br>-The total sum of all purchase history in the period</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td colspan="3">checkValue</td><td>true</td><td>String</td><td align="left">-Necessary Parameters = CPStatus + CPResult + TotalCount + InvoiceDetails[0].ItemID + … + InvoiceDetails[TotlaCount].ItemID</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td colspan="3">invoiceDetails</td><td>flase</td><td>JSON</td><td align="left">[Invoice Info]</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">seq</td><td>true</td><td>Number</td><td align="left">Sequence number (1 ~ TotalCount)</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">invoiceId</td><td>true</td><td>String</td><td align="left">Invoice Id</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">itemId</td><td>true</td><td>String</td><td align="left">Product Id</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">itemTitle</td><td>true</td><td>String</td><td align="left">Product name</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">itemType</td><td>true</td><td>String</td><td align="left">[Product type]<br>1 : CONSUMABLE<br>2 : NON-CONSUMABLE<br>3 : LIMITED-PERIOD<br>4 : SUBSCRIPTION<br>*The response ItemType is a parameter that is in different attribute from the Request ItemType. This shows the type information of products that is classified in detail.
+     </td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">orderTime</td><td>true</td><td>String</td><td align="left">Payment time<br>(UTC-zero, ex> 20140314175900)</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">period</td><td>flase</td><td>Number</td><td align="left">Period(Minutes)</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">price</td><td>true</td><td>Number</td><td align="left">Price(xxxx.yy)</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">orderCurrencyId</td><td>true</td><td>String</td><td align="left">Currency code</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">cancelStatus</td><td>true</td><td>Boolean</td><td align="left">[Sales Cancellation Status]<br>- true : Sales Cancellation<br>- false : Sales Ongoing<br>* for the case of subscription product, refers to the cancellation status of the next subscription Cycle</td><td>X</td><td>O</td></tr>
+     <tr align="center"><td/><td colspan="2">appliedStatus</td><td>true</td><td>Boolean</td><td align="left">[Product Application Status]<Br>- true : Applied<br>- false : Not Applied<br>* for the case of subscription product, default value is true(Applied)</td><td>X</td><td>O</td></tr>
+
+    <tr align="center"><td/><td colspan="2">appliedTime</td><td>flase</td><td>String</td><td align="left">[Applied Time]
+(UTC-zero, ex> 20140314175900)</td><td>X</td><td>O</td></tr>
+    <tr align="center"><td/><td colspan="2">limitEndTime</td><td>flase</td><td>String</td><td align="left">Only applies to limited period products.
+AppliedTime + Period<br>(UTC-zero, ex> 20140314175900)</td><td>X</td><td>O</td></tr>
+    <tr align="center"><td/><td colspan="2">remainTime</td><td>true</td><td>String</td><td align="left">	Only applies to limited period products.
+LimtEndTime – The time when invoice/list was called for is converted (seconds)</td><td>X</td><td>O</td></tr>
+    <tr align="center"><td/><td colspan="2">subscriptionInfo</td><td>flase</td><td>JSON</td><td align="left">[SubscriptionInfo]<br>Mandatory when productType is Subscription</td><td>X</td><td>O</td></tr>
+    <tr align="center"><td/><td/><td>price</td><td>true</td><td>Number</td><td align="left">Price(xxxx.yy)</td><td>X</td><td>O</td></tr>
+    </table>
+
     * errorCallback: The method to invoke when an error occurs.
 * Return value
 	N/A
