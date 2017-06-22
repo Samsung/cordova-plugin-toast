@@ -24,9 +24,9 @@
 	<js-module src='www/application.js' name='application'>
 		<clobbers target='toast.application' />
 	</js-module>
-	<js-module src='www/Media.js' name='Media'>
+	<!--<js-module src='www/Media.js' name='Media'>
 		<clobbers target='toast.Media' />
-	</js-module>
+	</js-module>-->
 	<js-module src='www/MediaPlugin.js' name='MediaPlugin'>
 		<clobbers target='toast.MediaPlugin' />
 	</js-module>
@@ -61,6 +61,11 @@
 		<js-module src='src/browser/mediaProxy.js' name='mediaProxy'>
 			<runs />
 		</js-module>
+		<!-- sk08.lee -->
+		<js-module src='www/Media.js' name='Media'>
+			<clobbers target='toast.Media'/>
+		</js-module>
+		<!-- sk08.lee -->
 	</platform>
 
 	<!-- sectv-orsay -->
@@ -98,6 +103,11 @@
 		<js-module src='src/sectv-orsay/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
+		<!-- sk08.lee -->
+		<js-module src='www/Media.js' name='Media'>
+			<clobbers target='toast.Media'/>
+		</js-module>
+		<!-- sk08.lee -->
 	</platform>
 
 	<!-- sectv-tizen -->
@@ -138,6 +148,11 @@
 		<js-module src='src/sectv-tizen/billingProxy.js' name='billingProxy'>
 			<runs />
 		</js-module>
+		<!-- sk08.lee -->
+		<js-module src='www/Media.js' name='Media'>
+			<clobbers target='toast.Media'/>
+		</js-module>
+		<!-- sk08.lee -->
 	</platform>
 
 	<!-- tv-webos -->
@@ -166,5 +181,64 @@
 		<js-module src='src/tv-webos/MediaPluginPlayReady.js' name='MediaPluginPlayReady'>
 			<clobbers target='toast.MediaPluginPlayReady' />
 		</js-module>
+		<!-- sk08.lee -->
+		<js-module src='www/Media.js' name='Media'>
+			<clobbers target='toast.Media'/>
+		</js-module>
+		<!-- sk08.lee -->
 	</platform>
+
+	<!-- sk08.lee -->
+	<!-- android TV -->
+	<platform name='android'>
+		<!-- Edit Manifest.xml for Android TV -->
+		<edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
+			<application android:banner="@drawable/banner"/>
+		</edit-config>
+
+		<edit-config file="AndroidManifest.xml" target="/manifest/uses-sdk" mode="overwrite">
+			<uses-sdk android:minSdkVersion="17" android:targetSdkVersion="23"/>
+		</edit-config>
+
+		<edit-config file="AndroidManifest.xml" target="/manifest/application/activity/intent-filter/category" mode="overwrite">
+			<category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+		</edit-config>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-feature android:name="android.software.leanback" android:required="false"/>
+			<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+		</config-file>
+		<!-- end -->
+
+		<!-- setting for toast api -->
+		<framework src="com.google.android.exoplayer:exoplayer:r2.4.0"/>
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="toast.application">
+				<param name="android-package" value="com.samsung.cordova.toast.Application"/>
+			</feature>
+		</config-file>
+		<source-file src="src/android/Application.java" target-dir="src/com/samsung/cordova/toast"/>
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="toast.inputdevice">
+				<param name="android-package" value="com.samsung.cordova.toast.Inputdevice"/>
+			</feature>
+		</config-file>
+		<source-file src="src/android/Inputdevice.java" target-dir="src/com/samsung/cordova/toast"/>
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="toast.Media">
+				<param name="android-package" value="com.samsung.cordova.toast.Media"/>
+			</feature>
+		</config-file>
+		<source-file src="src/android/Media.java" target-dir="src/com/samsung/cordova/toast"/>
+		<source-file src="src/android/MediaPlayer.java" target-dir="src/com/samsung/cordova/toast"/>
+
+		<js-module src='www/android/Media.js' name='Media'>
+			<clobbers target='toast.Media'/>
+		</js-module>
+		<!-- end -->
+	</platform>
+	<!-- sk08.lee -->
 </plugin>
