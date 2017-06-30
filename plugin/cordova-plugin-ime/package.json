@@ -1,0 +1,20 @@
+{
+  "name": "cordova-plugin-ime",
+  "version": "0.0.1",
+  "description": "Cordova IME Plugin",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+  ],
+  "engines": {
+  },
+  "author": "Apache Software Foundation",
+  "license": "Apache-2.0"
+}
