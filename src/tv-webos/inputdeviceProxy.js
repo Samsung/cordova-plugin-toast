@@ -31,6 +31,8 @@ var supportedKeys = [
     {name: 'MediaPlay', code: 415},
     {name: 'MediaPause', code: 19},
     {name: 'MediaRewind', code: 412},
+    {name: 'ChannelUp', code: 33},
+    {name: 'ChannelDown', code: 34},
     {name: '0', code: 48},
     {name: '1', code: 49},
     {name: '2', code: 50},
