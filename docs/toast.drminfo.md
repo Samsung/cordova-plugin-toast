@@ -1,3 +1,4 @@
+# This api has been deprecated. Do not use it.
 # toast.drminfo
 toast.drminfo provides DRM information.
 
@@ -38,7 +39,7 @@ module DRMInfo {
 ```
 
 ## APIs
-### void getEsn(DOMString component, DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+### void getEsn(DOMString component, DOMStringCallback successCallback, optional ErrorCallback? errorCallback); [Deprecated]
 This method gets the ESN data of given component name.
 * Parameters
     - component : Name of component (ex. WIDEVINE)
@@ -62,7 +63,7 @@ This method gets the ESN data of given component name.
         });
         ```
 
-### void getSdi(DOMStringCallback successCallback, optional ErrorCallback? errorCallback);
+### void getSdi(DOMStringCallback successCallback, optional ErrorCallback? errorCallback); [Deprecated]
 This method gets the SDI(Samsung Device Identifier). SDI is used by a few CPs to distinguish devices instead of DUID.
 * Parameters
     - successCallback : The method to call when a value of SDI got successfully.
